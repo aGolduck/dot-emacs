@@ -1,24 +1,4 @@
 ;; init.el --- description -*- lexical-binding: t; -*-                         
-;;                                                                              
-;; Copyright (C) 2020 Wenpin CHOU                                               
-;;                                                                              
-;; Author: Wenpin CHOU <http://github/wenpin>                                   
-;; Maintainer: Wenpin CHOU <wpchou@outlook.com>                                 
-;; Created: April 10, 2020                                                      
-;; Modified: April 10, 2020                                                     
-;; Version: 0.0.1                                                               
-;; Keywords:                                                                    
-;; Homepage: https://github.com/wenpin/init                                     
-;; Package-Requires: ((emacs 26.3) (cl-lib "0.5"))                              
-;;                                                                              
-;; This file is not part of GNU Emacs.                                          
-;;                                                                              
-;;; Commentary:                                                                 
-;;                                                                              
-;;  description                                                                 
-;;                                                                              
-;;; Code:
-
 
 ;; bootstrap straight.el
 (defvar bootstrap-version)
@@ -55,7 +35,8 @@
   :custom
   (default-input-method "rime")
   (rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g"))  ;; 发往 librime 的快捷键
-  (rime-user-data-dir "~/.doom.d/rime")
+  (rime-librime-root (if (eq system-type 'darwin) (expand-file-name "~/.emacs.d/rime/librime-mac/dist")))
+  (rime-user-data-dir "~/.emacs.d/rime")
   (rime-show-candidate 'posframe)
   (rime-posframe-style 'simple)
   :config
