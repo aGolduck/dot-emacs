@@ -1,8 +1,24 @@
-;;; init.el --- wenpin's emacs.d                     -*- lexical-binding: t; -*-
+;; init.el --- description -*- lexical-binding: t; -*-                         
+;;                                                                              
+;; Copyright (C) 2020 Wenpin CHOU                                               
+;;                                                                              
+;; Author: Wenpin CHOU <http://github/wenpin>                                   
+;; Maintainer: Wenpin CHOU <wpchou@outlook.com>                                 
+;; Created: April 10, 2020                                                      
+;; Modified: April 10, 2020                                                     
+;; Version: 0.0.1                                                               
+;; Keywords:                                                                    
+;; Homepage: https://github.com/wenpin/init                                     
+;; Package-Requires: ((emacs 26.3) (cl-lib "0.5"))                              
+;;                                                                              
+;; This file is not part of GNU Emacs.                                          
+;;                                                                              
+;;; Commentary:                                                                 
+;;                                                                              
+;;  description                                                                 
+;;                                                                              
+;;; Code:
 
-;; Copyright (C) 2020 wenpin
-
-;; Author:  wenpin <w@shamingming.com>
 
 ;; bootstrap straight.el
 (defvar bootstrap-version)
@@ -67,6 +83,14 @@
 
 ;;; live in emacs
 (straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
+
+;; query magit's dependences                                                    
+(nth 1 (gethash "magit" straight--build-cache))
+;; query dash's dependents                                                      
+(cl-remove-if-not
+ (lambda (package)
+   (member "dash" (nth 1 (gethash package straight--build-cache))))
+ (hash-table-keys straight--recipe-cache))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'no-error 'no-message)
