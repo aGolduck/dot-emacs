@@ -1,0 +1,12 @@
+# default.custom.yaml
+patch:
+  schema_list:
+    - schema: luna_pinyin          # 朙月拼音
+    - schema: luna_pinyin_simp     # 朙月拼音 简化字模式
+    - schema: wubi86               # 五笔86
+  "key_binder/bindings":
+    - { when: has_menu, accept: semicolon, send: 2 }
+    - { when: has_menu, accept: apostrophe, send: 3 }
+  "ascii_composer/switch_key":
+    Shift_L: noop
+    Shift_R: noop

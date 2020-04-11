@@ -26,6 +26,26 @@
 ;; oh, it's magit
 (straight-use-package 'magit)
 
+;; rime, THE input method
+(straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
+;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
+(use-package rime
+  :bind
+  (("M-t" . 'toggle-input-method)
+   :map rime-mode-map
+    ;; ("C-S-s-j" . #'rime-force-enable)
+    ("C-`" . #'rime-send-keybinding)
+    ("C-S-`" . #'rime-send-keybinding))
+  :custom
+  (default-input-method "rime")
+  (rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g"))  ;; 发往 librime 的快捷键
+  (rime-user-data-dir "~/.doom.d/rime")
+  (rime-show-candidate 'posframe)
+  (rime-posframe-style 'simple)
+  :config
+  (unless (fboundp 'rime--posframe-display-content)
+    (error "Function `rime--posframe-display-content' is not available.")))
+
 ;; my org, my life
 (straight-use-package 'org)
 
@@ -33,33 +53,20 @@
 (straight-use-package 'which-key)
 (which-key-mode)
 
+
 ;;; programming
 ;; lsp rules all
 ;; (require 'init-lsp-mode)
 (straight-use-package '(nox :host github :repo "manateelazycat/nox"))
+
 (dolist (hook (list 'js-mode-hook))
   (add-hook hook '(lamda () (nox-ensure))))
 
 (straight-use-package 'typescript-mode)
 
 
-;; live in emacs
-(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :no-build t))
-(add-to-list 'load-path (expand-file-name "straight/repos/emacs-application-framework" user-emacs-directory))
-(require 'eaf)
+;;; live in emacs
+(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(leuven))
- '(recentf-mode t)
- '(visible-bell t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "JetBrains Mono" :foundry "JB  " :slant normal :weight normal :height 98 :width normal)))))
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'no-error 'no-message)
