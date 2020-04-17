@@ -128,7 +128,8 @@
   :custom
   (default-input-method "rime")
   (rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g"))  ;; 发往 librime 的快捷键
-  (rime-user-data-dir "~/.doom.d/rime")
+  (rime-librime-root (if (eq system-type 'darwin) (expand-file-name "~/.emacs.d/rime/librime-mac/dist")))
+  (rime-user-data-dir "~/.emacs.d/rime")
   (rime-show-candidate 'posframe)
   (rime-posframe-style 'simple)
   :config
@@ -146,6 +147,14 @@
 (global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
 (tool-bar-mode -1)
 (toggle-frame-maximized)
+
+;; query magit's dependences
+(nth 1 (gethash "magit" straight--build-cache))
+;; query dash's dependents
+(cl-remove-if-not
+ (lambda (package)
+   (member "dash" (nth 1 (gethash package straight--build-cache))))
+ (hash-table-keys straight--recipe-cache))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'no-error 'no-message)
