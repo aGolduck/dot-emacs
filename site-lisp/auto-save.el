@@ -100,13 +100,11 @@
   (interactive)
   (auto-save-set-timer)
   (add-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
-  (add-hook 'before-save-hook 'font-lock-flush)
-  )
+  (add-hook 'before-save-hook 'font-lock-flush))
 
 (defun auto-save-disable ()
   (auto-save-cancel-timer)
   (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
-  (remove-hook 'before-save-hook 'font-lock-flush)
-  )
+  (remove-hook 'before-save-hook 'font-lock-flush))
 
 (provide 'auto-save)
