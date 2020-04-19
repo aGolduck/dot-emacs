@@ -17,4 +17,4 @@
   (setq lsp-diagnostics-modeline-scope :project)
   (add-hook 'lsp-managed-mode-hook 'lsp-diagnostics-modeline-mode))
 
-(provide 'init-lsp.el)
+(provide 'init-lsp-mode.el)
