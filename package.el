@@ -1,6 +1,6 @@
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
 (straight-use-package 'company)
-;(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
+(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
 (straight-use-package 'counsel)
 (straight-use-package 'expand-region)
 (straight-use-package '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el")))
