@@ -22,8 +22,6 @@
 (defvar auto-save-disable-predicates nil
   "Disable auto-save in these cases")
 
-(setq auto-save-default nil)
-
 (defun auto-save-buffers ()
   (interactive)
   (let ((autosave-buffer-list))
