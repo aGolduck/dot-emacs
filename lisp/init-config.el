@@ -1,13 +1,11 @@
 ;;; Lazycat is lazy
 (use-package auto-save
-  :defer t
   :init
   (setq auto-save-silent t
 	auto-save-delete-trailing-whitespace t)
   (add-hook 'after-init-hook #'auto-save-enable))
 ;;; waiting to explore
 (use-package company
-  :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'js-mode-hook #'company-mode)
@@ -36,13 +34,13 @@
   ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 ;;; live in emacs
-(use-package eaf :if (eq system-type 'gnu/linux) :defer t)
+(use-package eaf :if (eq system-type 'gnu/linux))
 ;;; simple and intuitive
-(use-package expand-region :defer t :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
+(use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
-(use-package gcmh :defer t :init (add-hook 'after-init-hook #'gcmh-mode))
+(use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
   :after ivy
@@ -55,9 +53,8 @@
 					;(ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   :config (ivy-posframe-mode 1))
 ;;; oh, it's magit
-(use-package magit :defer t :init (global-set-key (kbd "M-SPC g s") 'magit-status))
+(use-package magit :init (global-set-key (kbd "M-SPC g s") 'magit-status))
 (use-package markdown-mode
-  :defer t
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -65,7 +62,6 @@
   (setq markdown-command "multimarkdown"))
 ;;; lsp rules all
 (use-package nox
-  :defer t
   :config
   (dolist (hook (list
 		 'js-mode-hook
@@ -74,7 +70,6 @@
     (add-hook hook '(lamda () (nox-ensure)))))
 ;;; it's spc, spc
 (use-package snails
-  :defer t
   :if window-system
   :commands (snails)
   :init
@@ -94,7 +89,6 @@
   (global-set-key (kbd "M-SPC SPC") 'snails))
 ;;; my org, my life
 (use-package org
-  :defer t
   :init
   (require 'bh-org)
   (defun bh/verify-refile-target ()
@@ -242,11 +236,9 @@ unwanted space when exporting org-mode to html."
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents))))
 (use-package org-journal
-  :defer t
   :init (setq org-journal-dir "~/org/diary" org-journal-file-format "%Y%m%d.org"))
 ;;; difference between heaven and hell
 (use-package paredit
-  :defer t
   :commands (enable-paredit-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
@@ -262,11 +254,10 @@ unwanted space when exporting org-mode to html."
    'paredit-close-round)
   )
 ;;; modern emacs
-(use-package posframe :defer t)
+(use-package posframe)
 ;;; rime, THE INPUT METHOD
 ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
 (use-package rime
-  :defer t
   :init
   (setq default-input-method "rime"
 	rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")  ;; 发往 librime 的快捷键
@@ -281,7 +272,6 @@ unwanted space when exporting org-mode to html."
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
 (use-package typescript-mode
-  :defer t
   :init (setq typescript-indent-level 2))
 
 (provide 'init-config)

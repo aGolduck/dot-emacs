@@ -39,6 +39,7 @@
 (straight-use-package 'use-package)
 ;; decouple code related to straight.el and use-package
 (setq straight-use-package-by-default nil)
+(setq use-package-always-defer t)
 ;; install and load packages by straight.el
 ;; straight.el loads auto-load functions only
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "package"))
