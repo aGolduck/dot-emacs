@@ -7,6 +7,8 @@
  '(custom-enabled-themes '(leuven))
  '(default-input-method "rime" nil nil "Customized with use-package rime")
  '(line-spacing 0.2)
+ '(mac-command-modifier (quote super))
+ '(mac-option-modifier (quote meta))
  '(make-backup-files nil)
  '(recentf-mode t)
  '(rime-posframe-style 'simple)
