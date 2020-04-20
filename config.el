@@ -11,29 +11,6 @@
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'js-mode-hook #'company-mode)
   (add-hook 'typescript-mode-hook #'company-mode))
-;;; ivy, counsel and swiper
-;; (use-package counsel
-;;   :init
-;;   (setq ivy-use-virtual-buffers t
-;; 	enable-recursive-minibuffers t)
-;;   (add-hook 'after-init-hook #'ivy-mode)
-;;   (add-hook 'ivy-mode-hook #'counsel-mode)
-;;   (global-set-key (kbd "C-s") 'swiper)
-;;   ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
-;;   ;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;;   ;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-;;   ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-;;   ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-;;   ;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
-;;   ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-;;   ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-;;   ;; (global-set-key (kbd "C-c g") 'counsel-git)
-;;   ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;;   ;; (global-set-key (kbd "C-c k") 'counsel-ag)
-;;   ;; (global-set-key (kbd "C-x l") 'counsel-locate)
-;;   ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-;;   ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-;;   )
 ;;; live in emacs
 (use-package eaf :if (eq system-type 'gnu/linux))
 ;;; simple and intuitive
@@ -42,6 +19,14 @@
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
+;;; ivy, counsel and swiper
+(use-package ivy
+  :init
+  (setq ivy-use-virtual-buffers t
+	enable-recursive-minibuffers t)
+  (add-hook 'after-init-hook #'ivy-mode)
+  (global-set-key (kbd "C-s") 'swiper)
+  )
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
   :after ivy
