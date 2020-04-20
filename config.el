@@ -29,7 +29,6 @@
   )
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
-  :after ivy
   :init
   (setq ivy-posframe-display-functions-alist
 	'(
@@ -37,7 +36,7 @@
 	  (t . ivy-posframe-display-at-frame-center)))
 					;(ivy-posframe-height-alist '((swiper . 20) (t . 40)))
 					;(ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
-  :config (ivy-posframe-mode 1))
+  (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
 ;;; oh, it's magit
 (use-package magit :init (global-set-key (kbd "M-SPC g s") 'magit-status))
 (use-package markdown-mode
