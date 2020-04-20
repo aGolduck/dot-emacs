@@ -11,6 +11,7 @@
 (straight-use-package 'markdown-mode)
 (straight-use-package '(nox :host github :repo "manateelazycat/nox"))
 (straight-use-package 'org)
+(straight-use-package 'org-journal)
 (straight-use-package '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/"))
 (straight-use-package 'posframe)
 (straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
