@@ -1,6 +1,11 @@
+# emacs built-in
 bookmarks
 recentf
-recentf~
+
+# straight.el
 repos
 straight*
+
+# others
+eaf
 transient

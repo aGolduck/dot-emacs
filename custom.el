@@ -3,9 +3,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-default nil)
  '(custom-enabled-themes '(leuven))
  '(default-input-method "rime" nil nil "Customized with use-package rime")
  '(line-spacing 0.2)
+ '(make-backup-files nil)
  '(recentf-mode t)
  '(rime-posframe-style 'simple)
  '(rime-show-candidate 'posframe)
