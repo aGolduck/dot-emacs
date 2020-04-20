@@ -73,8 +73,7 @@
   :after fuz
   :init
   (setq snails-use-exec-path-from-shell nil)
-  (global-set-key (kbd "M-SPC SPC") 'snails)
-  (toggle-frame-maximized))
+  (global-set-key (kbd "M-SPC SPC") 'snails))
 ;;; my org, my life
 (use-package org
   :init

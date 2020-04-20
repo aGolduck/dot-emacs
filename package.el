@@ -14,7 +14,7 @@
 (straight-use-package '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/"))
 (straight-use-package 'posframe)
 (straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
-;(straight-use-package 'smex)
+;; (straight-use-package 'smex)
 (straight-use-package '(snails :host github :repo "manateelazycat/snails" :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
 (straight-use-package 'typescript-mode)
 (straight-use-package 'which-key)
