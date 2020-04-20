@@ -229,9 +229,6 @@
     (error "Function `rime--posframe-display-content' is not available.")))
 (use-package typescript-mode
   :init (setq typescript-indent-level 2))
-;;; not sure if it is neccessary
-(use-package which-key :config (which-key-mode 1))
-
 
 (provide 'init-config)
 ;;; init-config ends here

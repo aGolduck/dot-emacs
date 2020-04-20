@@ -16,7 +16,6 @@
 (straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
 (straight-use-package '(snails :host github :repo "manateelazycat/snails" :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
 (straight-use-package 'typescript-mode)
-(straight-use-package 'which-key)
 (straight-use-package 'yasnippet)
 
 (provide 'init-packages)
