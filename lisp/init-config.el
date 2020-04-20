@@ -39,6 +39,8 @@
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; currently for snails only
 (use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+;;; reset gc after init
+(use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
   :after ivy

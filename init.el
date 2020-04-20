@@ -48,9 +48,6 @@
 
 (require 'init-config)
 
-;;; reset gc
-(use-package gcmh :config (gcmh-mode 1))
-
 (global-set-key (kbd "M-SPC f f") 'find-file)
 (global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
 (tool-bar-mode -1)
