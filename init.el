@@ -46,8 +46,8 @@
 ;; personal lisp
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "lisp"))
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "site-lisp"))
-
-(require 'init-config)
+;; configs
+(load (concat (file-name-directory (or load-file-name buffer-file-name)) "config"))
 
 (global-set-key (kbd "M-SPC f f") 'find-file)
 (global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
