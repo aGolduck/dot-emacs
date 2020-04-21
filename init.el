@@ -48,9 +48,9 @@
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "site-lisp"))
 ;; configs
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "config"))
+;; extra keybindings
+(load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
-(global-set-key (kbd "M-SPC f f") 'find-file)
-(global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
 (tool-bar-mode -1)
 (toggle-frame-maximized)
 
