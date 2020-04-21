@@ -43,7 +43,10 @@
   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
 ;;; oh, it's magit
-(use-package magit :init (global-set-key (kbd "M-SPC g s") 'magit-status))
+(use-package magit
+  :init
+  (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+  (global-set-key (kbd "M-SPC g s") 'magit-status))
 (use-package markdown-mode
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
