@@ -19,7 +19,7 @@
 (straight-use-package 'posframe)
 (straight-use-package 'projectile)
 (straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
-(straight-use-package '(snails :host github :repo "manateelazycat/snails" :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
+(straight-use-package '(snails :host github :repo "manateelazycat/snails" :fork (:repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
 (straight-use-package 'swiper)
 (straight-use-package 'typescript-mode)
 (straight-use-package 'yaml-mode)

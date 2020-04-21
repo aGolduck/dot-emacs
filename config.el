@@ -71,7 +71,8 @@
 ;;; it's spc, spc
 (use-package snails
   :if window-system
-  :commands (snails)
+  ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
+  :commands (wenpin-snails snails)
   :init
   (when (eq system-type 'darwin)
     (setq snails-default-backends '(
@@ -85,8 +86,25 @@
 			    snails-backend-fasd
 			    snails-backend-command
 			    )))
+  ;; (when (eq system-type 'gnu/linux)
+  ;;   (setq snails-default-backends '(
+  ;; 			    snails-backend-buffer
+  ;; 			    snails-backend-recentf
+  ;; 			    snails-backend-imenu
+  ;; 			    snails-backend-current-buffer
+  ;; 			    snails-backend-rg
+  ;; 			    snails-backend-projectile
+  ;; 			    snails-backend-fd
+  ;; 			    snails-backend-fasd
+  ;; 			    snails-backend-command
+  ;; 			    snails-backend-eaf-pdf-table
+  ;; 			    snails-backend-eaf-browser-history
+  ;; 			    snails-backend-eaf-browser-open
+  ;; 			    snails-backend-eaf-browser-search
+  ;; 			    snails-backend-eaf-github-search
+  ;; 			    )))
   (setq snails-use-exec-path-from-shell nil)
-  (global-set-key (kbd "M-SPC SPC") 'snails))
+  (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
 ;;; my org, my life
 (use-package org
   :init
