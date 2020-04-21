@@ -11,8 +11,13 @@
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'js-mode-hook #'company-mode)
   (add-hook 'typescript-mode-hook #'company-mode))
+;;; will be invoked by ivy
+(use-package counsel)
 ;;; live in emacs
 (use-package eaf :if (eq system-type 'gnu/linux))
+;;; eldoc configured for paredit
+;; TODO: is avaiding all require really necceassary
+;; (use-package eldoc :commands (eldoc-add-command))
 ;;; simple and intuitive
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; currently for snails only
@@ -32,10 +37,10 @@
   :init
   (setq ivy-posframe-display-functions-alist
 	'(
-					;(swiper . ivy-posframe-display-at-point)
+	  ;; (swiper . ivy-posframe-display-at-point)
 	  (t . ivy-posframe-display-at-frame-center)))
-					;(ivy-posframe-height-alist '((swiper . 20) (t . 40)))
-					;(ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
+  ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
+  ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
 ;;; oh, it's magit
 (use-package magit :init (global-set-key (kbd "M-SPC g s") 'magit-status))
@@ -256,6 +261,8 @@ unwanted space when exporting org-mode to html."
   (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
+;;; will be invoked by ivy
+(use-package swiper)
 (use-package typescript-mode
   :init (setq typescript-indent-level 2))
 

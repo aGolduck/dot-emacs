@@ -14,7 +14,7 @@
  '(rime-posframe-style 'simple)
  '(rime-show-candidate 'posframe)
  '(rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") t)
- '(rime-user-data-dir "~/.doom.d/rime")
+ '(rime-user-data-dir "~/.emacs.d/rime")
  '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

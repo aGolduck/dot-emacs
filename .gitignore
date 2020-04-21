@@ -1,6 +1,7 @@
 # emacs built-in
 bookmarks
 recentf
+auto-save-list
 
 # straight.el
 repos
