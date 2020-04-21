@@ -42,7 +42,7 @@
 (setq use-package-always-defer t)
 ;; install and load packages by straight.el
 ;; straight.el loads auto-load functions only
-(load (concat (file-name-directory (or load-file-name buffer-file-name)) "package"))
+(load (concat (file-name-directory (or load-file-name buffer-file-name)) "packages"))
 ;; personal lisp
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "lisp"))
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "site-lisp"))

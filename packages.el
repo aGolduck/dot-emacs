@@ -1,10 +1,11 @@
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
 (straight-use-package 'company)
-(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.")))
 ;; ivy, counsel and swiper belongs to the same repo
 ;; but straight.el builds them into different packages
 (straight-use-package 'counsel)
+(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.")))
 (straight-use-package 'expand-region)
+(straight-use-package 'eyebrowse)
 (straight-use-package '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el")))
 (straight-use-package 'gcmh)
 (straight-use-package 'ivy)
@@ -20,6 +21,7 @@
 (straight-use-package '(snails :host github :repo "manateelazycat/snails" :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
 (straight-use-package 'swiper)
 (straight-use-package 'typescript-mode)
+(straight-use-package 'yaml-mode)
 (straight-use-package 'yasnippet)
 
 (provide 'init-packages)
