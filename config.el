@@ -20,6 +20,11 @@
 ;; (use-package eldoc :commands (eldoc-add-command))
 ;;; simple and intuitive
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
+;;; workspace
+(use-package eyebrowse
+  :init
+  (add-hook 'after-init-hook #'eyebrowse-mode)
+  )
 ;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
@@ -61,6 +66,8 @@
 		 'typescript-mode-hook
 		 ))
     (add-hook hook '(lamda () (nox-ensure)))))
+;;; project definition
+(use-package projectile)
 ;;; it's spc, spc
 (use-package snails
   :if window-system

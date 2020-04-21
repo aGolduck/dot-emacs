@@ -3,7 +3,7 @@
 ;; ivy, counsel and swiper belongs to the same repo
 ;; but straight.el builds them into different packages
 (straight-use-package 'counsel)
-(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.")))
+(straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
 (straight-use-package 'expand-region)
 (straight-use-package 'eyebrowse)
 (straight-use-package '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el")))
@@ -17,6 +17,7 @@
 (straight-use-package 'org-journal)
 (straight-use-package '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/"))
 (straight-use-package 'posframe)
+(straight-use-package 'projectile)
 (straight-use-package '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
 (straight-use-package '(snails :host github :repo "manateelazycat/snails" :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t))
 (straight-use-package 'swiper)
