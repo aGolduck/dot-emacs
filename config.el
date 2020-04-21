@@ -265,6 +265,13 @@ unwanted space when exporting org-mode to html."
 (use-package swiper)
 (use-package typescript-mode
   :init (setq typescript-indent-level 2))
+;;; yaml mode for yaml, ansible
+(use-package yaml-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode)))
+
+
 
 (provide 'init-config)
 ;;; init-config ends here
