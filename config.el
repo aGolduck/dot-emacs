@@ -16,6 +16,16 @@
 	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
 	)
   (add-hook 'after-init-hook #'auto-save-enable))
+(use-package color-rg
+  :commands
+  (color-rg-search-input-in-project
+   color-rg-search-symbol-in-project
+   color-rg-search-input-in-current-file
+   color-rg-search-symbol-in-current-file
+   )
+  :init
+  (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
+  (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
 ;;; waiting to explore
 (use-package company
   :init

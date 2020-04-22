@@ -1,4 +1,5 @@
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
+(straight-use-package '(color-rg :host github :repo "manateelazycat/color-rg"))
 (straight-use-package 'company)
 ;; ivy, counsel and swiper belongs to the same repo
 ;; but straight.el builds them into different packages
