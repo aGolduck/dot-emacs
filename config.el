@@ -48,7 +48,9 @@
 (use-package eyebrowse
   :init
   (add-hook 'after-init-hook #'eyebrowse-mode)
-  )
+  ;; TODO: oddly, keydings below didn't work
+  (global-key-binding (kbd "M-SPC w c") 'eyebrowse-create-window-config)
+  (global-key-binding (kbd "M-SPC w n") 'eyebrowse-next-window-config))
 ;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
