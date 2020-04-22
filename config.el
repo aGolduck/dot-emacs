@@ -33,11 +33,14 @@
   (add-hook 'js-mode-hook #'company-mode)
   (add-hook 'typescript-mode-hook #'company-mode))
 ;;; will be invoked by ivy
-(use-package counsel)
+(use-package counsel
+  :init
+  (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
+  (global-set-key (kbd "M-x") 'counsel-M-x))
 ;;; live in emacs
 (use-package eaf :if (eq system-type 'gnu/linux))
 ;;; eldoc configured for paredit
-;; TODO: is avaiding all require really necceassary
+;; TODO: is avoiding all require really necceassary
 ;; (use-package eldoc :commands (eldoc-add-command))
 ;;; simple and intuitive
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
@@ -56,10 +59,7 @@
   (setq ivy-use-virtual-buffers t
 	enable-recursive-minibuffers t)
   (add-hook 'after-init-hook #'ivy-mode)
-  (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
-  (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
-  (global-set-key (kbd "M-SPC s s") 'swiper)
-  (global-set-key (kbd "M-SPC s S") 'swiper-thing-at-point))
+  (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer))
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
   :init
@@ -313,7 +313,10 @@ unwanted space when exporting org-mode to html."
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
 ;;; will be invoked by ivy
-(use-package swiper)
+(use-package swiper
+  :init
+  (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
 (use-package typescript-mode
   :init (setq typescript-indent-level 2))
 ;;; yaml mode for yaml, ansible
