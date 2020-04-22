@@ -36,7 +36,8 @@
 	enable-recursive-minibuffers t)
   (add-hook 'after-init-hook #'ivy-mode)
   (global-set-key (kbd "C-s") 'swiper)
-  (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer))
+  (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
+  (global-set-key (kbd "M-SPC f r") 'counsel-recentf))
 ;;; use posframe stop eaf blinking
 (use-package ivy-posframe
   :init
