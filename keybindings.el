@@ -1,3 +1,5 @@
+(global-set-key (kbd "M-SPC b s") 'save-some-buffers)
+(global-set-key (kbd "M-SPC b k") 'kill-buffer)
 (global-set-key (kbd "M-SPC f f") 'find-file)
 (global-set-key (kbd "M-SPC w d") 'delete-window)
 (global-set-key (kbd "M-SPC w D") 'delete-other-windows)
