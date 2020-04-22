@@ -83,12 +83,14 @@
   (setq markdown-command "multimarkdown"))
 ;;; lsp rules all
 (use-package nox
+  ;; TODO: nox is not friendly to use-package, reference: snails
+  :demand t
   :config
   (dolist (hook (list
 		 'js-mode-hook
 		 'typescript-mode-hook
 		 ))
-    (add-hook hook '(lamda () (nox-ensure)))))
+    (add-hook hook '(lambda () (nox-ensure)))))
 ;;; project definition
 (use-package projectile)
 ;;; it's spc, spc
