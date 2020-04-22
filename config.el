@@ -2,8 +2,19 @@
 (use-package auto-save
   :commands (auto-save-enable)
   :init
+  (defun buffer-is-org-capture-p (buffer)
+    "buffer is org capture"
+    (save-excursion
+      (set-buffer buffer)
+      (if (boundp 'org-capture-mode) org-capture-mode nil)))
+  (defun any-buffer-is-org-capture-p ()
+    "auto-save would keep deleting trailing whitespace of org-capture"
+    (if (member t (mapcar 'buffer-is-org-capture-p (buffer-list))) t nil))
   (setq auto-save-silent t
-	auto-save-delete-trailing-whitespace t)
+	auto-save-delete-trailing-whitespace t
+	;; TODO: not working
+	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
+	)
   (add-hook 'after-init-hook #'auto-save-enable))
 ;;; waiting to explore
 (use-package company

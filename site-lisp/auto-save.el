@@ -30,9 +30,9 @@
         (dolist (buf (buffer-list))
           (set-buffer buf)
           (when (and
-                 ;; Buffer associate with a filename?
+                 ;; Buffer is associated with a filename?
                  (buffer-file-name)
-                 ;; Buffer is modifiable?
+                 ;; Buffer is modified?
                  (buffer-modified-p)
                  ;; Yassnippet is not active?
                  (or (not (boundp 'yas--active-snippets))
@@ -46,7 +46,7 @@
                                 auto-save-disable-predicates)))
             (push (buffer-name) autosave-buffer-list)
             (if auto-save-silent
-                ;; `inhibit-message' can shut up Emacs, but we want
+                ;; `inhibit-message' can shut up Emacs, but what we want is
                 ;; it doesn't clean up echo area during saving
                 (with-temp-message ""
                   (let ((inhibit-message t))
@@ -56,7 +56,7 @@
         ;; Tell user when auto save files.
         (unless auto-save-silent
           (cond
-           ;; It's stupid tell user if nothing to save.
+           ;; It's stupid to tell user there's nothing to save.
            ((= (length autosave-buffer-list) 1)
             (message "# Saved %s" (car autosave-buffer-list)))
            ((> (length autosave-buffer-list) 1)

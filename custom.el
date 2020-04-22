@@ -4,16 +4,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
+ '(auto-save-list-file-prefix nil)
  '(default-input-method "rime" nil nil "Customized with use-package rime")
  '(line-spacing 0.2)
- '(mac-command-modifier (quote super))
- '(mac-option-modifier (quote meta))
+ '(mac-command-modifier 'super)
+ '(mac-option-modifier 'meta)
  '(make-backup-files nil)
  '(recentf-mode t)
- '(rime-posframe-style 'simple)
- '(rime-show-candidate 'posframe)
+ '(rime-posframe-style 'simple t)
+ '(rime-show-candidate 'posframe t)
  '(rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") t)
- '(rime-user-data-dir "~/.emacs.d/rime")
+ '(rime-user-data-dir "~/.emacs.d/rime" t)
  '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
