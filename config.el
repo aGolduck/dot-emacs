@@ -1,3 +1,5 @@
+;;; avoid conflict
+(use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 ;;; Lazycat is lazy
 (use-package auto-save
   :commands (auto-save-enable)
@@ -12,10 +14,17 @@
     (if (member t (mapcar 'buffer-is-org-capture-p (buffer-list))) t nil))
   (setq auto-save-silent t
 	auto-save-delete-trailing-whitespace t
-	;; TODO: not working
+	;; TODO: auto-save-disable-predicates not working
 	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
 	)
   (add-hook 'after-init-hook #'auto-save-enable))
+;;; jump to anywhere
+(use-package avy
+  :init
+  (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
+  (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
+  (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
+;;; search and refactor in project
 (use-package color-rg
   :commands
   (color-rg-search-input-in-project
@@ -26,23 +35,27 @@
   :init
   (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
   (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
-;;; waiting to explore
+;;; TODO: waiting to explore
 (use-package company
   :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'js-mode-hook #'company-mode)
   (add-hook 'typescript-mode-hook #'company-mode))
-;;; will be invoked by ivy
+;;; completion for script languages like js
+(use-package company-tabnine)
+;;; counsel invoked by ivy
 (use-package counsel
   :init
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
   (global-set-key (kbd "M-x") 'counsel-M-x))
+;;; to set up env variables
+(use-package dotenv)
 ;;; live in emacs
 (use-package eaf :if (eq system-type 'gnu/linux))
 ;;; eldoc configured for paredit
 ;; TODO: is avoiding all require really necceassary
 ;; (use-package eldoc :commands (eldoc-add-command))
-;;; simple and intuitive
+;;; selection simple and intuitive
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
@@ -55,6 +68,8 @@
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
+;;; new api mode
+(use-package graphql-mode)
 ;;; ivy, counsel and swiper
 (use-package ivy
   :init
@@ -62,7 +77,7 @@
 	enable-recursive-minibuffers t)
   (add-hook 'after-init-hook #'ivy-mode)
   (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer))
-;;; use posframe stop eaf blinking
+;;; use posframe to avoid eaf blinking
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
@@ -72,11 +87,21 @@
   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
+;;; livehood
+(use-package js-mode
+  :init
+  (add-hook 'js-mode-hook
+	    '(lambda ()
+	       (set (make-local-variable 'company-backends)
+		    '((company-tabnine))))))
 ;;; oh, it's magit
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (global-set-key (kbd "M-SPC g s") 'magit-status))
+;;; agenda for projects
+(use-package magit-todos :init (global-set-key (kbd "M-SPC p t") 'magit-todos-list))
+;;; if everyone use emacs......
 (use-package markdown-mode
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
@@ -89,12 +114,11 @@
   :demand t
   :config
   (dolist (hook (list
-		 'js-mode-hook
 		 'typescript-mode-hook
 		 ))
     (add-hook hook '(lambda () (nox-ensure)))))
 ;;; project definition
-(use-package projectile)
+(use-package projectile :init (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
 ;;; it's spc, spc
 (use-package snails
   :if window-system
@@ -265,6 +289,8 @@
 		  )
 		 nil)
 		)))
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((awk . t)))
   ;; key binding
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -280,6 +306,7 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents))))
+;;; for diary
 (use-package org-journal
   :init (setq org-journal-dir "~/org/diary" org-journal-file-format "%Y%m%d.org"))
 ;;; difference between heaven and hell
@@ -301,8 +328,8 @@ unwanted space when exporting org-mode to html."
 ;;; modern emacs
 (use-package posframe)
 ;;; rime, THE INPUT METHOD
-;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
 (use-package rime
+;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
   :init
   (setq default-input-method "rime"
 	rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")  ;; 发往 librime 的快捷键
@@ -316,11 +343,18 @@ unwanted space when exporting org-mode to html."
   (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
-;;; will be invoked by ivy
+;;; save cursor place
+(use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
+;;; only for emacs 27+
+(use-package so-long :init (add-hook 'after-init-hook #'global-so-long-mode))
+;;; for snake-shape words
+(use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
+;;; swiper, invoked by ivy
 (use-package swiper
   :init
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
+;;; better livehood
 (use-package typescript-mode
   :init (setq typescript-indent-level 2))
 ;;; yaml mode for yaml, ansible
