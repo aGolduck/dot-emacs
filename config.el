@@ -70,6 +70,9 @@
   (global-key-binding (kbd "M-SPC w n") 'eyebrowse-next-window-config))
 ;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+(use-package flymake-posframe
+  :commands (flymake-posframe-mode)
+  :init (diminish 'flymake-posframe-mode) (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
 ;;; reset gc after init
 (use-package gcmh :init (diminish 'gcmh-mode) (add-hook 'after-init-hook #'gcmh-mode))
 ;;; new api mode
