@@ -6,6 +6,7 @@
 ;; ivy, counsel and swiper belongs to the same repo
 ;; but straight.el builds them into different packages
 (straight-use-package 'counsel)
+(straight-use-package 'diminish)
 (straight-use-package 'dotenv-mode)
 (straight-use-package 'eglot)
 (straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
