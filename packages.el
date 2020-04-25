@@ -7,6 +7,7 @@
 ;; but straight.el builds them into different packages
 (straight-use-package 'counsel)
 (straight-use-package 'dotenv-mode)
+(straight-use-package 'eglot)
 (straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py")))
 (straight-use-package 'expand-region)
 (straight-use-package 'eyebrowse)
@@ -15,6 +16,7 @@
 (straight-use-package 'graphql-mode)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
+(straight-use-package 'lsp-mode)
 (straight-use-package 'magit)
 (straight-use-package 'magit-todos)
 (straight-use-package 'markdown-mode)

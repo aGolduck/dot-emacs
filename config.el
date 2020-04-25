@@ -39,8 +39,7 @@
 (use-package company
   :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'js-mode-hook #'company-mode)
-  (add-hook 'typescript-mode-hook #'company-mode))
+  (add-hook 'js-mode-hook #'company-mode))
 ;;; completion for script languages like js
 (use-package company-tabnine)
 ;;; counsel invoked by ivy
@@ -56,6 +55,10 @@
 ;; TODO: is avoiding all require really necceassary
 ;; (use-package eldoc :commands (eldoc-add-command))
 ;;; selection simple and intuitive
+(use-package eglot
+  :init
+  ;; (add-hook 'typescript-mode-hook #'eglot-ensure)
+  )
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
@@ -94,6 +97,9 @@
 	    '(lambda ()
 	       (set (make-local-variable 'company-backends)
 		    '((company-tabnine))))))
+(use-package lsp-mode
+  :init
+  (add-hook 'lsp-mode-hook #'yas-minor-mode))
 ;;; oh, it's magit
 (use-package magit
   :init
@@ -114,7 +120,7 @@
   :demand t
   :config
   (dolist (hook (list
-		 'typescript-mode-hook
+		 ;; 'typescript-mode-hook
 		 ))
     (add-hook hook '(lambda () (nox-ensure)))))
 ;;; project definition
@@ -356,7 +362,14 @@ unwanted space when exporting org-mode to html."
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
 ;;; better livehood
 (use-package typescript-mode
-  :init (setq typescript-indent-level 2))
+  :init
+  (setq typescript-indent-level 2)
+  (add-hook 'typescript-mode-hook #'paredit-mode)
+  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'electric-pair-local-mode)
+  ;; (add-hook 'typescript-mode-hook #'company-mode)
+  ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
+)
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init
