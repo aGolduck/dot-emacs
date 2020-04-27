@@ -320,7 +320,6 @@
   ;; key binding
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c a") 'org-agenda)
-  (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile)
   :config
   (defadvice org-html-paragraph (before org-html-paragraph-advice
 					(paragraph contents info) activate)
@@ -333,6 +332,8 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents))))
+(use-package org-agenda
+  :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
 ;;; for diary
 (use-package org-journal
   :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
