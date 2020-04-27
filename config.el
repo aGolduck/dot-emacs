@@ -68,11 +68,22 @@
   ;; TODO: oddly, keydings below didn't work
   (global-key-binding (kbd "M-SPC w c") 'eyebrowse-create-window-config)
   (global-key-binding (kbd "M-SPC w n") 'eyebrowse-next-window-config))
-;;; currently for snails only
-(use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+(use-package file
+  :init
+  (global-set-key (kbd "M-SPC f f") 'find-file)
+  (global-set-key (kbd "M-SPC f F") 'find-file-other-window)
+  (add-hook 'find-file-hook
+	    '(lambda ()
+	       (unless (or
+			(string-match-p "org/orgzly" (buffer-file-name))
+			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
+			)
+		 (view-mode)))))
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
   :init (diminish 'flymake-posframe-mode) (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
+;;; currently for snails only
+(use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
 (use-package gcmh :init (diminish 'gcmh-mode) (add-hook 'after-init-hook #'gcmh-mode))
 (use-package git-link)
