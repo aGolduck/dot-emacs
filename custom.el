@@ -15,6 +15,8 @@
  '(mac-command-modifier 'super)
  '(mac-option-modifier 'meta)
  '(make-backup-files nil)
+ '(recentf-auto-cleanup 'never)
+ '(recentf-max-saved-items nil)
  '(recentf-mode t)
  '(rime-posframe-style 'simple)
  '(rime-show-candidate 'posframe)
