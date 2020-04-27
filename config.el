@@ -322,7 +322,7 @@ unwanted space when exporting org-mode to html."
       (ad-set-arg 1 fixed-contents))))
 ;;; for diary
 (use-package org-journal
-  :init (setq org-journal-dir "~/org/diary" org-journal-file-format "%Y%m%d.org"))
+  :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
 ;;; difference between heaven and hell
 (use-package paredit
   :commands (enable-paredit-mode)
