@@ -90,6 +90,7 @@
 ;;; new api mode
 (use-package graphql-mode)
 ;;; ivy, counsel and swiper
+(use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 (use-package ivy
   :init
   (diminish 'ivy-mode)

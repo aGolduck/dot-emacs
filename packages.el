@@ -17,6 +17,7 @@
 (straight-use-package 'gcmh)
 (straight-use-package 'git-link)
 (straight-use-package 'graphql-mode)
+(straight-use-package 'hl-todo)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)
 (straight-use-package 'lsp-mode)
