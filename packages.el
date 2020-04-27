@@ -15,6 +15,7 @@
 (straight-use-package '(flymake-posframe :host github :repo "Ladicle/flymake-posframe"))
 (straight-use-package '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el")))
 (straight-use-package 'gcmh)
+(straight-use-package 'git-link)
 (straight-use-package 'graphql-mode)
 (straight-use-package 'ivy)
 (straight-use-package 'ivy-posframe)

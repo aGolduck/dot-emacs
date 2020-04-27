@@ -75,6 +75,7 @@
   :init (diminish 'flymake-posframe-mode) (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
 ;;; reset gc after init
 (use-package gcmh :init (diminish 'gcmh-mode) (add-hook 'after-init-hook #'gcmh-mode))
+(use-package git-link)
 ;;; new api mode
 (use-package graphql-mode)
 ;;; ivy, counsel and swiper
