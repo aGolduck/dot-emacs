@@ -319,6 +319,7 @@
   ;; key binding
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c a") 'org-agenda)
+  (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile)
   :config
   (defadvice org-html-paragraph (before org-html-paragraph-advice
 					(paragraph contents info) activate)
