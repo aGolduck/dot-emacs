@@ -396,9 +396,7 @@ unwanted space when exporting org-mode to html."
 			(string-match-p "org/orgzly" (buffer-file-name))
 			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
 			)
-		 (view-mode))))
-  (add-hook 'view-mode-hook
-	    '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar)))))
+		 (view-mode)))))
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init

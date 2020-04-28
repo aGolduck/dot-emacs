@@ -51,6 +51,14 @@
 ;; extra keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
+(add-hook 'view-mode-hook
+	  '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(add-hook 'org-capture-mode-hook '(lambda () (setq cursor-type 'bar)))
+(add-hook 'find-file-hook
+	  '(lambda ()
+	     (when (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
+	       (setq cursor-type 'bar))))
+
 (tool-bar-mode -1)
 (toggle-frame-maximized)
 
