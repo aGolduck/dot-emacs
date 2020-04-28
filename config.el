@@ -71,14 +71,7 @@
 (use-package file
   :init
   (global-set-key (kbd "M-SPC f f") 'find-file)
-  (global-set-key (kbd "M-SPC f F") 'find-file-other-window)
-  (add-hook 'find-file-hook
-	    '(lambda ()
-	       (unless (or
-			(string-match-p "org/orgzly" (buffer-file-name))
-			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
-			)
-		 (view-mode)))))
+  (global-set-key (kbd "M-SPC f F") 'find-file-other-window))
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
   :init (diminish 'flymake-posframe-mode) (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
@@ -391,7 +384,18 @@ unwanted space when exporting org-mode to html."
   (add-hook 'typescript-mode-hook #'electric-pair-local-mode)
   ;; (add-hook 'typescript-mode-hook #'company-mode)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
-)
+  )
+(use-package view-mode
+  :init
+  (add-hook 'find-file-hook
+	    '(lambda ()
+	       (unless (or
+			(string-match-p "org/orgzly" (buffer-file-name))
+			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
+			)
+		 (view-mode))))
+  (add-hook 'view-mode-hook
+	    '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar)))))
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init
