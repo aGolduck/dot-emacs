@@ -1,3 +1,9 @@
+;;; how to find out where config code goes?
+;; 1. major mode, like typescript-mode, org-mode
+;; 2. big minor mode, like ivy-mode, lsp-mode
+;; 3. minor mode
+
+
 ;;; avoid conflict
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 ;;; Lazycat is lazy
@@ -36,10 +42,7 @@
   (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
   (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
 ;;; TODO: waiting to explore
-(use-package company
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'js-mode-hook #'company-mode))
+(use-package company)
 ;;; completion for script languages like js
 (use-package company-tabnine)
 ;;; counsel invoked by ivy
@@ -56,10 +59,10 @@
 ;; TODO: is avoiding all require really necceassary
 ;; (use-package eldoc :commands (eldoc-add-command))
 ;;; selection simple and intuitive
-(use-package eglot
-  :init
-  ;; (add-hook 'typescript-mode-hook #'eglot-ensure)
-  )
+(use-package eglot)
+(use-package elisp-mode :init
+  (add-hook 'emacs-lisp-mode-hook #'company-mode)
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
@@ -106,6 +109,7 @@
 ;;; livehood
 (use-package js-mode
   :init
+  (add-hook 'js-mode-hook #'company-mode)
   (add-hook 'js-mode-hook
 	    '(lambda ()
 	       (set (make-local-variable 'company-backends)
@@ -146,16 +150,16 @@
   :init
   (when (eq system-type 'darwin)
     (setq snails-default-backends '(
-			    snails-backend-buffer
-			    snails-backend-recentf
-			    snails-backend-imenu
-			    snails-backend-current-buffer
-			    snails-backend-rg
-			    snails-backend-projectile
-			    snails-backend-mdfind
-			    snails-backend-fasd
-			    snails-backend-command
-			    )))
+				    snails-backend-buffer
+				    snails-backend-recentf
+				    snails-backend-imenu
+				    snails-backend-current-buffer
+				    snails-backend-rg
+				    snails-backend-projectile
+				    snails-backend-mdfind
+				    snails-backend-fasd
+				    snails-backend-command
+				    )))
   ;; (when (eq system-type 'gnu/linux)
   ;;   (setq snails-default-backends '(
   ;; 			    snails-backend-buffer
@@ -334,7 +338,6 @@ unwanted space when exporting org-mode to html."
 (use-package paredit
   :commands (enable-paredit-mode)
   :init
-  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
   (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
   (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
@@ -350,7 +353,7 @@ unwanted space when exporting org-mode to html."
 (use-package posframe)
 ;;; rime, THE INPUT METHOD
 (use-package rime
-;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
+  ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
   :init
   (setq default-input-method "rime"
 	rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")  ;; 发往 librime 的快捷键
