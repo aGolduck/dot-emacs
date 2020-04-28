@@ -6,6 +6,7 @@
  '(auto-save-default nil)
  '(auto-save-list-file-prefix nil)
  '(default-input-method "rime" nil nil "Customized with use-package rime")
+ '(delete-by-moving-to-trash t)
  '(ediff-merge-split-window-function 'split-window-vertically)
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
