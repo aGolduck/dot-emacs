@@ -50,7 +50,16 @@
   :init
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
   (global-set-key (kbd "M-x") 'counsel-M-x))
-(use-package diminish)
+(use-package diminish
+  :init
+  (add-hook 'after-init-hook
+	    '(lambda () (dolist (mode (list
+				       'flymake-posframe-mode
+				       'gcmh-mode
+				       'ivy-mode
+				       'ivy-posframe-mode
+				       ))
+			  (diminish mode)))))
 ;;; to set up env variables
 (use-package dotenv)
 ;;; live in emacs
@@ -77,11 +86,11 @@
   (global-set-key (kbd "M-SPC f F") 'find-file-other-window))
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
-  :init (diminish 'flymake-posframe-mode) (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
+  :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
 ;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 ;;; reset gc after init
-(use-package gcmh :init (diminish 'gcmh-mode) (add-hook 'after-init-hook #'gcmh-mode))
+(use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 (use-package git-link)
 ;;; new api mode
 (use-package graphql-mode)
@@ -89,7 +98,6 @@
 (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 (use-package ivy
   :init
-  (diminish 'ivy-mode)
   (setq ivy-use-virtual-buffers t
 	enable-recursive-minibuffers t)
   (add-hook 'after-init-hook #'ivy-mode)
@@ -98,7 +106,6 @@
 ;;; use posframe to avoid eaf blinking
 (use-package ivy-posframe
   :init
-  (diminish 'ivy-posframe-mode)
   (setq ivy-posframe-display-functions-alist
 	'(
 	  ;; (swiper . ivy-posframe-display-at-point)
