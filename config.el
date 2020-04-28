@@ -183,9 +183,6 @@
 (use-package org
   :init
   (require 'bh-org)
-  (defun bh/verify-refile-target ()
-    "Exclude todo keywords with a done state from refile targets"
-    (not (member (nth 2 (org-heading-components)) org-done-keywords)))
   (setq org-directory "~/org"
 	org-agenda-files '("~/org/orgzly")
 	org-agenda-log-mode-items '(closed)

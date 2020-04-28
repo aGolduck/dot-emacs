@@ -1,5 +1,9 @@
 ;;; bh's project management based on org mode
 ;; copied from http://doc.norang.ca/org-mode.html
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
 (defun bh/org-is-habit-p (&optional pom)
   "Is the task at POM or point a habit?"
   (string= "habit" (org-entry-get (or pom (point)) "STYLE")))
