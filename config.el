@@ -187,23 +187,23 @@
     "Exclude todo keywords with a done state from refile targets"
     (not (member (nth 2 (org-heading-components)) org-done-keywords)))
   (setq org-directory "~/org"
-	org-agenda-span 'month
-	org-agenda-show-future-repeats 'next
 	org-agenda-files '("~/org/orgzly")
 	org-agenda-log-mode-items '(closed)
-	org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
-	org-refile-targets (quote ((nil :maxlevel . 9)
-                                   (org-agenda-files :maxlevel . 9)))
-	org-refile-use-outline-path t
-	org-outline-path-complete-in-steps nil
 	org-agenda-log-mode-items (quote (closed state))
-	org-refile-target-verify-function 'bh/verify-refile-target
-	org-stuck-projects (quote ("" nil nil ""))
-	org-archive-mark-done nil
+	org-agenda-show-future-repeats 'next
+	org-agenda-span 'month
+	org-agenda-tags-todo-honor-ignore-options t
 	org-archive-location "%s_archive::* Archived Tasks"
+	org-archive-mark-done nil
 	org-confirm-babel-evaluate nil
-	org-html-inline-images t
+	org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
 	org-export-with-sub-superscripts nil
+	org-html-inline-images t
+	org-outline-path-complete-in-steps nil
+	org-refile-target-verify-function 'bh/verify-refile-target
+	org-refile-targets (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)))
+	org-refile-use-outline-path t
+	org-stuck-projects (quote ("" nil nil ""))
 	org-use-sub-superscripts nil)
   (setq org-todo-keywords
 	(quote ((sequence "TODO(T)" "NEXT(n)" "|" "DONE(t)")
@@ -212,6 +212,14 @@
 		;; (type "EXPERIENCE(e) DEBUG(d) | "DONE")
 		(type "EXPERIENCE(e)" "DEBUG(d)" "BOOKMARK(b)" "MARKBOOK(m)")
 		)))
+  (setq org-todo-state-tags-triggers
+	(quote (("CANCELLED" ("CANCELLED" . t))
+		("WAITING" ("WAITING" . t))
+		("HOLD" ("WAITING") ("HOLD" . t))
+		(done ("WAITING") ("HOLD"))
+		("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+		("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
   (setq org-capture-templates
 	'(
 	  ("t" "TODO" entry (file org-default-notes-file)
