@@ -53,7 +53,8 @@
 
 (add-hook 'view-mode-hook
 	  '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
-(add-hook 'org-capture-mode-hook '(lambda () (setq cursor-type 'bar)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (setq cursor-type 'bar)))
+(add-hook 'org-capture-mode-hook (lambda () (setq cursor-type 'bar)))
 (add-hook 'find-file-hook
 	  '(lambda ()
 	     (when (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
