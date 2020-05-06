@@ -156,18 +156,18 @@
   ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
   :commands (wenpin-snails snails)
   :init
-  (when (eq system-type 'darwin)
-    (setq snails-default-backends '(
-				    snails-backend-buffer
-				    snails-backend-recentf
-				    snails-backend-imenu
-				    snails-backend-current-buffer
-				    snails-backend-rg
-				    snails-backend-projectile
-				    snails-backend-mdfind
-				    snails-backend-fasd
-				    snails-backend-command
-				    )))
+  ;; (when (eq system-type 'darwin)
+  ;;   (setq snails-default-backends '(
+  ;;       			    snails-backend-buffer
+  ;;       			    snails-backend-recentf
+  ;;       			    snails-backend-imenu
+  ;;       			    snails-backend-current-buffer
+  ;;       			    snails-backend-rg
+  ;;       			    snails-backend-projectile
+  ;;       			    snails-backend-mdfind
+  ;;       			    snails-backend-fasd
+  ;;       			    snails-backend-command
+  ;;       			    )))
   ;; (when (eq system-type 'gnu/linux)
   ;;   (setq snails-default-backends '(
   ;; 			    snails-backend-buffer
