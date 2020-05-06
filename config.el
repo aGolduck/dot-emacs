@@ -95,7 +95,7 @@
 ;;; new api mode
 (use-package graphql-mode)
 ;;; ivy, counsel and swiper
-(use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
+;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t
@@ -390,6 +390,8 @@ unwanted space when exporting org-mode to html."
   :init
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
+(use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
+(use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
 ;;; better livehood
 (use-package typescript-mode
   :init
