@@ -75,6 +75,7 @@
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
+  :if (< emacs-major-version 27)
   :init
   (add-hook 'after-init-hook #'eyebrowse-mode)
   ;; TODO: oddly, keydings below didn't work
