@@ -229,9 +229,11 @@
 		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
   (setq org-capture-templates
 	'(
-	  ("t" "TODO" entry (file org-default-notes-file)
+	  ("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
 	   "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	  ("n" "NOTE" entry (file+headline org-default-notes-file "NOTES")
+	  ("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
+	   "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	  ("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
 	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
 	  ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
 	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
