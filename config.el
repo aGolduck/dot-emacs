@@ -30,6 +30,9 @@
   (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
+(use-package bookmark
+  :init
+  (global-set-key (kbd "M-SPC b s") 'bookmark-set))
 ;;; search and refactor in project
 (use-package color-rg
   :commands
@@ -48,6 +51,7 @@
 ;;; counsel invoked by ivy
 (use-package counsel
   :init
+  (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
   (global-set-key (kbd "M-x") 'counsel-M-x))
 (use-package diminish
@@ -320,7 +324,7 @@
 		("gn" "noon" tags-todo "@noon")
 		("gb" "bus" tags-todo "@bus")
 		("gl" "later" tags-todo "LATER")
-		("G" "Context  block agenda"
+		("G" "Context block agenda"
 		 ((tags-todo "@office")
 		  (tags-todo "@night")
 		  (tags-todo "@noon")
