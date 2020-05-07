@@ -23,6 +23,7 @@
           'hl-todo
           'ivy
           'ivy-posframe
+          'lsp-ivy
           'lsp-mode
           'magit
           'magit-todos
