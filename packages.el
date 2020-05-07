@@ -25,6 +25,7 @@
           'ivy-posframe
           'lsp-ivy
           'lsp-mode
+          'lsp-treemacs
           'magit
           'magit-todos
           'markdown-mode
@@ -39,6 +40,7 @@
           'rust-mode
           '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           'swiper
+          'treemacs
           'vterm
           'typescript-mode
           'yaml-mode
