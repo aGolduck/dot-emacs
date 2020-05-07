@@ -57,7 +57,10 @@
 (add-hook 'org-capture-mode-hook (lambda () (setq cursor-type 'bar)))
 (add-hook 'find-file-hook
 	  '(lambda ()
-	     (when (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
+	     (when (or
+		    (string-match-p "org/orgzly" (buffer-file-name))
+		    (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
+		    )
 	       (setq cursor-type 'bar))))
 
 (tool-bar-mode -1)
