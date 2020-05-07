@@ -140,9 +140,7 @@
         ;; lsp-diagnostic-package :none
         ;; lsp-idle-delay 0.500
         lsp-semantic-highlighting nil
-        read-process-output-max (* 1024 1024)
-        )
-  (add-hook 'lsp-mode-hook #'yas-minor-mode))
+        read-process-output-max (* 1024 1024)))
 (use-package lsp-ivy)
 ;;; oh, it's magit
 (use-package magit
