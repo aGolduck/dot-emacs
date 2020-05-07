@@ -411,6 +411,7 @@ unwanted space when exporting org-mode to html."
 			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
 			)
 		 (view-mode)))))
+(use-package vterm)
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init
