@@ -129,6 +129,13 @@
 		    '((company-tabnine))))))
 (use-package lsp-mode
   :init
+  (setq lsp-log-io t
+        lsp-print-performance t
+        lsp-enable-completion-at-point t
+        lsp-enable-xref t
+        ;; lsp-diagnostic-package :none
+        lsp-semantic-highlighting nil
+        )
   (add-hook 'lsp-mode-hook #'yas-minor-mode))
 ;;; oh, it's magit
 (use-package magit
