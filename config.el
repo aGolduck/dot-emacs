@@ -383,8 +383,8 @@ unwanted space when exporting org-mode to html."
     (error "Function `rime--posframe-display-content' is not available.")))
 ;;; save cursor place
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
-;;; only for emacs 27+
-(use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
+;;; only for emacs 27+, 导致 .emacs.d/init.el 无法编辑，暂时看不到启动的必要
+;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 ;;; for snake-shape words
 (use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
 ;;; swiper, invoked by ivy
