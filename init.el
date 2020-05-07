@@ -74,5 +74,9 @@
 ;;    (member "dash" (nth 1 (gethash package straight--build-cache))))
 ;;  (hash-table-keys straight--recipe-cache))
 
+(setq wenpin-font-default-height
+      (cond
+       ((string-equal (getenv "HOME") "/Users/wenpin") 180)
+       (t 112)))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'no-error 'no-message)
