@@ -395,6 +395,9 @@ unwanted space when exporting org-mode to html."
   (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
+(use-package rust-mode
+  :init
+  (add-hook 'rust-mode-hook #'lsp))
 ;;; save cursor place
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
 ;;; only for emacs 27+, 导致 .emacs.d/init.el 无法编辑，暂时看不到启动的必要
