@@ -25,6 +25,7 @@
 (straight-use-package 'magit-todos)
 (straight-use-package 'markdown-mode)
 (straight-use-package '(nox :host github :repo "manateelazycat/nox"))
+(straight-use-package 'olivetti)
 (straight-use-package 'org)
 (straight-use-package 'org-journal)
 (straight-use-package '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/"))

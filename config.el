@@ -187,6 +187,7 @@
   ;; 			    )))
   (setq snails-use-exec-path-from-shell nil)
   (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
+(use-package olivetti)
 ;;; my org, my life
 (use-package org
   :init
