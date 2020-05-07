@@ -45,7 +45,11 @@
   (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
   (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
 ;;; TODO: waiting to explore
-(use-package company)
+(use-package company
+  :init
+  (setq company-minimum-prefix-length 1
+        ;; default is 0.2
+        company-idle-delay 0.0))
 ;;; completion for script languages like js
 (use-package company-tabnine)
 ;;; counsel invoked by ivy
