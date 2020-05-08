@@ -53,8 +53,14 @@
 
 (add-hook 'view-mode-hook
 	  '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
-(add-hook 'lisp-interaction-mode-hook (lambda () (setq cursor-type 'bar)))
-(add-hook 'org-capture-mode-hook (lambda () (setq cursor-type 'bar)))
+(dolist (wenpin-writable-major-mode-hook
+         (list
+          'eshell-mode-hook
+          'lisp-interaction-mode-hook
+          'org-capture-mode-hook
+          'vterm-mode-hook
+          ))
+  (add-hook wenpin-writable-major-mode-hook (lambda () (setq cursor-type 'bar))))
 (add-hook 'find-file-hook
 	  '(lambda ()
 	     (when (or
