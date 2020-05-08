@@ -3,6 +3,7 @@
 (dolist (wenpin-package
          (list
           'avy
+          'ccls
           '(color-rg :host github :repo "manateelazycat/color-rg")
           'company
           ;; 'company-tabnine

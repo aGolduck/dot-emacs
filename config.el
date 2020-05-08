@@ -36,6 +36,10 @@
   :init
   (global-set-key (kbd "M-SPC b s") 'bookmark-set))
 ;;; search and refactor in project
+(use-package ccls)
+(use-package cc-mode
+  :init
+  (add-hook 'c-mode-hook #'lsp))
 (use-package color-rg
   :commands
   (color-rg-search-input-in-project
