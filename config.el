@@ -129,10 +129,7 @@
 (use-package js-mode
   :init
   (add-hook 'js-mode-hook #'company-mode)
-  (add-hook 'js-mode-hook
-	    '(lambda ()
-	       (set (make-local-variable 'company-backends)
-		    '((company-tabnine))))))
+  )
 (use-package lsp-mode
   :init
   (setq lsp-log-io t

@@ -5,7 +5,7 @@
           'avy
           '(color-rg :host github :repo "manateelazycat/color-rg")
           'company
-          'company-tabnine
+          ;; 'company-tabnine
           ;; ivy, counsel and swiper belongs to the same repo
           ;; but straight.el builds them into different packages
           'counsel
