@@ -30,6 +30,8 @@
   (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
+;;; for laptop
+;; (use-package battery)
 (use-package bookmark
   :init
   (global-set-key (kbd "M-SPC b s") 'bookmark-set))
