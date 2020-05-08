@@ -128,8 +128,10 @@
 ;;; livehood
 (use-package js-mode
   :init
-  (add-hook 'js-mode-hook #'company-mode)
-  )
+  (setq js-indent-level 2)
+  (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'js-mode-hook #'paredit-mode)
+  (add-hook 'js-mode-hook #'electric-pair-local-mode))
 (use-package lsp-mode
   :init
   (setq lsp-log-io t
@@ -419,8 +421,8 @@ unwanted space when exporting org-mode to html."
 (use-package typescript-mode
   :init
   (setq typescript-indent-level 2)
-  (add-hook 'typescript-mode-hook #'paredit-mode)
   (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'paredit-mode)
   (add-hook 'typescript-mode-hook #'electric-pair-local-mode)
   ;; (add-hook 'typescript-mode-hook #'company-mode)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
