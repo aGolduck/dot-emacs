@@ -437,6 +437,7 @@ unwanted space when exporting org-mode to html."
 			)
 		 (view-mode)))))
 (use-package vterm)
+(use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init
