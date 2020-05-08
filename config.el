@@ -410,6 +410,7 @@ unwanted space when exporting org-mode to html."
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 ;;; for snake-shape words
 (use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
+(use-package sudo-edit)
 ;;; swiper, invoked by ivy
 (use-package swiper
   :init
