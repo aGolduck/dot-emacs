@@ -28,6 +28,7 @@
  '(rime-show-candidate 'posframe t)
  '(rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") t)
  '(rime-user-data-dir "~/.emacs.d/rime" t)
+ '(safe-local-variable-values '((flycheck-disabled-checkers emacs-lisp-checkdoc)))
  '(vc-follow-symlinks t)
  '(visible-bell t))
 (custom-set-faces
