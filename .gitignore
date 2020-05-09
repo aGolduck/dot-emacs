@@ -6,7 +6,8 @@ places
 
 # straight.el
 repos
-straight*
+straight*/straight/*
+!straight*/straight/versions
 
 # others
 eaf
