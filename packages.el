@@ -48,6 +48,7 @@
           ;; 'company-tabnine
           'ivy-xref
           'eshell-z
+          'eterm-256color
           ))
   (straight-use-package wenpin-package))
 

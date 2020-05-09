@@ -30,7 +30,11 @@
  '(rime-user-data-dir "~/.emacs.d/rime" t)
  '(safe-local-variable-values '((flycheck-disabled-checkers emacs-lisp-checkdoc)))
  '(vc-follow-symlinks t)
- '(visible-bell t))
+ '(visible-bell t)
+ '(vterm-keymap-exceptions
+   '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
+ '(vterm-kill-buffer-on-exit t)
+ '(vterm-term-environment-variable "eterm-color"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

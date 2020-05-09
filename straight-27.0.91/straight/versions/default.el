@@ -15,6 +15,7 @@
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("esh-autosuggest" . "972094808d231a86dc6e43862191167b1997d840")
  ("eshell-z" . "337cb241e17bd472bd3677ff166a0800f684213c")
+ ("eterm-256color" . "0f0dab497239ebedbc9c4a48b3ec8cce4a47e980")
  ("expand-region.el" . "ea6b4cbb9985ddae532bd2faf9bb00570c9f2781")
  ("eyebrowse" . "e483d35e905c2e26fac63f33c77b9e764729a364")
  ("f.el" . "1814209e2ff43cf2e6d38c4cd476218915f550fb")
@@ -61,6 +62,7 @@
  ("typescript.el" . "102587e458d48ece6335cd708300647f22ec8b8d")
  ("use-package" . "c873d5529c9c80cb58222f22873a4f081c307cb2")
  ("with-editor" . "4fe66d4d55c8eacebda53a13cc38e01d32bdaaa2")
+ ("xterm-color" . "d53a39a5af72cd340ebf686e59a37289b4cb6e8c")
  ("yaml-mode" . "cecf4b106b0c4236931b14919fdf87ff3546e2c9")
  ("yasnippet" . "5b1217ab085fab4abeb1118dccb260691b446703"))
 :alpha

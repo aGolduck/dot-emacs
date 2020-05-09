@@ -457,7 +457,13 @@ unwanted space when exporting org-mode to html."
 			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
 			)
 		 (view-mode)))))
-(use-package vterm)
+(use-package vterm
+  :init
+  ;; (add-hook 'vterm-mode-hook
+  ;;           (lambda ()
+  ;;             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch-serif)
+  ;;             (buffer-face-mode t)))
+  )
 (use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
 ;;; yaml mode for yaml, ansible
 (use-package yaml-mode
