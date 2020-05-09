@@ -46,6 +46,7 @@
           'yaml-mode
           'yasnippet
           ;; 'company-tabnine
+          'ivy-xref
           ))
   (straight-use-package wenpin-package))
 
