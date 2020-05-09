@@ -52,7 +52,7 @@
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
 (add-hook 'view-mode-hook
-	  '(lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+	  (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (dolist (wenpin-writable-major-mode-hook
          (list
           'eshell-mode-hook
@@ -62,7 +62,7 @@
           ))
   (add-hook wenpin-writable-major-mode-hook (lambda () (setq cursor-type 'bar))))
 (add-hook 'find-file-hook
-	  '(lambda ()
+	  (lambda ()
 	     (when (or
 		    (string-match-p "org/orgzly" (buffer-file-name))
 		    (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))

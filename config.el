@@ -67,7 +67,7 @@
 (use-package diminish
   :init
   (add-hook 'after-init-hook
-	    '(lambda () (dolist (mode (list
+	    (lambda () (dolist (mode (list
 				       'flymake-posframe-mode
 				       'gcmh-mode
 				       'ivy-mode
@@ -185,7 +185,7 @@
   (dolist (hook (list
 		 ;; 'typescript-mode-hook
 		 ))
-    (add-hook hook '(lambda () (nox-ensure)))))
+    (add-hook hook (lambda () (nox-ensure)))))
 ;;; project definition
 (use-package projectile :init (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
 ;;; it's spc, spc
@@ -288,7 +288,7 @@
 			      (org-agenda-tags-todo-honor-ignore-options t)
 			      (org-agenda-todo-ignore-scheduled 'future)
 			      (org-agenda-skip-function
-			       '(lambda ()
+			       (lambda ()
 				  (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
 				      (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
 			      (org-tags-match-list-sublevels t)
@@ -451,7 +451,7 @@ unwanted space when exporting org-mode to html."
 (use-package view-mode
   :init
   (add-hook 'find-file-hook
-	    '(lambda ()
+	    (lambda ()
 	       (unless (or
 			(string-match-p "org/orgzly" (buffer-file-name))
 			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
