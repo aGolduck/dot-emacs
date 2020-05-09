@@ -47,6 +47,7 @@
           'yasnippet
           ;; 'company-tabnine
           'ivy-xref
+          'eshell-z
           ))
   (straight-use-package wenpin-package))
 

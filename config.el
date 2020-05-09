@@ -86,6 +86,12 @@
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+(use-package esh-mode
+  :init
+  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+  (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z))))
+(use-package esh-autosuggest :commands (esh-autosuggest-mode))
+(use-package eshell-z)
 (use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
