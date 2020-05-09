@@ -53,6 +53,8 @@
 
 (add-hook 'view-mode-hook
 	  (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(add-hook 'vterm-copy-mode-hook
+	  (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (dolist (wenpin-writable-major-mode-hook
          (list
           'eshell-mode-hook
