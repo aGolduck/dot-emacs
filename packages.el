@@ -49,6 +49,7 @@
           'ivy-xref
           'eshell-z
           'eterm-256color
+          'highlight-indent-guides
           ))
   (straight-use-package wenpin-package))
 

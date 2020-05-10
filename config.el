@@ -116,8 +116,14 @@
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 ;;; new api mode
 (use-package graphql-mode)
-;;; ivy, counsel and swiper
+(use-package highlight-indent-guides
+  :init
+  (setq highlight-indent-guides-method 'fill
+        highlight-indent-guides-auto-odd-face-perc 15
+        highlight-indent-guides-auto-even-face-perc 55
+        highlight-indent-guides-auto-character-face-perc 100))
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
+;;; ivy, counsel and swiper
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t
@@ -469,7 +475,8 @@ unwanted space when exporting org-mode to html."
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode)))
+  (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
+  (add-hook 'yaml-mode #'highlight-indent-guides-mode))
 
 
 
