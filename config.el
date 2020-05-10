@@ -92,7 +92,10 @@
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z))))
 (use-package esh-autosuggest :commands (esh-autosuggest-mode))
 (use-package eshell-z)
-(use-package expand-region :init (global-set-key (kbd "M-SPC v") 'er/expand-region))
+(use-package expand-region
+  :init
+  (setq expand-region-contract-fast-key "V")
+  (global-set-key (kbd "M-SPC v") 'er/expand-region))
 ;;; workspace
 (use-package eyebrowse
   :if (< emacs-major-version 27)
@@ -103,6 +106,8 @@
   (global-key-binding (kbd "M-SPC w n") 'eyebrowse-next-window-config))
 (use-package file
   :init
+  (setq auto-save-default nil
+        make-backup-files nil)
   (global-set-key (kbd "M-SPC f f") 'find-file)
   (global-set-key (kbd "M-SPC f F") 'find-file-other-window))
 (use-package flymake-posframe
@@ -167,7 +172,9 @@
         ;; lsp-diagnostic-package :none
         ;; lsp-idle-delay 0.500
         lsp-semantic-highlighting nil
-        read-process-output-max (* 1024 1024)))
+        read-process-output-max (* 1024 1024)
+        lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
+        lsp-file-watch-threshold 1112))
 (use-package lsp-ivy)
 ;;; oh, it's magit
 (use-package magit
@@ -411,6 +418,11 @@ unwanted space when exporting org-mode to html."
   )
 ;;; modern emacs
 (use-package posframe)
+(use-package recentf
+  :init
+  (setq recentf-auto-cleanup 'never
+        recentf-max-saved-items nil)
+  (add-hook 'after-init-hook #'recentf-mode))
 ;;; rime, THE INPUT METHOD
 (use-package rime
   ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
@@ -465,6 +477,9 @@ unwanted space when exporting org-mode to html."
 		 (view-mode)))))
 (use-package vterm
   :init
+  (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y")
+        vterm-kill-buffer-on-exit t
+        vterm-term-environment-variable "eterm-color")
   ;; (add-hook 'vterm-mode-hook
   ;;           (lambda ()
   ;;             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch-serif)
