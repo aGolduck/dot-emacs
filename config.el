@@ -4,9 +4,7 @@
 ;; 3. minor mode
 
 
-;;; avoid conflict
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
-;;; Lazycat is lazy
 (use-package auto-save
   :commands (auto-save-enable)
   :init
@@ -24,18 +22,15 @@
 	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
 	)
   (add-hook 'after-init-hook #'auto-save-enable))
-;;; jump to anywhere
 (use-package avy
   :init
   (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
-;;; for laptop
 ;; (use-package battery)
 (use-package bookmark
   :init
   (global-set-key (kbd "M-SPC b s") 'bookmark-set))
-;;; search and refactor in project
 (use-package ccls)
 (use-package cc-mode
   :init
@@ -50,15 +45,12 @@
   :init
   (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
   (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
-;;; TODO: waiting to explore
 (use-package company
   :init
   (setq company-minimum-prefix-length 1
         ;; default is 0.2
         company-idle-delay 0.0))
-;;; completion for script languages like js
 (use-package company-tabnine)
-;;; counsel invoked by ivy
 (use-package counsel
   :init
   (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
@@ -74,14 +66,9 @@
 				       'ivy-posframe-mode
 				       ))
 			  (diminish mode)))))
-;;; to set up env variables
 (use-package dotenv)
-;;; live in emacs
-(use-package eaf :if (eq system-type 'gnu/linux))
-;;; eldoc configured for paredit
-;; TODO: is avoiding all require really necceassary
+;; (use-package eaf :if (eq system-type 'gnu/linux))
 ;; (use-package eldoc :commands (eldoc-add-command))
-;;; selection simple and intuitive
 (use-package eglot)
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
@@ -96,7 +83,6 @@
   :init
   (setq expand-region-contract-fast-key "V")
   (global-set-key (kbd "M-SPC v") 'er/expand-region))
-;;; workspace
 (use-package eyebrowse
   :if (< emacs-major-version 27)
   :init
@@ -113,13 +99,10 @@
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
   :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
-;;; currently for snails only
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
-;;; reset gc after init
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 (use-package git-link)
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
-;;; new api mode
 (use-package graphql-mode)
 (use-package highlight-indent-guides
   :init
@@ -128,7 +111,6 @@
         highlight-indent-guides-auto-even-face-perc 55
         highlight-indent-guides-auto-character-face-perc 100))
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
-;;; ivy, counsel and swiper
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t
@@ -136,7 +118,6 @@
   (add-hook 'after-init-hook #'ivy-mode)
   (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
   (global-set-key (kbd "M-SPC b B") 'ivy-switch-buffer-other-window))
-;;; use posframe to avoid eaf blinking
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
@@ -156,7 +137,6 @@
   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-;;; livehood
 (use-package js-mode
   :init
   (setq js-indent-level 2)
@@ -176,21 +156,17 @@
         lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
         lsp-file-watch-threshold 1112))
 (use-package lsp-ivy)
-;;; oh, it's magit
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (global-set-key (kbd "M-SPC g s") 'magit-status))
-;;; agenda for projects
 (use-package magit-todos :init (global-set-key (kbd "M-SPC p t") 'magit-todos-list))
-;;; if everyone use emacs......
 (use-package markdown-mode
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
-;;; lsp rules all
 (use-package nox
   ;; TODO: nox is not friendly to use-package, reference: snails
   :demand t
@@ -199,9 +175,7 @@
 		 ;; 'typescript-mode-hook
 		 ))
     (add-hook hook (lambda () (nox-ensure)))))
-;;; project definition
 (use-package projectile :init (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
-;;; it's spc, spc
 (use-package snails
   :if window-system
   ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
@@ -239,7 +213,6 @@
   (setq snails-use-exec-path-from-shell nil)
   (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
 (use-package olivetti)
-;;; my org, my life
 (use-package org
   :init
   (require 'bh-org)
@@ -398,10 +371,8 @@ unwanted space when exporting org-mode to html."
       (ad-set-arg 1 fixed-contents))))
 (use-package org-agenda
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
-;;; for diary
 (use-package org-journal
   :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
-;;; difference between heaven and hell
 (use-package paredit
   :commands (enable-paredit-mode)
   :init
@@ -416,14 +387,12 @@ unwanted space when exporting org-mode to html."
    'paredit-backward-delete
    'paredit-close-round)
   )
-;;; modern emacs
 (use-package posframe)
 (use-package recentf
   :init
   (setq recentf-auto-cleanup 'never
         recentf-max-saved-items nil)
   (add-hook 'after-init-hook #'recentf-mode))
-;;; rime, THE INPUT METHOD
 (use-package rime
   ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
   :init
@@ -442,21 +411,16 @@ unwanted space when exporting org-mode to html."
 (use-package rust-mode
   :init
   (add-hook 'rust-mode-hook #'lsp))
-;;; save cursor place
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
-;;; only for emacs 27+, 导致 .emacs.d/init.el 无法编辑，暂时看不到启动的必要
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
-;;; for snake-shape words
 (use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
 (use-package sudo-edit)
-;;; swiper, invoked by ivy
 (use-package swiper
   :init
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
 (use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
-;;; better livehood
 (use-package typescript-mode
   :init
   (setq typescript-indent-level 2)
@@ -486,7 +450,6 @@ unwanted space when exporting org-mode to html."
   ;;             (buffer-face-mode t)))
   )
 (use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
-;;; yaml mode for yaml, ansible
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
