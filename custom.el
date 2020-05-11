@@ -14,6 +14,7 @@
  '(line-spacing 0.2)
  '(mac-command-modifier 'super)
  '(mac-option-modifier 'meta)
+ '(nsm-trust-local-network t)
  '(rime-posframe-style 'simple t)
  '(rime-show-candidate 'posframe t)
  '(rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") t)
