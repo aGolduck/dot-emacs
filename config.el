@@ -175,7 +175,9 @@
 		 ;; 'typescript-mode-hook
 		 ))
     (add-hook hook (lambda () (nox-ensure)))))
-(use-package projectile :init (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
+(use-package projectile :init
+  (setq projectile-completion-system 'ivy)
+  (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
 (use-package snails
   :if window-system
   ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
