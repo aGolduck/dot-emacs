@@ -3,7 +3,7 @@
 (dolist (wenpin-package
          (list
           '(color-rg :host github :repo "manateelazycat/color-rg")
-          '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py"))
+          ;; '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py"))
           '(flymake-posframe :host github :repo "Ladicle/flymake-posframe")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           '(nox :host github :repo "manateelazycat/nox")
@@ -50,6 +50,7 @@
           'eshell-z
           'eterm-256color
           'highlight-indent-guides
+          'json-mode
           ))
   (straight-use-package wenpin-package))
 

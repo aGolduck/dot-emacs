@@ -455,6 +455,7 @@ unwanted space when exporting org-mode to html."
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode #'highlight-indent-guides-mode))
+(use-package json-mode)
 
 
 
