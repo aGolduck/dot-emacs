@@ -51,10 +51,12 @@
 ;; extra keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
-(add-hook 'view-mode-hook
-	  (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
-(add-hook 'vterm-copy-mode-hook
-	  (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(dolist (hook
+         (list
+          'view-mode-hook
+          'vterm-copy-mode-hook
+          ))
+  (add-hook hook (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar)))))
 (dolist (writable-major-mode-hook
          (list
           'eshell-mode-hook
