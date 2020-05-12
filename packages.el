@@ -51,6 +51,8 @@
           'eterm-256color
           'highlight-indent-guides
           'json-mode
+          'company-lsp
+          'tide
           ))
   (straight-use-package wenpin-package))
 

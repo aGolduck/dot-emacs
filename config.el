@@ -48,6 +48,7 @@
 (use-package company
   :init
   (setq company-minimum-prefix-length 1
+        company-tooltip-align-annotations t
         ;; default is 0.2
         company-idle-delay 0.0))
 (use-package company-tabnine)
@@ -428,14 +429,31 @@ unwanted space when exporting org-mode to html."
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
 (use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
+(use-package tide
+  :after (company flycheck)
+  :init
+  (setq tide-completion-detailed t
+        tide-always-show-documentation t
+        ;; Fix #1792: by default, tide ignores payloads larger than 100kb. This
+        ;; is too small for larger projects that produce long completion lists,
+        ;; so we up it to 512kb.
+        tide-server-max-response-length 524288))
 (use-package typescript-mode
   :init
   (setq typescript-indent-level 2)
-  (add-hook 'typescript-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'paredit-mode)
-  (add-hook 'typescript-mode-hook #'electric-pair-local-mode)
-  ;; (add-hook 'typescript-mode-hook #'company-mode)
+  ;; (add-hook 'typescript-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
+  (dolist (hooked (list
+                   #'eldoc-mode
+                   #'electric-pair-local-mode
+                   #'paredit-mode
+                   #'tide-hl-identifier-mode
+                   #'tide-setup
+                   ))
+    (add-hook 'typescript-mode-hook hooked))
+  ;; :config
+  ;; (require 'company-lsp)
+  ;; (push 'company-lsp company-backends)
   )
 (use-package view-mode
   :init
