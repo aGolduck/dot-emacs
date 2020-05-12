@@ -68,7 +68,7 @@
 			  (diminish mode)))))
 (use-package dotenv)
 ;; (use-package eaf :if (eq system-type 'gnu/linux))
-;; (use-package eldoc :commands (eldoc-add-command))
+(use-package eldoc :commands (eldoc-add-command))
 (use-package eglot)
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
@@ -145,16 +145,21 @@
   (add-hook 'js-mode-hook #'electric-pair-local-mode))
 (use-package lsp-mode
   :init
-  (setq lsp-log-io t
-        lsp-print-performance t
-        lsp-enable-completion-at-point t
-        lsp-enable-xref t
-        ;; lsp-diagnostic-package :none
+  (setq ;; lsp-diagnostic-package :none
+        ;; lsp-enable-file-watchers nil
         ;; lsp-idle-delay 0.500
-        lsp-semantic-highlighting nil
-        read-process-output-max (* 1024 1024)
+        lsp-enable-completion-at-point t
+        lsp-enable-folding nil
+        lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil
+        lsp-enable-text-document-color nil
+        lsp-enable-xref t
         lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
-        lsp-file-watch-threshold 1112))
+        lsp-file-watch-threshold 1112
+        lsp-log-io t
+        lsp-print-performance t
+        lsp-semantic-highlighting nil
+        read-process-output-max (* 1024 1024)))
 (use-package lsp-ivy)
 (use-package magit
   :init
@@ -172,7 +177,7 @@
   :demand t
   :config
   (dolist (hook (list
-		 ;; 'typescript-mode-hook
+		 ;; 'xxx-mode-hook
 		 ))
     (add-hook hook (lambda () (nox-ensure)))))
 (use-package projectile :init
@@ -376,6 +381,7 @@ unwanted space when exporting org-mode to html."
 (use-package org-journal
   :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
 (use-package paredit
+  :after eldoc
   :commands (enable-paredit-mode)
   :init
   (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -384,7 +390,6 @@ unwanted space when exporting org-mode to html."
   (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
   (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
   :config
-  (require 'eldoc)
   (eldoc-add-command
    'paredit-backward-delete
    'paredit-close-round)
