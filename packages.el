@@ -53,6 +53,7 @@
           'json-mode
           'company-lsp
           'tide
+          '(term-cursor :host github :repo "h0d/term-cursor.el")
           ))
   (straight-use-package wenpin-package))
 
