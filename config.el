@@ -444,6 +444,7 @@ unwanted space when exporting org-mode to html."
   ;; (add-hook 'typescript-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
   (dolist (hooked (list
+                   #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
                    #'paredit-mode
@@ -479,7 +480,7 @@ unwanted space when exporting org-mode to html."
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
-  (add-hook 'yaml-mode #'highlight-indent-guides-mode))
+  (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 (use-package json-mode)
 (use-package term-cursor :init (add-hook 'after-init-hook #'global-term-cursor-mode))
 
