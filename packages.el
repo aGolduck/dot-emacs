@@ -33,7 +33,6 @@
           'magit-todos
           'markdown-mode
           'olivetti
-          'org
           'org-journal
           'posframe
           'projectile

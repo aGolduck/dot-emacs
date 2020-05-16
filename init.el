@@ -69,6 +69,7 @@
   (add-hook writable-major-mode-hook (lambda () (term-cursor-mode 1) (setq cursor-type 'bar))))
 (dolist (readonly-major-mode-hook
          (list
+          'org-agenda-mode-hook
           ))
   (add-hook readonly-major-mode-hook (lambda () (term-cursor-mode 1) (setq cursor-type 'box))))
 (add-hook 'find-file-hook
