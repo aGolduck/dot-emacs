@@ -456,15 +456,6 @@ unwanted space when exporting org-mode to html."
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
   )
-(use-package view-mode
-  :init
-  (add-hook 'find-file-hook
-	    (lambda ()
-	       (unless (or
-			(string-match-p "org/orgzly" (buffer-file-name))
-			(string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
-			)
-		 (view-mode)))))
 (use-package vterm
   :init
   (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y")
@@ -482,7 +473,7 @@ unwanted space when exporting org-mode to html."
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 (use-package json-mode)
-(use-package term-cursor :init (add-hook 'after-init-hook #'global-term-cursor-mode))
+(use-package term-cursor)
 
 
 

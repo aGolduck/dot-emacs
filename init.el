@@ -51,12 +51,14 @@
 ;; extra keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
-(dolist (hook
-         (list
-          'view-mode-hook
-          'vterm-copy-mode-hook
-          ))
-  (add-hook hook (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar)))))
+(add-hook 'view-mode-hook
+          (lambda ()
+            (term-cursor-mode 1)
+            (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(add-hook 'vterm-copy-mode-hook
+          (lambda ()
+            (term-cursor-mode 1)
+            (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (dolist (writable-major-mode-hook
          (list
           'eshell-mode-hook
@@ -64,14 +66,19 @@
           'org-capture-mode-hook
           'vterm-mode-hook
           ))
-  (add-hook writable-major-mode-hook (lambda () (setq cursor-type 'bar))))
+  (add-hook writable-major-mode-hook (lambda () (term-cursor-mode 1) (setq cursor-type 'bar))))
+(dolist (readonly-major-mode-hook
+         (list
+          ))
+  (add-hook readonly-major-mode-hook (lambda () (term-cursor-mode 1) (setq cursor-type 'box))))
 (add-hook 'find-file-hook
 	  (lambda ()
-	     (when (or
-		    (string-match-p "org/orgzly" (buffer-file-name))
-		    (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name))
-		    )
-	       (setq cursor-type 'bar))))
+	    (term-cursor-mode 1)
+            (if (or
+		 (string-match-p "org/orgzly" (buffer-file-name))
+		 (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
+	        (setq cursor-type 'bar)
+              (view-mode))))
 
 (tool-bar-mode -1)
 (toggle-frame-maximized)
