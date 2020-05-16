@@ -15,7 +15,7 @@
 
 ;;; bootstrap straight.el and use-package
 (unless (file-exists-p "~/.emacs.d/repos") (mkdir "~/.emacs.d/repos"))
-(setq straight-base-dir (concat "~/.emacs.d/straight-" emacs-version))
+(setq straight-base-dir (concat "~/.emacs.d/straight-" emacs-version "-" (replace-regexp-in-string "/" "-" (symbol-name system-type))))
 (setq wenpin-straight-self-dir (expand-file-name "straight" straight-base-dir))
 (setq wenpin-straight-repos-dir (expand-file-name "repos" wenpin-straight-self-dir))
 (unless (file-exists-p straight-base-dir) (mkdir straight-base-dir))
