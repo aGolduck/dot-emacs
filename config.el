@@ -473,8 +473,8 @@ unwanted space when exporting org-mode to html."
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 (use-package json-mode)
-(use-package term-cursor)
-
+(use-package term-cursor :init (add-hook 'after-init-hook #'global-term-cursor-mode))
+(use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 (use-package startup :init (setq auto-save-list-file-prefix nil))
 (use-package ediff-wind
