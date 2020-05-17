@@ -475,6 +475,13 @@ unwanted space when exporting org-mode to html."
 (use-package json-mode)
 (use-package term-cursor)
 
+(use-package vc-hooks :init (setq vc-follow-symlinks t))
+(use-package startup :init (setq auto-save-list-file-prefix nil))
+(use-package ediff-wind
+  :init
+  (setq ediff-merge-split-window-function 'split-window-vertically
+        ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain))
 
 
 (provide 'init-config)
