@@ -61,6 +61,7 @@
           'lisp-interaction-mode-hook
           'org-capture-mode-hook
           'vterm-mode-hook
+          'with-editor-mode-hook
           ))
   (add-hook writeonly-mode-hook (lambda () (setq cursor-type 'bar))))
 (dolist (readonly-mode-hook
@@ -75,8 +76,10 @@
 		 (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
 	        (setq cursor-type 'bar)
               (view-mode))))
-(add-hook 'window-buffer-change-functions
-          (lambda (window) (term-cursor--immediate)) nil nil)
+;; (add-hook 'window-buffer-change-functions
+;;           (lambda (window) (term-cursor--immediate)) nil nil)
+;; window-state-change-functions
+(add-hook 'window-state-change-hook #'term-cursor--immediate)
 
 (tool-bar-mode -1)
 (toggle-frame-maximized)
