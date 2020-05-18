@@ -55,19 +55,19 @@
           (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (add-hook 'vterm-copy-mode-hook
           (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
-(dolist (writable-major-mode-hook
+(dolist (writeonly-mode-hook
          (list
           'eshell-mode-hook
           'lisp-interaction-mode-hook
           'org-capture-mode-hook
           'vterm-mode-hook
           ))
-  (add-hook writable-major-mode-hook (lambda () (setq cursor-type 'bar))))
-(dolist (readonly-major-mode-hook
+  (add-hook writeonly-mode-hook (lambda () (setq cursor-type 'bar))))
+(dolist (readonly-mode-hook
          (list
           'org-agenda-mode-hook
           ))
-  (add-hook readonly-major-mode-hook (lambda () (setq cursor-type 'box))))
+  (add-hook readonly-mode-hook (lambda () (setq cursor-type 'box))))
 (add-hook 'find-file-hook
 	  (lambda ()
             (if (or
