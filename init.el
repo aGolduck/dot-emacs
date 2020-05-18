@@ -82,8 +82,9 @@
 ;; (add-hook 'window-state-change-functions
 ;;           (lambda (window) (term-cursor--immediate)) nil nil)
 ;; (add-hook 'window-state-change-hook #'term-cursor--immediate)
-(add-hook 'switch-buffer-functions
-          (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
+;; (add-hook 'switch-buffer-functions
+;;           (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
+
 
 (tool-bar-mode -1)
 (toggle-frame-maximized)

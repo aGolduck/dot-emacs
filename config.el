@@ -474,8 +474,11 @@ unwanted space when exporting org-mode to html."
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 (use-package json-mode)
 (use-package term-cursor
-  :commands (term-cursor--immediate)
-  :init (add-hook 'after-init-hook #'global-term-cursor-mode))
+  :init
+  (setq term-cursor-triggers '(blink-cursor-mode-hook
+                               post-command-hook
+                               lsp-ui-doc-frame-hook))
+  (add-hook 'after-init-hook #'global-term-cursor-mode))
 (use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 (use-package startup :init (setq auto-save-list-file-prefix nil))
