@@ -48,7 +48,7 @@
 (use-package company
   :init
   (setq company-minimum-prefix-length 1
-        company-tooltip-align-annotations t
+        company-tooltip-align-annotations nil
         ;; default is 0.2
         company-idle-delay 0.0))
 (use-package company-tabnine)
