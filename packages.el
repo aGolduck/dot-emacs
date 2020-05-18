@@ -33,6 +33,7 @@
           'magit-todos
           'markdown-mode
           'olivetti
+	  '(org :type built-in)
           'org-journal
           'posframe
           'projectile
