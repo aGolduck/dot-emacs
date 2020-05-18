@@ -484,7 +484,7 @@ unwanted space when exporting org-mode to html."
   (setq ediff-merge-split-window-function 'split-window-vertically
         ediff-split-window-function 'split-window-horizontally
         ediff-window-setup-function 'ediff-setup-windows-plain))
-
+(use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
 (provide 'init-config)
 ;;; init-config ends here
