@@ -76,10 +76,14 @@
 		 (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
 	        (setq cursor-type 'bar)
               (view-mode))))
+;;; hooks provided by built-in emacs are not enough
 ;; (add-hook 'window-buffer-change-functions
 ;;           (lambda (window) (term-cursor--immediate)) nil nil)
-;; window-state-change-functions
-(add-hook 'window-state-change-hook #'term-cursor--immediate)
+;; (add-hook 'window-state-change-functions
+;;           (lambda (window) (term-cursor--immediate)) nil nil)
+;; (add-hook 'window-state-change-hook #'term-cursor--immediate)
+(add-hook 'switch-buffer-functions
+          (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
 
 (tool-bar-mode -1)
 (toggle-frame-maximized)
