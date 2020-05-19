@@ -56,6 +56,7 @@
           '(path-headerline-mode :host github :repo "7696122/path-headerline-mode")
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           ;; 'switch-buffer-functions
+          'lsp-python-ms
           ))
   (straight-use-package wenpin-package))
 

@@ -107,10 +107,13 @@
 (use-package graphql-mode)
 (use-package highlight-indent-guides
   :init
-  (setq highlight-indent-guides-method 'fill
+  (setq highlight-indent-guides-method 'character
+        ;; highlight-indent-guides-character 9475 ;; codepoint of "┃"
+        ;; highlight-indent-guides-character 9474 ;; codepoint of "│"
+        highlight-indent-guides-character 9553 ;; codepoint of "║"
         highlight-indent-guides-auto-odd-face-perc 15
         highlight-indent-guides-auto-even-face-perc 55
-        highlight-indent-guides-auto-character-face-perc 100))
+        highlight-indent-guides-auto-character-face-perc 80))
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 (use-package ivy
   :init
@@ -488,6 +491,13 @@ unwanted space when exporting org-mode to html."
         ediff-split-window-function 'split-window-horizontally
         ediff-window-setup-function 'ediff-setup-windows-plain))
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
+(use-package python
+  :init
+  (setq lsp-python-ms-auto-install-server nil
+        lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+  (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
+  (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
+(use-package lsp-python-ms)
 
 (provide 'init-config)
 ;;; init-config ends here
