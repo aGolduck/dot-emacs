@@ -1,15 +1,20 @@
 # emacs built-in
-bookmarks
 recentf
 auto-save-list
 places
+.emacs.desktop
+
 
 # straight.el
 repos
 straight*/straight/*
 !straight*/straight/versions
 
+
 # others
 eaf
 transient
 .lsp-session-v1
+.cache/lsp
+
+org-journal.cache
