@@ -4,7 +4,6 @@
 ;; 3. minor mode
 
 
-(use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 (use-package auto-save
   :commands (auto-save-enable)
   :init
@@ -22,19 +21,25 @@
 	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
 	)
   (add-hook 'after-init-hook #'auto-save-enable))
+
+(use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
+
 (use-package avy
   :init
   (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
-;; (use-package battery)
+
 (use-package bookmark
   :init
   (global-set-key (kbd "M-SPC b s") 'bookmark-set))
-(use-package ccls)
+
 (use-package cc-mode
   :init
   (add-hook 'c-mode-hook #'lsp))
+
+(use-package ccls)
+
 (use-package color-rg
   :commands
   (color-rg-search-input-in-project
@@ -45,18 +50,20 @@
   :init
   (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
   (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
+
 (use-package company
   :init
   (setq company-minimum-prefix-length 1
         company-tooltip-align-annotations t
         ;; default is 0.2
         company-idle-delay 0.0))
-(use-package company-tabnine)
+
 (use-package counsel
   :init
   (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
   (global-set-key (kbd "M-x") 'counsel-M-x))
+
 (use-package diminish
   :init
   (add-hook 'after-init-hook
@@ -66,45 +73,61 @@
 				       'ivy-mode
 				       'ivy-posframe-mode
 				       ))
-			  (diminish mode)))))
+			 (diminish mode)))))
+
 (use-package dotenv)
-;; (use-package eaf :if (eq system-type 'gnu/linux))
+
+(use-package ediff-wind
+  :init
+  (setq ediff-merge-split-window-function 'split-window-vertically
+        ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain))
+
 (use-package eldoc :commands (eldoc-add-command))
-(use-package eglot)
+
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+
+(use-package esh-autosuggest :commands (esh-autosuggest-mode))
+
 (use-package esh-mode
   :init
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z))))
-(use-package esh-autosuggest :commands (esh-autosuggest-mode))
+
 (use-package eshell-z)
+
 (use-package expand-region
   :init
   (setq expand-region-contract-fast-key "V")
   (global-set-key (kbd "M-SPC v") 'er/expand-region))
-(use-package eyebrowse
-  :if (< emacs-major-version 27)
-  :init
-  (add-hook 'after-init-hook #'eyebrowse-mode)
-  ;; TODO: oddly, keydings below didn't work
-  (global-key-binding (kbd "M-SPC w c") 'eyebrowse-create-window-config)
-  (global-key-binding (kbd "M-SPC w n") 'eyebrowse-next-window-config))
+
 (use-package file
   :init
   (setq auto-save-default nil
         make-backup-files nil)
   (global-set-key (kbd "M-SPC f f") 'find-file)
   (global-set-key (kbd "M-SPC f F") 'find-file-other-window))
+
+(use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
+
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
   :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
+
+(use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
+
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
+
 (use-package git-link)
+
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
+
 (use-package graphql-mode)
+
 (use-package highlight-indent-guides
   :init
   (setq highlight-indent-guides-method 'character
@@ -114,7 +137,7 @@
         highlight-indent-guides-auto-odd-face-perc 15
         highlight-indent-guides-auto-even-face-perc 55
         highlight-indent-guides-auto-character-face-perc 50))
-;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
+
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t
@@ -122,6 +145,7 @@
   (add-hook 'after-init-hook #'ivy-mode)
   (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
   (global-set-key (kbd "M-SPC b B") 'ivy-switch-buffer-other-window))
+
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
@@ -131,6 +155,7 @@
   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
+
 (use-package ivy-xref
   :init
   ;; xref initialization is different in Emacs 27 - there are two different
@@ -141,12 +166,18 @@
   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
 (use-package js-mode
   :init
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'paredit-mode)
   (add-hook 'js-mode-hook #'electric-pair-local-mode))
+
+(use-package json-mode)
+
+(use-package lsp-ivy)
+
 (use-package lsp-mode
   :init
   (setq ;; lsp-diagnostic-package :none
@@ -164,66 +195,25 @@
         lsp-print-performance t
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024)))
-(use-package lsp-ivy)
+
+(use-package lsp-python-ms)
+
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (global-set-key (kbd "M-SPC g s") 'magit-status))
+
 (use-package magit-todos :init (global-set-key (kbd "M-SPC p t") 'magit-todos-list))
+
 (use-package markdown-mode
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
-(use-package nox
-  ;; TODO: nox is not friendly to use-package, reference: snails
-  :demand t
-  :config
-  (dolist (hook (list
-		 ;; 'xxx-mode-hook
-		 ))
-    (add-hook hook (lambda () (nox-ensure)))))
-(use-package projectile :init
-  (setq projectile-completion-system 'ivy)
-  (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
-(use-package snails
-  :if window-system
-  ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
-  :commands (wenpin-snails snails)
-  :init
-  ;; (when (eq system-type 'darwin)
-  ;;   (setq snails-default-backends '(
-  ;;       			    snails-backend-buffer
-  ;;       			    snails-backend-recentf
-  ;;       			    snails-backend-imenu
-  ;;       			    snails-backend-current-buffer
-  ;;       			    snails-backend-rg
-  ;;       			    snails-backend-projectile
-  ;;       			    snails-backend-mdfind
-  ;;       			    snails-backend-fasd
-  ;;       			    snails-backend-command
-  ;;       			    )))
-  ;; (when (eq system-type 'gnu/linux)
-  ;;   (setq snails-default-backends '(
-  ;; 			    snails-backend-buffer
-  ;; 			    snails-backend-recentf
-  ;; 			    snails-backend-imenu
-  ;; 			    snails-backend-current-buffer
-  ;; 			    snails-backend-rg
-  ;; 			    snails-backend-projectile
-  ;; 			    snails-backend-fd
-  ;; 			    snails-backend-fasd
-  ;; 			    snails-backend-command
-  ;; 			    snails-backend-eaf-pdf-table
-  ;; 			    snails-backend-eaf-browser-history
-  ;; 			    snails-backend-eaf-browser-open
-  ;; 			    snails-backend-eaf-browser-search
-  ;; 			    snails-backend-eaf-github-search
-  ;; 			    )))
-  (setq snails-use-exec-path-from-shell nil)
-  (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
+
 (use-package olivetti)
+
 (use-package org
   :init
   (require 'bh-org)
@@ -380,10 +370,13 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents))))
+
 (use-package org-agenda
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
+
 (use-package org-journal
   :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
+
 (use-package paredit
   :after eldoc
   :commands (enable-paredit-mode)
@@ -398,12 +391,26 @@ unwanted space when exporting org-mode to html."
    'paredit-backward-delete
    'paredit-close-round)
   )
+
 (use-package posframe)
+
+(use-package projectile :init
+  (setq projectile-completion-system 'ivy)
+  (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
+
+(use-package python
+  :init
+  (setq lsp-python-ms-auto-install-server nil
+        lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+  (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
+  (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
+
 (use-package recentf
   :init
   (setq recentf-auto-cleanup 'never
         recentf-max-saved-items nil)
   (add-hook 'after-init-hook #'recentf-mode))
+
 (use-package rime
   ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
   :init
@@ -419,19 +426,72 @@ unwanted space when exporting org-mode to html."
   (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
+
 (use-package rust-mode
   :init
   (add-hook 'rust-mode-hook #'lsp))
+
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
-;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
+
+(use-package snails
+  :if window-system
+  ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
+  :commands (wenpin-snails snails)
+  :init
+  ;; (when (eq system-type 'darwin)
+  ;;   (setq snails-default-backends '(
+  ;;       			    snails-backend-buffer
+  ;;       			    snails-backend-recentf
+  ;;       			    snails-backend-imenu
+  ;;       			    snails-backend-current-buffer
+  ;;       			    snails-backend-rg
+  ;;       			    snails-backend-projectile
+  ;;       			    snails-backend-mdfind
+  ;;       			    snails-backend-fasd
+  ;;       			    snails-backend-command
+  ;;       			    )))
+  ;; (when (eq system-type 'gnu/linux)
+  ;;   (setq snails-default-backends '(
+  ;; 			    snails-backend-buffer
+  ;; 			    snails-backend-recentf
+  ;; 			    snails-backend-imenu
+  ;; 			    snails-backend-current-buffer
+  ;; 			    snails-backend-rg
+  ;; 			    snails-backend-projectile
+  ;; 			    snails-backend-fd
+  ;; 			    snails-backend-fasd
+  ;; 			    snails-backend-command
+  ;; 			    snails-backend-eaf-pdf-table
+  ;; 			    snails-backend-eaf-browser-history
+  ;; 			    snails-backend-eaf-browser-open
+  ;; 			    snails-backend-eaf-browser-search
+  ;; 			    snails-backend-eaf-github-search
+  ;; 			    )))
+  (setq snails-use-exec-path-from-shell nil)
+  (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
+
+(use-package startup :init (setq auto-save-list-file-prefix nil))
+
 (use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
+
 (use-package sudo-edit)
+
 (use-package swiper
   :init
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
+
 (use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
+
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
+
+(use-package term-cursor
+  :init
+  (setq term-cursor-triggers '(blink-cursor-mode-hook
+                               post-command-hook
+                               lsp-ui-doc-frame-hook))
+  (add-hook 'after-init-hook #'global-term-cursor-mode))
+
 (use-package tide
   :after (company flycheck)
   :init
@@ -441,6 +501,7 @@ unwanted space when exporting org-mode to html."
         ;; is too small for larger projects that produce long completion lists,
         ;; so we up it to 512kb.
         tide-server-max-response-length 524288))
+
 (use-package typescript-mode
   :init
   (setq typescript-indent-level 2)
@@ -459,6 +520,9 @@ unwanted space when exporting org-mode to html."
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
   )
+
+(use-package vc-hooks :init (setq vc-follow-symlinks t))
+
 (use-package vterm
   :init
   (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y")
@@ -469,35 +533,25 @@ unwanted space when exporting org-mode to html."
   ;;             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch-serif)
   ;;             (buffer-face-mode t)))
   )
+
 (use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
+
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
-(use-package json-mode)
-(use-package term-cursor
-  :init
-  (setq term-cursor-triggers '(blink-cursor-mode-hook
-                               post-command-hook
-                               lsp-ui-doc-frame-hook))
-  (add-hook 'after-init-hook #'global-term-cursor-mode))
-(use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
-(use-package vc-hooks :init (setq vc-follow-symlinks t))
-(use-package startup :init (setq auto-save-list-file-prefix nil))
-(use-package ediff-wind
-  :init
-  (setq ediff-merge-split-window-function 'split-window-vertically
-        ediff-split-window-function 'split-window-horizontally
-        ediff-window-setup-function 'ediff-setup-windows-plain))
-(use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
-(use-package python
-  :init
-  (setq lsp-python-ms-auto-install-server nil
-        lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-  (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
-  (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
-(use-package lsp-python-ms)
+
+;; (use-package battery)
+
+;; (use-package eaf :if (eq system-type 'gnu/linux))
+
+;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
+
+;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
+
+
+
 
 (provide 'init-config)
 ;;; init-config ends here
