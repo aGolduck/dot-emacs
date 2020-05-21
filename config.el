@@ -110,10 +110,10 @@
   (setq highlight-indent-guides-method 'character
         ;; highlight-indent-guides-character 9475 ;; codepoint of "┃"
         ;; highlight-indent-guides-character 9474 ;; codepoint of "│"
-        highlight-indent-guides-character 9553 ;; codepoint of "║"
+        ;; highlight-indent-guides-character 9553 ;; codepoint of "║"
         highlight-indent-guides-auto-odd-face-perc 15
         highlight-indent-guides-auto-even-face-perc 55
-        highlight-indent-guides-auto-character-face-perc 80))
+        highlight-indent-guides-auto-character-face-perc 50))
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 (use-package ivy
   :init
