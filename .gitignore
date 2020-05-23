@@ -3,6 +3,7 @@ recentf
 auto-save-list
 places
 .emacs.desktop
+custom.el
 
 
 # straight.el
