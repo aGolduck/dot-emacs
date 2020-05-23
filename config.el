@@ -131,12 +131,12 @@
 (use-package highlight-indent-guides
   :init
   (setq highlight-indent-guides-method 'character
-        ;; highlight-indent-guides-character 9475 ;; codepoint of "┃"
-        ;; highlight-indent-guides-character 9474 ;; codepoint of "│"
-        ;; highlight-indent-guides-character 9553 ;; codepoint of "║"
+        ;; highlight-indent-guides-character ?┃
+        ;; highlight-indent-guides-character ?│
+        ;; highlight-indent-guides-character ?║
         highlight-indent-guides-auto-odd-face-perc 15
         highlight-indent-guides-auto-even-face-perc 55
-        highlight-indent-guides-auto-character-face-perc 50))
+        highlight-indent-guides-auto-character-face-perc 61.8))
 
 (use-package ivy
   :init

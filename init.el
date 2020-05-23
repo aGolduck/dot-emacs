@@ -134,5 +134,6 @@
 (set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
 (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
 ;; other faces
+;; TODO create fontsets for fixed-pitch and fixed-pitch-serif
 (set-face-attribute 'fixed-pitch t :family "Source Code Pro")
 (set-face-attribute 'fixed-pitch-serif t :family "Courier Prime")
