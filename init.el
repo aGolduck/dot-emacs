@@ -103,4 +103,36 @@
        ((string-match "xps" (getenv "DESKTOP_STARTUP_ID")) 98)
        (t 112)))
 (setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'no-error 'no-message)
+;; (load custom-file 'no-error 'no-message)
+
+;;; set up variables not categorised
+(setq create-lockfiles nil
+      delete-by-moving-to-trash t
+      mac-command-modifier 'super
+      mac-option-modifier 'meta
+      nsm-trust-local-network t
+      visible-bell t)
+(setq-default indent-tabs-mode nil
+	      line-spacing 0.2)
+;;; fonts and faces
+;; default font
+(set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin-font-default-height)
+;; fallback font
+(set-fontset-font t nil "Courier New" nil 'append)
+;; specific glyphs
+;; (set-fontset-font t ?😊 "Segoe UI Emoji")
+;; glyphs range
+;; (set-fontset-font t '(?😊 . ?😎) "Segoe UI Emoji")
+;; han default font
+(set-fontset-font t 'han "Noto Sans CJK SC Regular")
+;; han fallback font
+(set-fontset-font t 'han "Source Han Sans CN Regular" nil 'append)
+;; search font for han if both fonts above can't be found
+(set-fontset-font t 'han (font-spec :script 'han) nil 'append)
+;; other cjk
+(set-fontset-font t 'kana "Noto Sans CJK JP Regular")
+(set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
+(set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
+;; other faces
+(set-face-attribute 'fixed-pitch t :family "Source Code Pro")
+(set-face-attribute 'fixed-pitch-serif t :family "Courier Prime")
