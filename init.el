@@ -100,6 +100,7 @@
 (setq wenpin-font-default-height
       (cond
        ((string-equal (getenv "HOME") "/Users/wenpin") 180)
+       ((string-match "xps" (getenv "DESKTOP_STARTUP_ID")) 98)
        (t 112)))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'no-error 'no-message)
