@@ -1,6 +1,6 @@
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
 
-(dolist (wenpin-package
+(dolist (wenpin/package
          (list
 	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
@@ -50,7 +50,7 @@
           'vterm
           'yaml-mode
           ))
-  (straight-use-package wenpin-package))
+  (straight-use-package wenpin/package))
 
 
 (provide 'init-packages)

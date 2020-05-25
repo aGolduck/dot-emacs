@@ -16,12 +16,12 @@
 ;;; bootstrap straight.el and use-package
 (unless (file-exists-p "~/.emacs.d/repos") (mkdir "~/.emacs.d/repos"))
 (setq straight-base-dir (concat "~/.emacs.d/straight-" emacs-version "-" (replace-regexp-in-string "/" "-" (symbol-name system-type))))
-(setq wenpin-straight-self-dir (expand-file-name "straight" straight-base-dir))
-(setq wenpin-straight-repos-dir (expand-file-name "repos" wenpin-straight-self-dir))
+(setq wenpin/straight-self-dir (expand-file-name "straight" straight-base-dir))
+(setq wenpin/straight-repos-dir (expand-file-name "repos" wenpin/straight-self-dir))
 (unless (file-exists-p straight-base-dir) (mkdir straight-base-dir))
-(unless (file-exists-p wenpin-straight-self-dir) (mkdir wenpin-straight-self-dir))
-(unless (file-exists-p wenpin-straight-repos-dir)
-  (shell-command (concat "ln -s ../../repos " wenpin-straight-repos-dir)))
+(unless (file-exists-p wenpin/straight-self-dir) (mkdir wenpin/straight-self-dir))
+(unless (file-exists-p wenpin/straight-repos-dir)
+  (shell-command (concat "ln -s ../../repos " wenpin/straight-repos-dir)))
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -97,7 +97,7 @@
 ;;    (member "dash" (nth 1 (gethash package straight--build-cache))))
 ;;  (hash-table-keys straight--recipe-cache))
 
-(setq wenpin-font-default-height
+(setq wenpin/font-default-height
       (cond
        ((string-equal (getenv "HOME") "/Users/wenpin") 180)
        ((string-match "xps" (getenv "DESKTOP_STARTUP_ID")) 98)
@@ -116,7 +116,7 @@
 	      line-spacing 0.2)
 ;;; fonts and faces
 ;; default font
-(set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin-font-default-height)
+(set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin/font-default-height)
 ;; fallback font
 (set-fontset-font t nil "Courier New" nil 'append)
 ;; specific glyphs

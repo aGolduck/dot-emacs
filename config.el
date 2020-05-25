@@ -435,8 +435,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package snails
   :if window-system
-  ;; both wenpin-snails snails need to be in commands, otherwise emacs can not recognize type of wenpin-snails
-  :commands (wenpin-snails snails)
+  ;; both wenpin/snails snails need to be in commands, otherwise emacs can not recognize type of wenpin/snails
+  :commands (wenpin/snails snails)
   :init
   ;; (when (eq system-type 'darwin)
   ;;   (setq snails-default-backends '(
@@ -468,7 +468,7 @@ unwanted space when exporting org-mode to html."
   ;; 			    snails-backend-eaf-github-search
   ;; 			    )))
   (setq snails-use-exec-path-from-shell nil)
-  (global-set-key (kbd "M-SPC SPC") 'wenpin-snails))
+  (global-set-key (kbd "M-SPC SPC") 'wenpin/snails))
 
 (use-package startup :init (setq auto-save-list-file-prefix nil))
 
