@@ -560,6 +560,9 @@ unwanted space when exporting org-mode to html."
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
+(use-package flycheck-posframe :after flycheck :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
+(use-package flycheck)
 
 
 (provide 'init-config)
