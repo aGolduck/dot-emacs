@@ -1,7 +1,7 @@
 (("ace-window" . "7003c88cd9cad58dc35c7cd13ebc61c355fb5be7")
  ("avy" . "f34ff764aa89b724d3cdcdf651381432d917431f")
  ("color-rg" . "22b050fc0b9b8d13f10c5fbd4cf14980d2831dc8")
- ("company-mode" . "1c7a87283146f429c5076e8ea0a559556a4d4272")
+ ("company-mode" . "36e650acd681a3a15a96e3c074471e86bdeeb4d8")
  ("dash.el" . "fe9bbc2414af645d255de68cd59cf0edd5d8548b")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("emacs-application-framework" . "01072601f73030e4c85ca43456651c267d0c69cd")
