@@ -102,8 +102,6 @@
        ((string-equal (getenv "HOME") "/Users/wenpin") 180)
        ((string-match "xps" (getenv "DESKTOP_STARTUP_ID")) 98)
        (t 112)))
-(setq custom-file "~/.emacs.d/custom.el")
-;; (load custom-file 'no-error 'no-message)
 
 ;;; set up variables not categorised
 (setq create-lockfiles nil
@@ -135,5 +133,11 @@
 (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
 ;; other faces
 ;; TODO create fontsets for fixed-pitch and fixed-pitch-serif
-(set-face-attribute 'fixed-pitch t :family "Source Code Pro")
-(set-face-attribute 'fixed-pitch-serif t :family "Iosevka Slab Extended")
+(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+(set-face-attribute 'fixed-pitch-serif nil :family "Iosevka Slab Extended")
+
+
+
+(setq custom-file "~/.emacs.d/custom.el")
+;; (load custom-file 'no-error 'no-message)
+
