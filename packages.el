@@ -49,6 +49,9 @@
           'typescript-mode
           'vterm
           'yaml-mode
+          'org-roam
+          '(company-org-roam :host github :repo "org-roam/company-org-roam")
+          'flycheck-posframe
           ))
   (straight-use-package wenpin/package))
 

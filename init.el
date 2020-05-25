@@ -73,6 +73,7 @@
 	  (lambda ()
             (if (or
 		 (string-match-p "org/orgzly" (buffer-file-name))
+		 (string-match-p "org/roam" (buffer-file-name))
 		 (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
 	        (setq cursor-type 'bar)
               (view-mode))))

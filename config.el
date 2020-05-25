@@ -72,6 +72,7 @@
 				       'gcmh-mode
 				       'ivy-mode
 				       'ivy-posframe-mode
+                                       'org-roam-mode
 				       ))
 			 (diminish mode)))))
 
@@ -234,6 +235,7 @@
 	org-refile-target-verify-function 'bh/verify-refile-target
 	org-refile-targets (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)))
 	org-refile-use-outline-path t
+        org-return-follows-link t
 	org-stuck-projects (quote ("" nil nil ""))
 	org-use-sub-superscripts nil)
   (setq org-todo-keywords
@@ -550,6 +552,13 @@ unwanted space when exporting org-mode to html."
 
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
+(use-package org-roam
+  :init
+  (setq org-roam-directory "~/org/roam"
+        org-roam-completion-system 'ivy)
+  (add-hook 'after-init-hook #'org-roam-mode))
+
+(use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
 
 
