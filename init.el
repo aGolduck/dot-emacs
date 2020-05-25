@@ -100,7 +100,7 @@
 (setq wenpin/font-default-height
       (cond
        ((string-equal (getenv "HOME") "/Users/wenpin") 180)
-       ((string-match "xps" (getenv "DESKTOP_STARTUP_ID")) 98)
+       ((string-match "xps" (or (getenv "DESKTOP_STARTUP_ID") "")) 98)
        (t 112)))
 
 ;;; set up variables not categorised
