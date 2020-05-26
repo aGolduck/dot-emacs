@@ -581,7 +581,12 @@ unwanted space when exporting org-mode to html."
   :init
   (setq org-roam-directory "~/org/roam"
         org-roam-completion-system 'ivy)
-  (add-hook 'after-init-hook #'org-roam-mode))
+  (add-hook 'after-init-hook #'org-roam-mode)
+  :config
+  (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
+  (define-key org-roam-mode-map (kbd "M-SPC n n") #'org-roam-find-file)
+  (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
+  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert))
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
