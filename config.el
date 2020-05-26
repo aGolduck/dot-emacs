@@ -564,7 +564,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package flycheck)
 
-(use-package dired :init (setq dired-listing-switches "-alh"))
+(use-package dired :init (setq dired-listing-switches "-Afhlv"))
 
 
 (provide 'init-config)
