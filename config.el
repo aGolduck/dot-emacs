@@ -383,11 +383,36 @@ unwanted space when exporting org-mode to html."
   :after eldoc
   :commands (enable-paredit-mode)
   :init
-  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+  ;; https://emacs-china.org/t/paredit-smartparens/6727/11
+  (defun paredit/space-for-delimiter-p (endp delm)
+    (or (member 'font-lock-keyword-face (text-properties-at (1- (point))))
+        (not (derived-mode-p 'basic-mode
+                             'c++-mode
+                             'c-mode
+                             'coffee-mode
+                             'csharp-mode
+                             'd-mode
+                             'dart-mode
+                             'go-mode
+                             'java-mode
+                             'js-mode
+                             'lua-mode
+                             'objc-mode
+                             'pascal-mode
+                             'python-mode
+                             'r-mode
+                             'ruby-mode
+                             'rust-mode
+                             'typescript-mode))))
+  (add-to-list 'paredit-space-for-delimiter-predicates #'paredit/space-for-delimiter-p)
+  (dolist (hook (list
+                 'eval-expression-minibuffer-setup-hook
+                 'ielm-mode-hook
+                 'lisp-mode-hook
+                 'lisp-interaction-mode-hook
+                 'scheme-mode-hook
+                 ))
+    (add-hook hook #'paredit-mode))
   :config
   (eldoc-add-command
    'paredit-backward-delete
