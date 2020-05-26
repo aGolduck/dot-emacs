@@ -383,6 +383,15 @@ unwanted space when exporting org-mode to html."
   :after eldoc
   :commands (enable-paredit-mode)
   :init
+  (dolist (hook (list
+                 'eval-expression-minibuffer-setup-hook
+                 'ielm-mode-hook
+                 'lisp-mode-hook
+                 'lisp-interaction-mode-hook
+                 'scheme-mode-hook
+                 ))
+    (add-hook hook #'paredit-mode))
+  :config
   ;; https://emacs-china.org/t/paredit-smartparens/6727/11
   (defun paredit/space-for-delimiter-p (endp delm)
     (or (member 'font-lock-keyword-face (text-properties-at (1- (point))))
@@ -405,15 +414,6 @@ unwanted space when exporting org-mode to html."
                              'rust-mode
                              'typescript-mode))))
   (add-to-list 'paredit-space-for-delimiter-predicates #'paredit/space-for-delimiter-p)
-  (dolist (hook (list
-                 'eval-expression-minibuffer-setup-hook
-                 'ielm-mode-hook
-                 'lisp-mode-hook
-                 'lisp-interaction-mode-hook
-                 'scheme-mode-hook
-                 ))
-    (add-hook hook #'paredit-mode))
-  :config
   (eldoc-add-command
    'paredit-backward-delete
    'paredit-close-round)
