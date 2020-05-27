@@ -356,7 +356,9 @@
 		 nil)
 		)))
   (org-babel-do-load-languages 'org-babel-load-languages
-			       '((awk . t)))
+			       '((awk . t)
+                                 (emacs-lisp . t)
+                                 (shell . t)))
   ;; key binding
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c a") 'org-agenda)
