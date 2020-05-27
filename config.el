@@ -524,12 +524,12 @@ unwanted space when exporting org-mode to html."
 
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
 
-(use-package term-cursor
-  :init
-  (setq term-cursor-triggers '(blink-cursor-mode-hook
-                               post-command-hook
-                               lsp-ui-doc-frame-hook))
-  (add-hook 'after-init-hook #'global-term-cursor-mode))
+;; (use-package term-cursor
+;;   :init
+;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
+;;                                post-command-hook
+;;                                lsp-ui-doc-frame-hook))
+;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 (use-package tide
   :after (company flycheck)
