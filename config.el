@@ -379,7 +379,18 @@ unwanted space when exporting org-mode to html."
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
 
 (use-package org-journal
-  :init (setq org-journal-dir "~/org/journal" org-journal-file-format "%Y%m%d.org"))
+  :after org
+  :init
+  (setq org-journal-dir "~/org/journal"
+        org-journal-file-format "%Y%m%d.org"
+        org-journal-find-file #'find-file
+        org-journal-file-type 'daily
+        org-extend-today-until 2
+        ;; org-journal-carryover-items nil
+        org-journal-date-prefix "* "
+        org-journal-date-format "%A, %x"
+        org-journal-time-prefix "** "
+        org-journal-time-format "%R "))
 
 (use-package paredit
   :after eldoc
