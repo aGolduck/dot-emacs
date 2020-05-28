@@ -53,6 +53,7 @@
           '(company-org-roam :host github :repo "org-roam/company-org-roam")
           'flycheck-posframe
           'magit-delta
+          '(valign :host github :repo "casouri/valign")
           ))
   (straight-use-package wenpin/package))
 
