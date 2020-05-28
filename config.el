@@ -604,7 +604,10 @@ unwanted space when exporting org-mode to html."
 
 (use-package dired :init (setq dired-listing-switches "-Afhlv"))
 
-(use-package magit-delta :after magit :init (add-hook 'magit-mode-hook #'magit-delta-mode))
+(use-package magit-delta
+  :if (not (equal (shell-command "delta") 127))
+  :after magit
+  :init (add-hook 'magit-mode-hook #'magit-delta-mode))
 
 
 
