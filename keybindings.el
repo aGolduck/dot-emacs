@@ -1,3 +1,4 @@
+(global-unset-key (kbd "M-x"))
 (global-set-key (kbd "M-SPC b k") 'kill-buffer)
 (global-set-key (kbd "M-SPC f f") 'find-file)
 (global-set-key (kbd "M-SPC f F") 'find-file-other-window)
