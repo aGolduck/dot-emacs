@@ -17,9 +17,7 @@
     (if (member t (mapcar 'buffer-is-org-capture-p (buffer-list))) t nil))
   (setq auto-save-silent t
 	auto-save-delete-trailing-whitespace t
-	;; TODO: auto-save-disable-predicates not working
-	;; auto-save-disable-predicates '('any-buffer-is-org-capture-p)
-	)
+	auto-save-disable-predicates '(#'any-buffer-is-org-capture-p))
   (add-hook 'after-init-hook #'auto-save-enable))
 
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
