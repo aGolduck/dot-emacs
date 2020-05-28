@@ -374,7 +374,8 @@ unwanted space when exporting org-mode to html."
             (replace-regexp-in-string
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents))))
+      (ad-set-arg 1 fixed-contents)))
+  (define-key org-mode-map (kbd "C-<tab>") nil))
 
 (use-package org-agenda
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
