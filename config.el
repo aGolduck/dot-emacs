@@ -62,7 +62,7 @@
   :init
   (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
-  (global-set-key (kbd "M-x") 'counsel-M-x))
+  (global-set-key (kbd "M-SPC SPC") 'counsel-M-x))
 
 (use-package diminish
   :init
@@ -507,7 +507,8 @@ unwanted space when exporting org-mode to html."
   ;; 			    snails-backend-eaf-github-search
   ;; 			    )))
   (setq snails-use-exec-path-from-shell nil)
-  (global-set-key (kbd "M-SPC SPC") 'wenpin/snails))
+  ;; (global-set-key (kbd "M-SPC SPC") 'wenpin/snails)
+  )
 
 (use-package startup :init (setq auto-save-list-file-prefix nil))
 
