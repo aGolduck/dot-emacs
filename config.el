@@ -171,6 +171,10 @@
 (use-package js-mode
   :init
   (setq js-indent-level 2)
+  (add-hook 'js-mode-hook (lambda ()
+                     (tide-setup)
+                     (unless (tide-current-server) (tide-restart-server))
+                     (tide-hl-identifier-mode 1)))
   (add-hook 'js-mode-hook #'paredit-mode)
   (add-hook 'js-mode-hook #'electric-pair-local-mode))
 
@@ -540,15 +544,7 @@ unwanted space when exporting org-mode to html."
         ;; Fix #1792: by default, tide ignores payloads larger than 100kb. This
         ;; is too small for larger projects that produce long completion lists,
         ;; so we up it to 512kb.
-        tide-server-max-response-length 524288)
-  (dolist (hook (list
-                 'typescript-mode-hook
-                 'js-mode-hook
-                 ))
-    (add-hook hook (lambda ()
-                     (tide-setup)
-                     (unless (tide-current-server) (tide-restart-server))
-                     (tide-hl-identifier-mode 1)))))
+        tide-server-max-response-length 524288))
 
 (use-package typescript-mode
   :init
@@ -556,6 +552,8 @@ unwanted space when exporting org-mode to html."
   ;; (add-hook 'typescript-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
   (dolist (hooked (list
+                   #'tide-setup
+                   #'tide-hl-identifier-mode
                    #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
