@@ -609,7 +609,7 @@ unwanted space when exporting org-mode to html."
   :after magit
   :init (add-hook 'magit-mode-hook #'magit-delta-mode))
 
-(use-package valign :commands (valign-setup))
+(use-package valign)
 
 (use-package ivy-hydra)
 
