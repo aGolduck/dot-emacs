@@ -611,6 +611,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package valign :commands (valign-setup))
 
+(use-package ivy-hydra)
+
 
 (provide 'init-config)
 ;;; init-config ends here

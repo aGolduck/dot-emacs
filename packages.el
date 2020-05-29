@@ -54,6 +54,7 @@
           'flycheck-posframe
           'magit-delta
           '(valign :host github :repo "casouri/valign")
+          'ivy-hydra
           ))
   (straight-use-package wenpin/package))
 
