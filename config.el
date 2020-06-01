@@ -613,6 +613,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package ivy-hydra)
 
+(use-package re-builder :init (setq reb-re-syntax 'string))
 
 (use-package smex) ;; smex is needed to order candidates for ivy
 
