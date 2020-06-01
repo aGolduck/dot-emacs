@@ -52,7 +52,8 @@
   :init
   (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
-  (global-set-key (kbd "M-SPC SPC") 'counsel-M-x))
+  (global-set-key (kbd "M-SPC SPC") 'counsel-M-x)
+  (global-set-key (kbd "M-y") 'counsel-yank-pop))
 
 (use-package diminish
   :init
