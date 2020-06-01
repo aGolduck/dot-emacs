@@ -58,6 +58,7 @@
  ("projectile" . "5103cfc4248bc341d24c0c96f0728962c85bf8ed")
  ("rust-mode" . "1603a258d1dec3c5f8671a12782d913bb828864a")
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
+ ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("snails" . "b740a2ddb3789847090d991eba279f4f8579463f")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("straight.el" . "a7f94876b2bf96d2595706270be6630ecc94f0d3")

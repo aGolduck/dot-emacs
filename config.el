@@ -614,5 +614,8 @@ unwanted space when exporting org-mode to html."
 (use-package ivy-hydra)
 
 
+(use-package smex) ;; smex is needed to order candidates for ivy
+
+
 (provide 'init-config)
 ;;; init-config ends here

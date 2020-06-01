@@ -55,6 +55,7 @@
           'magit-delta
           '(valign :host github :repo "casouri/valign")
           'ivy-hydra
+          'smex
           ))
   (straight-use-package wenpin/package))
 
