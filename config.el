@@ -620,5 +620,22 @@ unwanted space when exporting org-mode to html."
 
 (use-package pocket-reader)
 
+(use-package org-download
+  :after org
+  :demand t
+  :init
+  ;; FIXME org-link-unescape 不能 decode link
+  ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
+  ;; (defun custom-org-download-method (link)
+  ;;   (org-download--fullname (org-link-unescape link)))
+  ;; (setq org-download-method 'custom-org-download-method) ; 注意：这里不能用lambda表达式
+  ;; 顺便改下annotate，就是自动插入的那行注释，里面写的是图片来源路径
+  ;; (setq org-download-annotate-function
+  ;;       '(lambda (link)
+  ;;          (org-download-annotate-default (org-link-unescape link))))
+  )
+
+(use-package org-cliplink)
+
 (provide 'init-config)
 ;;; init-config ends here

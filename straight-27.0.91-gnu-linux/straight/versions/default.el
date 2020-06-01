@@ -50,6 +50,8 @@
  ("markdown-mode" . "b13ee0c9c95768c5a58a1bc69276e1ce953a770e")
  ("melpa" . "fbfaebb1f0d51813321c89442cf78a415977719f")
  ("olivetti" . "b23a05f442e3b1230f014e8054ebe3e57d22fc42")
+ ("org-cliplink" . "82402cae7e118d67de7328417fd018a18f95fac2")
+ ("org-download" . "8e12cf05a2f529e4859d73dd956a33e7fba8d7ea")
  ("org-journal" . "e1003e3178d88d98a157bfd51dbbfe2888f1d00d")
  ("org-roam" . "a05b1ebcc3ee727c2055683ddb343ec79a5a6d4e")
  ("org-web-tools" . "ebc7888f4f4cad26ec1298edd7bf606a5ea2d564")

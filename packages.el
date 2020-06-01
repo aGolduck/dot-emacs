@@ -57,6 +57,8 @@
           'ivy-hydra
           'smex
           'pocket-reader
+          'org-download
+          'org-cliplink
           ))
   (straight-use-package wenpin/package))
 
