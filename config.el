@@ -618,6 +618,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package smex) ;; smex is needed to order candidates for ivy
 
+(use-package pocket-reader)
 
 (provide 'init-config)
 ;;; init-config ends here

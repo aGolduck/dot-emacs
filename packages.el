@@ -56,6 +56,7 @@
           '(valign :host github :repo "casouri/valign")
           'ivy-hydra
           'smex
+          'pocket-reader
           ))
   (straight-use-package wenpin/package))
 
