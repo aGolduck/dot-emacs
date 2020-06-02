@@ -61,6 +61,7 @@
           'yaml-mode
           'org-roam-server
           'ob-typescript
+          'dired-rsync
           ))
   (straight-use-package wenpin/package))
 

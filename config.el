@@ -660,6 +660,8 @@ unwanted space when exporting org-mode to html."
   ;; (add-hook 'after-init-hook #'org-roam-server-mode)
   )
 
+(use-package dired-rsync)
+
 
 (provide 'init-config)
 ;;; init-config ends here
