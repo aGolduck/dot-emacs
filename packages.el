@@ -60,6 +60,7 @@
           'vterm
           'yaml-mode
           'org-roam-server
+          'ob-typescript
           ))
   (straight-use-package wenpin/package))
 

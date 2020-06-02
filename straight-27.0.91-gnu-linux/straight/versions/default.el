@@ -50,6 +50,7 @@
  ("magit-todos" . "a0e5d1f3c7dfcb4f18c1b0d57f1746a4872df5c6")
  ("markdown-mode" . "b13ee0c9c95768c5a58a1bc69276e1ce953a770e")
  ("melpa" . "fbfaebb1f0d51813321c89442cf78a415977719f")
+ ("ob-typescript" . "0b2766b9d136cd6d81f4c15f1ad4b28542f484b9")
  ("olivetti" . "b23a05f442e3b1230f014e8054ebe3e57d22fc42")
  ("org-cliplink" . "82402cae7e118d67de7328417fd018a18f95fac2")
  ("org-download" . "40c8a1db186a4ec79d87805018237234c0aad878")
