@@ -4,6 +4,7 @@
          (list
 	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
+          '(company-org-roam :host github :repo "org-roam/company-org-roam")
           '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py"))
           '(flymake-posframe :host github :repo "Ladicle/flymake-posframe")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
@@ -11,6 +12,7 @@
           '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c"))
           '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           '(term-cursor :host github :repo "h0d/term-cursor.el")
+          '(valign :host github :repo "casouri/valign")
           'avy
           'ccls
           'company
@@ -21,12 +23,14 @@
           'eshell-z
           'eterm-256color
           'expand-region
+          'flycheck-posframe
           'gcmh
           'git-link
           'graphql-mode
           'highlight-indent-guides
           'hl-todo
           'ivy
+          'ivy-hydra
           'ivy-posframe
           'ivy-xref
           'json-mode
@@ -35,13 +39,19 @@
           'lsp-python-ms
           'lsp-treemacs
           'magit
+          'magit-delta
           'magit-todos
           'markdown-mode
           'olivetti
+          'org-cliplink
+          'org-download
           'org-journal
+          'org-roam
+          'pocket-reader
           'posframe
           'projectile
           'rust-mode
+          'smex
           'sudo-edit
           'swiper
           'tide
@@ -49,16 +59,6 @@
           'typescript-mode
           'vterm
           'yaml-mode
-          'org-roam
-          '(company-org-roam :host github :repo "org-roam/company-org-roam")
-          'flycheck-posframe
-          'magit-delta
-          '(valign :host github :repo "casouri/valign")
-          'ivy-hydra
-          'smex
-          'pocket-reader
-          'org-download
-          'org-cliplink
           ))
   (straight-use-package wenpin/package))
 

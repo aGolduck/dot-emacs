@@ -3,11 +3,9 @@
 ;; 2. big minor mode, like ivy-mode, lsp-mode
 ;; 3. minor mode
 
-
 (use-package auto-save
   :commands (auto-save-enable)
   :init
-
   (setq auto-save-silent t
 	auto-save-delete-trailing-whitespace t)
   (add-hook 'after-init-hook #'auto-save-enable))
@@ -48,6 +46,8 @@
         ;; default is 0.2
         company-idle-delay 0.0))
 
+(use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
+
 (use-package counsel
   :init
   (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
@@ -71,6 +71,7 @@
   :init
   (setq dired-listing-switches "-Afhlv"
         dired-auto-revert-buffer t))
+
 (use-package dotenv)
 
 (use-package ediff-wind
@@ -108,6 +109,10 @@
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
+(use-package flycheck)
+
+(use-package flycheck-posframe :after flycheck :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
   :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
@@ -141,6 +146,8 @@
   (add-hook 'after-init-hook #'ivy-mode)
   (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
   (global-set-key (kbd "M-SPC b B") 'ivy-switch-buffer-other-window))
+
+(use-package ivy-hydra)
 
 (use-package ivy-posframe
   :init
@@ -201,6 +208,11 @@
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (global-set-key (kbd "M-SPC g s") 'magit-status))
+
+(use-package magit-delta
+  :if (not (equal (shell-command "delta") 127))
+  :after magit
+  :init (add-hook 'magit-mode-hook #'magit-delta-mode))
 
 (use-package magit-todos :init (global-set-key (kbd "M-SPC p t") 'magit-todos-list))
 
@@ -377,6 +389,23 @@ unwanted space when exporting org-mode to html."
 (use-package org-agenda
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
 
+(use-package org-cliplink)
+
+(use-package org-download
+  :after org
+  :demand t
+  :init
+  ;; FIXME org-link-unescape 不能 decode link
+  ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
+  ;; (defun custom-org-download-method (link)
+  ;;   (org-download--fullname (org-link-unescape link)))
+  ;; (setq org-download-method 'custom-org-download-method) ; 注意：这里不能用lambda表达式
+  ;; 顺便改下annotate，就是自动插入的那行注释，里面写的是图片来源路径
+  ;; (setq org-download-annotate-function
+  ;;       '(lambda (link)
+  ;;          (org-download-annotate-default (org-link-unescape link))))
+  )
+
 (use-package org-journal
   :after org
   :init
@@ -390,6 +419,17 @@ unwanted space when exporting org-mode to html."
         org-journal-date-format "%A, %x"
         org-journal-time-prefix "** "
         org-journal-time-format "%R "))
+
+(use-package org-roam
+  :init
+  (setq org-roam-directory "~/org/roam"
+        org-roam-completion-system 'ivy)
+  (add-hook 'after-init-hook #'org-roam-mode)
+  :config
+  (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
+  (define-key org-roam-mode-map (kbd "M-SPC n n") #'org-roam-find-file)
+  (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
+  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert))
 
 (use-package paredit
   :after eldoc
@@ -431,6 +471,8 @@ unwanted space when exporting org-mode to html."
    'paredit-close-round)
   )
 
+(use-package pocket-reader)
+
 (use-package posframe)
 
 (use-package projectile :init
@@ -443,6 +485,8 @@ unwanted space when exporting org-mode to html."
         lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
   (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
+
+(use-package re-builder :init (setq reb-re-syntax 'string))
 
 (use-package recentf
   :init
@@ -471,6 +515,8 @@ unwanted space when exporting org-mode to html."
   (add-hook 'rust-mode-hook #'lsp))
 
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
+
+(use-package smex) ;; smex is needed to order candidates for ivy
 
 (use-package snails
   :if window-system
@@ -525,13 +571,6 @@ unwanted space when exporting org-mode to html."
 
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
 
-;; (use-package term-cursor
-;;   :init
-;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
-;;                                post-command-hook
-;;                                lsp-ui-doc-frame-hook))
-;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
-
 (use-package tide
   :after (company flycheck)
   :init
@@ -560,6 +599,8 @@ unwanted space when exporting org-mode to html."
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
   )
+
+(use-package valign)
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
@@ -590,55 +631,12 @@ unwanted space when exporting org-mode to html."
 
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
-(use-package org-roam
-  :init
-  (setq org-roam-directory "~/org/roam"
-        org-roam-completion-system 'ivy)
-  (add-hook 'after-init-hook #'org-roam-mode)
-  :config
-  (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
-  (define-key org-roam-mode-map (kbd "M-SPC n n") #'org-roam-find-file)
-  (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
-  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert))
-
-(use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
-
-(use-package flycheck-posframe :after flycheck :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
-
-(use-package flycheck)
-
-
-(use-package magit-delta
-  :if (not (equal (shell-command "delta") 127))
-  :after magit
-  :init (add-hook 'magit-mode-hook #'magit-delta-mode))
-
-(use-package valign)
-
-(use-package ivy-hydra)
-
-(use-package re-builder :init (setq reb-re-syntax 'string))
-
-(use-package smex) ;; smex is needed to order candidates for ivy
-
-(use-package pocket-reader)
-
-(use-package org-download
-  :after org
-  :demand t
-  :init
-  ;; FIXME org-link-unescape 不能 decode link
-  ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
-  ;; (defun custom-org-download-method (link)
-  ;;   (org-download--fullname (org-link-unescape link)))
-  ;; (setq org-download-method 'custom-org-download-method) ; 注意：这里不能用lambda表达式
-  ;; 顺便改下annotate，就是自动插入的那行注释，里面写的是图片来源路径
-  ;; (setq org-download-annotate-function
-  ;;       '(lambda (link)
-  ;;          (org-download-annotate-default (org-link-unescape link))))
-  )
-
-(use-package org-cliplink)
+;; (use-package term-cursor
+;;   :init
+;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
+;;                                post-command-hook
+;;                                lsp-ui-doc-frame-hook))
+;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 (provide 'init-config)
 ;;; init-config ends here
