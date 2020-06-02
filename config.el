@@ -67,6 +67,10 @@
 				       ))
 			 (diminish mode)))))
 
+(use-package dired
+  :init
+  (setq dired-listing-switches "-Afhlv"
+        dired-auto-revert-buffer t))
 (use-package dotenv)
 
 (use-package ediff-wind
@@ -603,7 +607,6 @@ unwanted space when exporting org-mode to html."
 
 (use-package flycheck)
 
-(use-package dired :init (setq dired-listing-switches "-Afhlv"))
 
 (use-package magit-delta
   :if (not (equal (shell-command "delta") 127))
