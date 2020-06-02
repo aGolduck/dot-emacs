@@ -123,7 +123,9 @@
 
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 
-(use-package git-link)
+(use-package git-link
+  :init
+  (global-set-key (kbd "M-SPC g L") 'git-link))
 
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
