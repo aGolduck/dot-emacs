@@ -651,7 +651,10 @@ unwanted space when exporting org-mode to html."
         org-roam-server-label-truncate t
         org-roam-server-label-truncate-length 60
         org-roam-server-label-wrap-length 20)
-  (add-hook 'after-init-hook #'org-roam-server-mode))
+  ;; TODO start org-roam-server-mode automatically
+  ;; this does not work
+  ;; (add-hook 'after-init-hook #'org-roam-server-mode)
+  )
 
 
 (provide 'init-config)
