@@ -638,5 +638,18 @@ unwanted space when exporting org-mode to html."
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
+(use-package org-roam-server
+  :if window-system
+  :config
+  (require 'org-roam-protocol)
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 4242
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20)
+  (add-hook 'after-init-hook #'org-roam-server-mode))
+
+
 (provide 'init-config)
 ;;; init-config ends here
