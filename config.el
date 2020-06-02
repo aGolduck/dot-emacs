@@ -73,7 +73,8 @@
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top))
+        dired-recursive-deletes 'top)
+  (global-set-key (kbd "M-SPC ^") 'dired))
 
 (use-package dotenv)
 
