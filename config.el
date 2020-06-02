@@ -70,7 +70,10 @@
 (use-package dired
   :init
   (setq dired-listing-switches "-Afhlv"
-        dired-auto-revert-buffer t))
+        dired-auto-revert-buffer t
+        dired-dwim-target t
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'top))
 
 (use-package dotenv)
 
