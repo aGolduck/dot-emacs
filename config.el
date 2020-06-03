@@ -607,7 +607,9 @@ unwanted space when exporting org-mode to html."
   ;; (push 'company-lsp company-backends)
   )
 
-(use-package valign)
+(use-package valign
+  :commands (valign-mode)
+  :init (add-hook 'after-init-hook #'valign-mode))
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
