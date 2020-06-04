@@ -60,6 +60,7 @@
  ("org-roam-server" . "c69d0f07fdc2465f987fe0a6b427a83e316e8212")
  ("org-web-tools" . "ebc7888f4f4cad26ec1298edd7bf606a5ea2d564")
  ("ov" . "c5b9aa4e1b00d702eb2caedd61c69a22a5fa1fab")
+ ("ox-hugo" . "f8e26aaee92491ca348c2b6f7fb49627642b3176")
  ("paredit" . "814999bb320e6d5aaa9c8ff663b1933157129571")
  ("pcre2el" . "0b5b2a2c173aab3fd14aac6cf5e90ad3bf58fa7d")
  ("pfuture" . "d7926de3ba0105a36cfd00811fd6278aea903eef")

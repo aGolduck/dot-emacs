@@ -62,6 +62,7 @@
           'org-roam-server
           'ob-typescript
           'dired-rsync
+          'ox-hugo
           ))
   (straight-use-package wenpin/package))
 

@@ -663,6 +663,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package dired-rsync)
 
+(use-package ox-hugo :after ox)
+
 
 (provide 'init-config)
 ;;; init-config ends here
