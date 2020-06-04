@@ -74,7 +74,7 @@
         dired-dwim-target t
         dired-recursive-copies 'always
         dired-recursive-deletes 'top)
-  (global-set-key (kbd "M-SPC ^") 'dired))
+  (global-set-key (kbd "M-SPC ^") #'dired-jump))
 
 (use-package dotenv)
 
