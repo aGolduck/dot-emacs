@@ -608,8 +608,7 @@ unwanted space when exporting org-mode to html."
   )
 
 (use-package valign
-  :commands (valign-mode)
-  :init (add-hook 'after-init-hook #'valign-mode))
+  :commands (valign-mode valign-table))
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 

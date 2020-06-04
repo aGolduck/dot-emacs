@@ -84,7 +84,7 @@
  ("treemacs" . "1935108f683ac446e3d0add9467bc1adc4f744e7")
  ("typescript.el" . "0fc729787007b5111f3584034af0f3ef2389098f")
  ("use-package" . "d2640fec376a8458a669e7526e63e5870d875118")
- ("valign" . "51411a4f55c1e9c86ecc36428b3dac70542a31a1")
+ ("valign" . "04d299e4d5978ada060c53ec7f3722939e96813f")
  ("with-editor" . "f25a70777d9d9c90a52249791578bd72f1b7dfd7")
  ("xterm-color" . "076cd0c02a7c248b82729a9efdee29c0cb272be3")
  ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49"))
