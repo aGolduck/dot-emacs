@@ -665,6 +665,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package ox-hugo :after ox)
 
+(use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
+
 
 (provide 'init-config)
 ;;; init-config ends here
