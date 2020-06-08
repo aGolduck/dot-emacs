@@ -64,7 +64,7 @@
 				       'ivy-mode
 				       'ivy-posframe-mode
                                        'org-roam-mode
-                                       'magit-delta
+                                       'magit-delta-mode
 				       ))
 			 (diminish mode)))))
 
