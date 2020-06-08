@@ -17,15 +17,36 @@
           'org-agenda-mode-hook
           ))
   (add-hook readonly-mode-hook (lambda () (setq cursor-type 'box))))
-(add-hook 'find-file-hook
-	  (lambda ()
-            (if (or
-		 (string-match-p "org/orgzly" (buffer-file-name))
-		 (string-match-p "org/roam" (buffer-file-name))
-		 (string-match-p "org/journal" (buffer-file-name))
-		 (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
-	        (setq cursor-type 'bar)
-              (view-mode))))
+(defvar wenpin/view-mode-buffers nil)
+(defun wenpin/view-mode-hook-for-find-file ()
+  (if (or
+       (string-match-p "org/orgzly" (buffer-file-name))
+       (string-match-p "org/roam" (buffer-file-name))
+       (string-match-p "org/journal" (buffer-file-name))
+       (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
+      (setq cursor-type 'bar)
+    (view-mode 1)))
+(defun set-default-view-mode ()
+  "add view mode to find-file-hook"
+  (interactive)
+  (dolist (buffer wenpin/view-mode-buffers)
+    (save-excursion
+      (set-buffer buffer)
+      (view-mode 1)))
+  (setq wenpin/view-mode-buffers nil)
+  (add-hook 'find-file-hook #'wenpin/view-mode-hook-for-find-file))
+(defun unset-default-view-mode ()
+  "remove view mode from find-file-hook"
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (save-excursion
+      (set-buffer buffer)
+      (when view-mode
+        (view-mode -1)
+        (add-to-list 'wenpin/view-mode-buffers buffer))))
+  (remove-hook 'find-file-hook #'wenpin/view-mode-hook-for-find-file))
+(set-default-view-mode)
+
 ;; hooks provided by built-in emacs are not enough
 ;; (add-hook 'window-buffer-change-functions
 ;;           (lambda (window) (term-cursor--immediate)) nil nil)
