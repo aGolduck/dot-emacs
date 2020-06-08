@@ -667,6 +667,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
+(use-package avy)
+
 
 (provide 'init-config)
 ;;; init-config ends here

@@ -63,6 +63,7 @@
           'ob-typescript
           'dired-rsync
           'ox-hugo
+          'ag
           ))
   (straight-use-package wenpin/package))
 
