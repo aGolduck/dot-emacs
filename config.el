@@ -58,15 +58,18 @@
 (use-package diminish
   :init
   (add-hook 'after-init-hook
-	    (lambda () (dolist (mode (list
-				       'flymake-posframe-mode
-				       'gcmh-mode
-				       'ivy-mode
-				       'ivy-posframe-mode
-                                       'org-roam-mode
-                                       'magit-delta-mode
-				       ))
-			 (diminish mode)))))
+	    (lambda ()
+              (dolist (mode (list
+			     'flymake-posframe-mode
+			     'gcmh-mode
+			     'ivy-mode
+			     'ivy-posframe-mode
+                             'org-roam-mode
+                             ;; FIXME: diminish not workking for magit-delta, it has lighter Magit-Δ
+                             ;; 'magit-delta-mode
+			     ))
+		(diminish mode))
+              (when window-system (diminish 'view-mode)))))
 
 (use-package dired
   :init
