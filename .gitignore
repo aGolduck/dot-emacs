@@ -18,5 +18,5 @@ eaf
 transient
 .lsp-session-v1
 .cache/lsp
-
 org-journal.cache
+smex-items
