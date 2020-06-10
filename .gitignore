@@ -20,3 +20,4 @@ transient
 .cache/lsp
 org-journal.cache
 smex-items
+tramp
