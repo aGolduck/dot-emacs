@@ -5,6 +5,8 @@ places
 .emacs.desktop
 custom.el
 bookmarks
+eshell
+tramp
 
 
 # straight.el
@@ -20,4 +22,3 @@ transient
 .cache/lsp
 org-journal.cache
 smex-items
-tramp
