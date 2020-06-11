@@ -67,6 +67,7 @@
                              'org-roam-mode
                              ;; FIXME: diminish not workking for magit-delta, it has lighter Magit-Δ
                              ;; 'magit-delta-mode
+                             'company-mode
 			     ))
 		(diminish mode))
               (when window-system (diminish 'view-mode)))))
