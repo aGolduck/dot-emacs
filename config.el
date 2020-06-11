@@ -675,6 +675,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package avy)
 
+(use-package newcomment :init (global-set-key [remap comment-dwim] #'comment-line))
+
 
 (provide 'init-config)
 ;;; init-config ends here
