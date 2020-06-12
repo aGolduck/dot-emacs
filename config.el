@@ -679,6 +679,18 @@ unwanted space when exporting org-mode to html."
 
 (use-package newcomment :init (global-set-key [remap comment-dwim] #'comment-line))
 
+(use-package hi-lock
+  :init
+  ;; remove ugly hi-yellow from default
+  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
+  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
+  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
+  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
+  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
+  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
+  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
+  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
+
 
 (provide 'init-config)
 ;;; init-config ends here
