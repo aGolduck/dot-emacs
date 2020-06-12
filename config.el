@@ -219,6 +219,7 @@
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (global-set-key (kbd "M-SPC g s") 'magit-status)
+  :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
 (use-package magit-delta
