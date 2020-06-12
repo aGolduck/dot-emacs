@@ -457,6 +457,7 @@ unwanted space when exporting org-mode to html."
                  'scheme-mode-hook
                  ))
     (add-hook hook #'paredit-mode))
+  (global-set-key [remap paredit-comment-dwim] #'comment-line)
   :config
   ;; https://emacs-china.org/t/paredit-smartparens/6727/11
   (defun paredit/space-for-delimiter-p (endp delm)
