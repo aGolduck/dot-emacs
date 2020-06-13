@@ -254,6 +254,7 @@
 	org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
 	org-export-with-sub-superscripts nil
 	org-html-inline-images t
+        org-log-done 'time
 	org-outline-path-complete-in-steps nil
 	org-refile-target-verify-function 'bh/verify-refile-target
 	org-refile-targets (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)))
