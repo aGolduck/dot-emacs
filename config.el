@@ -101,6 +101,7 @@
   :init
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
+  :config
   (define-key 'eshell-command-map (kbd "C-u") #'eshell-kill-input))
 
 (use-package eshell-z)
