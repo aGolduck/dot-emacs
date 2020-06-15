@@ -692,6 +692,9 @@ unwanted space when exporting org-mode to html."
   (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
   (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
 
+(use-package simple
+  :init
+  (global-set-key (kbd "M-SPC u") #'universal-argument))
 
 (provide 'init-config)
 ;;; init-config ends here
