@@ -513,6 +513,20 @@ unwanted space when exporting org-mode to html."
   :init
   (setq recentf-auto-cleanup 'never
         recentf-max-saved-items nil)
+  ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
+  (defun recentd-track-opened-file ()
+    "Insert the name of the directory just opened into the recent list."
+    (and (derived-mode-p 'dired-mode) default-directory
+         (recentf-add-file default-directory))
+    ;; Must return nil because it is run from `write-file-functions'.
+    nil)
+  (defun recentd-track-closed-file ()
+    "Update the recent list when a dired buffer is killed.
+That is, remove a non kept dired from the recent list."
+    (and (derived-mode-p 'dired-mode) default-directory
+         (recentf-remove-if-non-kept default-directory)))
+  (add-hook 'dired-after-readin-hook 'recentd-track-opened-file)
+  (add-hook 'kill-buffer-hook 'recentd-track-closed-file)
   (add-hook 'after-init-hook #'recentf-mode))
 
 (use-package rime
