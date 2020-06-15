@@ -68,6 +68,7 @@
                              ;; FIXME: diminish not workking for magit-delta, it has lighter Magit-Δ
                              ;; 'magit-delta-mode
                              'company-mode
+                             'winner-mode
 			     ))
 		(diminish mode))
               (when window-system (diminish 'view-mode)))))
@@ -697,6 +698,9 @@ unwanted space when exporting org-mode to html."
 (use-package simple
   :init
   (global-set-key (kbd "M-SPC u") #'universal-argument))
+
+(use-package winner :init (add-hook 'after-init-hook #'winner-mode))
+
 
 (provide 'init-config)
 ;;; init-config ends here
