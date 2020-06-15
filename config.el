@@ -88,7 +88,9 @@
   :init
   (setq ediff-merge-split-window-function 'split-window-vertically
         ediff-split-window-function 'split-window-horizontally
-        ediff-window-setup-function 'ediff-setup-windows-plain))
+        ediff-window-setup-function 'ediff-setup-windows-plain)
+  :config
+  (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 (use-package eldoc :commands (eldoc-add-command))
 
