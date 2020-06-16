@@ -26,6 +26,7 @@
        (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
       (setq cursor-type 'bar)
     (view-mode 1)))
+;; TODO: add variable watcher for buffer-read-only to set cursor-type
 (defun set-default-view-mode ()
   "add view mode to find-file-hook"
   (interactive)

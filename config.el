@@ -18,6 +18,8 @@
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
 
+(use-package avy)
+
 (use-package bookmark
   :init
   (global-set-key (kbd "M-SPC b s") 'bookmark-set))
@@ -82,6 +84,8 @@
         dired-recursive-deletes 'top)
   (global-set-key (kbd "M-SPC ^") #'dired-jump))
 
+(use-package dired-rsync)
+
 (use-package dotenv)
 
 (use-package ediff-wind
@@ -108,6 +112,8 @@
   (define-key 'eshell-command-map (kbd "C-u") #'eshell-kill-input))
 
 (use-package eshell-z)
+
+(use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
 (use-package expand-region
   :init
@@ -144,6 +150,18 @@
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
 (use-package graphql-mode)
+
+(use-package hi-lock
+  :init
+  ;; remove ugly hi-yellow from default
+  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
+  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
+  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
+  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
+  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
+  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
+  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
+  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
 
 (use-package highlight-indent-guides
   :init
@@ -240,6 +258,8 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
+
+(use-package newcomment :init (global-set-key [remap comment-dwim] #'comment-line))
 
 (use-package olivetti)
 
@@ -451,6 +471,23 @@ unwanted space when exporting org-mode to html."
   (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
   (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert))
 
+(use-package org-roam-server
+  :if window-system
+  :config
+  (require 'org-roam-protocol)
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 4242
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20)
+  ;; TODO start org-roam-server-mode automatically
+  ;; this does not work
+  ;; (add-hook 'after-init-hook #'org-roam-server-mode)
+  )
+
+(use-package ox-hugo :after ox)
+
 (use-package paredit
   :after eldoc
   :commands (enable-paredit-mode)
@@ -550,6 +587,10 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'rust-mode-hook #'lsp))
 
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
+
+(use-package simple
+  :init
+  (global-set-key (kbd "M-SPC u") #'universal-argument))
 
 (use-package smex) ;; smex is needed to order candidates for ivy
 
@@ -651,6 +692,8 @@ That is, remove a non kept dired from the recent list."
   ;;             (buffer-face-mode t)))
   )
 
+(use-package winner :init (add-hook 'after-init-hook #'winner-mode))
+
 (use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
 
 (use-package yaml-mode
@@ -673,49 +716,6 @@ That is, remove a non kept dired from the recent list."
 ;;                                post-command-hook
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
-
-(use-package org-roam-server
-  :if window-system
-  :config
-  (require 'org-roam-protocol)
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 4242
-        org-roam-server-authenticate nil
-        org-roam-server-label-truncate t
-        org-roam-server-label-truncate-length 60
-        org-roam-server-label-wrap-length 20)
-  ;; TODO start org-roam-server-mode automatically
-  ;; this does not work
-  ;; (add-hook 'after-init-hook #'org-roam-server-mode)
-  )
-
-(use-package dired-rsync)
-
-(use-package ox-hugo :after ox)
-
-(use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
-
-(use-package avy)
-
-(use-package newcomment :init (global-set-key [remap comment-dwim] #'comment-line))
-
-(use-package hi-lock
-  :init
-  ;; remove ugly hi-yellow from default
-  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
-  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
-  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
-  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
-  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
-  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
-  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
-  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
-
-(use-package simple
-  :init
-  (global-set-key (kbd "M-SPC u") #'universal-argument))
-
-(use-package winner :init (add-hook 'after-init-hook #'winner-mode))
 
 
 (provide 'init-config)
