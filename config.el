@@ -464,7 +464,6 @@ unwanted space when exporting org-mode to html."
   :init
   (setq org-roam-directory "~/org/roam"
         org-roam-completion-system 'ivy)
-  (add-hook 'after-init-hook #'org-roam-mode)
   :config
   (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
   (define-key org-roam-mode-map (kbd "M-SPC n n") #'org-roam-find-file)
@@ -480,11 +479,7 @@ unwanted space when exporting org-mode to html."
         org-roam-server-authenticate nil
         org-roam-server-label-truncate t
         org-roam-server-label-truncate-length 60
-        org-roam-server-label-wrap-length 20)
-  ;; TODO start org-roam-server-mode automatically
-  ;; this does not work
-  ;; (add-hook 'after-init-hook #'org-roam-server-mode)
-  )
+        org-roam-server-label-wrap-length 20))
 
 (use-package ox-hugo :after ox)
 
