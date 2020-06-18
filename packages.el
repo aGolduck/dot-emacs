@@ -64,6 +64,7 @@
           'dired-rsync
           'ox-hugo
           'ag
+          'lsp-java
           ))
   (straight-use-package wenpin/package))
 
