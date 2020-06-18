@@ -427,6 +427,7 @@ unwanted space when exporting org-mode to html."
   (define-key org-mode-map (kbd "C-<tab>") nil))
 
 (use-package org-agenda
+  :init (setq org-agenda-restore-windows-after-quit t)
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
 
 (use-package org-cliplink)
