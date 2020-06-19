@@ -713,7 +713,8 @@ That is, remove a non kept dired from the recent list."
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
-(use-package lsp-java)
+(use-package lsp-java :init (add-hook 'java-mode-hook #'lsp))
+
 
 (provide 'init-config)
 ;;; init-config ends here
