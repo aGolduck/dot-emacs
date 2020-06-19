@@ -718,5 +718,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package maven-test-mode)
 
+(use-package epg-config :init (setq epg-pinentry-mode 'loopback))
+
 (provide 'init-config)
 ;;; init-config ends here
