@@ -13,11 +13,13 @@
           '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(valign :host github :repo "casouri/valign")
+          'ag
           'avy
           'ccls
           'company
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           'diminish
+          'dired-rsync
           'dotenv-mode
           'esh-autosuggest
           'eshell-z
@@ -35,6 +37,7 @@
           'ivy-xref
           'json-mode
           'lsp-ivy
+          'lsp-java
           'lsp-mode
           'lsp-python-ms
           'lsp-treemacs
@@ -42,11 +45,14 @@
           'magit-delta
           'magit-todos
           'markdown-mode
+          'ob-typescript
           'olivetti
           'org-cliplink
           'org-download
           'org-journal
           'org-roam
+          'org-roam-server
+          'ox-hugo
           'pocket-reader
           'posframe
           'projectile
@@ -59,12 +65,6 @@
           'typescript-mode
           'vterm
           'yaml-mode
-          'org-roam-server
-          'ob-typescript
-          'dired-rsync
-          'ox-hugo
-          'ag
-          'lsp-java
           ))
   (straight-use-package wenpin/package))
 
