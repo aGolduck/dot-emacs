@@ -715,6 +715,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package lsp-java :init (add-hook 'java-mode-hook #'lsp))
 
+(use-package maven-test-mode)
 
 (provide 'init-config)
 ;;; init-config ends here

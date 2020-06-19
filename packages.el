@@ -65,6 +65,7 @@
           'typescript-mode
           'vterm
           'yaml-mode
+          'maven-test-mode
           ))
   (straight-use-package wenpin/package))
 
