@@ -236,7 +236,8 @@
         lsp-log-io t
         lsp-print-performance t
         lsp-semantic-highlighting nil
-        read-process-output-max (* 1024 1024)))
+        read-process-output-max (* 1024 1024))
+  (add-hook 'lsp-mode-hook #'lsp-lens-mode))
 
 (use-package lsp-python-ms)
 
