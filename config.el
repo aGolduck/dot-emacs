@@ -720,5 +720,17 @@ That is, remove a non kept dired from the recent list."
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
+(use-package desktop
+  :init
+  (setq desktop-globals-to-save '()
+        desktop-files-not-to-save ".*"
+        desktop-buffers-not-to-save ".*"
+        desktop-save t)
+  (add-hook 'after-init-hook
+            (lambda ()
+              (when window-system
+                (desktop-save-mode)
+                (desktop-read)))))
+
 (provide 'init-config)
 ;;; init-config ends here

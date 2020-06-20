@@ -7,7 +7,7 @@ custom.el
 bookmarks
 eshell
 tramp
-
+.emacs.desktop.lock
 
 # straight.el
 repos

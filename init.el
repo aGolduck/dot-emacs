@@ -54,7 +54,7 @@
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
 (tool-bar-mode -1)
-(toggle-frame-maximized)
+;; (toggle-frame-maximized)
 
 (setq custom-file "~/.emacs.d/custom.el")
 ;; (load custom-file 'no-error 'no-message)
