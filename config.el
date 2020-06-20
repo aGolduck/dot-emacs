@@ -716,8 +716,6 @@ That is, remove a non kept dired from the recent list."
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
-(use-package lsp-java :init (add-hook 'java-mode-hook #'lsp))
-
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
 (use-package hideshow
@@ -753,6 +751,14 @@ That is, remove a non kept dired from the recent list."
 (use-package thing-edit)
 
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+
+(use-package dap-java)
+
+(use-package lsp-java
+  :init (add-hook 'java-mode-hook #'lsp))
+
+(use-package lsp-java-boot
+  :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 (use-package ranger)
 
