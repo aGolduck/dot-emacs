@@ -49,7 +49,7 @@
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
  ("let-alist" . "ef3c02fa292b6e32769945bbbfb7f2e5ac574b64")
  ("log4e" . "7df0c1ff4656f8f993b87064b1567618eadb5546")
- ("lsp-ivy" . "dce58b5509271bbedb53ba9d0278dcb563a43977")
+ ("lsp-ivy" . "f6e321187e773d7e5dfb215802fff5f308226cf9")
  ("lsp-java" . "580654972f179cad815c6b4fa3e7c6730b52fddf")
  ("lsp-mode" . "666de5f50942efa461130846be740729b25081fd")
  ("lsp-python-ms" . "db6f2636da1037bda06d5a2d992c4857ce3ad9b0")
