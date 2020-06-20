@@ -768,5 +768,10 @@ That is, remove a non kept dired from the recent list."
   :init
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))
 
+(use-package org-alert
+  :commands (org-alert-enable)
+  :init
+  (setq alert-default-style 'libnotify))
+
 (provide 'init-config)
 ;;; init-config ends here

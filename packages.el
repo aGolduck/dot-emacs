@@ -69,6 +69,7 @@
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           'dap-mode
           'ranger
+          'org-alert
           ))
   (straight-use-package wenpin/package))
 
