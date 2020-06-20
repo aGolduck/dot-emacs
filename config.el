@@ -720,6 +720,24 @@ That is, remove a non kept dired from the recent list."
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
+(use-package hideshow
+  :init
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
+  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
+  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
+  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
+  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
+  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
+  :config
+  (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+  (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
+    (when (eq 'code (overlay-get wenpin/overlay 'hs))
+      (let* ((nlines (count-lines (overlay-start wenpin/overlay)
+                                  (overlay-end wenpin/overlay)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put wenpin/overlay 'display (propertize info 'face wenpin/hideshow-folded-face)))))
+  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn))
+
 (use-package desktop
   :init
   (setq desktop-globals-to-save '()
