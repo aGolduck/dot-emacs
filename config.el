@@ -750,5 +750,11 @@ That is, remove a non kept dired from the recent list."
                 (desktop-save-mode)
                 (desktop-read)))))
 
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+
+(use-package dap-mode
+  :init
+  (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))
+
 (provide 'init-config)
 ;;; init-config ends here

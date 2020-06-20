@@ -65,6 +65,7 @@
           'typescript-mode
           'vterm
           'yaml-mode
+          'dap-mode
           ))
   (straight-use-package wenpin/package))
 
