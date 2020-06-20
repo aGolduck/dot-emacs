@@ -72,6 +72,8 @@
                              'company-mode
                              'winner-mode
                              'hs-minor-mode
+                             'selectric-mode
+                             'paredit-mode
 			     ))
 		(diminish mode))
               (when window-system (diminish 'view-mode)))))
