@@ -65,6 +65,7 @@
           'typescript-mode
           'vterm
           'yaml-mode
+          'selectric-mode
           'dap-mode
           'ranger
           ))

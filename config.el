@@ -754,6 +754,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package ranger)
 
+(use-package selectric-mode :init (add-hook 'after-init-hook #'selectric-mode))
+
 (use-package dap-mode
   :init
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))

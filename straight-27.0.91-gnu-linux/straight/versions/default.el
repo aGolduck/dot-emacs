@@ -79,6 +79,7 @@
  ("ranger.el" . "d7c18370981c9e585bc0fb78f7e55033457ca643")
  ("rust-mode" . "1603a258d1dec3c5f8671a12782d913bb828864a")
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
+ ("selectric-mode" . "bb9e66678f34e9bc23624ff6292cf5e7857e8e5f")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("snails" . "b740a2ddb3789847090d991eba279f4f8579463f")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
