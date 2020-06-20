@@ -76,6 +76,7 @@
  ("posframe" . "093b29a53cbeda6d637ccc9ef4dfc47123e79b9e")
  ("projectile" . "d7baa74eaa32cbed5d003a39a2687fa168cc4126")
  ("rainbow-identifiers" . "19fbfded1baa98d12335f26f6d7b20e5ae44ce2e")
+ ("ranger.el" . "d7c18370981c9e585bc0fb78f7e55033457ca643")
  ("rust-mode" . "1603a258d1dec3c5f8671a12782d913bb828864a")
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")

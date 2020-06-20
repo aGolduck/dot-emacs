@@ -752,6 +752,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
 
+(use-package ranger)
+
 (use-package dap-mode
   :init
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))

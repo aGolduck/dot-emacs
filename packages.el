@@ -66,6 +66,7 @@
           'vterm
           'yaml-mode
           'dap-mode
+          'ranger
           ))
   (straight-use-package wenpin/package))
 
