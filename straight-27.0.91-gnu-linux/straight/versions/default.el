@@ -87,6 +87,7 @@
  ("sudo-edit" . "f29c6d8e76ae2ca1e3b668601c76ceaf96738744")
  ("swiper" . "aef1d4d1631b7e9391296743807ee1cfa6170429")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
+ ("thing-edit" . "117eadcc43f6933e14b77c20b7983ee234cba794")
  ("tide" . "8a7c1fc5dcc9b3321c10c71f21d1436b0a62ac07")
  ("transient" . "a6e4cced303b3febd59412b24a97eaf1e855e6d7")
  ("treemacs" . "1935108f683ac446e3d0add9467bc1adc4f744e7")

@@ -750,6 +750,8 @@ That is, remove a non kept dired from the recent list."
                 (desktop-save-mode)
                 (desktop-read)))))
 
+(use-package thing-edit)
+
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
 
 (use-package ranger)

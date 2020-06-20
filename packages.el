@@ -66,6 +66,7 @@
           'vterm
           'yaml-mode
           'selectric-mode
+          '(thing-edit :host github :repo "manateelazycat/thing-edit")
           'dap-mode
           'ranger
           ))
