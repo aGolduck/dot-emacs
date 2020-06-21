@@ -278,8 +278,8 @@
   (add-hook 'java-mode-hook #'lsp)
   (add-hook 'java-mode-hook #'display-line-numbers-mode))
 
-(use-package lsp-java-boot
-  :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
+;; (use-package lsp-java-boot
+;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 (use-package lsp-mode
   :init
