@@ -752,10 +752,6 @@ That is, remove a non kept dired from the recent list."
 
 (use-package thing-edit)
 
-(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
-
-(use-package dap-java)
-
 (use-package lsp-java
   :init (add-hook 'java-mode-hook #'lsp))
 
@@ -767,8 +763,18 @@ That is, remove a non kept dired from the recent list."
 (use-package selectric-mode :init (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package dap-mode
-  :init
-  (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))
+  :after lsp-mode
+  :init (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
+  :config (dap-auto-configure-mode))
+
+(use-package dap-java
+  :commands (dap-java-debug
+             dap-java-run-test-method
+             dap-java-debug-test-method
+             dap-java-run-test-class
+             dap-java-debug-test-class)
+  :init (setq dap-java-test-runner
+              "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
 
 (use-package org-alert
   :commands (org-alert-enable)
