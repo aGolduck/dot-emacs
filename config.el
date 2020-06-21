@@ -148,7 +148,7 @@
             (lambda ()
               (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input))))
 
-(use-package eshell-z :after :esh-mode)
+(use-package eshell-z :after esh-mode)
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
