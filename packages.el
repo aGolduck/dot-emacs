@@ -12,12 +12,14 @@
           '(rime :host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c"))
           '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           '(term-cursor :host github :repo "h0d/term-cursor.el")
+          '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
           'ag
           'avy
           'ccls
           'company
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
+          'dap-mode
           'diminish
           'dired-rsync
           'dotenv-mode
@@ -47,6 +49,7 @@
           'markdown-mode
           'ob-typescript
           'olivetti
+          'org-alert
           'org-cliplink
           'org-download
           'org-journal
@@ -56,7 +59,9 @@
           'pocket-reader
           'posframe
           'projectile
+          'ranger
           'rust-mode
+          'selectric-mode
           'smex
           'sudo-edit
           'swiper
@@ -65,11 +70,6 @@
           'typescript-mode
           'vterm
           'yaml-mode
-          'selectric-mode
-          '(thing-edit :host github :repo "manateelazycat/thing-edit")
-          'dap-mode
-          'ranger
-          'org-alert
           'yasnippet
           ))
   (straight-use-package wenpin/package))

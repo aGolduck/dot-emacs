@@ -3,6 +3,13 @@
 ;; 2. big minor mode, like ivy-mode, lsp-mode
 ;; 3. minor mode
 
+(use-package ansi-color
+  :init
+  (add-hook 'compilation-filter-hook
+            (lambda ()
+              (let ((buffer-read-only nil))
+                (ansi-color-apply-on-region (point-min) (point-max))))))
+
 (use-package auto-save
   :commands (auto-save-enable)
   :init
@@ -17,8 +24,6 @@
   (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
   (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
-
-(use-package avy)
 
 (use-package bookmark
   :init
@@ -56,6 +61,32 @@
   (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
   (global-set-key (kbd "M-SPC SPC") 'counsel-M-x)
   (global-set-key (kbd "M-y") 'counsel-yank-pop))
+
+(use-package dap-java
+  :commands (dap-java-debug
+             dap-java-run-test-method
+             dap-java-debug-test-method
+             dap-java-run-test-class
+             dap-java-debug-test-class)
+  :init (setq dap-java-test-runner
+              "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+
+(use-package dap-mode
+  :after lsp-mode
+  :init (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
+  :config (dap-auto-configure-mode))
+
+(use-package desktop
+  :init
+  (setq desktop-globals-to-save '()
+        desktop-files-not-to-save ".*"
+        desktop-buffers-not-to-save ".*"
+        desktop-save t)
+  (add-hook 'after-init-hook
+            (lambda ()
+              (when window-system
+                (desktop-save-mode)
+                (desktop-read)))))
 
 (use-package diminish
   :init
@@ -105,7 +136,9 @@
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
 
-(use-package esh-autosuggest :commands (esh-autosuggest-mode))
+(use-package epg-config :init (setq epg-pinentry-mode 'loopback))
+
+(use-package esh-autosuggest :after esh-mode :commands (esh-autosuggest-mode))
 
 (use-package esh-mode
   :init
@@ -115,7 +148,7 @@
             (lambda ()
               (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input))))
 
-(use-package eshell-z)
+(use-package eshell-z :after :esh-mode)
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
@@ -166,6 +199,24 @@
   (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
   (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
   (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
+
+(use-package hideshow
+  :init
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
+  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
+  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
+  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
+  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
+  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
+  :config
+  (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+  (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
+    (when (eq 'code (overlay-get wenpin/overlay 'hs))
+      (let* ((nlines (count-lines (overlay-start wenpin/overlay)
+                                  (overlay-end wenpin/overlay)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put wenpin/overlay 'display (propertize info 'face wenpin/hideshow-folded-face)))))
+  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn))
 
 (use-package highlight-indent-guides
   :init
@@ -221,6 +272,12 @@
 (use-package json-mode)
 
 (use-package lsp-ivy)
+
+(use-package lsp-java
+  :init (add-hook 'java-mode-hook #'lsp))
+
+(use-package lsp-java-boot
+  :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 (use-package lsp-mode
   :init
@@ -435,6 +492,11 @@ unwanted space when exporting org-mode to html."
   :init (setq org-agenda-restore-windows-after-quit t)
   :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
 
+(use-package org-alert
+  :commands (org-alert-enable)
+  :init
+  (setq alert-default-style 'libnotify))
+
 (use-package org-cliplink)
 
 (use-package org-download
@@ -545,6 +607,8 @@ unwanted space when exporting org-mode to html."
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
   (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
 
+(use-package ranger)
+
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
 (use-package recentf
@@ -588,6 +652,8 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'rust-mode-hook #'lsp))
 
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
+
+(use-package selectric-mode :init (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple
   :init
@@ -648,6 +714,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
 
+(use-package thing-edit)
+
 (use-package tide
   :after (company flycheck)
   :init
@@ -703,6 +771,8 @@ That is, remove a non kept dired from the recent list."
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 
+(use-package yasnippet)
+
 ;; (use-package battery)
 
 ;; (use-package eaf :if (eq system-type 'gnu/linux))
@@ -718,77 +788,6 @@ That is, remove a non kept dired from the recent list."
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
-(use-package epg-config :init (setq epg-pinentry-mode 'loopback))
-
-(use-package hideshow
-  :init
-  (add-hook 'prog-mode-hook #'hs-minor-mode)
-  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
-  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
-  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
-  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
-  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
-  :config
-  (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
-  (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
-    (when (eq 'code (overlay-get wenpin/overlay 'hs))
-      (let* ((nlines (count-lines (overlay-start wenpin/overlay)
-                                  (overlay-end wenpin/overlay)))
-             (info (format " ... #%d " nlines)))
-        (overlay-put wenpin/overlay 'display (propertize info 'face wenpin/hideshow-folded-face)))))
-  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn))
-
-(use-package desktop
-  :init
-  (setq desktop-globals-to-save '()
-        desktop-files-not-to-save ".*"
-        desktop-buffers-not-to-save ".*"
-        desktop-save t)
-  (add-hook 'after-init-hook
-            (lambda ()
-              (when window-system
-                (desktop-save-mode)
-                (desktop-read)))))
-
-(use-package thing-edit)
-
-(use-package lsp-java
-  :init (add-hook 'java-mode-hook #'lsp))
-
-(use-package lsp-java-boot
-  :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
-
-(use-package ranger)
-
-(use-package selectric-mode :init (add-hook 'after-init-hook #'selectric-mode))
-
-(use-package dap-mode
-  :after lsp-mode
-  :init (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
-  :config (dap-auto-configure-mode))
-
-(use-package dap-java
-  :commands (dap-java-debug
-             dap-java-run-test-method
-             dap-java-debug-test-method
-             dap-java-run-test-class
-             dap-java-debug-test-class)
-  :init (setq dap-java-test-runner
-              "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
-
-(use-package org-alert
-  :commands (org-alert-enable)
-  :init
-  (setq alert-default-style 'libnotify))
-
-(use-package yasnippet)
-
-(use-package ansi-color
-  :init
-  (add-hook 'compilation-filter-hook
-            (lambda ()
-              (let ((buffer-read-only nil))
-                (ansi-color-apply-on-region (point-min) (point-max))))))
 
 (provide 'init-config)
 ;;; init-config ends here
