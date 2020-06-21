@@ -70,6 +70,7 @@
           'dap-mode
           'ranger
           'org-alert
+          'yasnippet
           ))
   (straight-use-package wenpin/package))
 

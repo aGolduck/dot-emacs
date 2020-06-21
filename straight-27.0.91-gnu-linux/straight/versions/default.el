@@ -100,5 +100,6 @@
  ("valign" . "d163320edcc1bfdf1e58b8bd201edcdd488aca1d")
  ("with-editor" . "f25a70777d9d9c90a52249791578bd72f1b7dfd7")
  ("xterm-color" . "076cd0c02a7c248b82729a9efdee29c0cb272be3")
- ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49"))
+ ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
+ ("yasnippet" . "5b1217ab085fab4abeb1118dccb260691b446703"))
 :alpha

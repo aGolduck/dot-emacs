@@ -775,5 +775,7 @@ That is, remove a non kept dired from the recent list."
   :init
   (setq alert-default-style 'libnotify))
 
+(use-package yasnippet)
+
 (provide 'init-config)
 ;;; init-config ends here
