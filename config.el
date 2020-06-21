@@ -783,5 +783,12 @@ That is, remove a non kept dired from the recent list."
 
 (use-package yasnippet)
 
+(use-package ansi-color
+  :init
+  (add-hook 'compilation-filter-hook
+            (lambda ()
+              (let ((buffer-read-only nil))
+                (ansi-color-apply-on-region (point-min) (point-max))))))
+
 (provide 'init-config)
 ;;; init-config ends here
