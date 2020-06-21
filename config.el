@@ -771,7 +771,7 @@ That is, remove a non kept dired from the recent list."
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 
-(use-package yasnippet)
+(use-package yasnippet :init (add-hook 'java-mode-hook #'yas-minor-mode))
 
 ;; (use-package battery)
 
