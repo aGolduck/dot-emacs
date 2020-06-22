@@ -783,7 +783,7 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package battery)
 
-;; (use-package eaf :if (eq system-type 'gnu/linux))
+(use-package eaf :if (eq system-type 'gnu/linux))
 
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
@@ -816,6 +816,11 @@ That is, remove a non kept dired from the recent list."
   (setq lsp-ui-doc-enable t))
 
 (use-package devdocs)
+
+(use-package browse-url
+  :init
+  (when (eq system-type 'gnu/linux) (setq browse-url-browser-function 'eaf-open-browser)))
+
 (use-package zeal-at-point)
 
 (provide 'init-config)
