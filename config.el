@@ -657,7 +657,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
 
-(use-package selectric-mode :init (add-hook 'after-init-hook #'selectric-mode))
+(use-package selectric-mode
+  :if (not (equal (shell-command "aplay") 127))
+  :init (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple
   :init
