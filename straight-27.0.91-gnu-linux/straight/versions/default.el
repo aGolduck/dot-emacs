@@ -54,6 +54,7 @@
  ("lsp-mode" . "1caab8252cd614a5f030d724a49b9e8cb65ae70e")
  ("lsp-python-ms" . "db6f2636da1037bda06d5a2d992c4857ce3ad9b0")
  ("lsp-treemacs" . "30c0a3e6e4bd5ac98c17600259368550fb3f3730")
+ ("lsp-ui" . "ce997c4dabb494ec4aaa93373ae27cd4d5cd0a4d")
  ("magit" . "3a487fa84afdd5c41c9c94d993a219e7b23a4b19")
  ("magit-delta" . "d988abd99882c6b89f21f2746f721a4d7ece6ad4")
  ("magit-todos" . "a0e5d1f3c7dfcb4f18c1b0d57f1746a4872df5c6")

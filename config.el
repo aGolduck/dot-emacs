@@ -278,7 +278,8 @@
 (use-package lsp-java
   :init
   (add-hook 'java-mode-hook #'lsp)
-  (add-hook 'java-mode-hook #'display-line-numbers-mode))
+  (add-hook 'java-mode-hook #'display-line-numbers-mode)
+  (add-hook 'java-mode-hook #'lsp-ui-mode))
 
 ;; (use-package lsp-java-boot
 ;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
@@ -809,5 +810,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
 
+(use-package lsp-ui
+  :init
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-enable t))
 (provide 'init-config)
 ;;; init-config ends here

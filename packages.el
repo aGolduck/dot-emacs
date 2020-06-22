@@ -72,6 +72,7 @@
           'yaml-mode
           'yasnippet
           'pdf-tools
+          'lsp-ui
           ))
   (straight-use-package wenpin/package))
 
