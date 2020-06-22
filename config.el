@@ -814,5 +814,7 @@ That is, remove a non kept dired from the recent list."
   :init
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-enable t))
+
+(use-package devdocs)
 (provide 'init-config)
 ;;; init-config ends here

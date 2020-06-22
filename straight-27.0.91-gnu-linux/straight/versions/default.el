@@ -1,4 +1,5 @@
-(("ace-window" . "7003c88cd9cad58dc35c7cd13ebc61c355fb5be7")
+(("DevDocs.el" . "a2d51e824f0cc48a9dd611cc740bc8b86143e611")
+ ("ace-window" . "7003c88cd9cad58dc35c7cd13ebc61c355fb5be7")
  ("ag.el" . "bd81d68466e44301505629454dfc689b6c17d94b")
  ("alert" . "7046393272686c7a1a9b3e7f7b1d825d2e5250a6")
  ("avy" . "f34ff764aa89b724d3cdcdf651381432d917431f")

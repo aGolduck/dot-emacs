@@ -73,6 +73,7 @@
           'yasnippet
           'pdf-tools
           'lsp-ui
+          'devdocs
           ))
   (straight-use-package wenpin/package))
 
