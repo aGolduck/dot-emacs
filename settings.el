@@ -83,17 +83,18 @@
 ;; (set-fontset-font t ?😊 "Segoe UI Emoji")
 ;; glyphs range
 ;; (set-fontset-font t '(?😊 . ?😎) "Segoe UI Emoji")
-;; han default font
-(set-fontset-font t 'han "Noto Sans CJK SC Regular")
+;; han default font, DO NOT USE "noto cjk", not working!!!
+(set-fontset-font t 'han "Source Han Sans CN")
 ;; han fallback font
-(set-fontset-font t 'han "Source Han Sans CN Regular" nil 'append)
+(set-fontset-font t 'han "Source Han Sans CN" nil 'append)
 ;; search font for han if both fonts above can't be found
 (set-fontset-font t 'han (font-spec :script 'han) nil 'append)
 ;; other cjk
-(set-fontset-font t 'kana "Noto Sans CJK JP Regular")
-(set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
-(set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
+(set-fontset-font t 'kana "Source Han Sans CN")
+(set-fontset-font t 'hangul "Source Han Sans CN")
+(set-fontset-font t 'cjk-misc "Source Han Sans CN")
 ;; other faces
-;; TODO create fontsets for fixed-pitch and fixed-pitch-serif
 (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
 (set-face-attribute 'fixed-pitch-serif nil :family "Iosevka Slab Extended")
+;; using Source Han Sans to stop hight chaning of tab-bar
+(set-face-attribute 'variable-pitch nil :family "Source Han Sans CN")
