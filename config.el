@@ -805,6 +805,7 @@ That is, remove a non kept dired from the recent list."
                                        ("\\.xls\\'" "libreoffice")
                                        ("\\.xlsx\\'" "libreoffice"))))
 
+(use-package pdf-tools)
 
 (provide 'init-config)
 ;;; init-config ends here

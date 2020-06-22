@@ -71,6 +71,7 @@
           'vterm
           'yaml-mode
           'yasnippet
+          'pdf-tools
           ))
   (straight-use-package wenpin/package))
 
