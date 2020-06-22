@@ -816,5 +816,7 @@ That is, remove a non kept dired from the recent list."
   (setq lsp-ui-doc-enable t))
 
 (use-package devdocs)
+(use-package zeal-at-point)
+
 (provide 'init-config)
 ;;; init-config ends here

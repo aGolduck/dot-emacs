@@ -74,6 +74,7 @@
           'pdf-tools
           'lsp-ui
           'devdocs
+          'zeal-at-point
           ))
   (straight-use-package wenpin/package))
 
