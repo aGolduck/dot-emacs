@@ -83,7 +83,7 @@
 ;; (set-fontset-font t ?😊 "Segoe UI Emoji")
 ;; glyphs range
 ;; (set-fontset-font t '(?😊 . ?😎) "Segoe UI Emoji")
-(set-fontset-font t 'han "Noto Sans CJK SC")
+(set-fontset-font t 'han "Source Han Sans CN")
 ;; han fallback font
 (set-fontset-font t 'han "Noto Sans CJK SC" nil 'append)
 ;; search font for han if both fonts above can't be found
