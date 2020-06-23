@@ -19,15 +19,9 @@
 
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 
-(use-package avy
-  :init
-  (global-set-key (kbd "M-SPC g g") 'avy-goto-char-timer)
-  (global-set-key (kbd "M-SPC g l") 'avy-goto-line)
-  (global-set-key (kbd "M-SPC g w") 'avy-goto-word-0))
+(use-package avy)
 
-(use-package bookmark
-  :init
-  (global-set-key (kbd "M-SPC b s") 'bookmark-set))
+(use-package bookmark)
 
 (use-package cc-mode
   :init
@@ -40,11 +34,7 @@
   (color-rg-search-input-in-project
    color-rg-search-symbol-in-project
    color-rg-search-input-in-current-file
-   color-rg-search-symbol-in-current-file
-   )
-  :init
-  (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
-  (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project))
+   color-rg-search-symbol-in-current-file))
 
 (use-package company
   :init
@@ -55,12 +45,7 @@
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
-(use-package counsel
-  :init
-  (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
-  (global-set-key (kbd "M-SPC f r") 'counsel-recentf)
-  (global-set-key (kbd "M-SPC SPC") 'counsel-M-x)
-  (global-set-key (kbd "M-y") 'counsel-yank-pop))
+(use-package counsel)
 
 (use-package dap-java
   :commands (dap-java-debug
@@ -70,8 +55,7 @@
              dap-java-debug-test-class)
   :init
   (setq dap-java-test-runner
-        "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar")
-  (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
+        "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
 
 (use-package dap-mode
   :after lsp-mode
@@ -117,8 +101,7 @@
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top)
-  (global-set-key (kbd "M-SPC ^") #'dired-jump))
+        dired-recursive-deletes 'top))
 
 (use-package dired-rsync)
 
@@ -154,17 +137,12 @@
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
-(use-package expand-region
-  :init
-  (setq expand-region-contract-fast-key "V")
-  (global-set-key (kbd "M-SPC v") 'er/expand-region))
+(use-package expand-region :init (setq expand-region-contract-fast-key "V"))
 
 (use-package file
   :init
   (setq auto-save-default nil
-        make-backup-files nil)
-  (global-set-key (kbd "M-SPC f f") 'find-file)
-  (global-set-key (kbd "M-SPC f F") 'find-file-other-window))
+        make-backup-files nil))
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
@@ -182,9 +160,7 @@
 
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 
-(use-package git-link
-  :init
-  (global-set-key (kbd "M-SPC g L") 'git-link))
+(use-package git-link)
 
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
@@ -193,23 +169,10 @@
 (use-package hi-lock
   :init
   ;; remove ugly hi-yellow from default
-  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
-  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
-  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
-  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
-  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
-  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
-  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
-  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns))
+  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb")))
 
 (use-package hideshow
-  :init
-  (add-hook 'prog-mode-hook #'hs-minor-mode)
-  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
-  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
-  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
-  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
-  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
+  :init (add-hook 'prog-mode-hook #'hs-minor-mode)
   :config
   (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
   (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
@@ -234,9 +197,7 @@
   :init
   (setq ivy-use-virtual-buffers t
 	enable-recursive-minibuffers t)
-  (add-hook 'after-init-hook #'ivy-mode)
-  (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
-  (global-set-key (kbd "M-SPC b B") 'ivy-switch-buffer-other-window))
+  (add-hook 'after-init-hook #'ivy-mode))
 
 (use-package ivy-hydra)
 
@@ -308,7 +269,6 @@
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
-  (global-set-key (kbd "M-SPC g s") 'magit-status)
   :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
@@ -317,7 +277,7 @@
   :after magit
   :init (add-hook 'magit-mode-hook #'magit-delta-mode))
 
-(use-package magit-todos :init (global-set-key (kbd "M-SPC p t") 'magit-todos-list))
+(use-package magit-todos)
 
 (use-package markdown-mode
   :init
@@ -326,7 +286,7 @@
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
 
-(use-package newcomment :init (global-set-key [remap comment-dwim] #'comment-line))
+(use-package newcomment)
 
 (use-package olivetti)
 
@@ -476,9 +436,7 @@
                                  (emacs-lisp . t)
                                  (shell . t)
                                  (typescript . t)))
-  ;; key binding
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c a") 'org-agenda)
+  (add-hook 'org-mode-hook #'visual-line-mode)
   :config
   (defadvice org-html-paragraph (before org-html-paragraph-advice
 					(paragraph contents info) activate)
@@ -507,7 +465,7 @@ unwanted space when exporting org-mode to html."
 (use-package org-download
   :after org
   :demand t
-  :init
+  ;; :init
   ;; FIXME org-link-unescape 不能 decode link
   ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
   ;; (defun custom-org-download-method (link)
@@ -537,7 +495,6 @@ unwanted space when exporting org-mode to html."
   :init
   (setq org-roam-directory "~/org/roam"
         org-roam-completion-system 'ivy)
-  (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
   (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
   :config
   (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
@@ -569,7 +526,6 @@ unwanted space when exporting org-mode to html."
                  'scheme-mode-hook
                  ))
     (add-hook hook #'paredit-mode))
-  (global-set-key [remap paredit-comment-dwim] #'comment-line)
   :config
   ;; https://emacs-china.org/t/paredit-smartparens/6727/11
   (defun paredit/space-for-delimiter-p (endp delm)
@@ -595,16 +551,13 @@ unwanted space when exporting org-mode to html."
   (add-to-list 'paredit-space-for-delimiter-predicates #'paredit/space-for-delimiter-p)
   (eldoc-add-command
    'paredit-backward-delete
-   'paredit-close-round)
-  )
+   'paredit-close-round))
 
 (use-package pocket-reader)
 
 (use-package posframe)
 
-(use-package projectile :init
-  (setq projectile-completion-system 'ivy)
-  (global-set-key (kbd "M-SPC p f") 'projectile-find-file))
+(use-package projectile :init (setq projectile-completion-system 'ivy))
 
 (use-package python
   :init
@@ -646,7 +599,6 @@ That is, remove a non kept dired from the recent list."
 	rime-user-data-dir "~/.emacs.d/rime"
 	rime-show-candidate 'posframe
 	rime-posframe-style 'simple)
-  (global-set-key (kbd "M-t") 'toggle-input-method)
   :config
   (define-key rime-mode-map (kbd "C-`") 'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
@@ -663,9 +615,7 @@ That is, remove a non kept dired from the recent list."
   :if (not (equal (shell-command "aplay") 127))
   :init (add-hook 'after-init-hook #'selectric-mode))
 
-(use-package simple
-  :init
-  (global-set-key (kbd "M-SPC u") #'universal-argument))
+(use-package simple)
 
 (use-package smex) ;; smex is needed to order candidates for ivy
 
@@ -703,9 +653,7 @@ That is, remove a non kept dired from the recent list."
   ;; 			    snails-backend-eaf-browser-search
   ;; 			    snails-backend-eaf-github-search
   ;; 			    )))
-  (setq snails-use-exec-path-from-shell nil)
-  ;; (global-set-key (kbd "M-SPC SPC") 'wenpin/snails)
-  )
+  (setq snails-use-exec-path-from-shell nil))
 
 (use-package startup :init (setq auto-save-list-file-prefix nil))
 
@@ -713,10 +661,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package sudo-edit)
 
-(use-package swiper
-  :init
-  (global-set-key (kbd "C-s") 'swiper)
-  (global-set-key (kbd "C-M-s") 'swiper-thing-at-point))
+(use-package swiper)
 
 (use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
 
@@ -753,8 +698,7 @@ That is, remove a non kept dired from the recent list."
   ;; (push 'company-lsp company-backends)
   )
 
-(use-package valign
-  :commands (valign-mode valign-table))
+(use-package valign :commands (valign-mode valign-table))
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
@@ -771,7 +715,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package winner :init (add-hook 'after-init-hook #'winner-mode))
 
-(use-package woman :init (global-set-key (kbd "M-SPC d m") 'woman))
+(use-package woman)
 
 (use-package yaml-mode
   :init
