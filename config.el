@@ -749,13 +749,13 @@ That is, remove a non kept dired from the recent list."
 
 (use-package dired-x
   :init
-  (add-hook 'dired-mode-hook (lambda () (require 'dired-x)))
   (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
                                        ("\\.docx\\'" "libreoffice")
                                        ("\\.ppt\\'" "libreoffice")
                                        ("\\.pptx\\'" "libreoffice")
                                        ("\\.xls\\'" "libreoffice")
-                                       ("\\.xlsx\\'" "libreoffice"))))
+                                       ("\\.xlsx\\'" "libreoffice")))
+  (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
 
 (use-package pdf-tools)
 
