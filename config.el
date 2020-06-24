@@ -238,8 +238,9 @@
 
 (use-package lsp-java
   :init
-  (add-hook 'java-mode-hook #'lsp)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
+  (add-hook 'java-mode-hook #'electric-pair-local-mode)
+  (add-hook 'java-mode-hook #'lsp)
   (add-hook 'java-mode-hook #'lsp-ui-mode))
 
 ;; (use-package lsp-java-boot
