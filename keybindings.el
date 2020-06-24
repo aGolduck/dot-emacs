@@ -21,6 +21,8 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC b b") 'ivy-switch-buffer)
 (global-set-key (kbd "M-SPC b j") 'counsel-bookmark)
 (global-set-key (kbd "M-SPC b k") 'kill-buffer)
+(global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
+(global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
 (global-set-key (kbd "M-SPC b s") 'bookmark-set)
 (global-set-key (kbd "M-SPC d m") 'woman)
 (global-set-key (kbd "M-SPC f F") 'find-file-other-window)
@@ -47,6 +49,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC p t") 'magit-todos-list)
 (global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "M-SPC s P") 'color-rg-search-symbol-in-project)
+(global-set-key (kbd "M-SPC s b") #'eaf-search-it)
 (global-set-key (kbd "M-SPC s p") 'color-rg-search-input-in-project)
 (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
@@ -70,6 +73,3 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key [remap comment-dwim] #'comment-line)
 (global-set-key [remap paredit-comment-dwim] #'comment-line)
 ;; (global-set-key (kbd "M-SPC SPC") 'wenpin/snails)
-
-
-(provide 'init-keybindings)

@@ -727,7 +727,11 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package battery)
 
-(use-package eaf :if (eq system-type 'gnu/linux))
+(use-package eaf
+  :if (eq system-type 'gnu/linux)
+  :config
+  (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
+  (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding))
 
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
