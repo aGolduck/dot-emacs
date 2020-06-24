@@ -84,15 +84,17 @@
 			     'ivy-mode
 			     'ivy-posframe-mode
                              'org-roam-mode
-                             ;; FIXME: diminish not workking for magit-delta, it has lighter Magit-Δ
-                             ;; 'magit-delta-mode
-                             'company-mode
                              'winner-mode
                              'hs-minor-mode
                              'selectric-mode
+                             'subword-mode
                              'paredit-mode
 			     ))
 		(diminish mode))
+              (diminish 'magit-delta-mode "")
+              (diminish 'company-mode "补")
+              (diminish 'eldoc-mode "文")
+              (diminish 'view-mode "览")
               (when window-system (diminish 'view-mode)))))
 
 (use-package dired
