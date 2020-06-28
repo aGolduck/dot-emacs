@@ -41,7 +41,8 @@
   (setq company-minimum-prefix-length 1
         company-tooltip-align-annotations t
         ;; default is 0.2
-        company-idle-delay 0.0))
+        company-idle-delay 0.0)
+  :config (diminish 'company-mode "补"))
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
@@ -85,17 +86,10 @@
 			     'ivy-posframe-mode
                              'org-roam-mode
                              'winner-mode
-                             'hs-minor-mode
                              'selectric-mode
                              'subword-mode
-                             'paredit-mode
 			     ))
-		(diminish mode))
-              (diminish 'magit-delta-mode "")
-              (diminish 'company-mode "补")
-              (diminish 'eldoc-mode "文")
-              (diminish 'view-mode "览")
-              (when window-system (diminish 'view-mode)))))
+		(diminish mode)))))
 
 (use-package dired
   :init
@@ -117,7 +111,9 @@
   :config
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
-(use-package eldoc :commands (eldoc-add-command))
+(use-package eldoc
+  :commands (eldoc-add-command)
+  :config (diminish 'eldoc-mode "册"))
 
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
@@ -148,7 +144,7 @@
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
-(use-package flycheck)
+(use-package flycheck :config (diminish 'flycheck-mode "检"))
 
 (use-package flycheck-posframe :after flycheck :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
@@ -171,7 +167,8 @@
 (use-package hi-lock
   :init
   ;; remove ugly hi-yellow from default
-  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb")))
+  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
+  :config (diminish 'hi-lock-mode "亮"))
 
 (use-package hideshow
   :init (add-hook 'prog-mode-hook #'hs-minor-mode)
@@ -183,7 +180,8 @@
                                   (overlay-end wenpin/overlay)))
              (info (format " ... #%d " nlines)))
         (overlay-put wenpin/overlay 'display (propertize info 'face wenpin/hideshow-folded-face)))))
-  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn))
+  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn)
+  (diminish 'hs-minor-mode "折"))
 
 (use-package highlight-indent-guides
   :init
@@ -265,7 +263,10 @@
         lsp-print-performance t
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024))
-  (add-hook 'lsp-mode-hook #'lsp-lens-mode))
+  (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+  :config
+  (diminish 'lsp-mode "语")
+  (diminish 'lsp-lens-mode "透"))
 
 (use-package lsp-python-ms)
 
@@ -278,7 +279,8 @@
 (use-package magit-delta
   :if (not (equal (shell-command "delta") 127))
   :after magit
-  :init (add-hook 'magit-mode-hook #'magit-delta-mode))
+  :init (add-hook 'magit-mode-hook #'magit-delta-mode)
+  :config (diminish 'magit-delta-mode ""))
 
 (use-package magit-todos)
 
@@ -554,7 +556,8 @@ unwanted space when exporting org-mode to html."
   (add-to-list 'paredit-space-for-delimiter-predicates #'paredit/space-for-delimiter-p)
   (eldoc-add-command
    'paredit-backward-delete
-   'paredit-close-round))
+   'paredit-close-round)
+  (diminish 'paredit-mode "括"))
 
 (use-package pocket-reader)
 
@@ -680,7 +683,8 @@ That is, remove a non kept dired from the recent list."
         ;; Fix #1792: by default, tide ignores payloads larger than 100kb. This
         ;; is too small for larger projects that produce long completion lists,
         ;; so we up it to 512kb.
-        tide-server-max-response-length 524288))
+        tide-server-max-response-length 524288)
+  :config (diminish 'tide-mode "型"))
 
 (use-package typescript-mode
   :init
@@ -726,7 +730,9 @@ That is, remove a non kept dired from the recent list."
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 
-(use-package yasnippet :init (add-hook 'java-mode-hook #'yas-minor-mode))
+(use-package yasnippet
+  :init (add-hook 'java-mode-hook #'yas-minor-mode)
+  :config (diminish 'yas-minor-mode "模"))
 
 ;; (use-package battery)
 
@@ -773,6 +779,10 @@ That is, remove a non kept dired from the recent list."
   (when (eq system-type 'gnu/linux) (setq browse-url-browser-function 'eaf-open-browser)))
 
 (use-package zeal-at-point)
+
+(use-package view :config (diminish 'view-mode "览"))
+
+(use-package abbrev :config (diminish 'abbrev-mode "缩"))
 
 (provide 'init-config)
 ;;; init-config ends here
