@@ -787,5 +787,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package abbrev :config (diminish 'abbrev-mode "缩"))
 
+(use-package default-view :demand t)
+
 (provide 'init-config)
 ;;; init-config ends here
