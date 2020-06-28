@@ -1,3 +1,5 @@
+(add-hook 'find-file-hook (lambda () (setq header-line-format "%f")))
+
 ;;; set up variables not categorised
 (setq create-lockfiles nil
       delete-by-moving-to-trash t
@@ -16,8 +18,7 @@
                                  mode-line-modes
                                  mode-line-buffer-identification
                                  mode-line-misc-info
-                                 mode-line-end-spaces)
-              header-line-format '("%f"))
+                                 mode-line-end-spaces))
 
 
 ;;; fonts and faces
