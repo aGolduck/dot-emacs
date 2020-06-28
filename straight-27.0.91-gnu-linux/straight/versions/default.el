@@ -80,7 +80,7 @@
  ("pocket-lib.el" . "f794e3e619e1f6cad25bbfd5fe019a7e62820bf4")
  ("pocket-reader.el" . "86c51c65d97819e11b3df403beea424f30125d30")
  ("popup-el" . "4839797cd1db25be6f3f98bc8d401b6c2af01f9f")
- ("posframe" . "093b29a53cbeda6d637ccc9ef4dfc47123e79b9e")
+ ("posframe" . "c4459028fbe6740315ff1ed6f37e8c4decd3d050")
  ("projectile" . "d7baa74eaa32cbed5d003a39a2687fa168cc4126")
  ("rainbow-identifiers" . "19fbfded1baa98d12335f26f6d7b20e5ae44ce2e")
  ("ranger.el" . "d7c18370981c9e585bc0fb78f7e55033457ca643")
