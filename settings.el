@@ -66,7 +66,18 @@
       nsm-trust-local-network t
       visible-bell t)
 (setq-default indent-tabs-mode nil
-	      line-spacing 0.2)
+	      line-spacing 0.2
+              mode-line-format '(
+                                 "%e"
+                                 mode-line-front-space
+                                 mode-line-mule-info
+                                 mode-line-position
+                                 (vc-mode vc-mode)
+                                 mode-line-modes
+                                 mode-line-buffer-identification
+                                 mode-line-misc-info
+                                 mode-line-end-spaces)
+              header-line-format '("%f"))
 
 
 ;;; fonts and faces
