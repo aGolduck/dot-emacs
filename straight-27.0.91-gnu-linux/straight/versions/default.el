@@ -91,7 +91,7 @@
  ("snails" . "b740a2ddb3789847090d991eba279f4f8579463f")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("straight.el" . "a7f94876b2bf96d2595706270be6630ecc94f0d3")
- ("sudo-edit" . "f29c6d8e76ae2ca1e3b668601c76ceaf96738744")
+ ("sudo-edit" . "0e2c32b5e5242d30f8780cbe8e1b1649476cac4d")
  ("swiper" . "aef1d4d1631b7e9391296743807ee1cfa6170429")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
