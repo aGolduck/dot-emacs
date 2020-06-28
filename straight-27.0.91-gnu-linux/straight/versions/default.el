@@ -7,7 +7,7 @@
  ("color-rg" . "22b050fc0b9b8d13f10c5fbd4cf14980d2831dc8")
  ("company-mode" . "36e650acd681a3a15a96e3c074471e86bdeeb4d8")
  ("company-org-roam" . "674c2bd493f571c5323d69279557a6c18ccbd14e")
- ("dap-mode" . "554f7cac9097ea1151af0b5b723dcdcc12abc4a8")
+ ("dap-mode" . "f52fa4327147bccb7c93300d5f522e2fdcff1a70")
  ("dash.el" . "fe9bbc2414af645d255de68cd59cf0edd5d8548b")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dired-rsync" . "bfd5c155be1cb6b71c83e5f41116c81b6532b6d5")
