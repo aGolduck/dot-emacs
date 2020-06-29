@@ -57,6 +57,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
 (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
 (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
+(global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
 (global-set-key (kbd "M-SPC p f") 'projectile-find-file)
 (global-set-key (kbd "M-SPC p t") 'magit-todos-list)
 (global-set-key (kbd "M-SPC q q") 'save-buffers-kill-terminal)
