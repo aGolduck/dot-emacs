@@ -461,7 +461,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package org-agenda
   :init (setq org-agenda-restore-windows-after-quit t)
-  :config (define-key org-agenda-keymap (kbd "R") 'org-agenda-refile))
+  :config (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
 
 (use-package org-alert
   :commands (org-alert-enable)
@@ -610,8 +610,8 @@ That is, remove a non kept dired from the recent list."
 	rime-show-candidate 'posframe
 	rime-posframe-style 'simple)
   :config
-  (define-key rime-mode-map (kbd "C-`") 'rime-send-keybinding)
-  (define-key rime-mode-map (kbd "C-S-`") 'rime-send-keybinding)
+  (define-key rime-mode-map (kbd "C-`") #'rime-send-keybinding)
+  (define-key rime-mode-map (kbd "C-S-`") #'rime-send-keybinding)
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
 
