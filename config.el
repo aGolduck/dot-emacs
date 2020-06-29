@@ -503,7 +503,7 @@ unwanted space when exporting org-mode to html."
   :init
   (setq org-roam-directory "~/org/roam"
         org-roam-completion-system 'ivy)
-  (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
+  ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
   :config
   (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
   (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
