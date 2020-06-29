@@ -507,7 +507,8 @@ unwanted space when exporting org-mode to html."
   :config
   (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
   (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
-  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert))
+  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert)
+  (diminish 'org-roam-mode "记"))
 
 (use-package org-roam-server
   :if window-system
