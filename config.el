@@ -268,7 +268,7 @@
   (add-hook 'lsp-mode-hook
             (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
   :config
-  (diminish 'lsp-mode "语")
+  ;; (diminish 'lsp-mode "语")
   (diminish 'lsp-lens-mode "透"))
 
 (use-package lsp-python-ms)
