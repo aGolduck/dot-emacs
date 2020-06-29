@@ -11,11 +11,9 @@ Position the cursor at it's beginning, according to the current mode."
 (defun wenpin/split-window-right ()
   "split-window-right with right window having a max width of 100 columns"
   (interactive)
-  (let ((original-width (window-total-width)))
-    (split-window-right)
-    (when (> original-width 200)
-      (enlarge-window-horizontally
-       (- original-width 100 (window-total-width))))))
+  (if (> (window-total-width) 200)
+      (split-window-right -100)
+    (split-window-right)))
 (defun wenpin/split-window-right-and-focus ()
   (interactive)
   (wenpin/split-window-right)
