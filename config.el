@@ -519,7 +519,8 @@ unwanted space when exporting org-mode to html."
         org-roam-server-authenticate nil
         org-roam-server-label-truncate t
         org-roam-server-label-truncate-length 60
-        org-roam-server-label-wrap-length 20))
+        org-roam-server-label-wrap-length 20)
+  (diminish 'org-roam-server-mode "图"))
 
 (use-package ox-hugo :after ox)
 
