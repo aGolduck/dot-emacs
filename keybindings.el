@@ -75,6 +75,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
 (global-set-key (kbd "M-SPC w u") #'winner-undo)
 (global-set-key (kbd "M-SPC w v") #'split-window-below)
+(global-set-key (kbd "M-SPC w x") #'window-swap-states)
 (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
 (global-set-key (kbd "M-SPC z S") #'hs-show-all)
 (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
