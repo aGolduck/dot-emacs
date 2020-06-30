@@ -22,3 +22,7 @@ transient
 .cache/lsp
 org-journal.cache
 smex-items
+.cache
+.org-id-locations
+url
+workspace
