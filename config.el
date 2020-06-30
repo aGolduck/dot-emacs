@@ -439,13 +439,15 @@
 		  )
 		 nil)
 		)))
+  (add-hook 'org-mode-hook #'visual-line-mode)
+  :config
+  (require 'ob-js)
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
                                  (emacs-lisp . t)
+                                 (js . t)
                                  (shell . t)
                                  (typescript . t)))
-  (add-hook 'org-mode-hook #'visual-line-mode)
-  :config
   (defadvice org-html-paragraph (before org-html-paragraph-advice
 					(paragraph contents info) activate)
     "Join consecutive Chinese lines into a single long line without
