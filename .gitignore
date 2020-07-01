@@ -2,13 +2,14 @@
 recentf
 auto-save-list
 places
-.emacs.desktop
+.emacs*.desktop
 custom.el
 bookmarks
 eshell
 tramp
 .emacs.desktop.lock
 image-dired
+.emacs*.desktop.lock
 
 # straight.el
 repos
