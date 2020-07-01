@@ -7,7 +7,6 @@ custom.el
 bookmarks
 eshell
 tramp
-.emacs.desktop.lock
 image-dired
 .emacs*.desktop.lock
 
