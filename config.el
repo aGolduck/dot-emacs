@@ -678,7 +678,15 @@ That is, remove a non kept dired from the recent list."
 
 (use-package swiper)
 
-(use-package tab-bar :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'tab-bar-mode))
+(use-package tab-bar
+  :if (> emacs-major-version 26)
+  :init
+  (setq tab-bar-tab-name-function
+        (defun wenpin/tab-bar-show-file-name ()
+          (let* ((buffer (window-buffer (minibuffer-selected-window)))
+                 (file-name (buffer-file-name buffer)))
+            (if file-name file-name (format "%s" buffer)))))
+  (add-hook 'after-init-hook #'tab-bar-mode))
 
 (use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
 
