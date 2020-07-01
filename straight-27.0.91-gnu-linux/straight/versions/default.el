@@ -77,6 +77,7 @@
  ("pdf-tools" . "c510442ab89c8a9e9881230eeb364f4663f59e76")
  ("pfuture" . "d7926de3ba0105a36cfd00811fd6278aea903eef")
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
+ ("pkgbuild-mode" . "bc22301198b3f581d89352510e847454fb1cb9ff")
  ("pocket-lib.el" . "f794e3e619e1f6cad25bbfd5fe019a7e62820bf4")
  ("pocket-reader.el" . "86c51c65d97819e11b3df403beea424f30125d30")
  ("popup-el" . "4839797cd1db25be6f3f98bc8d401b6c2af01f9f")

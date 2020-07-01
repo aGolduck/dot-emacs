@@ -793,5 +793,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package default-view :demand t)
 
+(use-package pkgbuild-mode)
+
 (provide 'init-config)
 ;;; init-config ends here

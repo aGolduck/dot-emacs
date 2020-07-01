@@ -75,6 +75,7 @@
           'lsp-ui
           'devdocs
           'zeal-at-point
+          'pkgbuild-mode
           ))
   (straight-use-package wenpin/package))
 
