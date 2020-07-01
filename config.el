@@ -65,7 +65,9 @@
 
 (use-package desktop
   :init
-  (setq desktop-globals-to-save '()
+  (setq desktop-base-file-name (concat ".emacs-" emacs-version ".desktop")
+        desktop-base-lock-name (concat ".emacs-" emacs-version ".desktop.lock")
+        desktop-globals-to-save '()
         desktop-files-not-to-save ".*"
         desktop-buffers-not-to-save ".*"
         desktop-save t)
