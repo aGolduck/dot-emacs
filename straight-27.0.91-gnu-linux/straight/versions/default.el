@@ -96,7 +96,7 @@
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
  ("thing-edit" . "117eadcc43f6933e14b77c20b7983ee234cba794")
- ("tide" . "8a7c1fc5dcc9b3321c10c71f21d1436b0a62ac07")
+ ("tide" . "5717214a3bf647b35a30fd1513aac1f60b820cbb")
  ("transient" . "a6e4cced303b3febd59412b24a97eaf1e855e6d7")
  ("treemacs" . "1ce0bd487f0b9178744e19bbc48b6692c55c590c")
  ("typescript.el" . "0fc729787007b5111f3584034af0f3ef2389098f")
