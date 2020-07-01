@@ -11,7 +11,7 @@
  ("dash.el" . "fe9bbc2414af645d255de68cd59cf0edd5d8548b")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dired-rsync" . "bfd5c155be1cb6b71c83e5f41116c81b6532b6d5")
- ("emacs-application-framework" . "58a00fc5ea9098669d2fcdfa6eac5d74f5ba5948")
+ ("emacs-application-framework" . "4a53e9d8887d960955f9c53bfe561388d3a7f2c0")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
  ("emacs-ccls" . "0fd0b410533f8be8d1a834834bae76ce7cbf7c84")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
