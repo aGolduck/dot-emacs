@@ -237,7 +237,7 @@
                    #'electric-pair-local-mode
                    #'paredit-mode
                    ))
-    (add-hook 'typescript-mode-hook hooked)))
+    (add-hook 'js-mode-hook hooked)))
 
 (use-package json-mode)
 
