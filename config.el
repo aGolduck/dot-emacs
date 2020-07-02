@@ -231,8 +231,13 @@
                      (tide-setup)
                      (unless (tide-current-server) (tide-restart-server))
                      (tide-hl-identifier-mode 1)))
-  (add-hook 'js-mode-hook #'paredit-mode)
-  (add-hook 'js-mode-hook #'electric-pair-local-mode))
+    (dolist (hooked (list
+                   #'company-mode
+                   #'eldoc-mode
+                   #'electric-pair-local-mode
+                   #'paredit-mode
+                   ))
+    (add-hook 'typescript-mode-hook hooked)))
 
 (use-package json-mode)
 
