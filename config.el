@@ -580,7 +580,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package projectile
   :init
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy
+        projectile-mode-line-prefix "项")
   (add-hook 'after-init-hook #'projectile-mode))
 
 (use-package python
