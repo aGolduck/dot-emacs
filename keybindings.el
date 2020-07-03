@@ -64,6 +64,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
 (global-set-key (kbd "M-SPC s b") #'eaf-search-it)
 (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
+(global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode)
 (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
 (global-set-key (kbd "M-SPC v") #'er/expand-region)
