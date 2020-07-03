@@ -283,6 +283,7 @@
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+  (setq magit-process-finish-apply-ansi-colors t)
   :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
