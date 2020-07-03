@@ -578,7 +578,10 @@ unwanted space when exporting org-mode to html."
 
 (use-package posframe)
 
-(use-package projectile :init (setq projectile-completion-system 'ivy))
+(use-package projectile
+  :init
+  (setq projectile-completion-system 'ivy)
+  (add-hook 'after-init-hook #'projectile-mode))
 
 (use-package python
   :init
