@@ -272,8 +272,10 @@
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024))
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-  (add-hook 'lsp-mode-hook
-            (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
+  ;; TODO should only start after lsp starts
+  ;; (add-hook 'lsp-mode-hook
+  ;;           (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
+  ;; (add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
   :config
   ;; (diminish 'lsp-mode "语")
   (diminish 'lsp-lens-mode "透"))
