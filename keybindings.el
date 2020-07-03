@@ -71,6 +71,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC w O") (defun wenpin/previou-window () (interactive) (other-window -1)))
 (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
 (global-set-key (kbd "M-SPC w V") (defun wenpin/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
+(global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
 (global-set-key (kbd "M-SPC w d") #'delete-window)
 (global-set-key (kbd "M-SPC w o") #'other-window)
 (global-set-key (kbd "M-SPC w r") #'winner-redo)
