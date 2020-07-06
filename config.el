@@ -819,6 +819,20 @@ That is, remove a non kept dired from the recent list."
 
 (use-package pkgbuild-mode)
 
+(use-package shackle
+  :init
+  ;; TODO 1. split if needed, 2. display buffer in target window, 3. return target window
+  ;; (defun wenpin/shackle-diplay-in-right-most-window (buffer alist plist)
+  ;;   (let (window (select-window))
+  ;;     window))
+  (setq shackle-rules '(("*Agenda Commands*" :other t :select t)
+                        ("*Help*" :other t))
+        ;; shackle-inhibit-window-quit-on-same-windows t
+        ;; shackle-select-reused-windows t
+        ;; shackle-default-rule nil
+   )
+  (add-hook 'after-init-hook #'shackle-mode))
+
 (use-package keyfreq
   :init
   (setq keyfreq-excluded-commands '(self-insert-command))
