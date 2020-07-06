@@ -767,9 +767,16 @@ That is, remove a non kept dired from the recent list."
 
 (use-package eaf
   :if (eq system-type 'gnu/linux)
+  :init
+  (setq browse-url-browser-function 'eaf-open-browser
+        eaf-browser-continue-where-left-off t)
+  (defalias 'browse-web #'eaf-open-browser)
   :config
+  (eaf-setq eaf-browser-default-zoom "1.25")
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
-  (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding))
+  (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
+  (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
+  (eaf-bind-key ace-window "M-i" eaf-browser-keybinding))
 
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
