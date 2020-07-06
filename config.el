@@ -862,5 +862,7 @@ That is, remove a non kept dired from the recent list."
 	                    (?o delete-other-windows "Delete Other Windows")
 	                    (?? aw-show-dispatch-help))))
 
+(use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
+
 (provide 'init-config)
 ;;; init-config ends here
