@@ -21,9 +21,35 @@ Position the cursor at it's beginning, according to the current mode."
   (wenpin/split-window-right)
   (other-window 1))
 
+;;; Commands of these keybindings are almost never used, just rebind them
+;; (global-set-key (kbd "C-l"))
+;; (global-set-key (kbd "C-o"))
+;; (global-set-key (kbd "C-z"))
+;; (global-set-key (kbd "M-i"))
+;; (global-set-key (kbd "M-j"))
+;; (global-set-key (kbd "M-m"))
+;; (global-set-key (kbd "M-r"))
+;; (global-set-key (kbd "M-z"))
+;;; These keybindings are for English writing, which I rarely used,
+;; So they are worth rebinding
+;; (global-set-key (kbd "M-a"))
+;; (global-set-key (kbd "M-c"))
+;; (global-set-key (kbd "M-h"))
+;; (global-set-key (kbd "M-l"))
+;; (global-set-key (kbd "M-k"))
+;; (global-set-key (kbd "M-q"))
+;; (global-set-key (kbd "M-u"))
+;; first class keybindings
 (global-set-key (kbd "M-i") #'ace-window)
+(global-set-key (kbd "M-o") #'smart-open-line-above)
+(global-set-key (kbd "M-t") #'toggle-input-method)
+(global-set-key (kbd "M-y") #'counsel-yank-pop)
+;; C-c zone
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
+;;; M-Spc 2 key strokes zone
+;; (global-set-key (kbd "M-SPC SPC") #'wenpin/snails)
+;;; M-SPC 3 key strokes zone
 (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
@@ -82,9 +108,5 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
 (global-set-key (kbd "M-SPC z s") #'hs-show-block)
 (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
-(global-set-key (kbd "M-o") #'smart-open-line-above)
-(global-set-key (kbd "M-t") #'toggle-input-method)
-(global-set-key (kbd "M-y") #'counsel-yank-pop)
 (global-set-key [remap comment-dwim] #'comment-line)
 (global-set-key [remap paredit-comment-dwim] #'comment-line)
-;; (global-set-key (kbd "M-SPC SPC") #'wenpin/snails)
