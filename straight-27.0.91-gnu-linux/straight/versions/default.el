@@ -13,7 +13,7 @@
  ("dired-rsync" . "bfd5c155be1cb6b71c83e5f41116c81b6532b6d5")
  ("emacs-application-framework" . "2013e0ad88ac13bff402d22fc826732f9223b2de")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
- ("emacs-ccls" . "914516d6ce7b1864b1dd479c79d682ea80916df9")
+ ("emacs-ccls" . "c2de88254142e73791da30e8564854ba4044b426")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
  ("emacs-kv" . "721148475bce38a70e0b678ba8aa923652e8900e")
  ("emacs-libvterm" . "fbd0f097198ee110a895dcff30c0d1be39e8284e")
