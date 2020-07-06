@@ -21,11 +21,9 @@ Position the cursor at it's beginning, according to the current mode."
   (wenpin/split-window-right)
   (other-window 1))
 
-(global-set-key (kbd "C-M-s") #'swiper-thing-at-point)
 (global-set-key (kbd "M-i") #'ace-window)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(global-set-key (kbd "C-s") #'swiper)
 (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
