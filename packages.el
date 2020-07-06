@@ -78,6 +78,7 @@
           'pkgbuild-mode
           'shackle
           'keyfreq
+          'ace-window
           ))
   (straight-use-package wenpin/package))
 
