@@ -819,5 +819,11 @@ That is, remove a non kept dired from the recent list."
 
 (use-package pkgbuild-mode)
 
+(use-package keyfreq
+  :init
+  (setq keyfreq-excluded-commands '(self-insert-command))
+  (add-hook 'after-init-hook #'keyfreq-mode)
+  (add-hook 'after-init-hook #'keyfreq-autosave-mode))
+
 (provide 'init-config)
 ;;; init-config ends here

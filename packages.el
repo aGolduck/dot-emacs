@@ -76,6 +76,7 @@
           'devdocs
           'zeal-at-point
           'pkgbuild-mode
+          'keyfreq
           ))
   (straight-use-package wenpin/package))
 

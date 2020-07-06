@@ -48,6 +48,7 @@
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
+ ("keyfreq" . "e5fe9d585ce882f1ba9afa5d894eaa82c79be4f4")
  ("let-alist" . "ef3c02fa292b6e32769945bbbfb7f2e5ac574b64")
  ("log4e" . "7df0c1ff4656f8f993b87064b1567618eadb5546")
  ("lsp-ivy" . "4cdb739fc2bc47f7d4dcad824f9240c70c4cb37d")
