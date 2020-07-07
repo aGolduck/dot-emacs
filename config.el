@@ -700,7 +700,11 @@ That is, remove a non kept dired from the recent list."
             (if file-name file-name (format "%s" buffer)))))
   (add-hook 'after-init-hook #'tab-bar-mode))
 
-(use-package tab-line :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-tab-line-mode))
+(use-package tab-line
+  :if (> emacs-major-version 26)
+  :init
+  (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
+  (add-hook 'after-init-hook #'global-tab-line-mode))
 
 (use-package thing-edit)
 
