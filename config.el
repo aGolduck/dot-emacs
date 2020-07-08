@@ -870,5 +870,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
+(use-package nxml-mode :init (add-hook 'nxml-mode-hook #'smartparens-mode))
+
 (provide 'init-config)
 ;;; init-config ends here
