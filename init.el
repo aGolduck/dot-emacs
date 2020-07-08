@@ -12,6 +12,11 @@
 ;; accelerate loading init files, will be reset by gcmh
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6)
+(setq wenpin/host
+      (cond
+       ((string-equal (getenv "HOME") "/Users/wenpin") "mo")
+       ((string-match "xps" (or (getenv "DESKTOP_STARTUP_ID") "")) "xps")
+       (t nil)))
 
 ;;; bootstrap straight.el and use-package
 (unless (file-exists-p "~/.emacs.d/repos") (mkdir "~/.emacs.d/repos"))

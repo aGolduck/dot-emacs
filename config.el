@@ -776,7 +776,7 @@ That is, remove a non kept dired from the recent list."
         eaf-browser-continue-where-left-off t)
   (defalias 'browse-web #'eaf-open-browser)
   :config
-  (eaf-setq eaf-browser-default-zoom "1.25")
+  (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
   (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
   (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
