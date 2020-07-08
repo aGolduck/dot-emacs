@@ -868,5 +868,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
 
+(use-package smartparens :config (require 'smartparens-config))
+
 (provide 'init-config)
 ;;; init-config ends here

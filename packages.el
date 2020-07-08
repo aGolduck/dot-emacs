@@ -79,6 +79,7 @@
           'shackle
           'keyfreq
           'ace-window
+          'smartparens
           ))
   (straight-use-package wenpin/package))
 

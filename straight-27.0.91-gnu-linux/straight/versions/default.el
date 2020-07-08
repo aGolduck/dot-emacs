@@ -90,6 +90,7 @@
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
  ("selectric-mode" . "bb9e66678f34e9bc23624ff6292cf5e7857e8e5f")
  ("shackle" . "171c3f437d853f34782b201d86ef765665b755e2")
+ ("smartparens" . "555626a43f9bb1985aa9a0eb675f2b88b29702c8")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("snails" . "b740a2ddb3789847090d991eba279f4f8579463f")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
