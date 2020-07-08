@@ -20,6 +20,10 @@ Position the cursor at it's beginning, according to the current mode."
   (interactive)
   (wenpin/split-window-right)
   (other-window 1))
+(defun wenpin/ivy-switch-buffer-in-other-window ()
+  (interactive)
+  (call-interactively #'ivy-switch-buffer-other-window)
+  (other-window 1))
 
 ;;; Commands of these keybindings are almost never used, just rebind them
 ;; (global-set-key (kbd "C-l"))
@@ -57,6 +61,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window)
+(global-set-key (kbd "M-SPC B B") #'wenpin/ivy-switch-buffer-in-other-window)
 (global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
 (global-set-key (kbd "M-SPC b j") #'counsel-bookmark)
 (global-set-key (kbd "M-SPC b k") #'kill-buffer)
