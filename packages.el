@@ -80,6 +80,7 @@
           'keyfreq
           'ace-window
           'smartparens
+          'groovy-mode
           ))
   (straight-use-package wenpin/package))
 

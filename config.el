@@ -873,5 +873,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package nxml-mode :init (add-hook 'nxml-mode-hook #'smartparens-mode))
 
+(use-package gradle-mode :init (add-hook 'gradle-mode-hook #'electric-pair-local-mode))
+
 (provide 'init-config)
 ;;; init-config ends here
