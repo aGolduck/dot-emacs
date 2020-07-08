@@ -780,7 +780,8 @@ That is, remove a non kept dired from the recent list."
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
   (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
   (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
-  (eaf-bind-key ace-window "M-i" eaf-browser-keybinding))
+  (eaf-bind-key ace-window "M-i" eaf-browser-keybinding)
+  (eaf-bind-key scroll_down_page "S-SPC" eaf-browser-keybinding))
 
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
