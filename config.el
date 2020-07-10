@@ -877,5 +877,15 @@ That is, remove a non kept dired from the recent list."
 
 (use-package autodisass-java-bytecode :demand t)
 
+(use-package helpful
+  :init
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  (global-set-key (kbd "C-h F") #'helpful-function)
+  (global-set-key (kbd "C-h C") #'helpful-command)
+  (setq counsel-describe-function-function #'helpful-callable
+        counsel-describe-variable-function #'helpful-variable))
+
 (provide 'init-config)
 ;;; init-config ends here

@@ -82,6 +82,7 @@
           'smartparens
           'groovy-mode
           'autodisass-java-bytecode
+          'helpful
           ))
   (straight-use-package wenpin/package))
 
