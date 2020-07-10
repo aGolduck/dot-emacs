@@ -744,14 +744,14 @@ That is, remove a non kept dired from the recent list."
 
 (use-package vterm
   :init
-  (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y")
+  (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i")
         vterm-kill-buffer-on-exit t
         vterm-term-environment-variable "eterm-color")
   ;; (add-hook 'vterm-mode-hook
   ;;           (lambda ()
   ;;             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch-serif)
   ;;             (buffer-face-mode t)))
-  )
+  :config (set-face-attribute 'vterm-color-green nil :foreground "dark green"))
 
 (use-package winner :init (add-hook 'after-init-hook #'winner-mode))
 
