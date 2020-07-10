@@ -875,5 +875,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
+(use-package autodisass-java-bytecode :demand t)
+
 (provide 'init-config)
 ;;; init-config ends here

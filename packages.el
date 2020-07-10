@@ -81,6 +81,7 @@
           'ace-window
           'smartparens
           'groovy-mode
+          'autodisass-java-bytecode
           ))
   (straight-use-package wenpin/package))
 
