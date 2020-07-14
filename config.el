@@ -853,7 +853,26 @@ That is, remove a non kept dired from the recent list."
 
 (use-package ace-window
   :init
-  (setq aw-keys '(?i ?u ?h ?d ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
+  (defun wenpin/get-window-list ()
+    (if (<= (length (window-list)) 2)
+        (window-list)
+      (save-excursion
+        (let ((windows nil))
+          (ignore-errors (dotimes (i 10) (windmove-left)))
+          (ignore-errors (dotimes (i 10) (windmove-up)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-right)))
+          (ignore-errors (dotimes (i 10) (windmove-up)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-left)))
+          (ignore-errors (dotimes (i 10) (windmove-down)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-right)))
+          (ignore-errors (dotimes (i 10) (windmove-down)))
+          (add-to-list 'windows (selected-window) t)
+          windows))))
+  (advice-add 'aw-window-list :override #'wenpin/get-window-list)
+  (setq aw-keys '(?i ?d ?u ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
         aw-dispatch-alist '((?x aw-delete-window "Delete Window")
 	                    (?m aw-swap-window "Swap Windows")
 	                    (?M aw-move-window "Move Window")
