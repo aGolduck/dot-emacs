@@ -99,7 +99,9 @@
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top))
+        dired-recursive-deletes 'top)
+  :config
+  (set-face-attribute 'dired-directory nil :height (/ 2.0 3) :inherit font-lock-function-name-face))
 
 (use-package dired-rsync)
 
@@ -906,6 +908,11 @@ That is, remove a non kept dired from the recent list."
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-h o") #'helpful-symbol))
+
+(use-package font-lock
+  :config
+  (set-face-attribute 'font-lock-comment-face nil :height 0.9)
+  (set-face-attribute 'font-lock-function-name-face nil :height 1.5))
 
 (provide 'init-config)
 ;;; init-config ends here
