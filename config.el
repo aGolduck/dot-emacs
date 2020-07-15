@@ -892,7 +892,11 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
-(use-package nxml-mode :init (add-hook 'nxml-mode-hook #'smartparens-mode))
+(use-package nxml-mode
+  :init
+  (add-hook 'nxml-mode-hook #'smartparens-mode)
+  :config
+  (set-face-attribute 'nxml-element-local-name nil :inherit 'font-lock-function-name-face :height 0.8))
 
 (use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
