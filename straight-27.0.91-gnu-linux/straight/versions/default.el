@@ -72,7 +72,7 @@
  ("org-alert" . "f87bff4acbd839acb4d2245b56b2c3d21f950911")
  ("org-cliplink" . "82402cae7e118d67de7328417fd018a18f95fac2")
  ("org-download" . "768716b6fcc814b06360b99ad70bce44c0eb4a32")
- ("org-journal" . "b4b3b2d9854ec9ba98c16098979d2b6b40f54180")
+ ("org-journal" . "6626bfe6128ab66df022c72df55966cc5dc73c3b")
  ("org-roam" . "1e11a3a16f4c17cde2ba8383ea8d268ab1ec9ddd")
  ("org-roam-server" . "7617ac01a1b7bad61407916ef03eda95c17da7c9")
  ("org-web-tools" . "ebc7888f4f4cad26ec1298edd7bf606a5ea2d564")
