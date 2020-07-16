@@ -26,6 +26,14 @@ Position the cursor at it's beginning, according to the current mode."
   (call-interactively #'ivy-switch-buffer-other-window)
   (other-window 1))
 
+;;; available punctuations
+;; (global-set-key (kbd "C-;"))
+;; (global-set-key (kbd "C-'"))
+;; (global-set-key (kbd "C-."))
+;; (global-set-key (kbd "C-="))
+;; (global-set-key (kbd "C--"))
+;; (global-set-key (kbd "M-="))
+;; (global-set-key (kbd "M--"))
 ;;; Commands of these keybindings are almost never used, just rebind them
 ;; (global-set-key (kbd "C-l"))
 ;; (global-set-key (kbd "C-o"))
@@ -35,6 +43,11 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (global-set-key (kbd "M-m"))
 ;; (global-set-key (kbd "M-r"))
 ;; (global-set-key (kbd "M-z"))
+;;; C-M-x keybindings
+;; (global-set-key (kbd "C-m-...") ...)
+;;; abbrev keybindings which need to be research
+;; (global-set-key (kbd "M-'"))
+;; (global-set-key (kbd "M-/"))
 ;;; These keybindings are for English writing, which I rarely used,
 ;; So they are worth rebinding
 ;; (global-set-key (kbd "M-a"))
