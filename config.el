@@ -937,5 +937,9 @@ That is, remove a non kept dired from the recent list."
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-h o") #'helpful-symbol))
 
+(use-package font-lock
+  :config
+  (set-face-attribute 'font-lock-comment-face nil :height 0.9))
+
 (provide 'init-config)
 ;;; init-config ends here
