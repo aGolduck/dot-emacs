@@ -850,7 +850,32 @@ That is, remove a non kept dired from the recent list."
 
 (use-package keyfreq
   :init
-  (setq keyfreq-excluded-commands '(self-insert-command))
+  (setq keyfreq-excluded-commands '(
+                                    self-insert-command
+                                    next-line
+                                    previous-line
+                                    org-self-insert-command
+                                    dired-previous-line
+                                    dired-next-line
+                                    mwheel-scroll
+                                    mouse-set-point
+                                    mouse-drag-region
+                                    org-agenda-next-line
+                                    backward-word
+                                    vterm--self-insert
+                                    magit-section-forward
+                                    paredit-backward
+                                    paredit-forward
+                                    magit-section-backward
+                                    org-agenda-previous-line
+                                    forward-word
+                                    backward-char
+                                    dired-find-file
+                                    ace-window
+                                    ivy-done
+                                    eaf-send-key
+                                    rime--backspace
+                                    scroll-up-command))
   (add-hook 'after-init-hook #'keyfreq-mode)
   (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
