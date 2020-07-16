@@ -99,9 +99,7 @@
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top)
-  :config
-  (set-face-attribute 'dired-directory nil :height (/ 2.0 3) :inherit font-lock-function-name-face))
+        dired-recursive-deletes 'top))
 
 (use-package dired-rsync)
 
@@ -250,7 +248,10 @@
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
   (add-hook 'java-mode-hook #'lsp)
-  (add-hook 'java-mode-hook #'lsp-ui-mode))
+  (add-hook 'java-mode-hook #'lsp-ui-mode)
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (face-remap-add-relative 'font-lock-function-name-face :height 1.5))))
 
 ;; (use-package lsp-java-boot
 ;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
@@ -894,9 +895,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package nxml-mode
   :init
-  (add-hook 'nxml-mode-hook #'smartparens-mode)
-  :config
-  (set-face-attribute 'nxml-element-local-name nil :inherit 'font-lock-function-name-face :height 0.8))
+  (add-hook 'nxml-mode-hook #'smartparens-mode))
 
 (use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
@@ -912,11 +911,6 @@ That is, remove a non kept dired from the recent list."
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-h o") #'helpful-symbol))
-
-(use-package font-lock
-  :config
-  (set-face-attribute 'font-lock-comment-face nil :height 0.9)
-  (set-face-attribute 'font-lock-function-name-face nil :height 1.5))
 
 (provide 'init-config)
 ;;; init-config ends here
