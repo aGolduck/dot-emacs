@@ -455,6 +455,13 @@
   (add-hook 'org-mode-hook #'visual-line-mode)
   :config
   (require 'ob-js)
+  ;; TODO ob-jshell
+  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
+  (defun org-babel-execute:jsh (body params)
+    "Execute a block of jshell code snippets or commands with org-babel"
+    (message "Executing jshell snippets")
+    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
+  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
                                  (emacs-lisp . t)
