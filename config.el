@@ -748,7 +748,7 @@ That is, remove a non kept dired from the recent list."
   ;; (push 'company-lsp company-backends)
   )
 
-(use-package valign :commands (valign-mode valign-table))
+(use-package valign)
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
