@@ -858,32 +858,60 @@ That is, remove a non kept dired from the recent list."
 
 (use-package keyfreq
   :init
-  (setq keyfreq-excluded-commands '(
-                                    self-insert-command
-                                    next-line
-                                    previous-line
-                                    org-self-insert-command
-                                    dired-previous-line
-                                    dired-next-line
-                                    mwheel-scroll
-                                    mouse-set-point
-                                    mouse-drag-region
-                                    org-agenda-next-line
-                                    backward-word
-                                    vterm--self-insert
-                                    magit-section-forward
-                                    paredit-backward
-                                    paredit-forward
-                                    magit-section-backward
-                                    org-agenda-previous-line
-                                    forward-word
-                                    backward-char
-                                    dired-find-file
-                                    ace-window
-                                    ivy-done
-                                    eaf-send-key
-                                    rime--backspace
-                                    scroll-up-command))
+  (setq keyfreq-excluded-commands 'nil)
+  ;; (setq keyfreq-excluded-commands '(
+  ;;                                   self-insert-command
+  ;;                                   next-line
+  ;;                                   previous-line
+  ;;                                   org-self-insert-command
+  ;;                                   dired-previous-line
+  ;;                                   dired-next-line
+  ;;                                   mwheel-scroll
+  ;;                                   mouse-set-point
+  ;;                                   mouse-drag-region
+  ;;                                   org-agenda-next-line
+  ;;                                   backward-word
+  ;;                                   vterm--self-insert
+  ;;                                   magit-section-forward
+  ;;                                   paredit-backward
+  ;;                                   paredit-forward
+  ;;                                   magit-section-backward
+  ;;                                   org-agenda-previous-line
+  ;;                                   forward-word
+  ;;                                   backward-char
+  ;;                                   dired-find-file
+  ;;                                   ace-window
+  ;;                                   ivy-done
+  ;;                                   eaf-send-key
+  ;;                                   rime--backspace
+  ;;                                   scroll-up-command
+  ;;                                   ignore
+  ;;                                   eaf-proxy-scroll_up_page
+  ;;                                   ivy-backward-delete-char
+  ;;                                   magit-next-line
+  ;;                                   isearch-repeat-forward
+  ;;                                   delete-backward-char
+  ;;                                   org-delete-backward-char
+  ;;                                   eaf-proxy-scroll_down_page
+  ;;                                   beginning-of-buffer
+  ;;                                   ivy-next-line
+  ;;                                   move-end-of-line
+  ;;                                   newline
+  ;;                                   forward-sexp
+  ;;                                   dap-tooltip-mouse-motion
+  ;;                                   scroll-down-command
+  ;;                                   isearch-printing-char
+  ;;                                   magit-section-toggle
+  ;;                                   paredit-backward-delete
+  ;;                                   end-of-buffer
+  ;;                                   company-complete-selection
+  ;;                                   forward-char
+  ;;                                   dired-up-directory
+  ;;                                   counsel-recentf
+  ;;                                   minibuffer-keyboard-quit
+  ;;                                   set-mark-command
+  ;;                                   dired-jump
+  ;;                                   magit-previous-line))
   (add-hook 'after-init-hook #'keyfreq-mode)
   (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
