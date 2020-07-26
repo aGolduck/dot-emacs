@@ -99,7 +99,8 @@
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top))
+        dired-recursive-deletes 'top)
+  (define-key dired-mode-map (kbd "M-<RET>") #'eaf-open-this-from-dired))
 
 (use-package dired-rsync)
 
