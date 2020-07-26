@@ -100,6 +100,7 @@
         dired-dwim-target t
         dired-recursive-copies 'always
         dired-recursive-deletes 'top)
+  :config
   (define-key dired-mode-map (kbd "M-<RET>") #'eaf-open-this-from-dired))
 
 (use-package dired-rsync)
