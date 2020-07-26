@@ -788,6 +788,7 @@ That is, remove a non kept dired from the recent list."
   (setq browse-url-browser-function 'eaf-open-browser
         eaf-browser-continue-where-left-off t)
   (defalias 'browse-web #'eaf-open-browser)
+  (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
   :config
   (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
