@@ -585,6 +585,7 @@ unwanted space when exporting org-mode to html."
   (eldoc-add-command
    'paredit-backward-delete
    'paredit-close-round)
+  (define-key paredit-mode-map (kbd "M-r") nil)
   (diminish 'paredit-mode "括"))
 
 (use-package pocket-reader)
@@ -604,7 +605,7 @@ unwanted space when exporting org-mode to html."
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
   (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
 
-(use-package ranger)
+(use-package ranger :init (global-set-key (kbd "M-r") #'ranger))
 
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
