@@ -993,5 +993,10 @@ That is, remove a non kept dired from the recent list."
   :config
   (set-face-attribute 'font-lock-comment-face nil :height 0.9))
 
+(use-package isearch
+  :config
+  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
+  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
+
 (provide 'init-config)
 ;;; init-config ends here
