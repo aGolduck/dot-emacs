@@ -83,6 +83,7 @@
           'groovy-mode
           'autodisass-java-bytecode
           'helpful
+          'ivy-rich
           ))
   (straight-use-package wenpin/package))
 

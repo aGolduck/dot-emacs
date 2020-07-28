@@ -52,7 +52,10 @@
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
-(use-package counsel)
+(use-package counsel
+  :init
+  (global-set-key (kbd "C-h f") #'counsel-describe-function)
+  (global-set-key (kbd "C-h v") #'counsel-describe-variable))
 
 (use-package dap-java
   :commands (dap-java-debug
@@ -210,6 +213,8 @@
   (add-hook 'after-init-hook #'ivy-mode))
 
 (use-package ivy-hydra)
+
+(use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
 
 (use-package ivy-posframe
   :init

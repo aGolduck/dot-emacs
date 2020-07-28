@@ -48,6 +48,7 @@
  ("ht.el" . "fff8c43f0e03d5b98deb9f988522b839ce2ca253")
  ("hydra" . "8a9124f80b6919ad5288172b3e9f46c5332763ca")
  ("ivy-posframe" . "44749562a9e68bd43ccaa225b31311476fab1251")
+ ("ivy-rich" . "10970130b41c6ef9570893cdab8dfbe720e2b1a9")
  ("ivy-xref" . "3d4c35fe2b243d948d8fe02a1f0d76a249d63de9")
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
