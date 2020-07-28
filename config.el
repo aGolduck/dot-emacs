@@ -230,9 +230,10 @@
   :init
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook (lambda ()
-                     (tide-setup)
-                     (unless (tide-current-server) (tide-restart-server))
-                     (tide-hl-identifier-mode 1)))
+                            (when (equal (shell-command "which tsserver") 0)
+                              (tide-setup)
+                              (unless (tide-current-server) (tide-restart-server))
+                              (tide-hl-identifier-mode 1))))
     (dolist (hooked (list
                    #'company-mode
                    #'eldoc-mode
@@ -652,7 +653,7 @@ That is, remove a non kept dired from the recent list."
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
 
 (use-package selectric-mode
-  :if (not (equal (shell-command "aplay") 127))
+  :if (equal (shell-command "which aplay") 0)
   :init (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple)
@@ -738,14 +739,15 @@ That is, remove a non kept dired from the recent list."
   ;; (add-hook 'typescript-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp-deferred)
   (dolist (hooked (list
-                   #'tide-setup
-                   #'tide-hl-identifier-mode
                    #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
                    #'paredit-mode
                    ))
     (add-hook 'typescript-mode-hook hooked))
+  (when (equal (shell-command "which tsserver") 0)
+      (dolist (hooked (list #'tide-setup #'tide-hl-identifier-mode))
+        (add-hook 'typescript-mode-hook hooked)))
   ;; :config
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
