@@ -479,6 +479,7 @@
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
                                  (emacs-lisp . t)
+                                 (haskell . t)
                                  (js . t)
                                  (shell . t)
                                  (typescript . t)))
@@ -1008,6 +1009,8 @@ That is, remove a non kept dired from the recent list."
   :config
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
+
+(use-package haskell-mode)
 
 (provide 'init-config)
 ;;; init-config ends here

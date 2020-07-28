@@ -84,6 +84,7 @@
           'autodisass-java-bytecode
           'helpful
           'ivy-rich
+          'haskell-mode
           ))
   (straight-use-package wenpin/package))
 

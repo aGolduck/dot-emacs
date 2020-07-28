@@ -42,6 +42,7 @@
  ("gnu-elpa-mirror" . "ccc0196a68462c1b80f37fa588697fb19b8059bb")
  ("graphql-mode" . "7c37aee28bf8c8ffb3da73df5571c4e1e352562b")
  ("groovy-emacs-modes" . "cafdd98e06a3bbff213f3ccb163de2c42d412b66")
+ ("haskell-mode" . "41683c0e634bb3f54eac8747919a82132e1714fe")
  ("helpful" . "c0662aa07266fe204f4e6d72ccaa6af089400556")
  ("highlight-indent-guides" . "11bd2d30d56f273223f64f8f3eb5fc8565245959")
  ("hl-todo" . "3bba4591c54951d2abab113ec5e58a6319808ca9")
