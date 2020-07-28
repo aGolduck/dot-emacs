@@ -230,7 +230,7 @@
   :init
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook (lambda ()
-                            (when (equal (shell-command "which tsserver") 0)
+                            (when (equal (shell-command "command -v tsserver") 0)
                               (tide-setup)
                               (unless (tide-current-server) (tide-restart-server))
                               (tide-hl-identifier-mode 1))))
@@ -653,7 +653,7 @@ That is, remove a non kept dired from the recent list."
 (use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
 
 (use-package selectric-mode
-  :if (equal (shell-command "which aplay") 0)
+  :if (equal (shell-command "command -v aplay") 0)
   :init (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple)
@@ -745,7 +745,7 @@ That is, remove a non kept dired from the recent list."
                    #'paredit-mode
                    ))
     (add-hook 'typescript-mode-hook hooked))
-  (when (equal (shell-command "which tsserver") 0)
+  (when (equal (shell-command "command -v tsserver") 0)
       (dolist (hooked (list #'tide-setup #'tide-hl-identifier-mode))
         (add-hook 'typescript-mode-hook hooked)))
   ;; :config
