@@ -31,10 +31,16 @@
 
 (use-package color-rg
   :commands
-  (color-rg-search-input-in-project
+  (color-rg-search-input
+   color-rg-search-symbol
+   color-rg-search-input-in-project
    color-rg-search-symbol-in-project
+   color-rg-search-symbol-in-current-file
    color-rg-search-input-in-current-file
-   color-rg-search-symbol-in-current-file))
+   color-rg-search-project-rails
+   color-rg-search-symbol-with-type
+   color-rg-search-project-with-type
+   color-rg-search-project-rails-with-type))
 
 (use-package company
   :init
