@@ -57,6 +57,10 @@ Position the cursor at it's beginning, according to the current mode."
 ;; (global-set-key (kbd "M-k"))
 ;; (global-set-key (kbd "M-q"))
 ;; (global-set-key (kbd "M-u"))
+;;; 下面几种键位可能只能用于图形界面
+;; F1 -- F12
+;; menu
+;; some win +
 ;; first class keybindings
 (global-set-key (kbd "M-i") #'ace-window)
 (global-set-key (kbd "M-o") #'smart-open-line-above)

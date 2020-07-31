@@ -130,6 +130,7 @@
 
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
+  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
@@ -1007,6 +1008,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package isearch
   :config
+  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
 
