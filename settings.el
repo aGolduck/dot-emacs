@@ -1,5 +1,6 @@
 ;;; set up variables not categorised
 (setq create-lockfiles nil
+      ;; confirm-kill-emacs nil
       delete-by-moving-to-trash t
       mac-command-modifier 'super
       mac-option-modifier 'meta
