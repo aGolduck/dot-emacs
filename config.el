@@ -55,7 +55,10 @@
         company-tooltip-align-annotations t
         ;; default is 0.2
         company-idle-delay 0.0)
-  :config (diminish 'company-mode "补"))
+  :config
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (diminish 'company-mode "补"))
 
 (use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
 
@@ -105,7 +108,6 @@
 			     'gcmh-mode
 			     'ivy-mode
 			     'ivy-posframe-mode
-                             'org-roam-mode
                              'winner-mode
                              'selectric-mode
                              'subword-mode
