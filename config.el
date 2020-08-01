@@ -143,7 +143,6 @@
 
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))

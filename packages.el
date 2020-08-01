@@ -85,7 +85,6 @@
           'helpful
           'ivy-rich
           'haskell-mode
-          'context-coloring
           ))
   (straight-use-package wenpin/package))
 
