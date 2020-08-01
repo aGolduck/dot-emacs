@@ -836,6 +836,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package eaf
   :if (eq system-type 'gnu/linux)
+  :commands (eaf-browser-restore-buffers)
   :init
   (setq browse-url-browser-function 'eaf-open-browser
         eaf-browser-continue-where-left-off t)
