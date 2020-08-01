@@ -19,7 +19,11 @@
 
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 
-(use-package avy)
+(use-package avy
+  :init
+  (global-set-key (kbd "M-SPC g g") #'avy-goto-char-timer)
+  (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
+  (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
 
 (use-package bookmark)
 
@@ -40,7 +44,10 @@
    color-rg-search-project-rails
    color-rg-search-symbol-with-type
    color-rg-search-project-with-type
-   color-rg-search-project-rails-with-type))
+   color-rg-search-project-rails-with-type)
+  :init
+  (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
+  (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project))
 
 (use-package company
   :init
@@ -54,6 +61,8 @@
 
 (use-package counsel
   :init
+  (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
+  (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
 
@@ -65,7 +74,8 @@
              dap-java-debug-test-class)
   :init
   (setq dap-java-test-runner
-        "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+        "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar")
+  (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
 
 (use-package dap-mode
   :after lsp-mode
@@ -109,6 +119,7 @@
         dired-dwim-target t
         dired-recursive-copies 'always
         dired-recursive-deletes 'top)
+  (global-set-key (kbd "M-SPC ^") #'dired-jump)
   :config
   (define-key dired-mode-map (kbd "M-<RET>") #'eaf-open-this-from-dired))
 
@@ -149,7 +160,10 @@
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
-(use-package expand-region :init (setq expand-region-contract-fast-key "V"))
+(use-package expand-region
+  :init
+  (setq expand-region-contract-fast-key "V")
+  (global-set-key (kbd "M-SPC v") #'er/expand-region))
 
 (use-package file
   :init
@@ -172,7 +186,7 @@
 
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 
-(use-package git-link)
+(use-package git-link :init (global-set-key (kbd "M-SPC g L") #'git-link))
 
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
@@ -182,10 +196,23 @@
   :init
   ;; remove ugly hi-yellow from default
   (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
+  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns)
+  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
+  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
+  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
+  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
+  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
+  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
   :config (diminish 'hi-lock-mode "亮"))
 
 (use-package hideshow
-  :init (add-hook 'prog-mode-hook #'hs-minor-mode)
+  :init
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
+  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
+  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
+  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
+  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
+  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
   :config
   (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
   (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
@@ -225,7 +252,8 @@
 	  (t . ivy-posframe-display-at-frame-center)))
   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
-  (add-hook 'ivy-mode-hook #'ivy-posframe-mode))
+  (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
+  (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
 
 (use-package ivy-xref
   :init
@@ -304,6 +332,7 @@
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (setq magit-process-finish-apply-ansi-colors t)
+  (global-set-key (kbd "M-SPC g s") #'magit-status)
   :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
@@ -313,7 +342,7 @@
   :init (add-hook 'magit-mode-hook #'magit-delta-mode)
   :config (diminish 'magit-delta-mode ""))
 
-(use-package magit-todos)
+(use-package magit-todos :init (global-set-key (kbd "M-SPC p t") #'magit-todos-list))
 
 (use-package markdown-mode
   :init
@@ -542,6 +571,8 @@ unwanted space when exporting org-mode to html."
   (setq org-roam-directory "~/org/roam"
         org-roam-completion-system 'ivy)
   ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
+  (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
+  (global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
   :config
   (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
   (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
@@ -611,7 +642,8 @@ unwanted space when exporting org-mode to html."
   :init
   (setq projectile-completion-system 'ivy
         projectile-mode-line-prefix "项")
-  (add-hook 'after-init-hook #'projectile-mode))
+  (add-hook 'after-init-hook #'projectile-mode)
+  (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
 
 (use-package python
   :init
@@ -653,6 +685,7 @@ That is, remove a non kept dired from the recent list."
 	rime-user-data-dir "~/.emacs.d/rime"
 	rime-show-candidate 'posframe
 	rime-posframe-style 'simple)
+  (global-set-key (kbd "M-t") #'toggle-input-method)
   :config
   (define-key rime-mode-map (kbd "C-`") #'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-S-`") #'rime-send-keybinding)
@@ -781,9 +814,12 @@ That is, remove a non kept dired from the recent list."
   ;;             (buffer-face-mode t)))
   :config (set-face-attribute 'vterm-color-green nil :foreground "dark green"))
 
-(use-package winner :init (add-hook 'after-init-hook #'winner-mode))
+(use-package winner
+  :init
+  (add-hook 'after-init-hook #'winner-mode)
+  (global-set-key (kbd "M-SPC w r") #'winner-redo))
 
-(use-package woman)
+(use-package woman :init (global-set-key (kbd "M-SPC d m") #'woman))
 
 (use-package yaml-mode
   :init
@@ -804,6 +840,8 @@ That is, remove a non kept dired from the recent list."
         eaf-browser-continue-where-left-off t)
   (defalias 'browse-web #'eaf-open-browser)
   (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
+  (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
+  (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
   :config
   (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
@@ -977,7 +1015,8 @@ That is, remove a non kept dired from the recent list."
 	                    (?v aw-split-window-vert "Split Vert Window")
 	                    (?b aw-split-window-horz "Split Horz Window")
 	                    (?o delete-other-windows "Delete Other Windows")
-	                    (?? aw-show-dispatch-help))))
+	                    (?? aw-show-dispatch-help)))
+  (global-set-key (kbd "M-i") #'ace-window))
 
 (use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
 
