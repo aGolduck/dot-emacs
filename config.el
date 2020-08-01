@@ -701,7 +701,10 @@ That is, remove a non kept dired from the recent list."
 
 (use-package selectric-mode
   :if (equal (shell-command "command -v aplay") 0)
-  :init (add-hook 'after-init-hook #'selectric-mode))
+  :init
+  ;; 不禁用会导致 <up>, <down> 等语义改变，致使 previous-line, next-line 等 remap 失败
+  (setq selectric-affected-bindings-list nil)
+  (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple)
 
