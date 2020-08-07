@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; how to find out where config code goes?
 ;; 1. major mode, like typescript-mode, org-mode
 ;; 2. big minor mode, like ivy-mode, lsp-mode
