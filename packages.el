@@ -14,12 +14,15 @@
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
+          'ace-window
           'ag
+          'autodisass-java-bytecode
           'avy
           'ccls
           'company
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           'dap-mode
+          'devdocs
           'diminish
           'dired-rsync
           'dotenv-mode
@@ -31,18 +34,24 @@
           'gcmh
           'git-link
           'graphql-mode
+          'groovy-mode
+          'haskell-mode
+          'helpful
           'highlight-indent-guides
           'hl-todo
           'ivy
           'ivy-hydra
           'ivy-posframe
+          'ivy-rich
           'ivy-xref
           'json-mode
+          'keyfreq
           'lsp-ivy
           'lsp-java
           'lsp-mode
           'lsp-python-ms
           'lsp-treemacs
+          'lsp-ui
           'magit
           'magit-delta
           'magit-todos
@@ -56,12 +65,16 @@
           'org-roam
           'org-roam-server
           'ox-hugo
+          'pdf-tools
+          'pkgbuild-mode
           'pocket-reader
           'posframe
           'projectile
           'ranger
           'rust-mode
           'selectric-mode
+          'shackle
+          'smartparens
           'smex
           'sudo-edit
           'swiper
@@ -71,20 +84,7 @@
           'vterm
           'yaml-mode
           'yasnippet
-          'pdf-tools
-          'lsp-ui
-          'devdocs
           'zeal-at-point
-          'pkgbuild-mode
-          'shackle
-          'keyfreq
-          'ace-window
-          'smartparens
-          'groovy-mode
-          'autodisass-java-bytecode
-          'helpful
-          'ivy-rich
-          'haskell-mode
           ))
   (straight-use-package wenpin/package))
 

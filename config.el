@@ -4,6 +4,44 @@
 ;; 2. big minor mode, like ivy-mode, lsp-mode
 ;; 3. minor mode
 
+(use-package abbrev :config (diminish 'abbrev-mode "缩"))
+
+(use-package ace-window
+  :init
+  (defun wenpin/get-window-list ()
+    (if (<= (length (window-list)) 2)
+        (window-list)
+      (save-excursion
+        (let ((windows nil))
+          (ignore-errors (dotimes (i 10) (windmove-left)))
+          (ignore-errors (dotimes (i 10) (windmove-up)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-right)))
+          (ignore-errors (dotimes (i 10) (windmove-up)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-left)))
+          (ignore-errors (dotimes (i 10) (windmove-down)))
+          (add-to-list 'windows (selected-window) t)
+          (ignore-errors (dotimes (i 10) (windmove-right)))
+          (ignore-errors (dotimes (i 10) (windmove-down)))
+          (add-to-list 'windows (selected-window) t)
+          windows))))
+  (advice-add 'aw-window-list :override #'wenpin/get-window-list)
+  (setq aw-keys '(?i ?d ?u ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
+        aw-dispatch-alist '((?x aw-delete-window "Delete Window")
+	                    (?m aw-swap-window "Swap Windows")
+	                    (?M aw-move-window "Move Window")
+	                    (?c aw-copy-window "Copy Window")
+	                    (?j aw-switch-buffer-in-window "Select Buffer")
+	                    (?n aw-flip-window)
+	                    (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+	                    (?c aw-split-window-fair "Split Fair Window")
+	                    (?v aw-split-window-vert "Split Vert Window")
+	                    (?b aw-split-window-horz "Split Horz Window")
+	                    (?o delete-other-windows "Delete Other Windows")
+	                    (?? aw-show-dispatch-help)))
+  (global-set-key (kbd "M-i") #'ace-window))
+
 (use-package ansi-color
   :init
   (add-hook 'compilation-filter-hook
@@ -11,12 +49,16 @@
               (let ((buffer-read-only nil))
                 (ansi-color-apply-on-region (point-min) (point-max))))))
 
+(use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
+
 (use-package auto-save
   :commands (auto-save-enable)
   :init
   (setq auto-save-silent t
 	auto-save-delete-trailing-whitespace t)
   (add-hook 'after-init-hook #'auto-save-enable))
+
+(use-package autodisass-java-bytecode :demand t)
 
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 
@@ -27,6 +69,12 @@
   (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
 
 (use-package bookmark)
+
+(use-package browse-url
+  :init
+  (when (eq system-type 'gnu/linux) (setq browse-url-browser-function 'eaf-open-browser)))
+
+(use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
 
 (use-package cc-mode
   :init
@@ -86,6 +134,8 @@
   :init (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
   :config (dap-auto-configure-mode))
 
+(use-package default-view :demand t)
+
 (use-package desktop
   :init
   (setq desktop-base-file-name (concat ".emacs-" emacs-version ".desktop")
@@ -99,6 +149,8 @@
               (when window-system
                 (desktop-save-mode)
                 (desktop-read)))))
+
+(use-package devdocs)
 
 (use-package diminish
   :init
@@ -128,7 +180,36 @@
 
 (use-package dired-rsync)
 
+(use-package dired-x
+  :init
+  (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
+                                       ("\\.docx\\'" "libreoffice")
+                                       ("\\.ppt\\'" "libreoffice")
+                                       ("\\.pptx\\'" "libreoffice")
+                                       ("\\.xls\\'" "libreoffice")
+                                       ("\\.xlsx\\'" "libreoffice")))
+  (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
+
 (use-package dotenv)
+
+(use-package eaf
+  :if (eq system-type 'gnu/linux)
+  :commands (eaf-browser-restore-buffers eaf-open-this-from-dired)
+  :init
+  (setq browse-url-browser-function 'eaf-open-browser
+        eaf-browser-continue-where-left-off t)
+  (defalias 'browse-web #'eaf-open-browser)
+  (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
+  (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
+  (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
+  :config
+  (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
+  (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
+  (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
+  (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
+  (eaf-bind-key ace-window "M-i" eaf-browser-keybinding)
+  (eaf-bind-key scroll_down_page "S-SPC" eaf-browser-keybinding)
+  (eaf-bind-key scroll_down_page "S-SPC" eaf-pdf-viewer-keybinding))
 
 (use-package ediff-wind
   :init
@@ -182,6 +263,10 @@
   :commands (flymake-posframe-mode)
   :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
 
+(use-package font-lock
+  :config
+  (set-face-attribute 'font-lock-comment-face nil :height 0.9))
+
 (use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 
 (use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
@@ -193,6 +278,21 @@
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
 (use-package graphql-mode)
+
+(use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
+
+(use-package haskell-mode)
+
+(use-package helpful
+  :init
+  ;; (setq counsel-describe-function-function #'helpful-callable
+  ;;       counsel-describe-variable-function #'helpful-variable)
+  ;; (global-set-key (kbd "C-h f") #'helpful-callable)
+  ;; (global-set-key (kbd "C-h v") #'helpful-variable)
+  ;; (global-set-key (kbd "C-h F") #'helpful-function)
+  ;; (global-set-key (kbd "C-h C") #'helpful-command)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  (global-set-key (kbd "C-h o") #'helpful-symbol))
 
 (use-package hi-lock
   :init
@@ -236,6 +336,12 @@
         highlight-indent-guides-auto-even-face-perc 55
         highlight-indent-guides-auto-character-face-perc 61.8))
 
+(use-package isearch
+  :config
+  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
+  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
+  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
+
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t
@@ -243,8 +349,6 @@
   (add-hook 'after-init-hook #'ivy-mode))
 
 (use-package ivy-hydra)
-
-(use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
 
 (use-package ivy-posframe
   :init
@@ -256,6 +360,8 @@
   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
   (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
+
+(use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
 
 (use-package ivy-xref
   :init
@@ -286,6 +392,65 @@
 
 (use-package json-mode)
 
+(use-package keyfreq
+  :init
+  (setq keyfreq-excluded-commands 'nil)
+  ;; (setq keyfreq-excluded-commands '(
+  ;;                                   self-insert-command
+  ;;                                   next-line
+  ;;                                   previous-line
+  ;;                                   org-self-insert-command
+  ;;                                   dired-previous-line
+  ;;                                   dired-next-line
+  ;;                                   mwheel-scroll
+  ;;                                   mouse-set-point
+  ;;                                   mouse-drag-region
+  ;;                                   org-agenda-next-line
+  ;;                                   backward-word
+  ;;                                   vterm--self-insert
+  ;;                                   magit-section-forward
+  ;;                                   paredit-backward
+  ;;                                   paredit-forward
+  ;;                                   magit-section-backward
+  ;;                                   org-agenda-previous-line
+  ;;                                   forward-word
+  ;;                                   backward-char
+  ;;                                   dired-find-file
+  ;;                                   ace-window
+  ;;                                   ivy-done
+  ;;                                   eaf-send-key
+  ;;                                   rime--backspace
+  ;;                                   scroll-up-command
+  ;;                                   ignore
+  ;;                                   eaf-proxy-scroll_up_page
+  ;;                                   ivy-backward-delete-char
+  ;;                                   magit-next-line
+  ;;                                   isearch-repeat-forward
+  ;;                                   delete-backward-char
+  ;;                                   org-delete-backward-char
+  ;;                                   eaf-proxy-scroll_down_page
+  ;;                                   beginning-of-buffer
+  ;;                                   ivy-next-line
+  ;;                                   move-end-of-line
+  ;;                                   newline
+  ;;                                   forward-sexp
+  ;;                                   dap-tooltip-mouse-motion
+  ;;                                   scroll-down-command
+  ;;                                   isearch-printing-char
+  ;;                                   magit-section-toggle
+  ;;                                   paredit-backward-delete
+  ;;                                   end-of-buffer
+  ;;                                   company-complete-selection
+  ;;                                   forward-char
+  ;;                                   dired-up-directory
+  ;;                                   counsel-recentf
+  ;;                                   minibuffer-keyboard-quit
+  ;;                                   set-mark-command
+  ;;                                   dired-jump
+  ;;                                   magit-previous-line))
+  (add-hook 'after-init-hook #'keyfreq-mode)
+  (add-hook 'after-init-hook #'keyfreq-autosave-mode))
+
 (use-package lsp-ivy)
 
 (use-package lsp-java
@@ -297,9 +462,6 @@
   (add-hook 'java-mode-hook
             (lambda ()
               (face-remap-add-relative 'font-lock-function-name-face :height 1.5))))
-
-;; (use-package lsp-java-boot
-;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 (use-package lsp-mode
   :commands (lsp-headerline-breadcrumb-mode)
@@ -330,6 +492,13 @@
 
 (use-package lsp-python-ms)
 
+(use-package lsp-ui
+  :init
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-enable nil)
+  :config
+  (set-face-attribute 'lsp-ui-doc-background nil :background "white smoke"))
+
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
@@ -354,6 +523,10 @@
   (setq markdown-command "multimarkdown"))
 
 (use-package newcomment)
+
+(use-package nxml-mode
+  :init
+  (add-hook 'nxml-mode-hook #'smartparens-mode))
 
 (use-package olivetti)
 
@@ -636,6 +809,10 @@ unwanted space when exporting org-mode to html."
   (define-key paredit-mode-map (kbd "M-r") nil)
   (diminish 'paredit-mode "括"))
 
+(use-package pdf-tools)
+
+(use-package pkgbuild-mode)
+
 (use-package pocket-reader)
 
 (use-package posframe)
@@ -708,6 +885,8 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'after-init-hook #'selectric-mode))
 
 (use-package simple)
+
+(use-package smartparens :config (require 'smartparens-config))
 
 (use-package smex) ;; smex is needed to order candidates for ivy
 
@@ -808,6 +987,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
+(use-package view :config (diminish 'view-mode "览"))
+
 (use-package vterm
   :init
   (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i")
@@ -836,74 +1017,14 @@ That is, remove a non kept dired from the recent list."
   :init (add-hook 'java-mode-hook #'yas-minor-mode)
   :config (diminish 'yas-minor-mode "模"))
 
-;; (use-package battery)
+(use-package zeal-at-point)
 
-(use-package eaf
-  :if (eq system-type 'gnu/linux)
-  :commands (eaf-browser-restore-buffers eaf-open-this-from-dired)
-  :init
-  (setq browse-url-browser-function 'eaf-open-browser
-        eaf-browser-continue-where-left-off t)
-  (defalias 'browse-web #'eaf-open-browser)
-  (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
-  (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
-  (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
-  :config
-  (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
-  (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
-  (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
-  (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
-  (eaf-bind-key ace-window "M-i" eaf-browser-keybinding)
-  (eaf-bind-key scroll_down_page "S-SPC" eaf-browser-keybinding)
-  (eaf-bind-key scroll_down_page "S-SPC" eaf-pdf-viewer-keybinding))
+;; (use-package battery)
 
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
-;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
-
-;; (use-package term-cursor
-;;   :init
-;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
-;;                                post-command-hook
-;;                                lsp-ui-doc-frame-hook))
-;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
-
-(use-package dired-x
-  :init
-  (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
-                                       ("\\.docx\\'" "libreoffice")
-                                       ("\\.ppt\\'" "libreoffice")
-                                       ("\\.pptx\\'" "libreoffice")
-                                       ("\\.xls\\'" "libreoffice")
-                                       ("\\.xlsx\\'" "libreoffice")))
-  (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
-
-(use-package pdf-tools)
-
-(use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
-
-(use-package lsp-ui
-  :init
-  (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-enable nil)
-  :config
-  (set-face-attribute 'lsp-ui-doc-background nil :background "white smoke"))
-
-(use-package devdocs)
-
-(use-package browse-url
-  :init
-  (when (eq system-type 'gnu/linux) (setq browse-url-browser-function 'eaf-open-browser)))
-
-(use-package zeal-at-point)
-
-(use-package view :config (diminish 'view-mode "览"))
-
-(use-package abbrev :config (diminish 'abbrev-mode "缩"))
-
-(use-package default-view :demand t)
-
-(use-package pkgbuild-mode)
+;; (use-package lsp-java-boot
+;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 ;; (use-package shackle
 ;;   ;; TODO try shackle-mode/display-buffer-alist some day maybe
@@ -929,135 +1050,14 @@ That is, remove a non kept dired from the recent list."
 ;;    )
 ;;   (add-hook 'after-init-hook #'shackle-mode))
 
-(use-package keyfreq
-  :init
-  (setq keyfreq-excluded-commands 'nil)
-  ;; (setq keyfreq-excluded-commands '(
-  ;;                                   self-insert-command
-  ;;                                   next-line
-  ;;                                   previous-line
-  ;;                                   org-self-insert-command
-  ;;                                   dired-previous-line
-  ;;                                   dired-next-line
-  ;;                                   mwheel-scroll
-  ;;                                   mouse-set-point
-  ;;                                   mouse-drag-region
-  ;;                                   org-agenda-next-line
-  ;;                                   backward-word
-  ;;                                   vterm--self-insert
-  ;;                                   magit-section-forward
-  ;;                                   paredit-backward
-  ;;                                   paredit-forward
-  ;;                                   magit-section-backward
-  ;;                                   org-agenda-previous-line
-  ;;                                   forward-word
-  ;;                                   backward-char
-  ;;                                   dired-find-file
-  ;;                                   ace-window
-  ;;                                   ivy-done
-  ;;                                   eaf-send-key
-  ;;                                   rime--backspace
-  ;;                                   scroll-up-command
-  ;;                                   ignore
-  ;;                                   eaf-proxy-scroll_up_page
-  ;;                                   ivy-backward-delete-char
-  ;;                                   magit-next-line
-  ;;                                   isearch-repeat-forward
-  ;;                                   delete-backward-char
-  ;;                                   org-delete-backward-char
-  ;;                                   eaf-proxy-scroll_down_page
-  ;;                                   beginning-of-buffer
-  ;;                                   ivy-next-line
-  ;;                                   move-end-of-line
-  ;;                                   newline
-  ;;                                   forward-sexp
-  ;;                                   dap-tooltip-mouse-motion
-  ;;                                   scroll-down-command
-  ;;                                   isearch-printing-char
-  ;;                                   magit-section-toggle
-  ;;                                   paredit-backward-delete
-  ;;                                   end-of-buffer
-  ;;                                   company-complete-selection
-  ;;                                   forward-char
-  ;;                                   dired-up-directory
-  ;;                                   counsel-recentf
-  ;;                                   minibuffer-keyboard-quit
-  ;;                                   set-mark-command
-  ;;                                   dired-jump
-  ;;                                   magit-previous-line))
-  (add-hook 'after-init-hook #'keyfreq-mode)
-  (add-hook 'after-init-hook #'keyfreq-autosave-mode))
+;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
-(use-package ace-window
-  :init
-  (defun wenpin/get-window-list ()
-    (if (<= (length (window-list)) 2)
-        (window-list)
-      (save-excursion
-        (let ((windows nil))
-          (ignore-errors (dotimes (i 10) (windmove-left)))
-          (ignore-errors (dotimes (i 10) (windmove-up)))
-          (add-to-list 'windows (selected-window) t)
-          (ignore-errors (dotimes (i 10) (windmove-right)))
-          (ignore-errors (dotimes (i 10) (windmove-up)))
-          (add-to-list 'windows (selected-window) t)
-          (ignore-errors (dotimes (i 10) (windmove-left)))
-          (ignore-errors (dotimes (i 10) (windmove-down)))
-          (add-to-list 'windows (selected-window) t)
-          (ignore-errors (dotimes (i 10) (windmove-right)))
-          (ignore-errors (dotimes (i 10) (windmove-down)))
-          (add-to-list 'windows (selected-window) t)
-          windows))))
-  (advice-add 'aw-window-list :override #'wenpin/get-window-list)
-  (setq aw-keys '(?i ?d ?u ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
-        aw-dispatch-alist '((?x aw-delete-window "Delete Window")
-	                    (?m aw-swap-window "Swap Windows")
-	                    (?M aw-move-window "Move Window")
-	                    (?c aw-copy-window "Copy Window")
-	                    (?j aw-switch-buffer-in-window "Select Buffer")
-	                    (?n aw-flip-window)
-	                    (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
-	                    (?c aw-split-window-fair "Split Fair Window")
-	                    (?v aw-split-window-vert "Split Vert Window")
-	                    (?b aw-split-window-horz "Split Horz Window")
-	                    (?o delete-other-windows "Delete Other Windows")
-	                    (?? aw-show-dispatch-help)))
-  (global-set-key (kbd "M-i") #'ace-window))
-
-(use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
-
-(use-package smartparens :config (require 'smartparens-config))
-
-(use-package nxml-mode
-  :init
-  (add-hook 'nxml-mode-hook #'smartparens-mode))
-
-(use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
-
-(use-package autodisass-java-bytecode :demand t)
-
-(use-package helpful
-  :init
-  ;; (setq counsel-describe-function-function #'helpful-callable
-  ;;       counsel-describe-variable-function #'helpful-variable)
-  ;; (global-set-key (kbd "C-h f") #'helpful-callable)
-  ;; (global-set-key (kbd "C-h v") #'helpful-variable)
-  ;; (global-set-key (kbd "C-h F") #'helpful-function)
-  ;; (global-set-key (kbd "C-h C") #'helpful-command)
-  (global-set-key (kbd "C-h k") #'helpful-key)
-  (global-set-key (kbd "C-h o") #'helpful-symbol))
-
-(use-package font-lock
-  :config
-  (set-face-attribute 'font-lock-comment-face nil :height 0.9))
-
-(use-package isearch
-  :config
-  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
-  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
-  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-
-(use-package haskell-mode)
+;; (use-package term-cursor
+;;   :init
+;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
+;;                                post-command-hook
+;;                                lsp-ui-doc-frame-hook))
+;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 (provide 'init-config)
 ;;; init-config ends here
