@@ -9,6 +9,7 @@
   (setq exec-path (split-string (getenv "PATH") path-separator)))
 ;; M-SPC is key to my emacs world
 (global-unset-key (kbd "M-SPC"))
+(global-unset-key (kbd "M--"))
 ;; accelerate loading init files, will be reset by gcmh
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6)

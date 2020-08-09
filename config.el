@@ -492,6 +492,7 @@
   ;; (add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
   :config
   ;; (diminish 'lsp-mode "语")
+  (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
   (diminish 'lsp-lens-mode "透"))
 
 (use-package lsp-python-ms)
