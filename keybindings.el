@@ -61,29 +61,17 @@ Position the cursor at it's beginning, according to the current mode."
 ;; F1 -- F12
 ;; menu
 ;; some win +
-;; first class keybindings
+;; first class keybindings, 1 key
 (global-set-key (kbd "M-o") #'smart-open-line-above)
-(global-set-key (kbd "M-y") #'counsel-yank-pop)
 ;; C-c zone
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
 ;;; M-Spc 2 key strokes zone
 ;; (global-set-key (kbd "M-SPC SPC") #'wenpin/snails)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
 ;;; M-SPC 3 key strokes zone
-(global-set-key (kbd "M-SPC F F") #'find-function-other-window)
-(global-set-key (kbd "M-SPC F f") #'find-function)
-(global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window)
 (global-set-key (kbd "M-SPC B B") #'wenpin/ivy-switch-buffer-in-other-window)
-(global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
-(global-set-key (kbd "M-SPC b j") #'counsel-bookmark)
 (global-set-key (kbd "M-SPC b k") #'kill-buffer)
-(global-set-key (kbd "M-SPC b s") #'bookmark-set)
 (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
-(global-set-key (kbd "M-SPC f F") #'find-file-other-window)
-(global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
 (global-set-key (kbd "M-SPC f f") #'find-file)
-(global-set-key (kbd "M-SPC f v") #'find-variable)
 (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal)
 (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
 (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
@@ -91,8 +79,5 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
 (global-set-key (kbd "M-SPC w d") #'delete-window)
 (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
-(global-set-key (kbd "M-SPC w u") #'winner-undo)
 (global-set-key (kbd "M-SPC w v") #'split-window-below)
 (global-set-key (kbd "M-SPC w x") #'window-swap-states)
-(global-set-key [remap comment-dwim] #'comment-line)
-(global-set-key [remap paredit-comment-dwim] #'comment-line)

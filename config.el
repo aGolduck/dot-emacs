@@ -68,7 +68,7 @@
   (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
 
-(use-package bookmark)
+(use-package bookmark :init (global-set-key (kbd "M-SPC b s") #'bookmark-set))
 
 (use-package browse-url
   :init
@@ -113,7 +113,9 @@
 
 (use-package counsel
   :init
+  (global-set-key (kbd "M-y") #'counsel-yank-pop)
   (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
+  (global-set-key (kbd "M-SPC b j") #'counsel-bookmark)
   (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
@@ -346,7 +348,9 @@
   :init
   (setq ivy-use-virtual-buffers t
 	enable-recursive-minibuffers t)
-  (add-hook 'after-init-hook #'ivy-mode))
+  (add-hook 'after-init-hook #'ivy-mode)
+  (global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
+  (global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window))
 
 (use-package ivy-hydra)
 
@@ -522,7 +526,10 @@
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
 
-(use-package newcomment)
+(use-package newcomment
+  :init
+  (global-set-key [remap comment-dwim] #'comment-line)
+  (global-set-key [remap paredit-comment-dwim] #'comment-line))
 
 (use-package nxml-mode
   :init
@@ -672,6 +679,8 @@
 		 nil)
 		)))
   (add-hook 'org-mode-hook #'visual-line-mode)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
   :config
   (require 'ob-js)
   ;; TODO ob-jshell
@@ -1003,6 +1012,7 @@ That is, remove a non kept dired from the recent list."
 (use-package winner
   :init
   (add-hook 'after-init-hook #'winner-mode)
+  (global-set-key (kbd "M-SPC w u") #'winner-undo)
   (global-set-key (kbd "M-SPC w r") #'winner-redo))
 
 (use-package woman :init (global-set-key (kbd "M-SPC d m") #'woman))
@@ -1058,6 +1068,13 @@ That is, remove a non kept dired from the recent list."
 ;;                                post-command-hook
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
+
+(use-package find-func
+  :init
+  (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
+  (global-set-key (kbd "M-SPC F f") #'find-function)
+  (global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
+  (global-set-key (kbd "M-SPC f v") #'find-variable))
 
 (provide 'init-config)
 ;;; init-config ends here
