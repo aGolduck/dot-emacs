@@ -1,6 +1,8 @@
+;;; -*- lexical-binding: t; -*-
 ;;; pre-init
+(setq comp-deferred-compilation t)
 ;; set PATH manually, https://blog.galeo.me/path-environment-variable-on-mac-os-x-emacs-app.html
-;; TODO: add othen variables like MANPATH
+;; TODO: add other variables like MANPATH
 ;; when more and more env vars need to be set, referece doom-load-envvars-file
 (when (and (eq system-type 'darwin) window-system)
   (setenv "PATH"
