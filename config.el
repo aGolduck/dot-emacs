@@ -1078,5 +1078,7 @@ That is, remove a non kept dired from the recent list."
   (global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
   (global-set-key (kbd "M-SPC f v") #'find-variable))
 
+(use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
+
 (provide 'init-config)
 ;;; init-config ends here
