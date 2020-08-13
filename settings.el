@@ -35,6 +35,8 @@
 ;; (set-fontset-font t ?😊 "Segoe UI Emoji")
 ;; glyphs range
 ;; (set-fontset-font t '(?😊 . ?😎) "Segoe UI Emoji")
+;; emoji
+(set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
 (set-fontset-font t 'han "Source Han Sans CN")
 ;; han fallback font
 (set-fontset-font t 'han "Noto Sans CJK SC" nil 'append)
