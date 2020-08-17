@@ -514,7 +514,7 @@
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
 (use-package magit-delta
-  :if (not (equal (shell-command "delta") 127))
+  :if (equal (shell-command "command -v delta") 0)
   :after magit
   :init (add-hook 'magit-mode-hook #'magit-delta-mode)
   :config (diminish 'magit-delta-mode ""))
@@ -1080,7 +1080,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
 
-(use-package direnv :init (add-hook 'after-init-hook #'direnv-mode))
+(use-package direnv
+  :if (equal (shell-command "command -v direnv") 0)
+  :init (add-hook 'after-init-hook #'direnv-mode))
 
 (provide 'init-config)
 ;;; init-config ends here
