@@ -1,3 +1,4 @@
+;;;  -*- lexical-binding: t; -*-
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
 
 (dolist (wenpin/package
@@ -85,6 +86,7 @@
           'yaml-mode
           'yasnippet
           'zeal-at-point
+          'direnv
           ))
   (straight-use-package wenpin/package))
 

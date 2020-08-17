@@ -1080,5 +1080,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
 
+(use-package direnv :init (add-hook 'after-init-hook #'direnv-mode))
+
 (provide 'init-config)
 ;;; init-config ends here

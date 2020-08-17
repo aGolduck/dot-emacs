@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
 
 (defun smart-open-line-above ()

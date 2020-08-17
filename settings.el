@@ -1,3 +1,4 @@
+;;;  -*- lexical-binding: t; -*-
 ;;; set up variables not categorised
 (setq create-lockfiles nil
       ;; confirm-kill-emacs nil
