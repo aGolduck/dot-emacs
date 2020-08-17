@@ -68,7 +68,7 @@
  ("magit-delta" . "d988abd99882c6b89f21f2746f721a4d7ece6ad4")
  ("magit-todos" . "a0e5d1f3c7dfcb4f18c1b0d57f1746a4872df5c6")
  ("markdown-mode" . "399df42755ccf31cecb61c9f5d8ad72bc30d7e4b")
- ("melpa" . "5593a586ce7579fd3a136e2416b89721157f98e1")
+ ("melpa" . "dada661402d2f3c9c4bcea8c41ebd926f8b26748")
  ("ob-typescript" . "0b2766b9d136cd6d81f4c15f1ad4b28542f484b9")
  ("olivetti" . "57ca8e70bc9ee975f0e2a60bfc4121064dadd2e0")
  ("org-alert" . "f87bff4acbd839acb4d2245b56b2c3d21f950911")
