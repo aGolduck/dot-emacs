@@ -9,6 +9,7 @@ eshell
 tramp
 image-dired
 .emacs*.desktop.lock
+eln-cache
 
 # straight.el
 repos
@@ -29,3 +30,4 @@ url
 workspace
 projectile-bookmarks.eld
 projectile.cache
+.dap-breakpoints
