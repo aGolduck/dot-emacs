@@ -15,7 +15,7 @@
  ("elisp-refs" . "0e7ea1574717108ddc2eda5e1bc883d44cd28257")
  ("emacs-application-framework" . "8880c7403f8d0e8c25e7af84abac510590409413")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
- ("emacs-ccls" . "c2de88254142e73791da30e8564854ba4044b426")
+ ("emacs-ccls" . "675a5704c14a27931e835a431beea3631d92e8e6")
  ("emacs-direnv" . "f5484b0fc33d4e5116612626294efb362ff9ecd4")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
  ("emacs-kv" . "721148475bce38a70e0b678ba8aa923652e8900e")
