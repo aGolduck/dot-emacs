@@ -38,9 +38,11 @@
 ;; (set-fontset-font t '(?😊 . ?😎) "Segoe UI Emoji")
 ;; emoji
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
-(set-fontset-font t 'han "Source Han Sans CN")
+;; (set-fontset-font t 'han "Source Han Sans CN")
+(set-fontset-font t 'han "Noto Sans CJK SC")
 ;; han fallback font
-(set-fontset-font t 'han "Noto Sans CJK SC" nil 'append)
+;; (set-fontset-font t 'han "Noto Sans CJK SC" nil 'append)
+(set-fontset-font t 'han "Source Han Sans CN" nil 'append)
 ;; search font for han if both fonts above can't be found
 (set-fontset-font t 'han (font-spec :script 'han) nil 'append)
 ;; other cjk
