@@ -1085,5 +1085,7 @@ That is, remove a non kept dired from the recent list."
   :if (equal (shell-command "command -v direnv") 0)
   :init (add-hook 'after-init-hook #'direnv-mode))
 
+(use-package org-ql)
+
 (provide 'init-config)
 ;;; init-config ends here

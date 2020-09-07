@@ -87,6 +87,7 @@
           'yasnippet
           'zeal-at-point
           'direnv
+          'org-ql
           ))
   (straight-use-package wenpin/package))
 
