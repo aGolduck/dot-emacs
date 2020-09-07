@@ -78,7 +78,7 @@
 
 (use-package cc-mode
   :init
-  (add-hook 'c-mode-hook #'lsp))
+  (add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp))))
 
 (use-package ccls)
 
