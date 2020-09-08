@@ -833,7 +833,8 @@ unwanted space when exporting org-mode to html."
 (use-package projectile
   :init
   (setq projectile-completion-system 'ivy
-        projectile-mode-line-prefix "项")
+        projectile-mode-line-prefix "项"
+        projectile-project-root-files-bottom-up '(".projectile" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" "pom.xml"))
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
 
