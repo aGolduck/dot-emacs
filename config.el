@@ -1099,5 +1099,8 @@ That is, remove a non kept dired from the recent list."
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
   (set-face-attribute 'treemacs-file-face nil :height 0.9))
 
+(use-package make-mode
+  :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
+
 (provide 'init-config)
 ;;; init-config ends here
