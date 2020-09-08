@@ -1091,5 +1091,13 @@ That is, remove a non kept dired from the recent list."
 
 (use-package screenshot-svg)
 
+(use-package treemacs
+  :init
+  (setq treemacs-no-png-images t)
+  (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
+  :config
+  (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
+  (set-face-attribute 'treemacs-file-face nil :height 0.9))
+
 (provide 'init-config)
 ;;; init-config ends here
