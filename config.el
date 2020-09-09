@@ -250,10 +250,11 @@
   (setq expand-region-contract-fast-key "V")
   (global-set-key (kbd "M-SPC v") #'er/expand-region))
 
-(use-package file
+(use-package files
   :init
   (setq auto-save-default nil
-        make-backup-files nil))
+        make-backup-files nil
+        safe-local-variable-values '((org-startup-with-inline-images . t))))
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
