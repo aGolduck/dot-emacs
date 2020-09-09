@@ -537,7 +537,10 @@
 
 (use-package nxml-mode
   :init
-  (add-hook 'nxml-mode-hook #'smartparens-mode))
+  ;; download from http://mirrors.ustc.edu.cn/eclipse/lemminx/
+  (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
+  (add-hook 'nxml-mode-hook #'smartparens-mode)
+  (add-hook 'nxml-mode-hook #'lsp))
 
 (use-package olivetti)
 
