@@ -283,7 +283,12 @@
 
 (use-package graphql-mode)
 
-(use-package groovy-mode :init (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
+(use-package groovy-mode
+  :init
+  (setq lsp-groovy-server-file "~/.emacs.d/resources/groovy-language-server-all.jar")
+  (add-hook 'groovy-mode-hook #'lsp)
+  (add-hook 'groovy-mode-hook #'company-mode)
+  (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
 (use-package haskell-mode)
 
@@ -702,6 +707,7 @@
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
                                  (emacs-lisp . t)
+                                 (groovy . t)
                                  (haskell . t)
                                  (js . t)
                                  (shell . t)
@@ -1105,6 +1111,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package make-mode
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
+
+(use-package ob-groovy)
 
 (provide 'init-config)
 ;;; init-config ends here

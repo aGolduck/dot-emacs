@@ -88,8 +88,8 @@
           'zeal-at-point
           'direnv
           'org-ql
+          '(ob-groovy :host github :repo "zweifisch/ob-groovy")
           ))
   (straight-use-package wenpin/package))
-
 
 (provide 'init-packages)

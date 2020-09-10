@@ -71,6 +71,7 @@
  ("map" . "224054737dcafdb291862d5eda57c6ee7f585e95")
  ("markdown-mode" . "399df42755ccf31cecb61c9f5d8ad72bc30d7e4b")
  ("melpa" . "dada661402d2f3c9c4bcea8c41ebd926f8b26748")
+ ("ob-groovy" . "091513bce46fc906752afa8f07320a6b3536d678")
  ("ob-typescript" . "0b2766b9d136cd6d81f4c15f1ad4b28542f484b9")
  ("olivetti" . "57ca8e70bc9ee975f0e2a60bfc4121064dadd2e0")
  ("org-alert" . "f87bff4acbd839acb4d2245b56b2c3d21f950911")
