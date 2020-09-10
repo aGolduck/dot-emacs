@@ -254,7 +254,8 @@
   :init
   (setq auto-save-default nil
         make-backup-files nil
-        safe-local-variable-values '((org-startup-with-inline-images . t))))
+        safe-local-variable-values '((flycheck-disable-checker '(emacs-lisp-checkdoc))
+                                     (org-startup-with-inline-images . t))))
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
