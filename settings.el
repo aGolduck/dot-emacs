@@ -3,6 +3,7 @@
 (setq create-lockfiles nil
       ;; confirm-kill-emacs nil
       delete-by-moving-to-trash t
+      frame-resize-pixelwise t
       mac-command-modifier 'super
       mac-option-modifier 'meta
       nsm-trust-local-network t
