@@ -471,6 +471,7 @@
   (add-hook 'java-mode-hook #'paredit-mode)
   (add-hook 'java-mode-hook #'lsp)
   (add-hook 'java-mode-hook #'lsp-ui-mode)
+  (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
   (add-hook 'java-mode-hook
             (lambda ()
               (face-remap-add-relative 'font-lock-function-name-face :height 1.5))))
@@ -1113,6 +1114,8 @@ That is, remove a non kept dired from the recent list."
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
 
 (use-package ob-groovy)
+
+(use-package lsp-java-boot)
 
 (provide 'init-config)
 ;;; init-config ends here
