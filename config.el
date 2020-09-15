@@ -1117,5 +1117,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package lsp-java-boot)
 
+(use-package yasnippet-snippets)
+
 (provide 'init-config)
 ;;; init-config ends here

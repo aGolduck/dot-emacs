@@ -85,6 +85,7 @@
           'vterm
           'yaml-mode
           'yasnippet
+          'yasnippet-snippets
           'zeal-at-point
           'direnv
           'org-ql

@@ -124,5 +124,6 @@
  ("xterm-color" . "b9b1f84fb10fff5261702e38bf15b3ae75a4b6bb")
  ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
  ("yasnippet" . "d3d6d70b1cd4818d271752468e0fdb0788db750d")
+ ("yasnippet-snippets" . "281752335ec797cfb2f8ab17d01e9293eab3f137")
  ("zeal-at-point" . "0fc3263f44e95acd3e9d91057677621ce4d297ee"))
 :beta
