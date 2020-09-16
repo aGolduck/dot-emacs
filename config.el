@@ -471,7 +471,7 @@
   (add-hook 'java-mode-hook #'paredit-mode)
   (add-hook 'java-mode-hook #'lsp)
   (add-hook 'java-mode-hook #'lsp-ui-mode)
-  (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+  ;; (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
   (add-hook 'java-mode-hook
             (lambda ()
               (face-remap-add-relative 'font-lock-function-name-face :height 1.5))))
@@ -1108,14 +1108,15 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
   :config
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
-  (set-face-attribute 'treemacs-file-face nil :height 0.9))
+  (set-face-attribute 'treemacs-file-face nil :height 0.9)
+  (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light))
 
 (use-package make-mode
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
 
 (use-package ob-groovy)
 
-(use-package lsp-java-boot)
+;; (use-package lsp-java-boot)
 
 (use-package yasnippet-snippets)
 
