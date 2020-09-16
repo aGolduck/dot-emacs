@@ -1040,8 +1040,12 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 
 (use-package yasnippet
-  :init (add-hook 'java-mode-hook #'yas-minor-mode)
-  :config (diminish 'yas-minor-mode "模"))
+  :init
+  (add-hook 'java-mode-hook #'yas-minor-mode)
+  :config
+  ;; (define-key yas-minor-mode-map (kbd "<tab>") #'yas-expand)
+  ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
+  (diminish 'yas-minor-mode "模"))
 
 (use-package zeal-at-point)
 
