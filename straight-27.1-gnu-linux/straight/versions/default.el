@@ -115,7 +115,7 @@
  ("thing-edit" . "117eadcc43f6933e14b77c20b7983ee234cba794")
  ("tide" . "fa617f54629dc53a3182251dd8076c9e7ac9effa")
  ("transient" . "73694be44a802cac89bfe0798e2a4aeb79e39ead")
- ("treemacs" . "1ce0bd487f0b9178744e19bbc48b6692c55c590c")
+ ("treemacs" . "e6252a6c5c8ec632f9882861c08d57763964d405")
  ("ts.el" . "df48734ef046547c1aa0de0f4c07d11964ef1f7f")
  ("typescript.el" . "0fc729787007b5111f3584034af0f3ef2389098f")
  ("use-package" . "bfc5ecd69cdf71fae0af722d90336c66a6415f03")
@@ -124,6 +124,6 @@
  ("xterm-color" . "b9b1f84fb10fff5261702e38bf15b3ae75a4b6bb")
  ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
  ("yasnippet" . "d3d6d70b1cd4818d271752468e0fdb0788db750d")
- ("yasnippet-snippets" . "281752335ec797cfb2f8ab17d01e9293eab3f137")
+ ("yasnippet-snippets" . "d46faad09b2bbf70e1370e900d5f3a8b6ef86d8a")
  ("zeal-at-point" . "0fc3263f44e95acd3e9d91057677621ce4d297ee"))
 :beta
