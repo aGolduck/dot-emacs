@@ -92,6 +92,7 @@
           'company-org-roam
           'clojure-mode
           'transient
+          'go-translate
           ))
   (straight-use-package wenpin/package))
 

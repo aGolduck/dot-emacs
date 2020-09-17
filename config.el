@@ -1159,5 +1159,10 @@ That is, remove a non kept dired from the recent list."
 
 (use-package url-cookie :init (setq url-cookie-file (wenpin/locate-emacs-var-file "url/cookies")))
 
+(use-package go-translate
+  :init
+  ;; (setq go-translate-base-url "https://translate.google.cn")
+  (setq go-translate-local-language "zh-CN"))
+
 (provide 'init-config)
 ;;; init-config ends here
