@@ -8,22 +8,27 @@
           '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py"))
           '(flymake-posframe :host github :repo "Ladicle/flymake-posframe")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
+          '(ob-groovy :host github :repo "zweifisch/ob-groovy")
           '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
           '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
+          '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git"))
           'ace-window
           'ag
           'autodisass-java-bytecode
           'avy
           'ccls
+          'clojure-mode
           'company
+          'company-org-roam
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           'dap-mode
           'devdocs
           'diminish
           'dired-rsync
+          'direnv
           'dotenv-mode
           'esh-autosuggest
           'eshell-z
@@ -32,6 +37,7 @@
           'flycheck-posframe
           'gcmh
           'git-link
+          'go-translate
           'graphql-mode
           'groovy-mode
           'haskell-mode
@@ -61,6 +67,7 @@
           'org-cliplink
           'org-download
           'org-journal
+          'org-ql
           'org-roam
           'org-roam-server
           'ox-hugo
@@ -70,6 +77,7 @@
           'posframe
           'projectile
           'ranger
+          'rime
           'rust-mode
           'selectric-mode
           'shackle
@@ -78,21 +86,13 @@
           'sudo-edit
           'swiper
           'tide
+          'transient
           'treemacs
           'typescript-mode
           'vterm
           'yaml-mode
           'yasnippet
-          '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git"))
           'zeal-at-point
-          'direnv
-          'org-ql
-          '(ob-groovy :host github :repo "zweifisch/ob-groovy")
-          'rime
-          'company-org-roam
-          'clojure-mode
-          'transient
-          'go-translate
           ))
   (straight-use-package wenpin/package))
 

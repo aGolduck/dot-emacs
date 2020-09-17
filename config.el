@@ -87,6 +87,8 @@
 
 (use-package ccls)
 
+(use-package clojure-mode)
+
 (use-package color-rg
   :commands
   (color-rg-search-input
@@ -199,6 +201,10 @@
                                        ("\\.xlsx\\'" "libreoffice")))
   (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
 
+(use-package direnv
+  :if (equal (shell-command "command -v direnv") 0)
+  :init (add-hook 'after-init-hook #'direnv-mode))
+
 (use-package dotenv)
 
 (use-package eaf
@@ -265,6 +271,13 @@
         safe-local-variable-values '((flycheck-disable-checker '(emacs-lisp-checkdoc))
                                      (org-startup-with-inline-images . t))))
 
+(use-package find-func
+  :init
+  (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
+  (global-set-key (kbd "M-SPC F f") #'find-function)
+  (global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
+  (global-set-key (kbd "M-SPC f v") #'find-variable))
+
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
 (use-package flycheck :config (diminish 'flycheck-mode "检"))
@@ -286,6 +299,11 @@
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 
 (use-package git-link :init (global-set-key (kbd "M-SPC g L") #'git-link))
+
+(use-package go-translate
+  :init
+  ;; (setq go-translate-base-url "https://translate.google.cn")
+  (setq go-translate-local-language "zh-CN"))
 
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
@@ -310,6 +328,8 @@
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-h o") #'helpful-symbol))
+
+(use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
 
 (use-package hi-lock
   :init
@@ -352,6 +372,8 @@
         highlight-indent-guides-auto-odd-face-perc 15
         highlight-indent-guides-auto-even-face-perc 55
         highlight-indent-guides-auto-character-face-perc 61.8))
+
+(use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired")))
 
 (use-package isearch
   :config
@@ -541,6 +563,9 @@
 
 (use-package magit-todos :init (global-set-key (kbd "M-SPC p t") #'magit-todos-list))
 
+(use-package make-mode
+  :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
+
 (use-package markdown-mode
   :init
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
@@ -559,6 +584,10 @@
   (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
   (add-hook 'nxml-mode-hook #'smartparens-mode)
   (add-hook 'nxml-mode-hook #'lsp))
+
+(use-package ob-clojure)
+
+(use-package ob-groovy)
 
 (use-package olivetti)
 
@@ -767,6 +796,8 @@ unwanted space when exporting org-mode to html."
   ;;          (org-download-annotate-default (org-link-unescape link))))
   )
 
+(use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
+
 (use-package org-journal
   :init
   (setq org-journal-dir "~/org/journal"
@@ -780,6 +811,8 @@ unwanted space when exporting org-mode to html."
         org-journal-date-format "%A, %x"
         org-journal-time-prefix "** "
         org-journal-time-format "%R "))
+
+(use-package org-ql)
 
 (use-package org-roam
   :init
@@ -922,6 +955,8 @@ That is, remove a non kept dired from the recent list."
   (setq save-place-file (wenpin/locate-emacs-var-file "places"))
   (add-hook 'after-init-hook #'save-place-mode))
 
+(use-package screenshot-svg)
+
 (use-package selectric-mode
   :if (equal (shell-command "command -v aplay") 0)
   :init
@@ -933,8 +968,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
-;; smex is needed to order candidates for ivy
-(use-package smex :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
+(use-package smex
+  ;; smex is needed to order candidates for ivy
+  :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
 
 (use-package snails
   :if window-system
@@ -1008,6 +1044,20 @@ That is, remove a non kept dired from the recent list."
         tide-server-max-response-length 524288)
   :config (diminish 'tide-mode "型"))
 
+(use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
+
+(use-package transient :init (setq transient-history-file (wenpin/locate-emacs-var-file "transient/history.el")))
+
+(use-package treemacs
+  :init
+  (setq treemacs-no-png-images t
+        treemacs-persist-file (wenpin/locate-emacs-var-file ".cache/treemacs-persist"))
+  (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
+  :config
+  (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
+  (set-face-attribute 'treemacs-file-face nil :height 0.9)
+  (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light))
+
 (use-package typescript-mode
   :init
   (setq typescript-indent-level 2)
@@ -1027,6 +1077,8 @@ That is, remove a non kept dired from the recent list."
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
   )
+
+(use-package url-cookie :init (setq url-cookie-file (wenpin/locate-emacs-var-file "url/cookies")))
 
 (use-package valign :config (diminish 'valign-mode))
 
@@ -1067,6 +1119,8 @@ That is, remove a non kept dired from the recent list."
   ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
   (diminish 'yas-minor-mode "模"))
 
+(use-package yasnippet-snippets)
+
 (use-package zeal-at-point)
 
 ;; (use-package battery)
@@ -1075,6 +1129,8 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package lsp-java-boot
 ;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
+
+;; (use-package lsp-java-boot)
 
 ;; (use-package shackle
 ;;   ;; TODO try shackle-mode/display-buffer-alist some day maybe
@@ -1108,61 +1164,6 @@ That is, remove a non kept dired from the recent list."
 ;;                                post-command-hook
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
-
-(use-package find-func
-  :init
-  (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
-  (global-set-key (kbd "M-SPC F f") #'find-function)
-  (global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
-  (global-set-key (kbd "M-SPC f v") #'find-variable))
-
-(use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
-
-(use-package direnv
-  :if (equal (shell-command "command -v direnv") 0)
-  :init (add-hook 'after-init-hook #'direnv-mode))
-
-(use-package org-ql)
-
-(use-package screenshot-svg)
-
-(use-package treemacs
-  :init
-  (setq treemacs-no-png-images t
-        treemacs-persist-file (wenpin/locate-emacs-var-file ".cache/treemacs-persist"))
-  (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
-  :config
-  (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
-  (set-face-attribute 'treemacs-file-face nil :height 0.9)
-  (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light))
-
-(use-package make-mode
-  :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
-
-(use-package ob-groovy)
-
-;; (use-package lsp-java-boot)
-
-(use-package yasnippet-snippets)
-
-(use-package clojure-mode)
-
-(use-package ob-clojure)
-
-(use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
-
-(use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
-
-(use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired")))
-
-(use-package transient :init (setq transient-history-file (wenpin/locate-emacs-var-file "transient/history.el")))
-
-(use-package url-cookie :init (setq url-cookie-file (wenpin/locate-emacs-var-file "url/cookies")))
-
-(use-package go-translate
-  :init
-  ;; (setq go-translate-base-url "https://translate.google.cn")
-  (setq go-translate-local-language "zh-CN"))
 
 (provide 'init-config)
 ;;; init-config ends here
