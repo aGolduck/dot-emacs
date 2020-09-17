@@ -72,7 +72,8 @@
 
 (use-package browse-url
   :init
-  (when (eq system-type 'gnu/linux) (setq browse-url-browser-function 'eaf-open-browser)))
+  (when (string-equal wenpin/HOST "xps")
+    (setq browse-url-browser-function 'eaf-open-browser)))
 
 (use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
 
@@ -205,7 +206,7 @@
   (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
   (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
   :config
-  (when (string-equal wenpin/host "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
+  (when (string-equal wenpin/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
   (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
   (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
