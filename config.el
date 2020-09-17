@@ -49,7 +49,8 @@
               (let ((buffer-read-only nil))
                 (ansi-color-apply-on-region (point-min) (point-max))))))
 
-(use-package auth-source :init (setq auth-sources '((:source "~/.emacs.d/.authinfo.gpg"))))
+(use-package auth-source
+  :init (setq auth-sources '((:source (expand-file-name ".authinfo.gpg" wenpin/EMACS-VAR)))))
 
 (use-package auto-save
   :commands (auto-save-enable)
@@ -68,7 +69,10 @@
   (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
 
-(use-package bookmark :init (global-set-key (kbd "M-SPC b s") #'bookmark-set))
+(use-package bookmark
+  :init
+  (setq bookmark-default-file (expand-file-name "bookmarks" wenpin/EMACS-VAR))
+  (global-set-key (kbd "M-SPC b s") #'bookmark-set))
 
 (use-package browse-url
   :init
@@ -129,20 +133,23 @@
              dap-java-debug-test-class)
   :init
   (setq dap-java-test-runner
-        "~/.emacs.d/.cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar")
+        (locate-user-emacs-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
   (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
 
 (use-package dap-mode
   :after lsp-mode
-  :init (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
-  :config (dap-auto-configure-mode))
+  :init
+  (setq dap-breakpoints-file (expand-file-name ".dap-breakpoints" wenpin/EMACS-VAR))
+  (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
+  :config
+  (dap-auto-configure-mode))
 
 (use-package default-view :demand t)
 
 (use-package desktop
   :init
-  (setq desktop-base-file-name (concat ".emacs-" emacs-version ".desktop")
-        desktop-base-lock-name (concat ".emacs-" emacs-version ".desktop.lock")
+  (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") wenpin/EMACS-VAR)
+        desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") wenpin/EMACS-VAR)
         desktop-globals-to-save '()
         desktop-files-not-to-save ".*"
         desktop-buffers-not-to-save ".*"
@@ -236,6 +243,7 @@
 
 (use-package esh-mode
   :init
+  (setq eshell-directory-name (expand-file-name "eshell" wenpin/EMACS-VAR))
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
   (add-hook 'eshell-mode-hook
@@ -286,7 +294,7 @@
 
 (use-package groovy-mode
   :init
-  (setq lsp-groovy-server-file "~/.emacs.d/resources/groovy-language-server-all.jar")
+  (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
   (add-hook 'groovy-mode-hook #'lsp)
   (add-hook 'groovy-mode-hook #'company-mode)
   (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
@@ -467,6 +475,7 @@
 
 (use-package lsp-java
   :init
+  (setq lsp-java-workspace-dir (expand-file-name "workspace" wenpin/EMACS-VAR))
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
   (add-hook 'java-mode-hook #'paredit-mode)
@@ -496,6 +505,8 @@
         lsp-print-performance t
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024))
+  (setq lsp-session-file (expand-file-name ".lsp-session-v1" wenpin/EMACS-VAR)
+        lsp-server-install-dir (expand-file-name ".cache/lsp" wenpin/EMACS-VAR))
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
   ;; TODO should only start after lsp starts
   ;; (add-hook 'lsp-mode-hook
@@ -759,6 +770,7 @@ unwanted space when exporting org-mode to html."
   :after org
   :init
   (setq org-journal-dir "~/org/journal"
+        org-journal-cache-file (expand-file-name "org-journal.cache" wenpin/EMACS-VAR)
         org-journal-file-format "%Y%m%d.org"
         org-journal-find-file #'find-file
         org-journal-file-type 'daily
@@ -848,6 +860,8 @@ unwanted space when exporting org-mode to html."
 (use-package projectile
   :init
   (setq projectile-completion-system 'ivy
+        projectile-cache-file (expand-file-name "projectile.cache" wenpin/EMACS-VAR)
+        projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" wenpin/EMACS-VAR)
         projectile-mode-line-prefix "项")
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
@@ -866,6 +880,7 @@ unwanted space when exporting org-mode to html."
 (use-package recentf
   :init
   (setq recentf-auto-cleanup 'never
+        recentf-save-file (expand-file-name "recentf" wenpin/EMACS-VAR)
         recentf-max-saved-items nil)
   ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
   (defun recentd-track-opened-file ()
@@ -888,8 +903,8 @@ That is, remove a non kept dired from the recent list."
   :init
   (setq default-input-method "rime"
 	rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")  ;; 发往 librime 的快捷键
-	rime-librime-root (if (eq system-type 'darwin) (expand-file-name "~/.emacs.d/rime/librime-mac/dist"))
-	rime-user-data-dir "~/.emacs.d/rime"
+	rime-librime-root (if (eq system-type 'darwin) (locate-user-emacs-file "rime/librime-mac/dist"))
+	rime-user-data-dir (locate-user-emacs-file "rime")
 	rime-show-candidate 'posframe
 	rime-posframe-style 'simple)
   (global-set-key (kbd "M-t") #'toggle-input-method)
@@ -903,7 +918,10 @@ That is, remove a non kept dired from the recent list."
   :init
   (add-hook 'rust-mode-hook #'lsp))
 
-(use-package saveplace :init (add-hook 'after-init-hook #'save-place-mode))
+(use-package saveplace
+  :init
+  (setq save-place-file (expand-file-name "places" wenpin/EMACS-VAR))
+  (add-hook 'after-init-hook #'save-place-mode))
 
 (use-package selectric-mode
   :if (equal (shell-command "command -v aplay") 0)
@@ -916,7 +934,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
-(use-package smex) ;; smex is needed to order candidates for ivy
+ ;; smex is needed to order candidates for ivy
+(use-package smex :init (setq smex-save-file (expand-file-name "smex-items" wenpin/EMACS-VAR)))
 
 (use-package snails
   :if window-system
@@ -1111,7 +1130,8 @@ That is, remove a non kept dired from the recent list."
 
 (use-package treemacs
   :init
-  (setq treemacs-no-png-images t)
+  (setq treemacs-no-png-images t
+        treemacs-persist-file (expand-file-name ".cache/treemacs-persist" wenpin/EMACS-VAR))
   (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
   :config
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
@@ -1130,6 +1150,16 @@ That is, remove a non kept dired from the recent list."
 (use-package clojure-mode)
 
 (use-package ob-clojure)
+
+(use-package org-id :init (setq org-id-locations-file (expand-file-name ".org-id-locations" wenpin/EMACS-VAR)))
+
+(use-package tramp :init (setq tramp-persistency-file-name (expand-file-name "tramp" wenpin/EMACS-VAR)))
+
+(use-package image-dired :init (setq image-dired-dir (expand-file-name "image-dired" wenpin/EMACS-VAR)))
+
+(use-package transient :init (setq transient-history-file (expand-file-name "transient/history.el" wenpin/EMACS-VAR)))
+
+(use-package url-cookie :init (setq url-cookie-file (expand-file-name "url/cookies" wenpin/EMACS-VAR)))
 
 (provide 'init-config)
 ;;; init-config ends here

@@ -91,6 +91,7 @@
           'rime
           'company-org-roam
           'clojure-mode
+          'transient
           ))
   (straight-use-package wenpin/package))
 

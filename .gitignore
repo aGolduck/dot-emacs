@@ -1,33 +1,13 @@
+var
+
 # emacs built-in
-recentf
 auto-save-list
-places
-.emacs*.desktop
 custom.el
-bookmarks
-eshell
-tramp
-image-dired
-.emacs*.desktop.lock
 eln-cache
 
 # straight.el
-repos
-straight*/straight/*
-!straight*/straight/versions
-
+straight/repos
+straight/straight*
 
 # others
 eaf
-transient
-.lsp-session-v1
-.cache/lsp
-org-journal.cache
-smex-items
-.cache
-.org-id-locations
-url
-workspace
-projectile-bookmarks.eld
-projectile.cache
-.dap-breakpoints
