@@ -707,6 +707,7 @@
   (add-to-list 'org-src-lang-modes '("jsh" . "java"))
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
+                                 (clojure . t)
                                  (emacs-lisp . t)
                                  (groovy . t)
                                  (haskell . t)
@@ -1123,6 +1124,10 @@ That is, remove a non kept dired from the recent list."
 ;; (use-package lsp-java-boot)
 
 (use-package yasnippet-snippets)
+
+(use-package clojure-mode)
+
+(use-package ob-clojure)
 
 (provide 'init-config)
 ;;; init-config ends here

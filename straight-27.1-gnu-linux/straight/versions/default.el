@@ -5,6 +5,7 @@
  ("autodisass-java-bytecode" . "3d61dbe266133c950b39e880f78d142751c7dc4c")
  ("avy" . "bbf1e7339eba06784dfe86643bb0fbddf5bb0342")
  ("bui.el" . "28a9b0a36cb69b931cf32db7546ad5c6589752cf")
+ ("clojure-mode" . "84ed16c5ddb6561620886485e20669d0c81f88a1")
  ("color-rg" . "22b050fc0b9b8d13f10c5fbd4cf14980d2831dc8")
  ("company-mode" . "656ad10670512e135a0a5881f127bb7a789ef8ca")
  ("company-org-roam" . "674c2bd493f571c5323d69279557a6c18ccbd14e")

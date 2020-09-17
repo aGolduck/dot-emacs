@@ -90,6 +90,7 @@
           '(ob-groovy :host github :repo "zweifisch/ob-groovy")
           'rime
           'company-org-roam
+          'clojure-mode
           ))
   (straight-use-package wenpin/package))
 
