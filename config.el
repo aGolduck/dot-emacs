@@ -501,9 +501,10 @@
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
   ;; (add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
+  (global-unset-key (kbd "M--"))
   :config
-  ;; (diminish 'lsp-mode "语")
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
+  ;; (diminish 'lsp-mode "语")
   (diminish 'lsp-lens-mode "透"))
 
 (use-package lsp-python-ms)
