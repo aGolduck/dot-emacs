@@ -50,7 +50,7 @@
                 (ansi-color-apply-on-region (point-min) (point-max))))))
 
 (use-package auth-source
-  :init (setq auth-sources '((:source (expand-file-name ".authinfo.gpg" wenpin/EMACS-VAR)))))
+  :init (setq auth-sources '((:source (wenpin/locate-emacs-var-file ".authinfo.gpg")))))
 
 (use-package auto-save
   :commands (auto-save-enable)
@@ -71,7 +71,7 @@
 
 (use-package bookmark
   :init
-  (setq bookmark-default-file (expand-file-name "bookmarks" wenpin/EMACS-VAR))
+  (setq bookmark-default-file (wenpin/locate-emacs-var-file "bookmarks"))
   (global-set-key (kbd "M-SPC b s") #'bookmark-set))
 
 (use-package browse-url
@@ -139,7 +139,7 @@
 (use-package dap-mode
   :after lsp-mode
   :init
-  (setq dap-breakpoints-file (expand-file-name ".dap-breakpoints" wenpin/EMACS-VAR))
+  (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
   :config
   (dap-auto-configure-mode))
@@ -243,7 +243,7 @@
 
 (use-package esh-mode
   :init
-  (setq eshell-directory-name (expand-file-name "eshell" wenpin/EMACS-VAR))
+  (setq eshell-directory-name (wenpin/locate-emacs-var-file "eshell"))
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
   (add-hook 'eshell-mode-hook
@@ -475,7 +475,7 @@
 
 (use-package lsp-java
   :init
-  (setq lsp-java-workspace-dir (expand-file-name "workspace" wenpin/EMACS-VAR))
+  (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace"))
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
   (add-hook 'java-mode-hook #'paredit-mode)
@@ -505,8 +505,8 @@
         lsp-print-performance t
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024))
-  (setq lsp-session-file (expand-file-name ".lsp-session-v1" wenpin/EMACS-VAR)
-        lsp-server-install-dir (expand-file-name ".cache/lsp" wenpin/EMACS-VAR))
+  (setq lsp-session-file (wenpin/locate-emacs-var-file ".lsp-session-v1")
+        lsp-server-install-dir (wenpin/locate-emacs-var-file ".cache/lsp"))
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
   ;; TODO should only start after lsp starts
   ;; (add-hook 'lsp-mode-hook
@@ -770,7 +770,7 @@ unwanted space when exporting org-mode to html."
   :after org
   :init
   (setq org-journal-dir "~/org/journal"
-        org-journal-cache-file (expand-file-name "org-journal.cache" wenpin/EMACS-VAR)
+        org-journal-cache-file (wenpin/locate-emacs-var-file "org-journal.cache")
         org-journal-file-format "%Y%m%d.org"
         org-journal-find-file #'find-file
         org-journal-file-type 'daily
@@ -860,8 +860,8 @@ unwanted space when exporting org-mode to html."
 (use-package projectile
   :init
   (setq projectile-completion-system 'ivy
-        projectile-cache-file (expand-file-name "projectile.cache" wenpin/EMACS-VAR)
-        projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" wenpin/EMACS-VAR)
+        projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
+        projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
         projectile-mode-line-prefix "项")
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
@@ -880,7 +880,7 @@ unwanted space when exporting org-mode to html."
 (use-package recentf
   :init
   (setq recentf-auto-cleanup 'never
-        recentf-save-file (expand-file-name "recentf" wenpin/EMACS-VAR)
+        recentf-save-file (wenpin/locate-emacs-var-file "recentf")
         recentf-max-saved-items nil)
   ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
   (defun recentd-track-opened-file ()
@@ -920,7 +920,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package saveplace
   :init
-  (setq save-place-file (expand-file-name "places" wenpin/EMACS-VAR))
+  (setq save-place-file (wenpin/locate-emacs-var-file "places"))
   (add-hook 'after-init-hook #'save-place-mode))
 
 (use-package selectric-mode
@@ -935,7 +935,7 @@ That is, remove a non kept dired from the recent list."
 (use-package smartparens :config (require 'smartparens-config))
 
  ;; smex is needed to order candidates for ivy
-(use-package smex :init (setq smex-save-file (expand-file-name "smex-items" wenpin/EMACS-VAR)))
+(use-package smex :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
 
 (use-package snails
   :if window-system
@@ -1131,7 +1131,7 @@ That is, remove a non kept dired from the recent list."
 (use-package treemacs
   :init
   (setq treemacs-no-png-images t
-        treemacs-persist-file (expand-file-name ".cache/treemacs-persist" wenpin/EMACS-VAR))
+        treemacs-persist-file (wenpin/locate-emacs-var-file ".cache/treemacs-persist"))
   (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
   :config
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
@@ -1151,15 +1151,15 @@ That is, remove a non kept dired from the recent list."
 
 (use-package ob-clojure)
 
-(use-package org-id :init (setq org-id-locations-file (expand-file-name ".org-id-locations" wenpin/EMACS-VAR)))
+(use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
 
-(use-package tramp :init (setq tramp-persistency-file-name (expand-file-name "tramp" wenpin/EMACS-VAR)))
+(use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
 
-(use-package image-dired :init (setq image-dired-dir (expand-file-name "image-dired" wenpin/EMACS-VAR)))
+(use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired")))
 
-(use-package transient :init (setq transient-history-file (expand-file-name "transient/history.el" wenpin/EMACS-VAR)))
+(use-package transient :init (setq transient-history-file (wenpin/locate-emacs-var-file "transient/history.el")))
 
-(use-package url-cookie :init (setq url-cookie-file (expand-file-name "url/cookies" wenpin/EMACS-VAR)))
+(use-package url-cookie :init (setq url-cookie-file (wenpin/locate-emacs-var-file "url/cookies")))
 
 (provide 'init-config)
 ;;; init-config ends here
