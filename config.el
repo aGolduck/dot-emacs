@@ -566,12 +566,6 @@
   :init
   (require 'bh-org)
   (setq org-directory "~/org"
-	org-agenda-files '("~/org/orgzly")
-	org-agenda-log-mode-items '(closed)
-	org-agenda-log-mode-items (quote (closed state))
-	org-agenda-show-future-repeats 'next
-	org-agenda-span 'month
-	org-agenda-tags-todo-honor-ignore-options t
 	org-archive-location "%s_archive::* Archived Tasks"
 	org-archive-mark-done nil
 	org-confirm-babel-evaluate nil
@@ -601,22 +595,47 @@
 		("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
 		("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
 		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-  (setq org-capture-templates
-	'(
-	  ("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
-	   "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	  ("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
-	   "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	  ("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
-	  ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
-	  ("s" "source code" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
-	  ("g" "template group")
-	  ("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
-	  ))
+  (add-hook 'org-mode-hook #'visual-line-mode)
+  (add-hook 'org-mode-hook #'valign-mode)
+  :config
+  ;; TODO ob-jshell
+  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
+  (defun org-babel-execute:jsh (body params)
+    "Execute a block of jshell code snippets or commands with org-babel"
+    (message "Executing jshell snippets")
+    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
+  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((awk . t)
+                                 (clojure . t)
+                                 (emacs-lisp . t)
+                                 (groovy . t)
+                                 (haskell . t)
+                                 (js . t)
+                                 (shell . t)
+                                 (typescript . t)))
+  (defadvice org-html-paragraph (before org-html-paragraph-advice
+					(paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to html."
+    (let* ((origin-contents (ad-get-arg 1))
+           (fix-regexp "[[:multibyte:]]")
+           (fixed-contents
+            (replace-regexp-in-string
+             (concat
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+      (ad-set-arg 1 fixed-contents)))
+  (define-key org-mode-map (kbd "C-<tab>") nil))
+
+(use-package org-agenda
+  :init
+  (setq org-agenda-restore-windows-after-quit t
+  	org-agenda-files '("~/org/orgzly")
+	org-agenda-log-mode-items '(closed)
+	org-agenda-log-mode-items (quote (closed state))
+	org-agenda-show-future-repeats 'next
+	org-agenda-span 'month
+	org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands
 	(quote (("A" "My Agenda"
 		 (
@@ -703,54 +722,38 @@
 		  )
 		 nil)
 		)))
-  (add-hook 'org-mode-hook #'visual-line-mode)
-  (add-hook 'org-mode-hook #'valign-mode)
   (global-set-key (kbd "C-c a") #'org-agenda)
-  (global-set-key (kbd "C-c c") #'org-capture)
   :config
-  (require 'ob-js)
-  ;; TODO ob-jshell
-  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
-  (defun org-babel-execute:jsh (body params)
-    "Execute a block of jshell code snippets or commands with org-babel"
-    (message "Executing jshell snippets")
-    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
-  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
-  (org-babel-do-load-languages 'org-babel-load-languages
-			       '((awk . t)
-                                 (clojure . t)
-                                 (emacs-lisp . t)
-                                 (groovy . t)
-                                 (haskell . t)
-                                 (js . t)
-                                 (shell . t)
-                                 (typescript . t)))
-  (defadvice org-html-paragraph (before org-html-paragraph-advice
-					(paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil))
-
-(use-package org-agenda
-  :init (setq org-agenda-restore-windows-after-quit t)
-  :config (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
+  (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
 
 (use-package org-alert
   :commands (org-alert-enable)
   :init
   (setq alert-default-style 'libnotify))
 
+(use-package org-capture
+  :init
+  (setq org-capture-templates
+	'(
+	  ("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
+	   "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	  ("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
+	   "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	  ("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
+	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
+	  ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
+	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
+	  ("s" "source code" entry (file+headline org-default-notes-file "NOTES")
+	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
+	  ("g" "template group")
+	  ("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
+	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
+	  ))
+  (global-set-key (kbd "C-c c") #'org-capture))
+
 (use-package org-cliplink)
 
 (use-package org-download
-  :after org
   :demand t
   ;; :init
   ;; FIXME org-link-unescape 不能 decode link
