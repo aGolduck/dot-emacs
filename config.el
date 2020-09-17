@@ -114,7 +114,7 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
-(use-package company-org-roam :after org-roam :config (push 'company-org-roam company-backends))
+(use-package company-org-roam :config (push 'company-org-roam company-backends))
 
 (use-package counsel
   :init
@@ -137,7 +137,6 @@
   (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
 
 (use-package dap-mode
-  :after lsp-mode
   :init
   (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
@@ -239,7 +238,7 @@
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
-(use-package esh-autosuggest :after esh-mode :commands (esh-autosuggest-mode))
+(use-package esh-autosuggest :commands (esh-autosuggest-mode))
 
 (use-package esh-mode
   :init
@@ -250,7 +249,7 @@
             (lambda ()
               (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input))))
 
-(use-package eshell-z :after esh-mode)
+(use-package eshell-z)
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
@@ -270,7 +269,7 @@
 
 (use-package flycheck :config (diminish 'flycheck-mode "检"))
 
-(use-package flycheck-posframe :after flycheck :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+(use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
 (use-package flymake-posframe
   :commands (flymake-posframe-mode)
@@ -282,7 +281,7 @@
 
 (use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 
-(use-package fuz :after (:any snails (:and ivy ivy-fuz)) :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+(use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 
 (use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
 
@@ -402,7 +401,7 @@
                               (tide-setup)
                               (unless (tide-current-server) (tide-restart-server))
                               (tide-hl-identifier-mode 1))))
-    (dolist (hooked (list
+  (dolist (hooked (list
                    #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
@@ -537,7 +536,6 @@
 
 (use-package magit-delta
   :if (equal (shell-command "command -v delta") 0)
-  :after magit
   :init (add-hook 'magit-mode-hook #'magit-delta-mode)
   :config (diminish 'magit-delta-mode ""))
 
@@ -628,8 +626,8 @@
 			      (org-agenda-todo-ignore-scheduled 'future)
 			      (org-agenda-skip-function
 			       (lambda ()
-				  (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
-				      (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
+				 (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
+				     (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
 			      (org-tags-match-list-sublevels t)
 			      (org-agenda-sorting-strategy
 			       '(todo-state-down priority-down effort-up category-keep))))
@@ -767,7 +765,6 @@ unwanted space when exporting org-mode to html."
   )
 
 (use-package org-journal
-  :after org
   :init
   (setq org-journal-dir "~/org/journal"
         org-journal-cache-file (wenpin/locate-emacs-var-file "org-journal.cache")
@@ -806,10 +803,9 @@ unwanted space when exporting org-mode to html."
         org-roam-server-label-wrap-length 20)
   (diminish 'org-roam-server-mode "图"))
 
-(use-package ox-hugo :after ox)
+(use-package ox-hugo)
 
 (use-package paredit
-  :after eldoc
   :commands (enable-paredit-mode)
   :init
   (dolist (hook (list
@@ -934,7 +930,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
- ;; smex is needed to order candidates for ivy
+;; smex is needed to order candidates for ivy
 (use-package smex :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
 
 (use-package snails
@@ -1000,7 +996,6 @@ That is, remove a non kept dired from the recent list."
 (use-package thing-edit)
 
 (use-package tide
-  :after (company flycheck)
   :init
   (setq tide-completion-detailed t
         tide-always-show-documentation t
@@ -1023,8 +1018,8 @@ That is, remove a non kept dired from the recent list."
                    ))
     (add-hook 'typescript-mode-hook hooked))
   (when (equal (shell-command "command -v tsserver") 0)
-      (dolist (hooked (list #'tide-setup #'tide-hl-identifier-mode))
-        (add-hook 'typescript-mode-hook hooked)))
+    (dolist (hooked (list #'tide-setup #'tide-hl-identifier-mode))
+      (add-hook 'typescript-mode-hook hooked)))
   ;; :config
   ;; (require 'company-lsp)
   ;; (push 'company-lsp company-backends)
