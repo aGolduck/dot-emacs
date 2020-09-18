@@ -11,9 +11,6 @@
   (setq exec-path (split-string (getenv "PATH") path-separator)))
 ;; M-SPC is key to my emacs world
 (global-unset-key (kbd "M-SPC"))
-;; accelerate loading init files, will be reset by gcmh
-(setq gc-cons-threshold 402653184
-      gc-cons-percentage 0.6)
 (defconst wenpin/HOST (substring (shell-command-to-string "hostname") 0 -1))
 (defconst wenpin/EMACS-VAR (locate-user-emacs-file "var"))
 (unless (file-exists-p wenpin/EMACS-VAR) (mkdir wenpin/EMACS-VAR))
@@ -71,10 +68,6 @@
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "settings"))
 ;; extra keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
-
-;;; post-init
-(tool-bar-mode -1)
-;; (toggle-frame-maximized)
 
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
