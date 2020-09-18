@@ -87,7 +87,9 @@
 
 (use-package ccls)
 
-(use-package clojure-mode)
+(use-package clojure-mode
+  :init
+  (add-hook 'clojure-mode-hook #'electric-pair-local-mode))
 
 (use-package color-rg
   :commands
@@ -1168,6 +1170,8 @@ That is, remove a non kept dired from the recent list."
 (use-package treemacs-projectile)
 
 ;; (use-package treemacs-magit :demand t)
+
+(use-package cider)
 
 (provide 'init-config)
 ;;; init-config ends here

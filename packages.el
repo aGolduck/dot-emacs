@@ -93,6 +93,7 @@
           'yaml-mode
           'yasnippet
           'zeal-at-point
+          'cider
           ))
   (straight-use-package wenpin/package))
 
