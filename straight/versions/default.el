@@ -20,7 +20,7 @@
  ("emacs-direnv" . "f5484b0fc33d4e5116612626294efb362ff9ecd4")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
  ("emacs-kv" . "721148475bce38a70e0b678ba8aa923652e8900e")
- ("emacs-libvterm" . "f41849c2c9c1899f22d1c3d4f871ec47c82627ce")
+ ("emacs-libvterm" . "14e4afdfc160b2e625c3e483d169786ac00cb4fe")
  ("emacs-request" . "912525c772984c6af0fd84acd6699ee43d91037a")
  ("emacs-rime" . "353a0bfee1bfe7f53d7e5cb9e9abedce60ca12a1")
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
