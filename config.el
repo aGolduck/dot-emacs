@@ -137,7 +137,7 @@
              dap-java-debug-test-class)
   :init
   (setq dap-java-test-runner
-        (locate-user-emacs-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+        (wenpin/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
   (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
 
 (use-package dap-mode
