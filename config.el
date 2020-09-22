@@ -531,6 +531,8 @@
   (setq lsp-session-file (wenpin/locate-emacs-var-file ".lsp-session-v1")
         lsp-server-install-dir (wenpin/locate-emacs-var-file ".cache/lsp"))
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+  ;; lsp-completion 使用 yas 补全，但没有补全完没有正确置空 yas--active-snippet，导致 auto-save 检测条件出错
+  (add-hook 'lsp-mode-hook #'yas-minor-mode-on)
   ;; TODO should only start after lsp starts
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
@@ -1115,8 +1117,6 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 
 (use-package yasnippet
-  :init
-  (add-hook 'java-mode-hook #'yas-minor-mode)
   :config
   ;; (define-key yas-minor-mode-map (kbd "<tab>") #'yas-expand)
   ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
