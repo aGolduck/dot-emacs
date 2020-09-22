@@ -942,6 +942,7 @@ That is, remove a non kept dired from the recent list."
 	rime-show-candidate 'posframe
 	rime-posframe-style 'simple)
   (global-set-key (kbd "M-t") #'toggle-input-method)
+  (global-set-key (kbd "s-SPC") #'toggle-input-method)
   :config
   (define-key rime-mode-map (kbd "C-`") #'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-S-`") #'rime-send-keybinding)
