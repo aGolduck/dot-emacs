@@ -70,7 +70,7 @@
  ("lsp-treemacs" . "08e256c45d2e95b510a98a8b88b0531e8785e519")
  ("lsp-ui" . "e49780e41d33b73882453f25675324aa4bebc9d0")
  ("magit" . "485ee181564655d21c0770a4e021f7b805f4d643")
- ("magit-delta" . "d988abd99882c6b89f21f2746f721a4d7ece6ad4")
+ ("magit-delta" . "f77e205956f4e4996db5b52670c61396d43b7aae")
  ("magit-todos" . "a0e5d1f3c7dfcb4f18c1b0d57f1746a4872df5c6")
  ("map" . "224054737dcafdb291862d5eda57c6ee7f585e95")
  ("markdown-mode" . "399df42755ccf31cecb61c9f5d8ad72bc30d7e4b")
