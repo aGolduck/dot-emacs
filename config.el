@@ -118,8 +118,6 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
-(use-package company-org-roam :config (push 'company-org-roam company-backends))
-
 (use-package counsel
   :init
   (global-set-key (kbd "M-y") #'counsel-yank-pop)
@@ -820,7 +818,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package org-roam
   :init
-  (setq org-roam-directory "~/org/roam"
+  (setq org-roam-directory (file-truename "~/org/roam")
+        org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
         org-roam-completion-system 'ivy)
   ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
   (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
