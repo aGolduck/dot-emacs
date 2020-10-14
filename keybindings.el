@@ -3,11 +3,18 @@
 
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
-Position the cursor at it's beginning, according to the current mode."
+Position the cursor at its beginning, according to the current mode."
   (interactive)
   (move-beginning-of-line nil)
   (newline-and-indent)
   (forward-line -1)
+  (indent-according-to-mode))
+(defun smart-open-line-below ()
+  "Insert an empty line below the current line.
+Position the cursor at its beginning, according to the current mode."
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent)
   (indent-according-to-mode))
 (defun wenpin/split-window-right ()
   "split-window-right with right window having a max width of 100 columns"
@@ -62,6 +69,7 @@ Position the cursor at it's beginning, according to the current mode."
 ;; menu
 ;; some win +
 ;; first class keybindings, 1 key
+(global-set-key (kbd "C-o") #'smart-open-line-below)
 (global-set-key (kbd "M-o") #'smart-open-line-above)
 ;; C-c zone
 ;;; M-Spc 2 key strokes zone
