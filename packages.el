@@ -22,7 +22,6 @@
           'ccls
           'clojure-mode
           'company
-          'company-org-roam
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           'dap-mode
           'devdocs
