@@ -93,6 +93,7 @@
           'yasnippet
           'zeal-at-point
           'cider
+          's
           ))
   (straight-use-package wenpin/package))
 
