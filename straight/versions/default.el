@@ -15,7 +15,7 @@
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dired-rsync" . "bfd5c155be1cb6b71c83e5f41116c81b6532b6d5")
  ("elisp-refs" . "0e7ea1574717108ddc2eda5e1bc883d44cd28257")
- ("emacs-application-framework" . "2bf07d71eeac548276addb50eb8c5c37380117d0")
+ ("emacs-application-framework" . "8d78471714d9e12d068ba3ee6c6be1542355dd79")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
  ("emacs-ccls" . "675a5704c14a27931e835a431beea3631d92e8e6")
  ("emacs-direnv" . "f5484b0fc33d4e5116612626294efb362ff9ecd4")
