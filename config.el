@@ -217,6 +217,12 @@
   (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
   (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
   (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
+  (defun eaf-find-file-advice (fn file &rest args)
+    (pcase (file-name-extension file)
+      ("pdf" (eaf-open file nil))
+      ("epub" (eaf-open file nil))
+      (_ (apply fn file args))))
+  (advice-add #'find-file :around #'eaf-find-file-advice)
   :config
   (when (string-equal wenpin/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
