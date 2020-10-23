@@ -914,7 +914,11 @@ unwanted space when exporting org-mode to html."
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
   (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
 
-(use-package ranger :init (global-set-key (kbd "M-r") #'ranger))
+(use-package ranger
+  :init
+  (setq ranger-map-style 'dired)
+  ;; (setq ranger-map-style 'emacs)
+  (global-set-key (kbd "M-r") #'ranger))
 
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
