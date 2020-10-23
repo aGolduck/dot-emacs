@@ -26,9 +26,9 @@
 ;;; fonts and faces
 (setq wenpin/font-default-height
       (cond
-       ((string-equal (getenv "HOME") "/Users/wenpin") 180)
-       ((string-match "xps" (or (getenv "DESKTOP_STARTUP_ID") "")) 108)
        (t 112)))
+       ((string-match wenpin/HOST "wenpin-iMac") 180)
+       ((string-match wenpin/HOST "xps") 108)
 ;; default font
 (set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin/font-default-height)
 ;; fallback font
