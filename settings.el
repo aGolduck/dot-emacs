@@ -28,7 +28,7 @@
       (cond
        ((string-match wenpin/HOST "wenpin-iMac") 180)
        ((string-match wenpin/HOST "xps") 108)
-       (t 112)))
+       (t 108)))
 ;; default font
 (set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin/font-default-height)
 ;; fallback font
