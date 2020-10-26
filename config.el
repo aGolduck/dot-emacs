@@ -922,6 +922,8 @@ unwanted space when exporting org-mode to html."
   :config
   (define-key ranger-emacs-mode-map (kbd "n") #'ranger-next-file)
   (define-key ranger-emacs-mode-map (kbd "p") #'ranger-prev-file)
+  (define-key ranger-emacs-mode-map (kbd "b") #'ranger-up-directory)
+  (define-key ranger-emacs-mode-map (kbd "f") #'ranger-find-file)
   (define-key ranger-emacs-mode-map (kbd "C-n") #'ranger-next-file)
   (define-key ranger-emacs-mode-map (kbd "C-p") #'ranger-prev-file))
 

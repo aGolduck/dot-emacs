@@ -6,6 +6,7 @@
       frame-resize-pixelwise t
       mac-command-modifier 'super
       mac-option-modifier 'meta
+      next-screen-context-lines 5
       nsm-trust-local-network t
       visible-bell t)
 (setq-default indent-tabs-mode nil
@@ -27,7 +28,8 @@
 (setq wenpin/font-default-height
       (cond
        ((string-match wenpin/HOST "wenpin-iMac") 180)
-       ((string-match wenpin/HOST "xps") 108)
+       ((string-match wenpin/HOST "xps") 112)
+       ((string-match wenpin/HOST "mo") 108)
        (t 108)))
 ;; default font
 (set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin/font-default-height)
