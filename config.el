@@ -635,6 +635,9 @@
   (add-hook 'org-mode-hook #'visual-line-mode)
   (add-hook 'org-mode-hook #'valign-mode)
   :config
+  ;; fix error of org-babel-js evaluation
+  (setq org-babel-js-function-wrapper
+      "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
   ;; TODO ob-jshell
   ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
   (defun org-babel-execute:jsh (body params)
