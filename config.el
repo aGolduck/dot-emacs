@@ -828,11 +828,14 @@ unwanted space when exporting org-mode to html."
 (use-package org-ql)
 
 (use-package org-roam
+  :commands (org-roam-dailies-today org-roam-dailies-capture-today)
   :init
   (setq org-roam-directory (file-truename "~/org/roam")
         org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
         org-roam-completion-system 'ivy)
   ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
+  (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
+  (global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
   (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
   (global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
   :config
