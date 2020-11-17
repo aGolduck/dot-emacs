@@ -309,7 +309,9 @@
 (use-package go-translate
   :init
   ;; (setq go-translate-base-url "https://translate.google.cn")
-  (setq go-translate-local-language "zh-CN"))
+  (setq go-translate-local-language "zh-CN")
+  :config
+  (defun go-translate-token--extract-tkk () (cons 430675 2721866130)))
 
 (use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
 
