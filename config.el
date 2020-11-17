@@ -1079,6 +1079,7 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
   :config
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
+  ;; TODO :inherit variable-pitch
   (set-face-attribute 'treemacs-file-face nil :height 0.9)
   (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light))
 

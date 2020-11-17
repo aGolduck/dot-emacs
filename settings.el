@@ -54,6 +54,7 @@
 (set-fontset-font t 'cjk-misc "Noto Sans CJK SC")
 ;; other faces
 (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
+;; TODO Iosevka was deleted from system
 (set-face-attribute 'fixed-pitch-serif nil :family "Iosevka Slab Extended")
 ;; using Noto Sans CJK to stop hight changing of tab-bar
 (set-face-attribute 'variable-pitch nil :family "Noto Sans CJK SC")
