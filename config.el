@@ -143,7 +143,21 @@
   (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
   :config
-  (dap-auto-configure-mode))
+  (dap-auto-configure-mode)
+  (dap-register-debug-template
+   "Java run"
+   (list :type "java"
+         :request "launch"
+         :args ""
+         :noDebug t
+         :cwd nil
+         :host "localhost"
+         :request "launch"
+         :modulePaths []
+         :classPaths nil
+         :name "JavaRun"
+         :projectName nil
+         :mainClass nil)))
 
 (use-package default-view :demand t)
 
