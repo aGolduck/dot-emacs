@@ -1213,5 +1213,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package cider)
 
+(use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
+
+(use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
+
 (provide 'init-config)
 ;;; init-config ends here
