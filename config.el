@@ -1217,5 +1217,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
+(use-package emmit-mode)
+
 (provide 'init-config)
 ;;; init-config ends here

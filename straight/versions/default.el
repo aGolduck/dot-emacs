@@ -28,6 +28,7 @@
  ("emacsmirror-mirror" . "5d8df117215e4d7e816bd63672cd467e532c662d")
  ("emacsql" . "a118b6c95af1306f0288a383d274b5dd93efbbda")
  ("emacsql-sqlite3" . "6db90f91516ca6a91e4a3e56d2cdc6c433cbfab8")
+ ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("esh-autosuggest" . "972094808d231a86dc6e43862191167b1997d840")
  ("eshell-z" . "337cb241e17bd472bd3677ff166a0800f684213c")

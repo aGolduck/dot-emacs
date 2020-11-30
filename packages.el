@@ -94,6 +94,7 @@
           'zeal-at-point
           'cider
           's
+          'emmet-mode
           ))
   (straight-use-package wenpin/package))
 
