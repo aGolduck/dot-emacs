@@ -1219,5 +1219,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package emmit-mode)
 
+(use-package org-pomodoro)
+
 (provide 'init-config)
 ;;; init-config ends here

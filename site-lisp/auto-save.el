@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; copied from https://github.com/manateelazycat/auto-save/blob/25ebe49d3da5ff050d97bbda408083375d78e479/auto-save.el
 
 (defgroup auto-save nil

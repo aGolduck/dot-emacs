@@ -95,6 +95,7 @@
           'cider
           's
           'emmet-mode
+          'org-pomodoro
           ))
   (straight-use-package wenpin/package))
 

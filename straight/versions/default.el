@@ -82,6 +82,7 @@
  ("org-cliplink" . "82402cae7e118d67de7328417fd018a18f95fac2")
  ("org-download" . "d740cca6d39e4ac9907d86a61bf4a40b908f9270")
  ("org-journal" . "6626bfe6128ab66df022c72df55966cc5dc73c3b")
+ ("org-pomodoro" . "aa07c11318f91219336197e62c47bc7a3d090479")
  ("org-ql" . "2c14903c7654fddeedf387937607aa2e1baaea60")
  ("org-roam" . "d70198bba9f78c00a87f67ff9eb8846f9b0ebba3")
  ("org-roam-server" . "5ea3d1403bd68af49ac0593a8cdff7514595d025")
