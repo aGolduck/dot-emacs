@@ -96,6 +96,7 @@
           's
           'emmet-mode
           'org-pomodoro
+          'crux
           ))
   (straight-use-package wenpin/package))
 

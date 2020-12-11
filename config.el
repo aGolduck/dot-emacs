@@ -1221,5 +1221,10 @@ That is, remove a non kept dired from the recent list."
 
 (use-package org-pomodoro)
 
+(use-package crux
+  :init
+  (global-set-key (kbd "C-o") #'crux-smart-open-line)
+  (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
+
 (provide 'init-config)
 ;;; init-config ends here

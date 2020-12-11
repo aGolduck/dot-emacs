@@ -10,6 +10,7 @@
  ("clojure-mode" . "84ed16c5ddb6561620886485e20669d0c81f88a1")
  ("color-rg" . "22b050fc0b9b8d13f10c5fbd4cf14980d2831dc8")
  ("company-mode" . "656ad10670512e135a0a5881f127bb7a789ef8ca")
+ ("crux" . "ba4a1f38eee0ae7597f67a1424bbf5c0c09473bf")
  ("dap-mode" . "35db94e81c592246675f300aaca4a70966b8a5fc")
  ("dash.el" . "732d92eac56023a4fb4a5dc3d9d4e274ebf44bf9")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
