@@ -1219,7 +1219,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package emmit-mode)
 
-(use-package org-pomodoro)
+(use-package org-pomodoro :init (global-set-key (kbd "M-c") #'org-pomodoro))
 
 (use-package crux
   :init
