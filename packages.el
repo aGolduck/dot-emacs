@@ -81,7 +81,7 @@
           'selectric-mode
           'shackle
           'smartparens
-          'smex
+          ;; 'smex
           'sudo-edit
           'swiper
           'tide
@@ -97,6 +97,10 @@
           'emmet-mode
           'org-pomodoro
           'crux
+          ;; 'selectrum
+          'prescient
+          'ivy-prescient
+          'company-prescient
           ))
   (straight-use-package wenpin/package))
 

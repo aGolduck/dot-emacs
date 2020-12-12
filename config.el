@@ -1011,9 +1011,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package smartparens :config (require 'smartparens-config))
 
-(use-package smex
-  ;; smex is needed to order candidates for ivy
-  :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
+;; (use-package smex
+;;   ;; smex is needed to order candidates for ivy
+;;   :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
 
 (use-package snails
   :if window-system
@@ -1225,6 +1225,12 @@ That is, remove a non kept dired from the recent list."
   :init
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
   (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
+
+(use-package prescient)
+
+(use-package ivy-prescient :init (add-hook 'counsel-mode-hook #'ivy-prescient-mode))
+
+(use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
 
 (provide 'init-config)
 ;;; init-config ends here
