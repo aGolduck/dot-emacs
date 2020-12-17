@@ -1228,7 +1228,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package prescient)
 
-(use-package ivy-prescient :init (add-hook 'counsel-mode-hook #'ivy-prescient-mode))
+(use-package ivy-prescient :init
+  (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
+  (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
 
 (use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
 
