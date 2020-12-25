@@ -11,6 +11,16 @@
       visible-bell t)
 (setq-default indent-tabs-mode nil
 	      line-spacing 0.2
+              header-line-format '(
+                                 "%e"
+                                 mode-line-front-space
+                                 mode-line-mule-info
+                                 mode-line-position
+                                 (vc-mode vc-mode)
+                                 mode-line-modes
+                                 mode-line-buffer-identification
+                                 mode-line-misc-info
+                                 mode-line-end-spaces)
               mode-line-format '(
                                  "%e"
                                  mode-line-front-space
@@ -28,7 +38,8 @@
 (setq wenpin/font-default-height
       (cond
        ((string-match wenpin/HOST "wenpin-iMac") 180)
-       ((string-match wenpin/HOST "xps") 112)
+       ((string-match wenpin/HOST "xps") 120) ;; font size: 16, 1.0 屏幕缩放
+       ;; ((string-match wenpin/HOST "xps") 96) ;; font size: 16, 1.25 屏幕缩放
        ((string-match wenpin/HOST "mo") 108)
        (t 108)))
 ;; default font
