@@ -1231,7 +1231,9 @@ That is, remove a non kept dired from the recent list."
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
   (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
 
-(use-package prescient)
+(use-package prescient
+  :commands (prescient-persist-mode)
+  :init (add-hook 'after-init-hook #'prescient-persist-mode))
 
 (use-package ivy-prescient :init
   (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
