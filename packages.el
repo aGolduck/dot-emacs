@@ -5,7 +5,7 @@
          (list
 	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
-          '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("app" "core" "*.el" "*.py"))
+          '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*"))
           '(flymake-posframe :host github :repo "Ladicle/flymake-posframe")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           '(ob-groovy :host github :repo "zweifisch/ob-groovy")
@@ -23,6 +23,7 @@
           'clojure-mode
           'company
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
+          'crux
           'dap-mode
           'devdocs
           'diminish
@@ -93,11 +94,13 @@
           'yasnippet
           'zeal-at-point
           'cider
-          's
           'emmet-mode
           'org-pomodoro
           'crux
           ;; 'selectrum
+          'epc
+          'ctable
+          'deferred
           'prescient
           'ivy-prescient
           'company-prescient

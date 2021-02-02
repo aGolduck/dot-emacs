@@ -225,6 +225,10 @@
   :if (eq system-type 'gnu/linux)
   :commands (eaf-browser-restore-buffers eaf-open-this-from-dired)
   :init
+  (use-package epc)
+  (use-package ctable)
+  (use-package deferred)
+  (use-package s)
   (setq browse-url-browser-function 'eaf-open-browser
         eaf-browser-continue-where-left-off t)
   (defalias 'browse-web #'eaf-open-browser)
