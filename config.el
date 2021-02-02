@@ -120,14 +120,11 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
-(use-package counsel
+(use-package crux
   :init
-  (global-set-key (kbd "M-y") #'counsel-yank-pop)
-  (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
-  (global-set-key (kbd "M-SPC b j") #'counsel-bookmark)
-  (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
-  (global-set-key (kbd "C-h f") #'counsel-describe-function)
-  (global-set-key (kbd "C-h v") #'counsel-describe-variable))
+  (global-set-key (kbd "C-o") #'crux-smart-open-line)
+  (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
+
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
 (use-package dap-java
@@ -187,8 +184,8 @@
               (dolist (mode (list
 			     'flymake-posframe-mode
 			     'gcmh-mode
-			     'ivy-mode
-			     'ivy-posframe-mode
+			     ;; 'ivy-mode
+			     ;; 'ivy-posframe-mode
                              'winner-mode
                              'selectric-mode
                              'subword-mode
@@ -268,6 +265,8 @@
 (use-package elisp-mode :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+
+(use-package emmit-mode)
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
@@ -412,39 +411,35 @@
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
 
-(use-package ivy
-  :init
-  (setq ivy-use-virtual-buffers t
-	enable-recursive-minibuffers t)
-  (add-hook 'after-init-hook #'ivy-mode)
-  (global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
-  (global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window))
+;; (use-package ivy-hydra)
 
-(use-package ivy-hydra)
+;; (use-package ivy-posframe
+;;   :init
+;;   (setq ivy-posframe-display-functions-alist
+;; 	'(
+;; 	  ;; (swiper . ivy-posframe-display-at-point)
+;; 	  (t . ivy-posframe-display-at-frame-center)))
+;;   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
+;;   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
+;;   (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
+;;   (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
 
-(use-package ivy-posframe
-  :init
-  (setq ivy-posframe-display-functions-alist
-	'(
-	  ;; (swiper . ivy-posframe-display-at-point)
-	  (t . ivy-posframe-display-at-frame-center)))
-  ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
-  ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
-  (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
-  (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
+;; (use-package ivy-prescient :init
+;;   (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
+;;   (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
 
-(use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
+;; (use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
 
-(use-package ivy-xref
-  :init
-  ;; xref initialization is different in Emacs 27 - there are two different
-  ;; variables which can be set rather than just one
-  (when (>= emacs-major-version 27)
-    (setq xref-show-definitions-function #'ivy-xref-show-defs))
-  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-  ;; as well
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+;; (use-package ivy-xref
+;;   :init
+;;   ;; xref initialization is different in Emacs 27 - there are two different
+;;   ;; variables which can be set rather than just one
+;;   (when (>= emacs-major-version 27)
+;;     (setq xref-show-definitions-function #'ivy-xref-show-defs))
+;;   ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+;;   ;; as well
+;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package js-mode
   :init
@@ -523,7 +518,7 @@
   (add-hook 'after-init-hook #'keyfreq-mode)
   (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
-(use-package lsp-ivy)
+;; (use-package lsp-ivy)
 
 (use-package lsp-java
   :init
@@ -858,7 +853,8 @@ unwanted space when exporting org-mode to html."
   :init
   (setq org-roam-directory (file-truename "~/org/roam")
         org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
-        org-roam-completion-system 'ivy)
+        ;; org-roam-completion-system 'ivy
+        )
   ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
   (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
   (global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
@@ -934,7 +930,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package projectile
   :init
-  (setq projectile-completion-system 'ivy
+  (setq ;; projectile-completion-system 'ivy
         projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
         projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
         projectile-mode-line-prefix "项")
@@ -1184,7 +1180,24 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package battery)
 
+;; (use-package counsel
+;;   :init
+;;   (global-set-key (kbd "M-y") #'counsel-yank-pop)
+;;   (global-set-key (kbd "M-SPC SPC") #'counsel-M-x)
+;;   (global-set-key (kbd "M-SPC b j") #'counsel-bookmark)
+;;   (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
+;;   (global-set-key (kbd "C-h f") #'counsel-describe-function)
+;;   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
+
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
+
+;; (use-package ivy
+;;   :init
+;;   (setq ivy-use-virtual-buffers t
+;; 	enable-recursive-minibuffers t)
+;;   (add-hook 'after-init-hook #'ivy-mode)
+;;   (global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
+;;   (global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window))
 
 ;; (use-package lsp-java-boot
 ;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
@@ -1230,25 +1243,51 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package treemacs-magit :demand t)
 
+(use-package mini-frame :init (add-hook 'after-init-hook #'mini-frame-mode))
 
-
-
-
-
-(use-package crux
+(use-package selectrum
   :init
-  (global-set-key (kbd "C-o") #'crux-smart-open-line)
-  (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
+  ;; (defun display-buffer-show-in-posframe (buffer _alist)
+  ;;   (frame-root-window
+  ;;    (posframe-show buffer
+  ;;                   :min-height 10
+  ;;                   :min-width (frame-width)
+  ;;                   :internal-border-width 1
+  ;;                   :left-fringe 8
+  ;;                   :right-fringe 8
+  ;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
+  ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
+  ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
+  (setq magit-completing-read-function #'selectrum-completing-read)
+  (add-hook 'after-init-hook #'selectrum-mode))
 
 (use-package prescient
   :commands (prescient-persist-mode)
   :init (add-hook 'after-init-hook #'prescient-persist-mode))
 
-(use-package ivy-prescient :init
-  (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
-  (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
-
 (use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
+
+(use-package selectrum-prescient :init (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode))
+
+(use-package simple
+  :init
+  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command))
+
+(use-package consult
+  :init
+  (setq-default consult-project-root-function #'projectile-project-root)
+  (global-set-key (kbd "M-SPC f r") #'consult-recent-file))
+
+(use-package marginalia
+  :init
+  (add-hook 'after-init-hook 'marginalia-mode)
+  (setq-default marginalia-annotators '(marginalia-annotators-heavy)))
+
+;; (use-package embark
+;;   :config
+;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
+
+;; (use-package embark-consult)
 
 (provide 'init-config)
 ;;; init-config ends here

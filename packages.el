@@ -95,14 +95,20 @@
           'yaml-mode
           'yasnippet
           'zeal-at-point
-          'crux
-          ;; 'selectrum
           'epc
           'ctable
           'deferred
+          'selectrum
           'prescient
-          'ivy-prescient
           'company-prescient
+          'ivy-prescient
+          'selectrum-prescient
+          'consult
+          'orderless
+          'marginalia
+          'embark
+          'embark-consult
+          'mini-frame
           ))
   (straight-use-package wenpin/package))
 
