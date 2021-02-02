@@ -843,6 +843,8 @@ unwanted space when exporting org-mode to html."
         org-journal-time-prefix "** "
         org-journal-time-format "%R "))
 
+(use-package org-pomodoro :init (global-set-key (kbd "M-c") #'org-pomodoro))
+
 (use-package org-ql)
 
 (use-package org-roam
@@ -1011,13 +1013,11 @@ That is, remove a non kept dired from the recent list."
   (setq selectric-affected-bindings-list nil)
   (add-hook 'after-init-hook #'selectric-mode))
 
+(use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
+
 (use-package simple)
 
 (use-package smartparens :config (require 'smartparens-config))
-
-;; (use-package smex
-;;   ;; smex is needed to order candidates for ivy
-;;   :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
 
 (use-package snails
   :if window-system
@@ -1110,6 +1110,8 @@ That is, remove a non kept dired from the recent list."
     (interactive)
     (ignore-errors (dotimes (i 5) (windmove-left))))
   (global-set-key (kbd "M-n") #'wenpin/treemacs-goto-treemacs))
+
+(use-package treemacs-projectile)
 
 (use-package typescript-mode
   :init

@@ -10,7 +10,6 @@
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           '(ob-groovy :host github :repo "zweifisch/ob-groovy")
           '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
-          '(snails :host github :repo "manateelazycat/snails" :fork (:host nil :repo "git@github.com:wpchou/snails.git") :files ("*.el" "*.sh" "*.ps1") :no-byte-compile t)
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
@@ -20,6 +19,7 @@
           'autodisass-java-bytecode
           'avy
           'ccls
+          'cider
           'clojure-mode
           'company
           'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
@@ -30,6 +30,7 @@
           'dired-rsync
           'direnv
           'dotenv-mode
+          'emmet-mode
           'esh-autosuggest
           'eshell-z
           'eterm-256color
@@ -40,6 +41,7 @@
           'go-translate
           'graphql-mode
           'groovy-mode
+          'guix
           'haskell-mode
           'helpful
           'highlight-indent-guides
@@ -63,10 +65,10 @@
           'markdown-mode
           'ob-typescript
           'olivetti
-          'org-alert
           'org-cliplink
           'org-download
           'org-journal
+          'org-pomodoro
           'org-ql
           'org-roam
           'org-roam-server
@@ -79,10 +81,10 @@
           'ranger
           'rime
           'rust-mode
+          's
           'selectric-mode
           'shackle
           'smartparens
-          ;; 'smex
           'sudo-edit
           'swiper
           'tide
@@ -93,9 +95,6 @@
           'yaml-mode
           'yasnippet
           'zeal-at-point
-          'cider
-          'emmet-mode
-          'org-pomodoro
           'crux
           ;; 'selectrum
           'epc
