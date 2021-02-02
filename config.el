@@ -87,6 +87,8 @@
 
 (use-package ccls)
 
+(use-package cider)
+
 (use-package clojure-mode
   :init
   (add-hook 'clojure-mode-hook #'electric-pair-local-mode))
@@ -126,6 +128,7 @@
   (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
+(use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
 (use-package dap-java
   :commands (dap-java-debug
@@ -342,6 +345,8 @@
   (add-hook 'groovy-mode-hook #'company-mode)
   (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
+(use-package guix)
+
 (use-package haskell-mode)
 
 (use-package helpful
@@ -523,6 +528,7 @@
 (use-package lsp-java
   :init
   (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace"))
+  (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
   (add-hook 'java-mode-hook #'paredit-mode)
@@ -1209,6 +1215,10 @@ That is, remove a non kept dired from the recent list."
 ;;    )
 ;;   (add-hook 'after-init-hook #'shackle-mode))
 
+;; (use-package smex
+;;   ;; smex is needed to order candidates for ivy
+;;   :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
+
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
 ;; (use-package term-cursor
@@ -1218,19 +1228,12 @@ That is, remove a non kept dired from the recent list."
 ;;                                lsp-ui-doc-frame-hook))
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
-(use-package treemacs-projectile)
-
 ;; (use-package treemacs-magit :demand t)
 
-(use-package cider)
 
-(use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
 
-(use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
-(use-package emmit-mode)
 
-(use-package org-pomodoro :init (global-set-key (kbd "M-c") #'org-pomodoro))
 
 (use-package crux
   :init
