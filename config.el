@@ -408,6 +408,7 @@
 (use-package isearch
   :config
   (global-set-key (kbd "C-s") #'isearch-forward-regexp)
+  (global-set-key (kbd "C-M-s") #'isearch-forward)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
 
@@ -1276,7 +1277,10 @@ That is, remove a non kept dired from the recent list."
 (use-package consult
   :init
   (setq-default consult-project-root-function #'projectile-project-root)
-  (global-set-key (kbd "M-SPC f r") #'consult-recent-file))
+  (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
+  ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
+  ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
+  )
 
 (use-package marginalia
   :init
