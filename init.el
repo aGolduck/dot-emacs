@@ -69,9 +69,6 @@
 ;; extra keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
-
-(tab-bar-mode 1)
-
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)

@@ -168,14 +168,6 @@
         desktop-globals-to-save '()
         desktop-files-not-to-save ".*"
         desktop-buffers-not-to-save ".*"
-        desktop-minor-mode-table '((defining-kbd-macro nil)
-                                   (isearch-mode nil)
-                                   (vc-mode nil)
-                                   (vc-dir-mode nil)
-                                   (erc-track-minor-mode nil)
-                                   (savehist-mode nil)
-                                   (tab-bar-mode nil)
-                                  )
         desktop-save t)
   (add-hook 'after-init-hook
             (lambda ()
@@ -1082,8 +1074,7 @@ That is, remove a non kept dired from the recent list."
           (let* ((buffer (window-buffer (minibuffer-selected-window)))
                  (file-name (buffer-file-name buffer)))
             (if file-name file-name (format "%s" buffer)))))
-  ;; (add-hook 'after-init-hook #'tab-bar-mode)
-  )
+  (add-hook 'after-init-hook #'tab-bar-mode))
 
 (use-package tab-line
   :if (> emacs-major-version 26)
@@ -1287,7 +1278,6 @@ That is, remove a non kept dired from the recent list."
   :init
   (setq-default consult-project-root-function #'projectile-project-root)
   (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
-  (global-set-key (kbd "M-SPC b b") #'consult-buffer)
   ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
   ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
   )
