@@ -1074,7 +1074,8 @@ That is, remove a non kept dired from the recent list."
           (let* ((buffer (window-buffer (minibuffer-selected-window)))
                  (file-name (buffer-file-name buffer)))
             (if file-name file-name (format "%s" buffer)))))
-  (add-hook 'after-init-hook #'tab-bar-mode))
+  ;; (add-hook 'after-init-hook #'tab-bar-mode)
+  )
 
 (use-package tab-line
   :if (> emacs-major-version 26)
