@@ -951,9 +951,9 @@ unwanted space when exporting org-mode to html."
     "Report project name shortened and type in the modeline."
     (let* ((project-name (projectile-project-name))
            (project-type (projectile-project-type))
-           (shortened-project-name (if (< (length project-name) 20)
+           (shortened-project-name (if (< (length project-name) 10)
                                        project-name
-                                     (concat (substring project-name 0 12) "..." (substring project-name -3 nil)))))
+                                     (concat (substring project-name 0 7) "..." (substring project-name -3 nil)))))
     (format "%s[%s%s]"
             projectile-mode-line-prefix
             (or shortened-project-name "-")
