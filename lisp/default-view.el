@@ -20,6 +20,7 @@
 (defvar wenpin/view-mode-buffers nil)
 (defun wenpin/view-mode-hook-for-find-file ()
   (if (or
+       (string-match-p ".emacs.d/var" (buffer-file-name))
        (string-match-p "org/orgzly" (buffer-file-name))
        (string-match-p "org/roam" (buffer-file-name))
        (string-match-p "org/journal" (buffer-file-name))
