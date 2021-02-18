@@ -1284,12 +1284,13 @@ That is, remove a non kept dired from the recent list."
                                (height . 1)
                                (vertical-scroll-bars . nil)))
   (add-hook 'window-configuration-change-hook
-            (lambda () (setq mini-frame-show-parameters
-                             `((left . ,(truncate (/ (frame-pixel-width) 10)))
-                               (top . ,(truncate (* (frame-pixel-height) 0.3)))
-                               (width . 0.8)
-                               (height . 1)
-                               (vertical-scroll-bars . nil)))))
+            (lambda () (when (> (frame-pixel-height) 100)  ;; exclude mini-frame
+                         (setq mini-frame-show-parameters
+                               `((left . ,(truncate (/ (frame-pixel-width) 10)))
+                                 (top . ,(truncate (* (frame-pixel-height) 0.3)))
+                                 (width . 0.8)
+                                 (height . 1)
+                                 (vertical-scroll-bars . nil))))))
   (add-hook 'after-init-hook #'mini-frame-mode))
 
 (use-package selectrum
