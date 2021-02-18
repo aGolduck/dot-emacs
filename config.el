@@ -1314,6 +1314,7 @@ That is, remove a non kept dired from the recent list."
 (use-package consult
   :init
   (setq-default consult-project-root-function #'projectile-project-root)
+  (global-set-key (kbd "M-SPC b b") #'consult-buffer)
   (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
   ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
   ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
