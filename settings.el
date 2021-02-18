@@ -17,18 +17,19 @@
                                  mode-line-mule-info
                                  mode-line-position
                                  (vc-mode vc-mode)
-                                 mode-line-modes
+                                 " "
+                                 ;; mode-line-modes
                                  mode-line-buffer-identification
-                                 mode-line-misc-info
+                                 ;; mode-line-misc-info
                                  mode-line-end-spaces)
               mode-line-format '(
                                  "%e"
                                  mode-line-front-space
-                                 mode-line-mule-info
-                                 mode-line-position
-                                 (vc-mode vc-mode)
+                                 ;; mode-line-mule-info
+                                 ;; mode-line-position
+                                 ;; (vc-mode vc-mode)
                                  mode-line-modes
-                                 mode-line-buffer-identification
+                                 ;; mode-line-buffer-identification
                                  mode-line-misc-info
                                  mode-line-end-spaces)
               frame-title-format '(buffer-file-name "%f" "%b"))
