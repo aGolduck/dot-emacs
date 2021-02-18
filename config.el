@@ -938,9 +938,23 @@ unwanted space when exporting org-mode to html."
 
 (use-package projectile
   :init
+  (defun wenpin/projectile-shortened-mode-line ()
+    "Report project name shortened and type in the modeline."
+    (let* ((project-name (projectile-project-name))
+           (project-type (projectile-project-type))
+           (shortened-project-name (if (< (length project-name) 20)
+                                       project-name
+                                     (concat (substring project-name 0 12) "..." (substring project-name -3 nil)))))
+    (format "%s[%s%s]"
+            projectile-mode-line-prefix
+            (or shortened-project-name "-")
+            (if project-type
+                (format ":%s" project-type)
+              ""))))
   (setq ;; projectile-completion-system 'ivy
         projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
         projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
+        projectile-mode-line-function 'wenpin/projectile-shortened-mode-line
         projectile-mode-line-prefix "项")
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
