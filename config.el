@@ -168,13 +168,13 @@
         desktop-globals-to-save '()
         desktop-files-not-to-save ".*"
         desktop-buffers-not-to-save ".*"
-        desktop-minor-mode-table '((defining-kbd-macro nil)
-                                   (isearch-mode nil)
-                                   (vc-mode nil)
-                                   (vc-dir-mode nil)
-                                   (erc-track-minor-mode nil)
-                                   (savehist-mode nil)
-                                   (tab-bar-mode nil))
+        ;; desktop-minor-mode-table '((defining-kbd-macro nil)
+        ;;                            (isearch-mode nil)
+        ;;                            (vc-mode nil)
+        ;;                            (vc-dir-mode nil)
+        ;;                            (erc-track-minor-mode nil)
+        ;;                            (savehist-mode nil)
+        ;;                            (tab-bar-mode nil))
         desktop-save t)
   (add-hook 'after-init-hook
             (lambda ()
