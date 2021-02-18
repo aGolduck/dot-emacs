@@ -1313,6 +1313,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package consult
   :init
+  (setq consult-preview-key nil)
   (setq-default consult-project-root-function #'projectile-project-root)
   (global-set-key (kbd "M-SPC b b") #'consult-buffer)
   (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
