@@ -530,7 +530,13 @@
 
 (use-package lsp-java
   :init
-  (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace"))
+  (setq wenpin/path-to-lombok "/usr/share/java/lombok.jar")
+  (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace")
+        lsp-java-vmargs `("-noverify"
+                          "-Xmx1G" "-XX:+UseG1GC"
+                          "-XX:+UseStringDeduplication"
+                          ,(concat "-javaagent:" wenpin/path-to-lombok)
+                          ,(concat "-Xbootclasspath/a:" wenpin/path-to-lombok)))
   (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
