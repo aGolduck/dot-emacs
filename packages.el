@@ -22,7 +22,7 @@
           'cider
           'clojure-mode
           'company
-          'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
+          ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           'crux
           'dap-mode
           'devdocs
@@ -46,14 +46,14 @@
           'helpful
           'highlight-indent-guides
           'hl-todo
-          'ivy
-          'ivy-hydra
-          'ivy-posframe
-          'ivy-rich
-          'ivy-xref
+          ;; 'ivy
+          ;; 'ivy-hydra
+          ;; 'ivy-posframe
+          ;; 'ivy-rich
+          ;; 'ivy-xref
           'json-mode
           'keyfreq
-          'lsp-ivy
+          ;; 'lsp-ivy
           'lsp-java
           'lsp-mode
           'lsp-python-ms
@@ -86,7 +86,7 @@
           'shackle
           'smartparens
           'sudo-edit
-          'swiper
+          ;; 'swiper
           'tide
           'transient
           'treemacs
@@ -101,7 +101,7 @@
           'selectrum
           'prescient
           'company-prescient
-          'ivy-prescient
+          ;; 'ivy-prescient
           'selectrum-prescient
           'consult
           'orderless
