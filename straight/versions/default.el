@@ -71,7 +71,7 @@
  ("log4e" . "7df0c1ff4656f8f993b87064b1567618eadb5546")
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
  ("lsp-java" . "260016236fa0520b5b6ec7f51ca2086288524cba")
- ("lsp-mode" . "4db1151dbf1fe84769433d841e90803448b0b354")
+ ("lsp-mode" . "c4daa529a1bbaffb4e73a33851ed70ce509baa01")
  ("lsp-python-ms" . "7a502e6c09456cbe8b5f6c64883c79f5ce08e5a9")
  ("lsp-treemacs" . "08e256c45d2e95b510a98a8b88b0531e8785e519")
  ("lsp-ui" . "e49780e41d33b73882453f25675324aa4bebc9d0")
