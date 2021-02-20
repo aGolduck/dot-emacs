@@ -673,6 +673,125 @@
 		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
   (add-hook 'org-mode-hook #'visual-line-mode)
   (add-hook 'org-mode-hook #'valign-mode)
+  (use-package org-agenda
+    :init
+    (setq org-agenda-restore-windows-after-quit t
+  	  org-agenda-files '("~/org/orgzly")
+	  org-agenda-log-mode-items '(closed)
+	  org-agenda-log-mode-items (quote (closed state))
+	  org-agenda-show-future-repeats 'next
+	  org-agenda-span 'month
+	  org-agenda-tags-todo-honor-ignore-options t)
+    (setq org-agenda-custom-commands
+	  (quote (("A" "My Agenda"
+		   (
+		    (tags-todo "-@office/!"
+			       ((org-agenda-overriding-header "Next Actions")
+			        (org-agenda-tags-todo-honor-ignore-options t)
+			        (org-agenda-todo-ignore-scheduled 'future)
+			        (org-agenda-skip-function
+			         (lambda ()
+				   (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
+				       (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
+			        (org-tags-match-list-sublevels t)
+			        (org-agenda-sorting-strategy
+			         '(todo-state-down priority-down effort-up category-keep))))
+		    (tags-todo "-CANCELLED/!NEXT"
+		               ((org-agenda-overriding-header (concat "Project Next Tasks"
+		                                                      (if bh/hide-scheduled-and-waiting-next-tasks
+		                                                          ""
+		                                                        " (including WAITING and SCHEDULED tasks)")))
+		                (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+		                (org-tags-match-list-sublevels t)
+		                (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-sorting-strategy
+		                 '(todo-state-down effort-up category-keep))))
+		    (tags "REFILE/!TODO"
+			  ((org-agenda-overriding-header "Tasks to Refile")
+			   (org-agenda-todo-ignore-scheduled 'future)
+			   (org-agenda-todo-ignore-deadlines 'future)
+			   (org-tags-match-list-sublevels nil)))
+		    (tags-todo "-CANCELLED/!"
+		               ((org-agenda-overriding-header "Stuck Projects")
+		                (org-agenda-skip-function 'bh/skip-non-stuck-projects)
+		                (org-agenda-sorting-strategy
+		                 '(category-keep))))
+		    (tags-todo "-HOLD-CANCELLED/!"
+		               ((org-agenda-overriding-header "Projects")
+		                (org-agenda-skip-function 'bh/skip-non-projects)
+		                (org-tags-match-list-sublevels 'indented)
+		                (org-agenda-sorting-strategy
+		                 '(category-keep))))
+		    (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
+		               ((org-agenda-overriding-header (concat "Project Subtasks"
+		                                                      (if bh/hide-scheduled-and-waiting-next-tasks
+		                                                          ""
+		                                                        " (including WAITING and SCHEDULED tasks)")))
+		                (org-agenda-skip-function 'bh/skip-non-project-tasks)
+		                (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-sorting-strategy
+		                 '(category-keep))))
+		    (tags-todo "-REFILE-CANCELLED-WAITING-HOLD-CONTEXT/!"
+		               ((org-agenda-overriding-header (concat "Standalone Tasks"
+		                                                      (if bh/hide-scheduled-and-waiting-next-tasks
+		                                                          ""
+		                                                        " (including WAITING and SCHEDULED tasks)")))
+		                (org-agenda-skip-function 'bh/skip-project-tasks)
+		                (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+		                (org-agenda-sorting-strategy
+		                 '(category-keep))))
+		    )
+		   nil)
+		  ("g" . "goto context")
+		  ("ga" "year agenda" agenda ""  ((org-agenda-span 'year)
+						  (org-agenda-start-on-weekday nil)
+						  (org-agenda-show-future-repeats nil)
+						  ))
+		  ("go" "Office" tags-todo "@office" ((org-agenda-sorting-strategy
+						       '(todo-state-down priority-down effort-up category-keep tsia-down))))
+		  ("gN" "Night" tags-todo "@night")
+		  ("gn" "noon" tags-todo "@noon")
+		  ("gb" "bus" tags-todo "@bus")
+		  ("gl" "later" tags-todo "LATER")
+		  ("G" "Context block agenda"
+		   ((tags-todo "@office")
+		    (tags-todo "@night")
+		    (tags-todo "@noon")
+		    (tags-todo "@bus")
+		    (tags-todo "LATER")
+		    )
+		   nil)
+		  )))
+    (global-set-key (kbd "C-c a") #'org-agenda)
+    :config
+    (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
+  (use-package org-capture
+    :init
+    (setq org-capture-templates
+	  '(
+	    ("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
+	     "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	    ("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
+	     "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	    ("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
+	     "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
+	    ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
+	     "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
+	    ("s" "source code" entry (file+headline org-default-notes-file "NOTES")
+	     "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
+	    ("g" "template group")
+	    ("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
+	     "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
+	    ))
+    (global-set-key (kbd "C-c c") #'org-capture))
+  (use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
+  ;; (use-package org-colview)
   :config
   ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
@@ -706,129 +825,10 @@ unwanted space when exporting org-mode to html."
       (ad-set-arg 1 fixed-contents)))
   (define-key org-mode-map (kbd "C-<tab>") nil))
 
-(use-package org-agenda
-  :init
-  (setq org-agenda-restore-windows-after-quit t
-  	org-agenda-files '("~/org/orgzly")
-	org-agenda-log-mode-items '(closed)
-	org-agenda-log-mode-items (quote (closed state))
-	org-agenda-show-future-repeats 'next
-	org-agenda-span 'month
-	org-agenda-tags-todo-honor-ignore-options t)
-  (setq org-agenda-custom-commands
-	(quote (("A" "My Agenda"
-		 (
-		  (tags-todo "-@office/!"
-			     ((org-agenda-overriding-header "Next Actions")
-			      (org-agenda-tags-todo-honor-ignore-options t)
-			      (org-agenda-todo-ignore-scheduled 'future)
-			      (org-agenda-skip-function
-			       (lambda ()
-				 (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
-				     (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
-			      (org-tags-match-list-sublevels t)
-			      (org-agenda-sorting-strategy
-			       '(todo-state-down priority-down effort-up category-keep))))
-		  (tags-todo "-CANCELLED/!NEXT"
-		             ((org-agenda-overriding-header (concat "Project Next Tasks"
-		                                                    (if bh/hide-scheduled-and-waiting-next-tasks
-		                                                        ""
-		                                                      " (including WAITING and SCHEDULED tasks)")))
-		              (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
-		              (org-tags-match-list-sublevels t)
-		              (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-sorting-strategy
-		               '(todo-state-down effort-up category-keep))))
-		  (tags "REFILE/!TODO"
-			((org-agenda-overriding-header "Tasks to Refile")
-			 (org-agenda-todo-ignore-scheduled 'future)
-			 (org-agenda-todo-ignore-deadlines 'future)
-			 (org-tags-match-list-sublevels nil)))
-		  (tags-todo "-CANCELLED/!"
-		             ((org-agenda-overriding-header "Stuck Projects")
-		              (org-agenda-skip-function 'bh/skip-non-stuck-projects)
-		              (org-agenda-sorting-strategy
-		               '(category-keep))))
-		  (tags-todo "-HOLD-CANCELLED/!"
-		             ((org-agenda-overriding-header "Projects")
-		              (org-agenda-skip-function 'bh/skip-non-projects)
-		              (org-tags-match-list-sublevels 'indented)
-		              (org-agenda-sorting-strategy
-		               '(category-keep))))
-		  (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
-		             ((org-agenda-overriding-header (concat "Project Subtasks"
-		                                                    (if bh/hide-scheduled-and-waiting-next-tasks
-		                                                        ""
-		                                                      " (including WAITING and SCHEDULED tasks)")))
-		              (org-agenda-skip-function 'bh/skip-non-project-tasks)
-		              (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-sorting-strategy
-		               '(category-keep))))
-		  (tags-todo "-REFILE-CANCELLED-WAITING-HOLD-CONTEXT/!"
-		             ((org-agenda-overriding-header (concat "Standalone Tasks"
-		                                                    (if bh/hide-scheduled-and-waiting-next-tasks
-		                                                        ""
-		                                                      " (including WAITING and SCHEDULED tasks)")))
-		              (org-agenda-skip-function 'bh/skip-project-tasks)
-		              (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
-		              (org-agenda-sorting-strategy
-		               '(category-keep))))
-		  )
-		 nil)
-		("g" . "goto context")
-		("ga" "year agenda" agenda ""  ((org-agenda-span 'year)
-						(org-agenda-start-on-weekday nil)
-						(org-agenda-show-future-repeats nil)
-						))
-		("go" "Office" tags-todo "@office" ((org-agenda-sorting-strategy
-						     '(todo-state-down priority-down effort-up category-keep tsia-down))))
-		("gN" "Night" tags-todo "@night")
-		("gn" "noon" tags-todo "@noon")
-		("gb" "bus" tags-todo "@bus")
-		("gl" "later" tags-todo "LATER")
-		("G" "Context block agenda"
-		 ((tags-todo "@office")
-		  (tags-todo "@night")
-		  (tags-todo "@noon")
-		  (tags-todo "@bus")
-		  (tags-todo "LATER")
-		  )
-		 nil)
-		)))
-  (global-set-key (kbd "C-c a") #'org-agenda)
-  :config
-  (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
-
-(use-package org-alert
-  :commands (org-alert-enable)
-  :init
-  (setq alert-default-style 'libnotify))
-
-(use-package org-capture
-  :init
-  (setq org-capture-templates
-	'(
-	  ("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
-	   "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	  ("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
-	   "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	  ("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
-	  ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
-	  ("s" "source code" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
-	  ("g" "template group")
-	  ("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
-	   "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
-	  ))
-  (global-set-key (kbd "C-c c") #'org-capture))
+;; (use-package org-alert
+;;   :commands (org-alert-enable)
+;;   :init
+;;   (setq alert-default-style 'libnotify))
 
 (use-package org-cliplink)
 
@@ -845,8 +845,6 @@ unwanted space when exporting org-mode to html."
   ;;       '(lambda (link)
   ;;          (org-download-annotate-default (org-link-unescape link))))
   )
-
-(use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
 
 (use-package org-journal
   :init
