@@ -72,3 +72,6 @@
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)
+
+(desktop-read)
+(tab-bar-mode 1)

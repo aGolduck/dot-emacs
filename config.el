@@ -166,6 +166,7 @@
   (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") wenpin/EMACS-VAR)
         desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") wenpin/EMACS-VAR)
         desktop-globals-to-save '()
+        desktop-locals-to-save '()
         desktop-files-not-to-save ".*"
         desktop-buffers-not-to-save ".*"
         desktop-minor-mode-table '((defining-kbd-macro nil)
@@ -176,11 +177,11 @@
                                    (savehist-mode nil)
                                    (tab-bar-mode nil))
         desktop-save t)
+  (add-hook 'desktop-save-hook (lambda () (tab-bar-mode -1)))
   (add-hook 'after-init-hook
             (lambda ()
               (when window-system
-                (desktop-save-mode)
-                (desktop-read)))))
+                (desktop-save-mode)))))
 
 (use-package devdocs)
 
@@ -1099,12 +1100,14 @@ That is, remove a non kept dired from the recent list."
 (use-package tab-bar
   :if (> emacs-major-version 26)
   :init
-  (setq tab-bar-tab-name-function
-        (defun wenpin/tab-bar-show-file-name ()
-          (let* ((buffer (window-buffer (minibuffer-selected-window)))
-                 (file-name (buffer-file-name buffer)))
-            (if file-name file-name (format "%s" buffer)))))
-  ;; (add-hook 'after-init-hook #'tab-bar-mode)
+  (setq tab-bar-show t
+        tab-bar-select-tab-modifiers '(meta)
+        tab-bar-tab-hints t)
+  ;; (setq tab-bar-tab-name-function
+  ;;       (defun wenpin/tab-bar-show-file-name ()
+  ;;         (let* ((buffer (window-buffer (minibuffer-selected-window)))
+  ;;                (file-name (buffer-file-name buffer)))
+  ;;           (if file-name file-name (format "%s" buffer)))))
   )
 
 (use-package tab-line
