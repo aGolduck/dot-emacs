@@ -794,7 +794,7 @@
 	    ))
     (global-set-key (kbd "C-c c") #'org-capture))
   (use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
-  ;; (use-package org-colview)
+  (use-package org-colview :config (define-key org-columns-map (kbd "SPC") #'org-columns-open-link))
   :config
   ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
