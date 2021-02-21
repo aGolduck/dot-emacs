@@ -13,10 +13,10 @@
   (interactive)
   (wenpin/split-window-right)
   (other-window 1))
-(defun wenpin/ivy-switch-buffer-in-other-window ()
-  (interactive)
-  (call-interactively #'ivy-switch-buffer-other-window)
-  (other-window 1))
+;; (defun wenpin/ivy-switch-buffer-in-other-window ()
+;;   (interactive)
+;;   (call-interactively #'ivy-switch-buffer-other-window)
+;;   (other-window 1))
 
 ;;; available punctuations
 ;; (global-set-key (kbd "C-;"))
@@ -59,7 +59,7 @@
 ;; (global-set-key (kbd "M-SPC SPC") #'wenpin/snails)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
 ;;; M-SPC 3 key strokes zone
-(global-set-key (kbd "M-SPC B B") #'wenpin/ivy-switch-buffer-in-other-window)
+;; (global-set-key (kbd "M-SPC B B") #'wenpin/ivy-switch-buffer-in-other-window)
 (global-set-key (kbd "M-SPC b k") #'kill-buffer)
 (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
 (global-set-key (kbd "M-SPC f f") #'find-file)
