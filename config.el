@@ -59,8 +59,6 @@
 	auto-save-delete-trailing-whitespace t)
   (add-hook 'after-init-hook #'auto-save-enable))
 
-(use-package autodisass-java-bytecode :demand t)
-
 (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 
 (use-package avy
@@ -127,37 +125,13 @@
 
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
-(use-package dap-java
-  :commands (dap-java-debug
-             dap-java-run-test-method
-             dap-java-debug-test-method
-             dap-java-run-test-class
-             dap-java-debug-test-class)
-  :init
-  (setq dap-java-test-runner
-        (wenpin/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
-  (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method))
-
 (use-package dap-mode
+  :after lsp-mode
   :init
   (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
   :config
-  (dap-auto-configure-mode)
-  (dap-register-debug-template
-   "Java run"
-   (list :type "java"
-         :request "launch"
-         :args ""
-         :noDebug t
-         :cwd nil
-         :host "localhost"
-         :request "launch"
-         :modulePaths []
-         :classPaths nil
-         :name "JavaRun"
-         :projectName nil
-         :mainClass nil)))
+  (dap-auto-configure-mode))
 
 (use-package default-view :demand t)
 
@@ -530,6 +504,7 @@
 ;; (use-package lsp-ivy)
 
 (use-package lsp-java
+  :after lsp-mode
   :init
   (setq wenpin/path-to-lombok "/usr/share/java/lombok.jar")
   (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace")
@@ -550,7 +525,34 @@
                               (diminish 'lsp-java-boot-lens-mode "弹")))
   (add-hook 'java-mode-hook
             (lambda ()
-              (face-remap-add-relative 'font-lock-function-name-face :height 1.5))))
+              (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
+  (use-package dap-java
+    :after dap-mode
+    :commands (dap-java-debug
+               dap-java-run-test-method
+               dap-java-debug-test-method
+               dap-java-run-test-class
+               dap-java-debug-test-class)
+    :init
+    (setq dap-java-test-runner
+          (wenpin/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+    (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
+    :config
+    (dap-register-debug-template
+     "Java run"
+     (list :type "java"
+           :request "launch"
+           :args ""
+           :noDebug t
+           :cwd nil
+           :host "localhost"
+           :request "launch"
+           :modulePaths []
+           :classPaths nil
+           :name "JavaRun"
+           :projectName nil
+           :mainClass nil)))
+  (use-package autodisass-java-bytecode :demand t))
 
 (use-package lsp-mode
   :commands (lsp-headerline-breadcrumb-mode)
