@@ -1288,7 +1288,7 @@ That is, remove a non kept dired from the recent list."
                                (height . 1)
                                (vertical-scroll-bars . nil)))
   (add-hook 'window-configuration-change-hook
-            (lambda () (when (> (frame-pixel-height) 100)  ;; exclude mini-frame
+            (lambda () (when (> (frame-pixel-height) 400)  ;; exclude mini-frame
                          (setq mini-frame-show-parameters
                                `((left . ,(truncate (/ (frame-pixel-width) 10)))
                                  (top . ,(truncate (* (frame-pixel-height) 0.3)))
