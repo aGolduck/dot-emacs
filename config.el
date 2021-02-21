@@ -212,7 +212,8 @@
   (use-package deferred)
   (use-package s)
   (setq browse-url-browser-function 'eaf-open-browser
-        eaf-browser-continue-where-left-off t)
+        eaf-browser-continue-where-left-off t
+        eaf-config-location (wenpin/locate-emacs-var-file "eaf"))
   (defalias 'browse-web #'eaf-open-browser)
   (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
   (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
