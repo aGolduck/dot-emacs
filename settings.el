@@ -43,8 +43,8 @@
        ;; ((string-match wenpin/HOST "xps") 96) ;; font size: 16, 1.25 屏幕缩放
        ((string-match wenpin/HOST "mo") 108)
        (t 108)))
-;; default font
-(set-face-attribute 'default nil :family "JetBrains Mono" :height wenpin/font-default-height)
+;; default font, default background for emacs-native-comp is too light for background of region face
+(set-face-attribute 'default nil :background "#fcfcfc" :family "JetBrains Mono" :height wenpin/font-default-height)
 ;; fallback font
 (set-fontset-font t nil "Courier New" nil 'append)
 ;; specific glyphs
