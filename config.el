@@ -183,7 +183,9 @@
         dired-recursive-deletes 'top)
   (global-set-key (kbd "M-SPC ^") #'dired-jump)
   :config
-  (define-key dired-mode-map (kbd "M-<RET>") #'eaf-open-this-from-dired))
+  (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
+  (define-key dired-mode-map
+    (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))
 
 (use-package dired-rsync)
 
