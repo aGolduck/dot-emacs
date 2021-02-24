@@ -1290,23 +1290,23 @@ That is, remove a non kept dired from the recent list."
 
 ;; (use-package treemacs-magit :demand t)
 
-(use-package mini-frame
-  :init
-  (setq mini-frame-show-parameters
-                             `((left . ,(truncate (/ (frame-pixel-width) 10)))
-                               (top . ,(truncate (* (frame-pixel-height) 0.3)))
-                               (width . 0.8)
-                               (height . 1)
-                               (vertical-scroll-bars . nil)))
-  (add-hook 'window-configuration-change-hook
-            (lambda () (when (> (frame-pixel-height) 400)  ;; exclude mini-frame
-                         (setq mini-frame-show-parameters
-                               `((left . ,(truncate (/ (frame-pixel-width) 10)))
-                                 (top . ,(truncate (* (frame-pixel-height) 0.3)))
-                                 (width . 0.8)
-                                 (height . 1)
-                                 (vertical-scroll-bars . nil))))))
-  (add-hook 'after-init-hook #'mini-frame-mode))
+;; (use-package mini-frame
+;;   :init
+;;   (setq mini-frame-show-parameters
+;;                              `((left . ,(truncate (/ (frame-pixel-width) 10)))
+;;                                (top . ,(truncate (* (frame-pixel-height) 0.3)))
+;;                                (width . 0.8)
+;;                                (height . 10)
+;;                                (vertical-scroll-bars . nil)))
+;;   (add-hook 'window-configuration-change-hook
+;;             (lambda () (when (> (frame-pixel-height) 400)  ;; exclude mini-frame
+;;                          (setq mini-frame-show-parameters
+;;                                `((left . ,(truncate (/ (frame-pixel-width) 10)))
+;;                                  (top . ,(truncate (* (frame-pixel-height) 0.3)))
+;;                                  (width . 0.8)
+;;                                  (height . 10)
+;;                                  (vertical-scroll-bars . nil))))))
+;;   (add-hook 'after-init-hook #'mini-frame-mode))
 
 (use-package selectrum
   :init
@@ -1314,11 +1314,11 @@ That is, remove a non kept dired from the recent list."
   ;;   (frame-root-window
   ;;    (posframe-show buffer
   ;;                   :min-height 10
-  ;;                   :min-width (frame-width)
+  ;;                   :min-width (truncate (* (frame-width) 0.8))
   ;;                   :internal-border-width 1
   ;;                   :left-fringe 8
   ;;                   :right-fringe 8
-  ;;                   :poshandler 'posframe-poshandler-frame-bottom-left-corner)))
+  ;;                   :poshandler 'posframe-poshandler-frame-center)))
   ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
   ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
   (setq magit-completing-read-function #'selectrum-completing-read)
