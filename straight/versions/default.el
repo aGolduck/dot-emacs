@@ -138,6 +138,7 @@
  ("typescript.el" . "e6f68ab2dd998af0b50ae89a781e1c04539d23d6")
  ("use-package" . "caa92f1d64fc25480551757d854b4b49981dfa6b")
  ("valign" . "6b0345e29cdec8526c9c19b73bdea53295ec998e")
+ ("visual-fill-column" . "5b08b9ae9da5b95e42e94e4c9ec01d63e8848ea2")
  ("with-editor" . "7c512887c6d69864fb600d32fb92857c51babcff")
  ("xterm-color" . "b9b1f84fb10fff5261702e38bf15b3ae75a4b6bb")
  ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
