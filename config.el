@@ -280,14 +280,17 @@
   (setq auto-save-default nil
         make-backup-files nil
         safe-local-variable-values '((flycheck-disable-checker '(emacs-lisp-checkdoc))
-                                     (org-startup-with-inline-images . t))))
+                                     (org-startup-with-inline-images . t)))
+  (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
+  (global-set-key (kbd "M-SPC f f") #'find-file)
+  (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal))
 
 (use-package find-func
   :init
   (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
   (global-set-key (kbd "M-SPC F f") #'find-function)
-  (global-set-key (kbd "M-SPC f V") #'find-variable-other-window)
-  (global-set-key (kbd "M-SPC f v") #'find-variable))
+  (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
+  (global-set-key (kbd "M-SPC F v") #'find-variable))
 
 (use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
 
@@ -1052,8 +1055,6 @@ That is, remove a non kept dired from the recent list."
 
 (use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
 
-(use-package simple)
-
 (use-package smartparens :config (require 'smartparens-config))
 
 (use-package snails
@@ -1325,13 +1326,14 @@ That is, remove a non kept dired from the recent list."
 
 (use-package simple
   :init
-  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command))
+  (add-hook 'after-init-hook #'global-visual-line-mode)
+  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
+  (global-set-key (kbd "M-SPC u") #'universal-argument))
 
 (use-package consult
   :init
   (setq consult-preview-key nil)
   (setq-default consult-project-root-function #'projectile-project-root)
-  (global-set-key (kbd "M-SPC b b") #'consult-buffer)
   (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
   ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
   ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
@@ -1347,6 +1349,31 @@ That is, remove a non kept dired from the recent list."
 ;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
 
 ;; (use-package embark-consult)
+
+(use-package window
+  :init
+  (defun wenpin/split-window-right ()
+    "split-window-right with right window having a max width of 100 columns"
+    (interactive)
+    (if (> (window-total-width) 200)
+        (split-window-right -100)
+      (if (> (window-total-width) 180)
+          (split-window-right -90)
+        (split-window-right))))
+  (defun wenpin/split-window-right-and-focus ()
+    (interactive)
+    (wenpin/split-window-right)
+    (other-window 1))
+  (global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
+  (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
+  (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
+  (global-set-key (kbd "M-SPC w V") (defun wenpin/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
+  (global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
+  (global-set-key (kbd "M-SPC w d") #'delete-window)
+  (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
+  (global-set-key (kbd "M-SPC w v") #'split-window-below)
+  (global-set-key (kbd "M-SPC w x") #'window-swap-states)
+  )
 
 (provide 'init-config)
 ;;; init-config ends here

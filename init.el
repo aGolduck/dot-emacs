@@ -64,10 +64,8 @@
 (add-to-list 'load-path (concat (file-name-directory (or load-file-name buffer-file-name)) "site-lisp"))
 ;; configs
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "config"))
-;; other settings
+;; other settings including extra variable, faces and keybindings
 (load (concat (file-name-directory (or load-file-name buffer-file-name)) "settings"))
-;; extra keybindings
-(load (concat (file-name-directory (or load-file-name buffer-file-name)) "keybindings"))
 
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
