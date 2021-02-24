@@ -1375,5 +1375,27 @@ That is, remove a non kept dired from the recent list."
   (global-set-key (kbd "M-SPC w x") #'window-swap-states)
   )
 
+(use-package telega
+  :init
+  (defun wenpin/my-telega-chat-mode ()
+    (set (make-local-variable 'company-backends)
+         (append (list telega-emoji-company-backend
+                       'telega-company-username
+                       'telega-company-hashtag)
+                 (when (telega-chat-bot-p telega-chatbuf--chat)
+                   '(telega-company-botcmd))))
+    (company-mode 1))
+  (setq telega-avatar-text-compose-chars nil
+        telega-chat-show-avatars nil
+        telega-directory (wenpin/locate-emacs-var-file "telega")
+        telega-server-libs-prefix "~/.guix-profile")
+  (add-hook 'telega-load-hook #'telega-appindicator-mode)
+  (add-hook 'telega-load-hook #'telega-mode-line-mode)
+  (add-hook 'telega-load-hook #'telega-notifications-mode)
+  (add-hook 'telega-chat-mode-hook #'wenpin/my-telega-chat-mode)
+  :config
+  (require 'telega-transient)
+  (telega-transient-mode 1))
+
 (provide 'init-config)
 ;;; init-config ends here

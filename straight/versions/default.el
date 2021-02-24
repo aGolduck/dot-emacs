@@ -127,6 +127,7 @@
  ("straight.el" . "2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1")
  ("sudo-edit" . "a7ae1713bb659988bb1465a13b837fbc2d699504")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
+ ("telega.el" . "3d2cd636099872a7514cc02f63875acfdc0e623e")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
  ("thing-edit" . "117eadcc43f6933e14b77c20b7983ee234cba794")
  ("tide" . "7f7334b42a40dd3093b830e887c36cdb4ef40858")

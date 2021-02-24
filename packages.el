@@ -109,6 +109,7 @@
           'embark
           'embark-consult
           'mini-frame
+          '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           ))
   (straight-use-package wenpin/package))
 
