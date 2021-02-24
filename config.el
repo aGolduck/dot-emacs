@@ -1190,8 +1190,10 @@ That is, remove a non kept dired from the recent list."
 
 (use-package vterm
   :init
-  (setq vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i")
+  (setq vterm-buffer-name-string "vterm %s"
+        vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i")
         vterm-kill-buffer-on-exit t
+        vterm-shell "zsh"
         vterm-term-environment-variable "eterm-color")
   ;; (add-hook 'vterm-mode-hook
   ;;           (lambda ()
