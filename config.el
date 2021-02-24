@@ -1405,5 +1405,7 @@ That is, remove a non kept dired from the recent list."
   (require 'telega-transient)
   (telega-transient-mode 1))
 
+(use-package 'link-hint)
+
 (provide 'init-config)
 ;;; init-config ends here

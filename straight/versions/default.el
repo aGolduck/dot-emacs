@@ -68,6 +68,7 @@
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
  ("keyfreq" . "e5fe9d585ce882f1ba9afa5d894eaa82c79be4f4")
  ("let-alist" . "b299c78897cc307f9d5521927376fbd06a26f123")
+ ("link-hint.el" . "09ba5727d8ba4a2e5d4f5ce924aaebbc7478ff13")
  ("log4e" . "7df0c1ff4656f8f993b87064b1567618eadb5546")
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
  ("lsp-java" . "260016236fa0520b5b6ec7f51ca2086288524cba")
