@@ -105,7 +105,8 @@
    color-rg-search-project-rails-with-type)
   :init
   (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
-  (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project))
+  ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
+  )
 
 (use-package company
   :init
@@ -182,6 +183,7 @@
         dired-recursive-deletes 'top)
   (global-set-key (kbd "M-SPC ^") #'dired-jump)
   :config
+  (put 'dired-find-alternate-file 'disabled nil)
   (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
   (define-key dired-mode-map
     (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))
@@ -246,9 +248,14 @@
   :commands (eldoc-add-command)
   :config (diminish 'eldoc-mode "册"))
 
-(use-package elisp-mode :init
+(use-package elisp-mode
+  :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
+  ;; :config
+  ;; (define-key emacs-lisp-mode-map (kbd "M-;") #'paredit-comment-dwim)
+  )
 
 (use-package emmit-mode)
 
@@ -668,7 +675,9 @@
 	org-export-with-sub-superscripts nil
 	org-html-inline-images t
         org-log-done 'time
+        org-link-frame-setup '((file . find-file))
 	org-outline-path-complete-in-steps nil
+        org-preview-latex-default-process 'dvisvgm
 	org-refile-target-verify-function 'bh/verify-refile-target
 	org-refile-targets (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)))
 	org-refile-use-outline-path t
@@ -982,7 +991,8 @@ unwanted space when exporting org-mode to html."
         projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
         projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
         projectile-mode-line-function 'wenpin/projectile-shortened-mode-line
-        projectile-mode-line-prefix "项")
+        projectile-mode-line-prefix "项"
+        projectile-project-search-path '("~/g" "~/r" "~/b"))
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
 
@@ -1354,6 +1364,7 @@ That is, remove a non kept dired from the recent list."
   (setq consult-preview-key nil)
   (setq-default consult-project-root-function #'projectile-project-root)
   (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
+  (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
   ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
   ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
   )

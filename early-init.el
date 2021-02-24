@@ -14,7 +14,7 @@
 
 ;; Faster to disable these here (before they've been initialized)
 ;; (push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
+;; (push '(tool-bar-lines . 0) default-frame-alist)  ;; this may cause emacs frame expand
 ;; (push '(vertical-scroll-bars) default-frame-alist)
 ;; (when (featurep 'ns)
 ;;   (push '(ns-transparent-titlebar . t) default-frame-alist))
