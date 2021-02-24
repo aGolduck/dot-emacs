@@ -71,6 +71,7 @@
  ("link-hint.el" . "09ba5727d8ba4a2e5d4f5ce924aaebbc7478ff13")
  ("log4e" . "7df0c1ff4656f8f993b87064b1567618eadb5546")
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
+ ("lsp-haskell" . "7efbef3d206989faa8b691a4230a3ed872542187")
  ("lsp-java" . "260016236fa0520b5b6ec7f51ca2086288524cba")
  ("lsp-mode" . "c4daa529a1bbaffb4e73a33851ed70ce509baa01")
  ("lsp-python-ms" . "7a502e6c09456cbe8b5f6c64883c79f5ce08e5a9")

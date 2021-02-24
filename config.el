@@ -126,7 +126,6 @@
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
 (use-package dap-mode
-  :after lsp-mode
   :init
   (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
   (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
@@ -334,7 +333,14 @@
 
 (use-package guix)
 
-(use-package haskell-mode)
+(use-package haskell-mode
+  :init
+  (use-package lsp-haskell
+    :init
+    (add-hook 'haskell-mode-hook #'lsp)
+    (add-hook 'haskell-mode-hook #'lsp-ui-mode)
+    (add-hook 'haskell-literate-mode-hook #'lsp)
+    (add-hook 'haskell-mode-hook #'lsp)))
 
 (use-package helpful
   :init
@@ -510,7 +516,6 @@
 ;; (use-package lsp-ivy)
 
 (use-package lsp-java
-  :after lsp-mode
   :init
   (setq wenpin/path-to-lombok "/usr/share/java/lombok.jar")
   (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace")
@@ -533,7 +538,6 @@
             (lambda ()
               (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
   (use-package dap-java
-    :after dap-mode
     :commands (dap-java-debug
                dap-java-run-test-method
                dap-java-debug-test-method
@@ -575,6 +579,7 @@
         lsp-enable-text-document-color nil
         lsp-enable-xref t
         lsp-file-watch-threshold 10000
+        lsp-headerline-breadcrumb-enable t
         lsp-log-io t
         lsp-print-performance t
         lsp-semantic-highlighting nil
@@ -591,6 +596,8 @@
   (global-unset-key (kbd "M--"))
   :config
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
+  (define-key lsp-mode-map (kbd "M-'") #'lsp-goto-implementation)
+  (define-key lsp-mode-map (kbd "M-\"") #'lsp-find-references)
   ;; (diminish 'lsp-mode "语")
   (diminish 'lsp-lens-mode "透"))
 
@@ -598,10 +605,14 @@
 
 (use-package lsp-ui
   :init
-  (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-enable nil)
+  (setq lsp-ui-sideline-enable t
+        lsp-ui-doc-enable t
+        ;; lsp-ui-doc-delay .2
+        lsp-ui-doc-position 'top)
   :config
-  (set-face-attribute 'lsp-ui-doc-background nil :background "white smoke"))
+  (set-face-attribute 'lsp-ui-sideline-code-action nil :foreground "dark green")
+  (set-face-attribute 'lsp-ui-sideline-current-symbol nil :background "black")
+  (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
 
 (use-package magit
   :init

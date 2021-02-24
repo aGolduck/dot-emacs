@@ -109,6 +109,7 @@
           'embark
           'embark-consult
           'mini-frame
+          'lsp-haskell
           '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           'link-hint
           ))
