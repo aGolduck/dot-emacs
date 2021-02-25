@@ -6,42 +6,6 @@
 
 (use-package abbrev :config (diminish 'abbrev-mode "缩"))
 
-(use-package ace-window
-  :init
-  ;; (defun wenpin/get-window-list ()
-  ;;   (if (<= (length (window-list)) 2)
-  ;;       (window-list)
-  ;;     (save-excursion
-  ;;       (let ((windows nil))
-  ;;         (ignore-errors (dotimes (i 10) (windmove-left)))
-  ;;         (ignore-errors (dotimes (i 10) (windmove-up)))
-  ;;         (add-to-list 'windows (selected-window) t)
-  ;;         (ignore-errors (dotimes (i 10) (windmove-right)))
-  ;;         (ignore-errors (dotimes (i 10) (windmove-up)))
-  ;;         (add-to-list 'windows (selected-window) t)
-  ;;         (ignore-errors (dotimes (i 10) (windmove-left)))
-  ;;         (ignore-errors (dotimes (i 10) (windmove-down)))
-  ;;         (add-to-list 'windows (selected-window) t)
-  ;;         (ignore-errors (dotimes (i 10) (windmove-right)))
-  ;;         (ignore-errors (dotimes (i 10) (windmove-down)))
-  ;;         (add-to-list 'windows (selected-window) t)
-  ;;         windows))))
-  ;; (advice-add 'aw-window-list :override #'wenpin/get-window-list)
-  (setq aw-keys '(?i ?u ?d ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
-        aw-dispatch-alist '((?x aw-delete-window "Delete Window")
-	                    (?m aw-swap-window "Swap Windows")
-	                    (?M aw-move-window "Move Window")
-	                    (?c aw-copy-window "Copy Window")
-	                    (?j aw-switch-buffer-in-window "Select Buffer")
-	                    (?n aw-flip-window)
-	                    (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
-	                    (?c aw-split-window-fair "Split Fair Window")
-	                    (?v aw-split-window-vert "Split Vert Window")
-	                    (?b aw-split-window-horz "Split Horz Window")
-	                    (?o delete-other-windows "Delete Other Windows")
-	                    (?? aw-show-dispatch-help)))
-  (global-set-key (kbd "M-i") #'ace-window))
-
 (use-package ansi-color
   :init
   (add-hook 'compilation-filter-hook
@@ -51,15 +15,6 @@
 
 (use-package auth-source
   :init (setq auth-sources '((:source (wenpin/locate-emacs-var-file ".authinfo.gpg")))))
-
-(use-package auto-save
-  :commands (auto-save-enable)
-  :init
-  (setq auto-save-silent t
-	auto-save-delete-trailing-whitespace t)
-  (add-hook 'after-init-hook #'auto-save-enable))
-
-(use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
 
 (use-package avy
   :init
@@ -81,15 +36,13 @@
 
 (use-package cc-mode
   :init
-  (add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp))))
-
-(use-package ccls)
-
-(use-package cider)
+  (add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp)))
+  (use-package ccls))
 
 (use-package clojure-mode
   :init
-  (add-hook 'clojure-mode-hook #'electric-pair-local-mode))
+  (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
+  (use-package cider))
 
 (use-package color-rg
   :commands
@@ -125,15 +78,6 @@
   (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
 
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
-
-(use-package dap-mode
-  :init
-  (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
-  (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
-  :config
-  (dap-auto-configure-mode))
-
-(use-package default-view :demand t)
 
 (use-package desktop
   :init
@@ -186,19 +130,18 @@
   (put 'dired-find-alternate-file 'disabled nil)
   (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
   (define-key dired-mode-map
-    (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))
-
-(use-package dired-rsync)
-
-(use-package dired-x
-  :init
-  (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
-                                       ("\\.docx\\'" "libreoffice")
-                                       ("\\.ppt\\'" "libreoffice")
-                                       ("\\.pptx\\'" "libreoffice")
-                                       ("\\.xls\\'" "libreoffice")
-                                       ("\\.xlsx\\'" "libreoffice")))
-  (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
+    (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+  (use-package dired-rsync)
+  (use-package dired-x
+    :init
+    (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
+                                         ("\\.docx\\'" "libreoffice")
+                                         ("\\.ppt\\'" "libreoffice")
+                                         ("\\.pptx\\'" "libreoffice")
+                                         ("\\.xls\\'" "libreoffice")
+                                         ("\\.xlsx\\'" "libreoffice")))
+    (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
+  (use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired"))))
 
 (use-package direnv
   :if (equal (shell-command "command -v direnv") 0)
@@ -261,8 +204,6 @@
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
-(use-package esh-autosuggest :commands (esh-autosuggest-mode))
-
 (use-package esh-mode
   :init
   (setq eshell-directory-name (wenpin/locate-emacs-var-file "eshell"))
@@ -270,9 +211,9 @@
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input))))
-
-(use-package eshell-z)
+              (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input)))
+  (use-package esh-autosuggest :commands (esh-autosuggest-mode))
+  (use-package eshell-z))
 
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
@@ -289,24 +230,53 @@
                                      (org-startup-with-inline-images . t)))
   (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
   (global-set-key (kbd "M-SPC f f") #'find-file)
-  (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal))
+  (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal)
+  (use-package auto-save
+    :commands (auto-save-enable)
+    :init
+    (setq auto-save-silent t
+	  auto-save-delete-trailing-whitespace t)
+    (add-hook 'after-init-hook #'auto-save-enable))
+  (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
+  (use-package default-view :demand t)
+  (use-package recentf
+    :init
+    (setq recentf-auto-cleanup 'never
+          recentf-save-file (wenpin/locate-emacs-var-file "recentf")
+          recentf-max-saved-items nil)
+    ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
+    (defun recentd-track-opened-file ()
+      "Insert the name of the directory just opened into the recent list."
+      (and (derived-mode-p 'dired-mode) default-directory
+           (recentf-add-file (substring default-directory 0 -1)))
+      ;; Must return nil because it is run from `write-file-functions'.
+      nil)
+    (defun recentd-track-closed-file ()
+      "Update the recent list when a dired buffer is killed.
+That is, remove a non kept dired from the recent list."
+      (and (derived-mode-p 'dired-mode) default-directory
+           (recentf-remove-if-non-kept (substring default-directory 0 -1))))
+    (add-hook 'dired-after-readin-hook 'recentd-track-opened-file)
+    (add-hook 'kill-buffer-hook 'recentd-track-closed-file)
+    (add-hook 'after-init-hook #'recentf-mode))
+  (use-package saveplace
+    :init
+    (setq auto-save-list-file-prefix nil)
+    (setq save-place-file (wenpin/locate-emacs-var-file "places"))
+    (add-hook 'after-init-hook #'save-place-mode)
+    (use-package sudo-edit))
+  (use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
+  (use-package view :config (diminish 'view-mode "览")))
 
 (use-package find-func
   :init
+  (setq find-function-C-source-directory "~/b/gnu.org/emacs/emacs-native-comp/src")
   (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
   (global-set-key (kbd "M-SPC F f") #'find-function)
   (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
   (global-set-key (kbd "M-SPC F v") #'find-variable))
 
-(use-package find-func :init (setq find-function-C-source-directory "~/r/org.gnu/emacs/src"))
-
 (use-package flycheck :config (diminish 'flycheck-mode "检"))
-
-(use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
-
-(use-package flymake-posframe
-  :commands (flymake-posframe-mode)
-  :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode))
 
 (use-package font-lock
   :config
@@ -404,44 +374,12 @@
         highlight-indent-guides-auto-even-face-perc 55
         highlight-indent-guides-auto-character-face-perc 61.8))
 
-(use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired")))
-
 (use-package isearch
   :config
   (global-set-key (kbd "C-s") #'isearch-forward-regexp)
   (global-set-key (kbd "C-M-s") #'isearch-forward)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-
-;; (use-package ivy-hydra)
-
-;; (use-package ivy-posframe
-;;   :init
-;;   (setq ivy-posframe-display-functions-alist
-;; 	'(
-;; 	  ;; (swiper . ivy-posframe-display-at-point)
-;; 	  (t . ivy-posframe-display-at-frame-center)))
-;;   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
-;;   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
-;;   (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
-;;   (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
-
-;; (use-package ivy-prescient :init
-;;   (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
-;;   (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
-
-;; (use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
-
-;; (use-package ivy-xref
-;;   :init
-;;   ;; xref initialization is different in Emacs 27 - there are two different
-;;   ;; variables which can be set rather than just one
-;;   (when (>= emacs-major-version 27)
-;;     (setq xref-show-definitions-function #'ivy-xref-show-defs))
-;;   ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-;;   ;; as well
-;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package js-mode
   :init
@@ -520,7 +458,7 @@
   (add-hook 'after-init-hook #'keyfreq-mode)
   (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
-;; (use-package lsp-ivy)
+(use-package link-hint)
 
 (use-package lsp-java
   :init
@@ -601,6 +539,22 @@
   ;;           (lambda () (run-at-time 10 nil #'lsp-headerline-breadcrumb-mode)))
   ;; (add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
   (global-unset-key (kbd "M--"))
+  (use-package lsp-ui
+    :init
+    (setq lsp-ui-sideline-enable t
+          lsp-ui-doc-enable t
+          ;; lsp-ui-doc-delay .2
+          lsp-ui-doc-position 'top)
+    :config
+    (set-face-attribute 'lsp-ui-sideline-code-action nil :foreground "dark green")
+    (set-face-attribute 'lsp-ui-sideline-current-symbol nil :background "black")
+    (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
+  (use-package dap-mode
+    :init
+    (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
+    (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
+    :config
+    (dap-auto-configure-mode))
   :config
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "M-'") #'lsp-goto-implementation)
@@ -610,31 +564,18 @@
 
 (use-package lsp-python-ms)
 
-(use-package lsp-ui
-  :init
-  (setq lsp-ui-sideline-enable t
-        lsp-ui-doc-enable t
-        ;; lsp-ui-doc-delay .2
-        lsp-ui-doc-position 'top)
-  :config
-  (set-face-attribute 'lsp-ui-sideline-code-action nil :foreground "dark green")
-  (set-face-attribute 'lsp-ui-sideline-current-symbol nil :background "black")
-  (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
-
 (use-package magit
   :init
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (setq magit-process-finish-apply-ansi-colors t)
   (global-set-key (kbd "M-SPC g s") #'magit-status)
+  (use-package magit-delta
+    :if (equal (shell-command "command -v delta") 0)
+    :init (add-hook 'magit-mode-hook #'magit-delta-mode)
+    :config (diminish 'magit-delta-mode ""))
+  (use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
   :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
-
-(use-package magit-delta
-  :if (equal (shell-command "command -v delta") 0)
-  :init (add-hook 'magit-mode-hook #'magit-delta-mode)
-  :config (diminish 'magit-delta-mode ""))
-
-(use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
 
 (use-package make-mode
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
@@ -657,10 +598,6 @@
   (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
   (add-hook 'nxml-mode-hook #'smartparens-mode)
   (add-hook 'nxml-mode-hook #'lsp))
-
-(use-package ob-clojure)
-
-(use-package ob-groovy)
 
 (use-package olivetti)
 
@@ -823,7 +760,7 @@
   :config
   ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
-      "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
+        "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
   ;; TODO ob-jshell
   ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
   (defun org-babel-execute:jsh (body params)
@@ -851,78 +788,67 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil))
-
-;; (use-package org-alert
-;;   :commands (org-alert-enable)
-;;   :init
-;;   (setq alert-default-style 'libnotify))
-
-(use-package org-cliplink)
-
-(use-package org-download
-  :demand t
-  ;; :init
-  ;; FIXME org-link-unescape 不能 decode link
-  ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
-  ;; (defun custom-org-download-method (link)
-  ;;   (org-download--fullname (org-link-unescape link)))
-  ;; (setq org-download-method 'custom-org-download-method) ; 注意：这里不能用lambda表达式
-  ;; 顺便改下annotate，就是自动插入的那行注释，里面写的是图片来源路径
-  ;; (setq org-download-annotate-function
-  ;;       '(lambda (link)
-  ;;          (org-download-annotate-default (org-link-unescape link))))
-  )
-
-(use-package org-journal
-  :init
-  (setq org-journal-dir "~/org/journal"
-        org-journal-cache-file (wenpin/locate-emacs-var-file "org-journal.cache")
-        org-journal-file-format "%Y%m%d.org"
-        org-journal-find-file #'find-file
-        org-journal-file-type 'daily
-        org-extend-today-until 2
-        ;; org-journal-carryover-items nil
-        org-journal-date-prefix "* "
-        org-journal-date-format "%A, %x"
-        org-journal-time-prefix "** "
-        org-journal-time-format "%R "))
-
-(use-package org-pomodoro :init (global-set-key (kbd "M-c") #'org-pomodoro))
-
-(use-package org-ql)
-
-(use-package org-roam
-  :commands (org-roam-dailies-today org-roam-dailies-capture-today)
-  :init
-  (setq org-roam-directory (file-truename "~/org/roam")
-        org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
-        ;; org-roam-completion-system 'ivy
-        )
-  ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
-  (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
-  (global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
-  (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
-  (global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
-  :config
-  (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
-  (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
-  (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert)
-  (diminish 'org-roam-mode "记"))
-
-(use-package org-roam-server
-  :if window-system
-  :config
-  (require 'org-roam-protocol)
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 4242
-        org-roam-server-authenticate nil
-        org-roam-server-label-truncate t
-        org-roam-server-label-truncate-length 60
-        org-roam-server-label-wrap-length 20)
-  (diminish 'org-roam-server-mode "图"))
-
-(use-package ox-hugo)
+  (define-key org-mode-map (kbd "C-<tab>") nil)
+  (use-package ob-clojure)
+  (use-package ob-groovy)
+  (use-package org-cliplink)
+  (use-package org-download
+    :demand t
+    ;; :init
+    ;; FIXME org-link-unescape 不能 decode link
+    ;; https://emacs-china.org/t/org-download/2422/3?u=wenpin
+    ;; (defun custom-org-download-method (link)
+    ;;   (org-download--fullname (org-link-unescape link)))
+    ;; (setq org-download-method 'custom-org-download-method) ; 注意：这里不能用lambda表达式
+    ;; 顺便改下annotate，就是自动插入的那行注释，里面写的是图片来源路径
+    ;; (setq org-download-annotate-function
+    ;;       '(lambda (link)
+    ;;          (org-download-annotate-default (org-link-unescape link))))
+    )
+  (use-package org-journal
+    :init
+    (setq org-journal-dir "~/org/journal"
+          org-journal-cache-file (wenpin/locate-emacs-var-file "org-journal.cache")
+          org-journal-file-format "%Y%m%d.org"
+          org-journal-find-file #'find-file
+          org-journal-file-type 'daily
+          org-extend-today-until 2
+          ;; org-journal-carryover-items nil
+          org-journal-date-prefix "* "
+          org-journal-date-format "%A, %x"
+          org-journal-time-prefix "** "
+          org-journal-time-format "%R "))
+  (use-package org-pomodoro :init (global-set-key (kbd "M-c") #'org-pomodoro))
+  (use-package org-ql)
+  (use-package org-roam
+    :commands (org-roam-dailies-today org-roam-dailies-capture-today)
+    :init
+    (setq org-roam-directory (file-truename "~/org/roam")
+          org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
+          ;; org-roam-completion-system 'ivy
+          )
+    ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
+    (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
+    (global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
+    (global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
+    (global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
+    :config
+    (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
+    (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
+    (define-key org-mode-map (kbd "M-SPC n i") #'org-roam-insert)
+    (diminish 'org-roam-mode "记"))
+  (use-package org-roam-server
+    :if window-system
+    :config
+    (require 'org-roam-protocol)
+    (setq org-roam-server-host "127.0.0.1"
+          org-roam-server-port 4242
+          org-roam-server-authenticate nil
+          org-roam-server-label-truncate t
+          org-roam-server-label-truncate-length 60
+          org-roam-server-label-wrap-length 20)
+    (diminish 'org-roam-server-mode "图"))
+  (use-package ox-hugo))
 
 (use-package paredit
   :commands (enable-paredit-mode)
@@ -970,7 +896,19 @@ unwanted space when exporting org-mode to html."
 
 (use-package pocket-reader)
 
-(use-package posframe)
+(use-package posframe
+  :init
+  (use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+  (use-package flymake-posframe
+    :commands (flymake-posframe-mode)
+    :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode)))
+
+(use-package prescient
+  :commands (prescient-persist-mode)
+  :init
+  (add-hook 'after-init-hook #'prescient-persist-mode)
+  (use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
+  (use-package selectrum-prescient :init (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)))
 
 (use-package projectile
   :init
@@ -981,20 +919,21 @@ unwanted space when exporting org-mode to html."
            (shortened-project-name (if (< (length project-name) 10)
                                        project-name
                                      (concat (substring project-name 0 7) "..." (substring project-name -3 nil)))))
-    (format "%s[%s%s]"
-            projectile-mode-line-prefix
-            (or shortened-project-name "-")
-            (if project-type
-                (format ":%s" project-type)
-              ""))))
+      (format "%s[%s%s]"
+              projectile-mode-line-prefix
+              (or shortened-project-name "-")
+              (if project-type
+                  (format ":%s" project-type)
+                ""))))
   (setq ;; projectile-completion-system 'ivy
-        projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
-        projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
-        projectile-mode-line-function 'wenpin/projectile-shortened-mode-line
-        projectile-mode-line-prefix "项"
-        projectile-project-search-path '("~/g" "~/r" "~/b"))
+   projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
+   projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
+   projectile-mode-line-function 'wenpin/projectile-shortened-mode-line
+   projectile-mode-line-prefix "项"
+   projectile-project-search-path '("~/g" "~/r" "~/b"))
   (add-hook 'after-init-hook #'projectile-mode)
-  (global-set-key (kbd "M-SPC p f") #'projectile-find-file))
+  (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
+  (use-package treemacs-projectile))
 
 (use-package python
   :init
@@ -1018,27 +957,6 @@ unwanted space when exporting org-mode to html."
 
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
-(use-package recentf
-  :init
-  (setq recentf-auto-cleanup 'never
-        recentf-save-file (wenpin/locate-emacs-var-file "recentf")
-        recentf-max-saved-items nil)
-  ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
-  (defun recentd-track-opened-file ()
-    "Insert the name of the directory just opened into the recent list."
-    (and (derived-mode-p 'dired-mode) default-directory
-         (recentf-add-file (substring default-directory 0 -1)))
-    ;; Must return nil because it is run from `write-file-functions'.
-    nil)
-  (defun recentd-track-closed-file ()
-    "Update the recent list when a dired buffer is killed.
-That is, remove a non kept dired from the recent list."
-    (and (derived-mode-p 'dired-mode) default-directory
-         (recentf-remove-if-non-kept (substring default-directory 0 -1))))
-  (add-hook 'dired-after-readin-hook 'recentd-track-opened-file)
-  (add-hook 'kill-buffer-hook 'recentd-track-closed-file)
-  (add-hook 'after-init-hook #'recentf-mode))
-
 (use-package rime
   ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
   :init
@@ -1060,11 +978,6 @@ That is, remove a non kept dired from the recent list."
   :init
   (add-hook 'rust-mode-hook #'lsp))
 
-(use-package saveplace
-  :init
-  (setq save-place-file (wenpin/locate-emacs-var-file "places"))
-  (add-hook 'after-init-hook #'save-place-mode))
-
 (use-package screenshot-svg)
 
 (use-package selectric-mode
@@ -1074,7 +987,42 @@ That is, remove a non kept dired from the recent list."
   (setq selectric-affected-bindings-list nil)
   (add-hook 'after-init-hook #'selectric-mode))
 
+(use-package selectrum
+  :init
+  ;; (defun display-buffer-show-in-posframe (buffer _alist)
+  ;;   (frame-root-window
+  ;;    (posframe-show buffer
+  ;;                   :min-height 10
+  ;;                   :min-width (truncate (* (frame-width) 0.8))
+  ;;                   :internal-border-width 1
+  ;;                   :left-fringe 8
+  ;;                   :right-fringe 8
+  ;;                   :poshandler 'posframe-poshandler-frame-center)))
+  ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
+  ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
+  (setq magit-completing-read-function #'selectrum-completing-read)
+  (add-hook 'after-init-hook #'selectrum-mode)
+  (use-package consult
+    :init
+    (setq consult-preview-key nil)
+    (setq-default consult-project-root-function #'projectile-project-root)
+    (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
+    (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
+    ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
+    ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
+    )
+  (use-package marginalia
+    :init
+    (add-hook 'after-init-hook 'marginalia-mode)
+    (setq-default marginalia-annotators '(marginalia-annotators-heavy))))
+
 (use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
+
+(use-package simple
+  :init
+  (add-hook 'after-init-hook #'global-visual-line-mode)
+  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
+  (global-set-key (kbd "M-SPC u") #'universal-argument))
 
 (use-package smartparens :config (require 'smartparens-config))
 
@@ -1114,13 +1062,7 @@ That is, remove a non kept dired from the recent list."
   ;; 			    )))
   (setq snails-use-exec-path-from-shell nil))
 
-(use-package startup :init (setq auto-save-list-file-prefix nil))
-
 (use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
-
-(use-package sudo-edit)
-
-(use-package swiper)
 
 (use-package tab-bar
   :if (> emacs-major-version 26)
@@ -1141,6 +1083,29 @@ That is, remove a non kept dired from the recent list."
   (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
   (add-hook 'after-init-hook #'global-tab-line-mode))
 
+(use-package telega
+  :init
+  (defun wenpin/my-telega-chat-mode ()
+    (set (make-local-variable 'company-backends)
+         (append (list telega-emoji-company-backend
+                       'telega-company-username
+                       'telega-company-hashtag)
+                 (when (telega-chat-bot-p telega-chatbuf--chat)
+                   '(telega-company-botcmd))))
+    (toggle-input-method)
+    (company-mode 1))
+  (setq telega-avatar-text-compose-chars nil
+        telega-chat-show-avatars nil
+        telega-directory (wenpin/locate-emacs-var-file "telega")
+        telega-server-libs-prefix "~/.guix-profile")
+  (add-hook 'telega-load-hook #'telega-appindicator-mode)
+  (add-hook 'telega-load-hook #'telega-mode-line-mode)
+  (add-hook 'telega-load-hook #'telega-notifications-mode)
+  (add-hook 'telega-chat-mode-hook #'wenpin/my-telega-chat-mode)
+  :config
+  (require 'telega-transient)
+  (telega-transient-mode 1))
+
 (use-package thing-edit)
 
 (use-package tide
@@ -1152,8 +1117,6 @@ That is, remove a non kept dired from the recent list."
         ;; so we up it to 512kb.
         tide-server-max-response-length 524288)
   :config (diminish 'tide-mode "型"))
-
-(use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
 
 (use-package transient :init (setq transient-history-file (wenpin/locate-emacs-var-file "transient/history.el")))
 
@@ -1178,8 +1141,6 @@ That is, remove a non kept dired from the recent list."
   (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light)
   ;; (define-key treemacs-mode-map (kbd "M-n") nil)
   )
-
-(use-package treemacs-projectile)
 
 (use-package typescript-mode
   :init
@@ -1207,8 +1168,6 @@ That is, remove a non kept dired from the recent list."
 
 (use-package vc-hooks :init (setq vc-follow-symlinks t))
 
-(use-package view :config (diminish 'view-mode "览"))
-
 (use-package vterm
   :init
   (setq vterm-buffer-name-string "vterm %s"
@@ -1222,11 +1181,69 @@ That is, remove a non kept dired from the recent list."
   ;;             (buffer-face-mode t)))
   :config (set-face-attribute 'vterm-color-green nil :foreground "dark green"))
 
-(use-package winner
+(use-package window
   :init
-  (add-hook 'after-init-hook #'winner-mode)
-  (global-set-key (kbd "M-SPC w u") #'winner-undo)
-  (global-set-key (kbd "M-SPC w r") #'winner-redo))
+  (defun wenpin/split-window-right ()
+    "split-window-right with right window having a max width of 100 columns"
+    (interactive)
+    (if (> (window-total-width) 200)
+        (split-window-right -100)
+      (if (> (window-total-width) 180)
+          (split-window-right -90)
+        (split-window-right))))
+  (defun wenpin/split-window-right-and-focus ()
+    (interactive)
+    (wenpin/split-window-right)
+    (other-window 1))
+  (global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
+  (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
+  (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
+  (global-set-key (kbd "M-SPC w V") (defun wenpin/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
+  (global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
+  (global-set-key (kbd "M-SPC w d") #'delete-window)
+  (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
+  (global-set-key (kbd "M-SPC w v") #'split-window-below)
+  (global-set-key (kbd "M-SPC w x") #'window-swap-states)
+  (use-package ace-window
+    :init
+    ;; (defun wenpin/get-window-list ()
+    ;;   (if (<= (length (window-list)) 2)
+    ;;       (window-list)
+    ;;     (save-excursion
+    ;;       (let ((windows nil))
+    ;;         (ignore-errors (dotimes (i 10) (windmove-left)))
+    ;;         (ignore-errors (dotimes (i 10) (windmove-up)))
+    ;;         (add-to-list 'windows (selected-window) t)
+    ;;         (ignore-errors (dotimes (i 10) (windmove-right)))
+    ;;         (ignore-errors (dotimes (i 10) (windmove-up)))
+    ;;         (add-to-list 'windows (selected-window) t)
+    ;;         (ignore-errors (dotimes (i 10) (windmove-left)))
+    ;;         (ignore-errors (dotimes (i 10) (windmove-down)))
+    ;;         (add-to-list 'windows (selected-window) t)
+    ;;         (ignore-errors (dotimes (i 10) (windmove-right)))
+    ;;         (ignore-errors (dotimes (i 10) (windmove-down)))
+    ;;         (add-to-list 'windows (selected-window) t)
+    ;;         windows))))
+    ;; (advice-add 'aw-window-list :override #'wenpin/get-window-list)
+    (setq aw-keys '(?i ?u ?d ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
+          aw-dispatch-alist '((?x aw-delete-window "Delete Window")
+	                      (?m aw-swap-window "Swap Windows")
+	                      (?M aw-move-window "Move Window")
+	                      (?c aw-copy-window "Copy Window")
+	                      (?j aw-switch-buffer-in-window "Select Buffer")
+	                      (?n aw-flip-window)
+	                      (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+	                      (?c aw-split-window-fair "Split Fair Window")
+	                      (?v aw-split-window-vert "Split Vert Window")
+	                      (?b aw-split-window-horz "Split Horz Window")
+	                      (?o delete-other-windows "Delete Other Windows")
+	                      (?? aw-show-dispatch-help)))
+    (global-set-key (kbd "M-i") #'ace-window))
+  (use-package winner
+    :init
+    (add-hook 'after-init-hook #'winner-mode)
+    (global-set-key (kbd "M-SPC w u") #'winner-undo)
+    (global-set-key (kbd "M-SPC w r") #'winner-redo)))
 
 (use-package woman :init (global-set-key (kbd "M-SPC d m") #'woman))
 
@@ -1240,9 +1257,8 @@ That is, remove a non kept dired from the recent list."
   :config
   ;; (define-key yas-minor-mode-map (kbd "<tab>") #'yas-expand)
   ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
-  (diminish 'yas-minor-mode "模"))
-
-(use-package yasnippet-snippets)
+  (diminish 'yas-minor-mode "模")
+  (use-package yasnippet-snippets))
 
 (use-package zeal-at-point)
 
@@ -1257,6 +1273,12 @@ That is, remove a non kept dired from the recent list."
 ;;   (global-set-key (kbd "C-h f") #'counsel-describe-function)
 ;;   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
 
+;; (use-package embark
+;;   :config
+;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
+
+;; (use-package embark-consult)
+
 ;; (use-package hl-todo :init (add-hook 'after-init-hook #'global-hl-todo-mode))
 
 ;; (use-package ivy
@@ -1267,10 +1289,65 @@ That is, remove a non kept dired from the recent list."
 ;;   (global-set-key (kbd "M-SPC b b") #'ivy-switch-buffer)
 ;;   (global-set-key (kbd "M-SPC b B") #'ivy-switch-buffer-other-window))
 
+;; (use-package ivy-hydra)
+
+;; (use-package ivy-posframe
+;;   :init
+;;   (setq ivy-posframe-display-functions-alist
+;; 	'(
+;; 	  ;; (swiper . ivy-posframe-display-at-point)
+;; 	  (t . ivy-posframe-display-at-frame-center)))
+;;   ;; (ivy-posframe-height-alist '((swiper . 20) (t . 40)))
+;;   ;; (ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
+;;   (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
+;;   (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
+
+;; (use-package ivy-prescient :init
+;;   (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
+;;   (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
+
+;; (use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
+
+;; (use-package ivy-xref
+;;   :init
+;;   ;; xref initialization is different in Emacs 27 - there are two different
+;;   ;; variables which can be set rather than just one
+;;   (when (>= emacs-major-version 27)
+;;     (setq xref-show-definitions-function #'ivy-xref-show-defs))
+;;   ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+;;   ;; as well
+;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+;; (use-package lsp-ivy)
+
 ;; (use-package lsp-java-boot
 ;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
 ;; (use-package lsp-java-boot)
+
+;; (use-package mini-frame
+;;   :init
+;;   (setq mini-frame-show-parameters
+;;                              `((left . ,(truncate (/ (frame-pixel-width) 10)))
+;;                                (top . ,(truncate (* (frame-pixel-height) 0.3)))
+;;                                (width . 0.8)
+;;                                (height . 10)
+;;                                (vertical-scroll-bars . nil)))
+;;   (add-hook 'window-configuration-change-hook
+;;             (lambda () (when (> (frame-pixel-height) 400)  ;; exclude mini-frame
+;;                          (setq mini-frame-show-parameters
+;;                                `((left . ,(truncate (/ (frame-pixel-width) 10)))
+;;                                  (top . ,(truncate (* (frame-pixel-height) 0.3)))
+;;                                  (width . 0.8)
+;;                                  (height . 10)
+;;                                  (vertical-scroll-bars . nil))))))
+;;   (add-hook 'after-init-hook #'mini-frame-mode))
+
+;; (use-package org-alert
+;;   :commands (org-alert-enable)
+;;   :init
+;;   (setq alert-default-style 'libnotify))
 
 ;; (use-package shackle
 ;;   ;; TODO try shackle-mode/display-buffer-alist some day maybe
@@ -1310,125 +1387,6 @@ That is, remove a non kept dired from the recent list."
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 ;; (use-package treemacs-magit :demand t)
-
-;; (use-package mini-frame
-;;   :init
-;;   (setq mini-frame-show-parameters
-;;                              `((left . ,(truncate (/ (frame-pixel-width) 10)))
-;;                                (top . ,(truncate (* (frame-pixel-height) 0.3)))
-;;                                (width . 0.8)
-;;                                (height . 10)
-;;                                (vertical-scroll-bars . nil)))
-;;   (add-hook 'window-configuration-change-hook
-;;             (lambda () (when (> (frame-pixel-height) 400)  ;; exclude mini-frame
-;;                          (setq mini-frame-show-parameters
-;;                                `((left . ,(truncate (/ (frame-pixel-width) 10)))
-;;                                  (top . ,(truncate (* (frame-pixel-height) 0.3)))
-;;                                  (width . 0.8)
-;;                                  (height . 10)
-;;                                  (vertical-scroll-bars . nil))))))
-;;   (add-hook 'after-init-hook #'mini-frame-mode))
-
-(use-package selectrum
-  :init
-  ;; (defun display-buffer-show-in-posframe (buffer _alist)
-  ;;   (frame-root-window
-  ;;    (posframe-show buffer
-  ;;                   :min-height 10
-  ;;                   :min-width (truncate (* (frame-width) 0.8))
-  ;;                   :internal-border-width 1
-  ;;                   :left-fringe 8
-  ;;                   :right-fringe 8
-  ;;                   :poshandler 'posframe-poshandler-frame-center)))
-  ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
-  ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
-  (setq magit-completing-read-function #'selectrum-completing-read)
-  (add-hook 'after-init-hook #'selectrum-mode))
-
-(use-package prescient
-  :commands (prescient-persist-mode)
-  :init (add-hook 'after-init-hook #'prescient-persist-mode))
-
-(use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
-
-(use-package selectrum-prescient :init (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode))
-
-(use-package simple
-  :init
-  (add-hook 'after-init-hook #'global-visual-line-mode)
-  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
-  (global-set-key (kbd "M-SPC u") #'universal-argument))
-
-(use-package consult
-  :init
-  (setq consult-preview-key nil)
-  (setq-default consult-project-root-function #'projectile-project-root)
-  (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
-  (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
-  ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
-  ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
-  )
-
-(use-package marginalia
-  :init
-  (add-hook 'after-init-hook 'marginalia-mode)
-  (setq-default marginalia-annotators '(marginalia-annotators-heavy)))
-
-;; (use-package embark
-;;   :config
-;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
-
-;; (use-package embark-consult)
-
-(use-package window
-  :init
-  (defun wenpin/split-window-right ()
-    "split-window-right with right window having a max width of 100 columns"
-    (interactive)
-    (if (> (window-total-width) 200)
-        (split-window-right -100)
-      (if (> (window-total-width) 180)
-          (split-window-right -90)
-        (split-window-right))))
-  (defun wenpin/split-window-right-and-focus ()
-    (interactive)
-    (wenpin/split-window-right)
-    (other-window 1))
-  (global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
-  (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
-  (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
-  (global-set-key (kbd "M-SPC w V") (defun wenpin/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
-  (global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
-  (global-set-key (kbd "M-SPC w d") #'delete-window)
-  (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
-  (global-set-key (kbd "M-SPC w v") #'split-window-below)
-  (global-set-key (kbd "M-SPC w x") #'window-swap-states)
-  )
-
-(use-package telega
-  :init
-  (defun wenpin/my-telega-chat-mode ()
-    (set (make-local-variable 'company-backends)
-         (append (list telega-emoji-company-backend
-                       'telega-company-username
-                       'telega-company-hashtag)
-                 (when (telega-chat-bot-p telega-chatbuf--chat)
-                   '(telega-company-botcmd))))
-    (toggle-input-method)
-    (company-mode 1))
-  (setq telega-avatar-text-compose-chars nil
-        telega-chat-show-avatars nil
-        telega-directory (wenpin/locate-emacs-var-file "telega")
-        telega-server-libs-prefix "~/.guix-profile")
-  (add-hook 'telega-load-hook #'telega-appindicator-mode)
-  (add-hook 'telega-load-hook #'telega-mode-line-mode)
-  (add-hook 'telega-load-hook #'telega-notifications-mode)
-  (add-hook 'telega-chat-mode-hook #'wenpin/my-telega-chat-mode)
-  :config
-  (require 'telega-transient)
-  (telega-transient-mode 1))
-
-(use-package link-hint)
 
 (provide 'init-config)
 ;;; init-config ends here

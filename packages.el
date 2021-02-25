@@ -10,6 +10,7 @@
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           '(ob-groovy :host github :repo "zweifisch/ob-groovy")
           '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
+          '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
@@ -22,19 +23,26 @@
           'cider
           'clojure-mode
           'company
-          ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
+          'company-prescient
+          'consult
           'crux
+          'ctable
           'dap-mode
+          'deferred
           'devdocs
           'diminish
           'dired-rsync
           'direnv
           'dotenv-mode
+          'embark
+          'embark-consult
           'emmet-mode
+          'epc
           'esh-autosuggest
           'eshell-z
           'eterm-256color
           'expand-region
+          'flycheck
           'flycheck-posframe
           'gcmh
           'git-link
@@ -46,14 +54,10 @@
           'helpful
           'highlight-indent-guides
           'hl-todo
-          ;; 'ivy
-          ;; 'ivy-hydra
-          ;; 'ivy-posframe
-          ;; 'ivy-rich
-          ;; 'ivy-xref
           'json-mode
           'keyfreq
-          ;; 'lsp-ivy
+          'link-hint
+          'lsp-haskell
           'lsp-java
           'lsp-mode
           'lsp-python-ms
@@ -62,9 +66,12 @@
           'magit
           'magit-delta
           'magit-todos
+          'marginalia
           'markdown-mode
+          'mini-frame
           'ob-typescript
           'olivetti
+          'orderless
           'org-cliplink
           'org-download
           'org-journal
@@ -77,16 +84,18 @@
           'pkgbuild-mode
           'pocket-reader
           'posframe
+          'prescient
           'projectile
           'ranger
           'rime
           'rust-mode
           's
           'selectric-mode
+          'selectrum
+          'selectrum-prescient
           'shackle
           'smartparens
           'sudo-edit
-          ;; 'swiper
           'tide
           'transient
           'treemacs
@@ -95,24 +104,15 @@
           'yaml-mode
           'yasnippet
           'zeal-at-point
-          'epc
-          'ctable
-          'deferred
-          'selectrum
-          'prescient
-          'company-prescient
+          ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
+          ;; 'ivy
+          ;; 'ivy-hydra
+          ;; 'ivy-posframe
           ;; 'ivy-prescient
-          'selectrum-prescient
-          'consult
-          'orderless
-          'marginalia
-          'embark
-          'embark-consult
-          'mini-frame
-          'lsp-haskell
-          '(telega :host github :repo "zevlg/telega.el" :branch "releases")
-          'link-hint
-          'flycheck
+          ;; 'ivy-rich
+          ;; 'ivy-xref
+          ;; 'lsp-ivy
+          ;; 'swiper
           ))
   (straight-use-package wenpin/package))
 
