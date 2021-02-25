@@ -634,7 +634,7 @@
   :init (add-hook 'magit-mode-hook #'magit-delta-mode)
   :config (diminish 'magit-delta-mode ""))
 
-(use-package magit-todos :init (global-set-key (kbd "M-SPC p t") #'magit-todos-list))
+(use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
 
 (use-package make-mode
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
