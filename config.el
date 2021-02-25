@@ -766,38 +766,6 @@ That is, remove a non kept dired from the recent list."
     (global-set-key (kbd "C-c c") #'org-capture))
   (use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
   (use-package org-colview :config (define-key org-columns-map (kbd "SPC") #'org-columns-open-link))
-  :config
-  ;; fix error of org-babel-js evaluation
-  (setq org-babel-js-function-wrapper
-        "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
-  ;; TODO ob-jshell
-  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
-  (defun org-babel-execute:jsh (body params)
-    "Execute a block of jshell code snippets or commands with org-babel"
-    (message "Executing jshell snippets")
-    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
-  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
-  (org-babel-do-load-languages 'org-babel-load-languages
-			       '((awk . t)
-                                 (clojure . t)
-                                 (emacs-lisp . t)
-                                 (groovy . t)
-                                 (haskell . t)
-                                 (js . t)
-                                 (shell . t)
-                                 (typescript . t)))
-  (defadvice org-html-paragraph (before org-html-paragraph-advice
-					(paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil)
   (use-package ob-clojure)
   (use-package ob-groovy)
   (use-package org-cliplink)
@@ -857,7 +825,39 @@ unwanted space when exporting org-mode to html."
           org-roam-server-label-truncate-length 60
           org-roam-server-label-wrap-length 20)
     (diminish 'org-roam-server-mode "图"))
-  (use-package ox-hugo))
+  (use-package ox-hugo)
+  :config
+  ;; fix error of org-babel-js evaluation
+  (setq org-babel-js-function-wrapper
+        "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
+  ;; TODO ob-jshell
+  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
+  (defun org-babel-execute:jsh (body params)
+    "Execute a block of jshell code snippets or commands with org-babel"
+    (message "Executing jshell snippets")
+    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
+  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((awk . t)
+                                 (clojure . t)
+                                 (emacs-lisp . t)
+                                 (groovy . t)
+                                 (haskell . t)
+                                 (js . t)
+                                 (shell . t)
+                                 (typescript . t)))
+  (defadvice org-html-paragraph (before org-html-paragraph-advice
+					(paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to html."
+    (let* ((origin-contents (ad-get-arg 1))
+           (fix-regexp "[[:multibyte:]]")
+           (fixed-contents
+            (replace-regexp-in-string
+             (concat
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+      (ad-set-arg 1 fixed-contents)))
+  (define-key org-mode-map (kbd "C-<tab>") nil))
 
 (use-package paredit
   :commands (enable-paredit-mode)
