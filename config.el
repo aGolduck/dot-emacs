@@ -933,6 +933,7 @@ unwanted space when exporting org-mode to html."
    projectile-project-search-path '("~/g" "~/r" "~/b"))
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
+  (global-set-key (kbd "M-SPC p t") #'projectile-run-vterm)
   (use-package treemacs-projectile))
 
 (use-package python
