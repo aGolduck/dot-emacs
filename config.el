@@ -1392,5 +1392,11 @@ unwanted space when exporting org-mode to html."
 
 ;; (use-package treemacs-magit :demand t)
 
+(use-package dumb-jump
+  :init
+  (setq dumb-jump-force-searcher 'rg)
+  (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
+  (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back))
+
 (provide 'init-config)
 ;;; init-config ends here

@@ -113,6 +113,7 @@
           ;; 'ivy-xref
           ;; 'lsp-ivy
           ;; 'swiper
+          'dumb-jump
           ))
   (straight-use-package wenpin/package))
 

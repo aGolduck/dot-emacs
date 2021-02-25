@@ -16,6 +16,7 @@
  ("dash.el" . "732d92eac56023a4fb4a5dc3d9d4e274ebf44bf9")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dired-rsync" . "947a008387a939f466ca122bda2ea98bb17710e3")
+ ("dumb-jump" . "35a80403d9ed451f83417654a9dea823cc942d94")
  ("edit-indirect" . "bdc8f542fe8430ba55f9a24a7910639d4c434422")
  ("elisp-refs" . "0e7ea1574717108ddc2eda5e1bc883d44cd28257")
  ("emacs-application-framework" . "8643126f7bfd151a73c9c4046cd24db31eac4339")
