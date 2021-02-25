@@ -639,7 +639,13 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'org-mode-hook #'valign-mode)
   (use-package ol
     :init
+    (defun wenpin/org-link-search-elisp (addressing-string)
+      (when (eq major-mode 'emacs-lisp-mode)
+        (goto-char (point-min))
+        (and (search-forward addressing-string nil t)
+             (goto-char (match-beginning 0)))))
     (setq org-link-frame-setup '((file . find-file)))
+    (add-hook 'org-execute-file-search-functions #'wenpin/org-link-search-elisp)
     (global-set-key (kbd "M-SPC l s") #'org-store-link))
   (use-package org-agenda
     :init
