@@ -612,7 +612,6 @@ That is, remove a non kept dired from the recent list."
 	org-export-with-sub-superscripts nil
 	org-html-inline-images t
         org-log-done 'time
-        org-link-frame-setup '((file . find-file))
 	org-outline-path-complete-in-steps nil
         org-preview-latex-default-process 'dvisvgm
 	org-refile-target-verify-function 'bh/verify-refile-target
@@ -638,6 +637,10 @@ That is, remove a non kept dired from the recent list."
 		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
   (add-hook 'org-mode-hook #'visual-line-mode)
   (add-hook 'org-mode-hook #'valign-mode)
+  (use-package ol
+    :init
+    (setq org-link-frame-setup '((file . find-file)))
+    (global-set-key (kbd "M-SPC l s") #'org-store-link))
   (use-package org-agenda
     :init
     (setq org-agenda-restore-windows-after-quit t
