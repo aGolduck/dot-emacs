@@ -112,6 +112,7 @@
           'lsp-haskell
           '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           'link-hint
+          'flycheck
           ))
   (straight-use-package wenpin/package))
 
