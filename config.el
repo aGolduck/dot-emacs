@@ -1414,6 +1414,7 @@ That is, remove a non kept dired from the recent list."
                        'telega-company-hashtag)
                  (when (telega-chat-bot-p telega-chatbuf--chat)
                    '(telega-company-botcmd))))
+    (toggle-input-method)
     (company-mode 1))
   (setq telega-avatar-text-compose-chars nil
         telega-chat-show-avatars nil
