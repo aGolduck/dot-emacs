@@ -1402,7 +1402,8 @@ unwanted space when exporting org-mode to html."
   :init
   ;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
   (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
-  (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back))
+  ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
+  )
 
 (provide 'init-config)
 ;;; init-config ends here

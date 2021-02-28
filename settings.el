@@ -4,6 +4,7 @@
       ;; confirm-kill-emacs nil
       delete-by-moving-to-trash t
       frame-resize-pixelwise t
+      initial-major-mode 'fundamental-mode
       mac-command-modifier 'super
       mac-option-modifier 'meta
       next-screen-context-lines 5
@@ -32,7 +33,10 @@
                                  ;; mode-line-buffer-identification
                                  mode-line-misc-info
                                  mode-line-end-spaces)
-              frame-title-format '(buffer-file-name "%f" "%b"))
+              frame-title-format ;; '(buffer-file-name "%f" "%b")
+              '((:eval (if (buffer-file-name)
+                           (abbreviate-file-name (buffer-file-name))
+                         "%b"))))
 
 
 ;;; fonts and faces
@@ -65,6 +69,7 @@
 (set-fontset-font t 'hangul "Noto Sans CJK KR")
 (set-fontset-font t 'cjk-misc "Noto Sans CJK SC")
 ;; other faces
+;; TODO try face-spec-set
 (set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
 ;; TODO Iosevka was deleted from system
 (set-face-attribute 'fixed-pitch-serif nil :family "Iosevka Slab Extended")
@@ -90,6 +95,7 @@
 ;; (global-set-key (kbd "C-l"))
 ;; (global-set-key (kbd "C-o"))
 ;; (global-set-key (kbd "C-z"))
+;; (global-set-key (kbd "M-`"))
 ;; (global-set-key (kbd "M-i"))
 ;; (global-set-key (kbd "M-j"))
 ;; (global-set-key (kbd "M-m"))
