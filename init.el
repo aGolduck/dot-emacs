@@ -26,5 +26,13 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)
 
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (require 'server)
+            (unless (server-running-p)
+              (server-start))))
 (desktop-read)
 (tab-bar-mode 1)
+
+(provide 'init)
