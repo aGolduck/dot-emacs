@@ -11,7 +11,7 @@
 (require 'init-straight)
 (require 'init-use-package)
 
-(straight-use-package diminish)
+(straight-use-package 'diminish)
 (require 'init-grep)
 (require 'init-buffer)
 ;; (require 'init-lisp)
