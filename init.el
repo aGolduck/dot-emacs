@@ -12,6 +12,7 @@
 (require 'init-use-package)
 
 (require 'init-grep)
+(require 'init-buffer)
 ;; (require 'init-lisp)
 
 (load (w/locate-in-current-directory "packages"))
