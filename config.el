@@ -14,7 +14,7 @@
                 (ansi-color-apply-on-region (point-min) (point-max))))))
 
 (use-package auth-source
-  :init (setq auth-sources '((:source (wenpin/locate-emacs-var-file ".authinfo.gpg")))))
+  :init (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg")))))
 
 (use-package avy
   :init
@@ -24,12 +24,12 @@
 
 (use-package bookmark
   :init
-  (setq bookmark-default-file (wenpin/locate-emacs-var-file "bookmarks"))
+  (setq bookmark-default-file (w/locate-emacs-var-file "bookmarks"))
   (global-set-key (kbd "M-SPC b s") #'bookmark-set))
 
 (use-package browse-url
   :init
-  (when (string-equal wenpin/HOST "xps")
+  (when (string-equal w/HOST "xps")
     (setq browse-url-browser-function 'eaf-open-browser)))
 
 (use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
@@ -81,8 +81,8 @@
 
 (use-package desktop
   :init
-  (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") wenpin/EMACS-VAR)
-        desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") wenpin/EMACS-VAR)
+  (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") w/EMACS-VAR)
+        desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") w/EMACS-VAR)
         desktop-globals-to-save '()
         desktop-locals-to-save '()
         desktop-files-not-to-save ".*"
@@ -141,7 +141,7 @@
                                          ("\\.xls\\'" "libreoffice")
                                          ("\\.xlsx\\'" "libreoffice")))
     (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
-  (use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired"))))
+  (use-package image-dired :init (setq image-dired-dir (w/locate-emacs-var-file "image-dired"))))
 
 (use-package direnv
   :if (executable-find "direnv")
@@ -159,7 +159,7 @@
   (use-package s)
   (setq browse-url-browser-function 'eaf-open-browser
         eaf-browser-continue-where-left-off t
-        eaf-config-location (wenpin/locate-emacs-var-file "eaf"))
+        eaf-config-location (w/locate-emacs-var-file "eaf"))
   (defalias 'browse-web #'eaf-open-browser)
   (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
   (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
@@ -171,7 +171,7 @@
       (_ (apply fn file args))))
   (advice-add #'find-file :around #'eaf-find-file-advice)
   :config
-  (when (string-equal wenpin/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
+  (when (string-equal w/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
   (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
   (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
@@ -206,7 +206,7 @@
 
 (use-package esh-mode
   :init
-  (setq eshell-directory-name (wenpin/locate-emacs-var-file "eshell"))
+  (setq eshell-directory-name (w/locate-emacs-var-file "eshell"))
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
   (add-hook 'eshell-mode-hook
@@ -242,7 +242,7 @@
   (use-package recentf
     :init
     (setq recentf-auto-cleanup 'never
-          recentf-save-file (wenpin/locate-emacs-var-file "recentf")
+          recentf-save-file (w/locate-emacs-var-file "recentf")
           recentf-max-saved-items nil)
     ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
     (defun recentd-track-opened-file ()
@@ -262,10 +262,10 @@ That is, remove a non kept dired from the recent list."
   (use-package saveplace
     :init
     (setq auto-save-list-file-prefix nil)
-    (setq save-place-file (wenpin/locate-emacs-var-file "places"))
+    (setq save-place-file (w/locate-emacs-var-file "places"))
     (add-hook 'after-init-hook #'save-place-mode)
     (use-package sudo-edit))
-  (use-package tramp :init (setq tramp-persistency-file-name (wenpin/locate-emacs-var-file "tramp")))
+  (use-package tramp :init (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp")))
   (use-package view :config (diminish 'view-mode "览")))
 
 (use-package find-func
@@ -354,14 +354,14 @@ That is, remove a non kept dired from the recent list."
   (global-set-key (kbd "M-SPC z s") #'hs-show-block)
   (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
   :config
-  (defconst wenpin/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
-  (defun wenpin/hide-show-overlay-fn (wenpin/overlay)
-    (when (eq 'code (overlay-get wenpin/overlay 'hs))
-      (let* ((nlines (count-lines (overlay-start wenpin/overlay)
-                                  (overlay-end wenpin/overlay)))
+  (defconst w/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+  (defun w/hide-show-overlay-fn (w/overlay)
+    (when (eq 'code (overlay-get w/overlay 'hs))
+      (let* ((nlines (count-lines (overlay-start w/overlay)
+                                  (overlay-end w/overlay)))
              (info (format " ... #%d " nlines)))
-        (overlay-put wenpin/overlay 'display (propertize info 'face wenpin/hideshow-folded-face)))))
-  (setq hs-set-up-overlay 'wenpin/hide-show-overlay-fn)
+        (overlay-put w/overlay 'display (propertize info 'face w/hideshow-folded-face)))))
+  (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
   (diminish 'hs-minor-mode "折"))
 
 (use-package highlight-indent-guides
@@ -462,13 +462,13 @@ That is, remove a non kept dired from the recent list."
 
 (use-package lsp-java
   :init
-  (setq wenpin/path-to-lombok "/usr/share/java/lombok.jar")
-  (setq lsp-java-workspace-dir (wenpin/locate-emacs-var-file "workspace")
+  (setq w/path-to-lombok "/usr/share/java/lombok.jar")
+  (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
         lsp-java-vmargs `("-noverify"
                           "-Xmx1G" "-XX:+UseG1GC"
                           "-XX:+UseStringDeduplication"
-                          ,(concat "-javaagent:" wenpin/path-to-lombok)
-                          ,(concat "-Xbootclasspath/a:" wenpin/path-to-lombok)))
+                          ,(concat "-javaagent:" w/path-to-lombok)
+                          ,(concat "-Xbootclasspath/a:" w/path-to-lombok)))
   (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
@@ -490,7 +490,7 @@ That is, remove a non kept dired from the recent list."
                dap-java-debug-test-class)
     :init
     (setq dap-java-test-runner
-          (wenpin/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+          (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
     (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
     :config
     (dap-register-debug-template
@@ -529,8 +529,8 @@ That is, remove a non kept dired from the recent list."
         lsp-print-performance t
         lsp-semantic-highlighting nil
         read-process-output-max (* 1024 1024))
-  (setq lsp-session-file (wenpin/locate-emacs-var-file ".lsp-session-v1")
-        lsp-server-install-dir (wenpin/locate-emacs-var-file ".cache/lsp"))
+  (setq lsp-session-file (w/locate-emacs-var-file ".lsp-session-v1")
+        lsp-server-install-dir (w/locate-emacs-var-file ".cache/lsp"))
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
   ;; lsp-completion 使用 yas 补全，但没有补全完没有正确置空 yas--active-snippet，导致 auto-save 检测条件出错
   (add-hook 'lsp-mode-hook #'yas-minor-mode-on)
@@ -551,7 +551,7 @@ That is, remove a non kept dired from the recent list."
     (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
   (use-package dap-mode
     :init
-    (setq dap-breakpoints-file (wenpin/locate-emacs-var-file ".dap-breakpoints"))
+    (setq dap-breakpoints-file (w/locate-emacs-var-file ".dap-breakpoints"))
     (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
     :config
     (dap-auto-configure-mode))
@@ -639,13 +639,13 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'org-mode-hook #'valign-mode)
   (use-package ol
     :init
-    (defun wenpin/org-link-search-elisp (addressing-string)
+    (defun w/org-link-search-elisp (addressing-string)
       (when (eq major-mode 'emacs-lisp-mode)
         (goto-char (point-min))
         (and (search-forward addressing-string nil t)
              (goto-char (match-beginning 0)))))
     (setq org-link-frame-setup '((file . find-file)))
-    (add-hook 'org-execute-file-search-functions #'wenpin/org-link-search-elisp)
+    (add-hook 'org-execute-file-search-functions #'w/org-link-search-elisp)
     (global-set-key (kbd "M-SPC l s") #'org-store-link))
   (use-package org-agenda
     :init
@@ -764,7 +764,7 @@ That is, remove a non kept dired from the recent list."
 	     "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
 	    ))
     (global-set-key (kbd "C-c c") #'org-capture))
-  (use-package org-id :init (setq org-id-locations-file (wenpin/locate-emacs-var-file ".org-id-locations")))
+  (use-package org-id :init (setq org-id-locations-file (w/locate-emacs-var-file ".org-id-locations")))
   (use-package org-colview :config (define-key org-columns-map (kbd "SPC") #'org-columns-open-link))
   (use-package ob-clojure)
   (use-package ob-groovy)
@@ -785,7 +785,7 @@ That is, remove a non kept dired from the recent list."
   (use-package org-journal
     :init
     (setq org-journal-dir "~/org/journal"
-          org-journal-cache-file (wenpin/locate-emacs-var-file "org-journal.cache")
+          org-journal-cache-file (w/locate-emacs-var-file "org-journal.cache")
           org-journal-file-format "%Y%m%d.org"
           org-journal-find-file #'find-file
           org-journal-file-type 'daily
@@ -801,7 +801,7 @@ That is, remove a non kept dired from the recent list."
     :commands (org-roam-dailies-today org-roam-dailies-capture-today)
     :init
     (setq org-roam-directory (file-truename "~/org/roam")
-          org-roam-db-location (wenpin/locate-emacs-var-file "org-roam.db")
+          org-roam-db-location (w/locate-emacs-var-file "org-roam.db")
           ;; org-roam-completion-system 'ivy
           )
     ;; (add-hook 'org-roam-capture-after-find-file-hook #'winner-undo)
@@ -921,7 +921,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package projectile
   :init
-  (defun wenpin/projectile-shortened-mode-line ()
+  (defun w/projectile-shortened-mode-line ()
     "Report project name shortened and type in the modeline."
     (let* ((project-name (projectile-project-name))
            (project-type (projectile-project-type))
@@ -935,9 +935,9 @@ unwanted space when exporting org-mode to html."
                   (format ":%s" project-type)
                 ""))))
   (setq ;; projectile-completion-system 'ivy
-   projectile-cache-file (wenpin/locate-emacs-var-file "projectile.cache")
-   projectile-known-projects-file (wenpin/locate-emacs-var-file "projectile-bookmarks.eld")
-   projectile-mode-line-function 'wenpin/projectile-shortened-mode-line
+   projectile-cache-file (w/locate-emacs-var-file "projectile.cache")
+   projectile-known-projects-file (w/locate-emacs-var-file "projectile-bookmarks.eld")
+   projectile-mode-line-function 'w/projectile-shortened-mode-line
    projectile-mode-line-prefix "项"
    projectile-project-search-path '("~/g" "~/r" "~/b"))
   (add-hook 'after-init-hook #'projectile-mode)
@@ -1038,8 +1038,8 @@ unwanted space when exporting org-mode to html."
 
 (use-package snails
   :if window-system
-  ;; both wenpin/snails snails need to be in commands, otherwise emacs can not recognize type of wenpin/snails
-  :commands (wenpin/snails snails)
+  ;; both w/snails snails need to be in commands, otherwise emacs can not recognize type of w/snails
+  :commands (w/snails snails)
   :init
   ;; (when (eq system-type 'darwin)
   ;;   (setq snails-default-backends '(
@@ -1081,7 +1081,7 @@ unwanted space when exporting org-mode to html."
         tab-bar-select-tab-modifiers '(meta)
         tab-bar-tab-hints t)
   ;; (setq tab-bar-tab-name-function
-  ;;       (defun wenpin/tab-bar-show-file-name ()
+  ;;       (defun w/tab-bar-show-file-name ()
   ;;         (let* ((buffer (window-buffer (minibuffer-selected-window)))
   ;;                (file-name (buffer-file-name buffer)))
   ;;           (if file-name file-name (format "%s" buffer)))))
@@ -1095,7 +1095,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package telega
   :init
-  (defun wenpin/my-telega-chat-mode ()
+  (defun w/my-telega-chat-mode ()
     (set (make-local-variable 'company-backends)
          (append (list telega-emoji-company-backend
                        'telega-company-username
@@ -1106,12 +1106,12 @@ unwanted space when exporting org-mode to html."
     (company-mode 1))
   (setq telega-avatar-text-compose-chars nil
         telega-chat-show-avatars nil
-        telega-directory (wenpin/locate-emacs-var-file "telega")
+        telega-directory (w/locate-emacs-var-file "telega")
         telega-server-libs-prefix "~/.guix-profile")
   (add-hook 'telega-load-hook #'telega-appindicator-mode)
   (add-hook 'telega-load-hook #'telega-mode-line-mode)
   (add-hook 'telega-load-hook #'telega-notifications-mode)
-  (add-hook 'telega-chat-mode-hook #'wenpin/my-telega-chat-mode)
+  (add-hook 'telega-chat-mode-hook #'w/my-telega-chat-mode)
   :config
   (require 'telega-transient)
   (telega-transient-mode 1))
@@ -1128,22 +1128,22 @@ unwanted space when exporting org-mode to html."
         tide-server-max-response-length 524288)
   :config (diminish 'tide-mode "型"))
 
-(use-package transient :init (setq transient-history-file (wenpin/locate-emacs-var-file "transient/history.el")))
+(use-package transient :init (setq transient-history-file (w/locate-emacs-var-file "transient/history.el")))
 
 (use-package treemacs
   :commands (treemacs-current-visibilit)
   :init
   (setq treemacs-no-png-images t
-        treemacs-persist-file (wenpin/locate-emacs-var-file ".cache/treemacs-persist"))
+        treemacs-persist-file (w/locate-emacs-var-file ".cache/treemacs-persist"))
   (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
-  (defun wenpin/treemacs-goto-treemacs ()
+  (defun w/treemacs-goto-treemacs ()
     (interactive)
     (pcase (treemacs-current-visibility)
       ('visible (treemacs-select-window))
       ('exists (treemacs-select-window))
       ('none (treemacs-add-and-display-current-project))))
   ;; n for navigate?
-  (global-set-key (kbd "M-n") #'wenpin/treemacs-goto-treemacs)
+  (global-set-key (kbd "M-n") #'w/treemacs-goto-treemacs)
   :config
   (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
   ;; TODO :inherit variable-pitch
@@ -1172,7 +1172,7 @@ unwanted space when exporting org-mode to html."
   ;; (push 'company-lsp company-backends)
   )
 
-(use-package url-cookie :init (setq url-cookie-file (wenpin/locate-emacs-var-file "url/cookies")))
+(use-package url-cookie :init (setq url-cookie-file (w/locate-emacs-var-file "url/cookies")))
 
 (use-package valign :config (diminish 'valign-mode))
 
@@ -1193,7 +1193,7 @@ unwanted space when exporting org-mode to html."
 
 (use-package window
   :init
-  (defun wenpin/split-window-right ()
+  (defun w/split-window-right ()
     "split-window-right with right window having a max width of 100 columns"
     (interactive)
     (if (> (window-total-width) 200)
@@ -1201,22 +1201,22 @@ unwanted space when exporting org-mode to html."
       (if (> (window-total-width) 180)
           (split-window-right -90)
         (split-window-right))))
-  (defun wenpin/split-window-right-and-focus ()
+  (defun w/split-window-right-and-focus ()
     (interactive)
-    (wenpin/split-window-right)
+    (w/split-window-right)
     (other-window 1))
   (global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
   (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
-  (global-set-key (kbd "M-SPC w S") #'wenpin/split-window-right-and-focus)
-  (global-set-key (kbd "M-SPC w V") (defun wenpin/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
-  (global-set-key (kbd "M-SPC w X") (defun wenpin/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
+  (global-set-key (kbd "M-SPC w S") #'w/split-window-right-and-focus)
+  (global-set-key (kbd "M-SPC w V") (defun w/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
+  (global-set-key (kbd "M-SPC w X") (defun w/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
   (global-set-key (kbd "M-SPC w d") #'delete-window)
-  (global-set-key (kbd "M-SPC w s") #'wenpin/split-window-right)
+  (global-set-key (kbd "M-SPC w s") #'w/split-window-right)
   (global-set-key (kbd "M-SPC w v") #'split-window-below)
   (global-set-key (kbd "M-SPC w x") #'window-swap-states)
   (use-package ace-window
     :init
-    ;; (defun wenpin/get-window-list ()
+    ;; (defun w/get-window-list ()
     ;;   (if (<= (length (window-list)) 2)
     ;;       (window-list)
     ;;     (save-excursion
@@ -1234,7 +1234,7 @@ unwanted space when exporting org-mode to html."
     ;;         (ignore-errors (dotimes (i 10) (windmove-down)))
     ;;         (add-to-list 'windows (selected-window) t)
     ;;         windows))))
-    ;; (advice-add 'aw-window-list :override #'wenpin/get-window-list)
+    ;; (advice-add 'aw-window-list :override #'w/get-window-list)
     (setq aw-keys '(?i ?u ?d ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
           aw-dispatch-alist '((?x aw-delete-window "Delete Window")
 	                      (?m aw-swap-window "Swap Windows")
@@ -1363,11 +1363,11 @@ unwanted space when exporting org-mode to html."
 ;;   ;; TODO try shackle-mode/display-buffer-alist some day maybe
 ;;   :init
 ;;   ;; TODO 1. split if needed, 2. display buffer in target window, 3. return target window
-;;   ;; (defun wenpin/shackle-diplay-in-right-most-window (buffer alist plist)
+;;   ;; (defun w/shackle-diplay-in-right-most-window (buffer alist plist)
 ;;   ;;   (let (window (select-window))
 ;;   ;;     window))
 ;;   ;; https://emacs.stackexchange.com/questions/34779/using-shackle-to-split-current-window-instead-of-root
-;;   (setq wenpin/left-window-size
+;;   (setq w/left-window-size
 ;;         (cond
 ;;          ((> (frame-width) 200) (- (frame-width) 100))
 ;;          ((> (frame-width) 180) (- (frame-width) 90))
@@ -1375,7 +1375,7 @@ unwanted space when exporting org-mode to html."
 ;;   (setq shackle-rules `(("*Agenda Commands*" :other t :select t)
 ;;                         (eaf-mode :select t :align below :size 0.3)
 ;;                         ("\\*Help\\*" :regexp t :other t :align right
-;;                          :size ,(/ (* 1.0 (- (frame-width) wenpin/left-window-size))
+;;                          :size ,(/ (* 1.0 (- (frame-width) w/left-window-size))
 ;;                                   (frame-width))))
 ;;         ;; shackle-inhibit-window-quit-on-same-windows t
 ;;         ;; shackle-select-reused-windows t
@@ -1385,7 +1385,7 @@ unwanted space when exporting org-mode to html."
 
 ;; (use-package smex
 ;;   ;; smex is needed to order candidates for ivy
-;;   :init (setq smex-save-file (wenpin/locate-emacs-var-file "smex-items")))
+;;   :init (setq smex-save-file (w/locate-emacs-var-file "smex-items")))
 
 ;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
 

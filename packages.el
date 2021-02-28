@@ -1,8 +1,14 @@
 ;;;  -*- lexical-binding: t; -*-
 ;;; 包安装与配置分离，利于包版本集中管理，利于灵活调整包管理工具
 
-(dolist (wenpin/package
+(dolist (w/package
          (list
+          ;;; for reading others' emacs configs
+          'fullframe
+          'exec-path-from-shell
+          'dimmer
+
+          ;;; my own packages
 	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
           '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*"))
@@ -115,6 +121,6 @@
           ;; 'swiper
           'dumb-jump
           ))
-  (straight-use-package wenpin/package))
+  (straight-use-package w/package))
 
 (provide 'init-packages)

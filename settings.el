@@ -40,15 +40,15 @@
 
 
 ;;; fonts and faces
-(setq wenpin/font-default-height
+(setq w/font-default-height
       (cond
-       ((string-match wenpin/HOST "wenpin-iMac") 180)
-       ((string-match wenpin/HOST "xps") 120) ;; font size: 16, 1.0 屏幕缩放
-       ;; ((string-match wenpin/HOST "xps") 96) ;; font size: 16, 1.25 屏幕缩放
-       ((string-match wenpin/HOST "mo") 108)
+       ((string-match w/HOST "wenpin-iMac") 180)
+       ((string-match w/HOST "xps") 120) ;; font size: 16, 1.0 屏幕缩放
+       ;; ((string-match w/HOST "xps") 96) ;; font size: 16, 1.25 屏幕缩放
+       ((string-match w/HOST "mo") 108)
        (t 108)))
 ;; default font, default background for emacs-native-comp is too light for background of region face
-(set-face-attribute 'default nil :background "#fcfcfc" :family "JetBrains Mono" :height wenpin/font-default-height)
+(set-face-attribute 'default nil :background "#fcfcfc" :family "JetBrains Mono" :height w/font-default-height)
 ;; fallback font
 (set-fontset-font t nil "Courier New" nil 'append)
 ;; specific glyphs
@@ -79,7 +79,7 @@
 ;;; extra keybindings
 ;;; -*- lexical-binding: t; -*-
 (define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
-;; (defun wenpin/ivy-switch-buffer-in-other-window ()
+;; (defun w/ivy-switch-buffer-in-other-window ()
 ;;   (interactive)
 ;;   (call-interactively #'ivy-switch-buffer-other-window)
 ;;   (other-window 1))
@@ -122,7 +122,7 @@
 ;; first class keybindings, 1 key
 ;; C-c zone
 ;;; M-Spc 2 key strokes zone
-;; (global-set-key (kbd "M-SPC SPC") #'wenpin/snails)
+;; (global-set-key (kbd "M-SPC SPC") #'w/snails)
 ;;; M-SPC 3 key strokes zone
-;; (global-set-key (kbd "M-SPC B B") #'wenpin/ivy-switch-buffer-in-other-window)
+;; (global-set-key (kbd "M-SPC B B") #'w/ivy-switch-buffer-in-other-window)
 (global-set-key (kbd "M-SPC b k") #'kill-buffer)

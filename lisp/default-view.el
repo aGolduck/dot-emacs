@@ -17,8 +17,8 @@
           'org-agenda-mode-hook
           ))
   (add-hook readonly-mode-hook (lambda () (setq cursor-type 'box))))
-(defvar wenpin/view-mode-buffers nil)
-(defun wenpin/view-mode-hook-for-find-file ()
+(defvar w/view-mode-buffers nil)
+(defun w/view-mode-hook-for-find-file ()
   (if (or
        (string-match-p ".emacs.d/var" (buffer-file-name))
        (string-match-p "org/orgzly" (buffer-file-name))
@@ -31,12 +31,12 @@
 (defun set-default-view-mode ()
   "add view mode to find-file-hook"
   (interactive)
-  (dolist (buffer wenpin/view-mode-buffers)
+  (dolist (buffer w/view-mode-buffers)
     (save-excursion
       (set-buffer buffer)
       (view-mode 1)))
-  (setq wenpin/view-mode-buffers nil)
-  (add-hook 'find-file-hook #'wenpin/view-mode-hook-for-find-file))
+  (setq w/view-mode-buffers nil)
+  (add-hook 'find-file-hook #'w/view-mode-hook-for-find-file))
 (defun unset-default-view-mode ()
   "remove view mode from find-file-hook"
   (interactive)
@@ -45,8 +45,8 @@
       (set-buffer buffer)
       (when view-mode
         (view-mode -1)
-        (add-to-list 'wenpin/view-mode-buffers buffer))))
-  (remove-hook 'find-file-hook #'wenpin/view-mode-hook-for-find-file))
+        (add-to-list 'w/view-mode-buffers buffer))))
+  (remove-hook 'find-file-hook #'w/view-mode-hook-for-find-file))
 (set-default-view-mode)
 
 ;; hooks provided by built-in emacs are not enough

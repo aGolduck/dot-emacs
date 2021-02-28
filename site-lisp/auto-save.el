@@ -23,15 +23,15 @@
 (defvar auto-save-disable-predicates nil
   "Disable auto-save in these cases")
 
-(defun wenpin/buffer-is-org-capture-p (buffer)
+(defun w/buffer-is-org-capture-p (buffer)
   "buffer is org capture"
   (save-excursion
     (set-buffer buffer)
     (if (boundp 'org-capture-mode) org-capture-mode nil)))
 
-(defun wenpin/any-buffer-is-org-capture-p ()
+(defun w/any-buffer-is-org-capture-p ()
   "auto-save would keep deleting trailing whitespace of org-capture"
-  (if (member t (mapcar 'wenpin/buffer-is-org-capture-p (buffer-list))) t nil))
+  (if (member t (mapcar 'w/buffer-is-org-capture-p (buffer-list))) t nil))
 
 (defun auto-save-buffers ()
   (interactive)
@@ -51,7 +51,7 @@
                  ;; Company is not active?
                  (or (not (boundp 'company-candidates))
                      (not company-candidates))
-                 (not (wenpin/any-buffer-is-org-capture-p))
+                 (not (w/any-buffer-is-org-capture-p))
                  ;; tell auto-save don't save
                  (not (seq-some (lambda (predicate)
                                   (funcall predicate))
