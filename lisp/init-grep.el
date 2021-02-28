@@ -1,3 +1,7 @@
+;;; init-grep.el --- Settings for grep and grep-like tools -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
 (if (and (executable-find "rg")
          (straight-use-package 'rg))
     (global-set-key (kbd "M-SPC s p") #'rg-project)

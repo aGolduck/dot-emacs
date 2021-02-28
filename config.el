@@ -103,21 +103,6 @@
 
 (use-package devdocs)
 
-(use-package diminish
-  :init
-  (add-hook 'after-init-hook
-	    (lambda ()
-              (dolist (mode (list
-			     'flymake-posframe-mode
-			     'gcmh-mode
-			     ;; 'ivy-mode
-			     ;; 'ivy-posframe-mode
-                             'winner-mode
-                             'selectric-mode
-                             'subword-mode
-			     ))
-		(diminish mode)))))
-
 (use-package dired
   :init
   (setq dired-listing-switches "-Afhlv"
@@ -286,7 +271,9 @@ That is, remove a non kept dired from the recent list."
 
 (use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 
-(use-package gcmh :init (add-hook 'after-init-hook #'gcmh-mode))
+(use-package gcmh
+  :init (add-hook 'after-init-hook #'gcmh-mode)
+  :config (diminish 'gcmh-mode))
 
 (use-package git-link :init (global-set-key (kbd "M-SPC g L") #'git-link))
 
@@ -910,7 +897,8 @@ unwanted space when exporting org-mode to html."
   (use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
   (use-package flymake-posframe
     :commands (flymake-posframe-mode)
-    :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode)))
+    :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode)
+    :config (diminish 'flycheck-posframe-mode)))
 
 (use-package prescient
   :commands (prescient-persist-mode)
@@ -995,7 +983,9 @@ unwanted space when exporting org-mode to html."
   :init
   ;; 不禁用会导致 <up>, <down> 等语义改变，致使 previous-line, next-line 等 remap 失败
   (setq selectric-affected-bindings-list nil)
-  (add-hook 'after-init-hook #'selectric-mode))
+  (add-hook 'after-init-hook #'selectric-mode)
+  :config
+  (diminish 'selectric-mode))
 
 (use-package selectrum
   :init
@@ -1072,7 +1062,9 @@ unwanted space when exporting org-mode to html."
   ;; 			    )))
   (setq snails-use-exec-path-from-shell nil))
 
-(use-package subword :init (add-hook 'after-init-hook #'global-subword-mode))
+(use-package subword
+  :init (add-hook 'after-init-hook #'global-subword-mode)
+  :config (diminish 'subword-mode))
 
 (use-package tab-bar
   :if (> emacs-major-version 26)
@@ -1253,7 +1245,9 @@ unwanted space when exporting org-mode to html."
     :init
     (add-hook 'after-init-hook #'winner-mode)
     (global-set-key (kbd "M-SPC w u") #'winner-undo)
-    (global-set-key (kbd "M-SPC w r") #'winner-redo)))
+    (global-set-key (kbd "M-SPC w r") #'winner-redo)
+    :config
+    (diminish 'winner-mode)))
 
 (use-package woman :init (global-set-key (kbd "M-SPC d m") #'woman))
 
