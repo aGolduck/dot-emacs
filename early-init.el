@@ -18,3 +18,5 @@
 ;; (push '(vertical-scroll-bars) default-frame-alist)
 ;; (when (featurep 'ns)
 ;;   (push '(ns-transparent-titlebar . t) default-frame-alist))
+
+(setq comp-deferred-compilation t)
