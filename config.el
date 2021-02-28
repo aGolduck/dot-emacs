@@ -144,7 +144,7 @@
   (use-package image-dired :init (setq image-dired-dir (wenpin/locate-emacs-var-file "image-dired"))))
 
 (use-package direnv
-  :if (equal (shell-command "command -v direnv") 0)
+  :if (executable-find "direnv")
   :init (add-hook 'after-init-hook #'direnv-mode))
 
 (use-package dotenv)
@@ -570,7 +570,7 @@ That is, remove a non kept dired from the recent list."
   (setq magit-process-finish-apply-ansi-colors t)
   (global-set-key (kbd "M-SPC g s") #'magit-status)
   (use-package magit-delta
-    :if (equal (shell-command "command -v delta") 0)
+    :if (executable-find "delta")
     :init (add-hook 'magit-mode-hook #'magit-delta-mode)
     :config (diminish 'magit-delta-mode ""))
   (use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
@@ -991,7 +991,7 @@ unwanted space when exporting org-mode to html."
 (use-package screenshot-svg)
 
 (use-package selectric-mode
-  :if (equal (shell-command "command -v aplay") 0)
+  :if (executable-find "aplay")
   :init
   ;; 不禁用会导致 <up>, <down> 等语义改变，致使 previous-line, next-line 等 remap 失败
   (setq selectric-affected-bindings-list nil)
