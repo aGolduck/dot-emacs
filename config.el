@@ -928,6 +928,8 @@ unwanted space when exporting org-mode to html."
    projectile-mode-line-function 'w/projectile-shortened-mode-line
    projectile-mode-line-prefix "项"
    projectile-project-search-path '("~/g" "~/r" "~/b"))
+  (when (executable-find "rg")
+    (setq-default projectile-generic-command "rg --files --hidden"))
   (add-hook 'after-init-hook #'projectile-mode)
   (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
   (global-set-key (kbd "M-SPC p t") #'projectile-run-vterm)
