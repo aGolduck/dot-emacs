@@ -1,7 +1,13 @@
 (setq view-read-only nil)
 ;;; cursor-type
 (add-hook 'read-only-mode-hook
-          (lambda () (if buffer-read-only (setq cursor-type 'box) (setq cursor-type 'bar))))
+          (lambda () (if buffer-read-only
+                         (progn
+                           (setq cursor-type 'box)
+                           (w/toggle-read-only-mode 1))
+                       (progn
+                         (setq cursor-type 'bar)
+                          (w/toggle-read-only-mode -1)))))
 (add-hook 'vterm-copy-mode-hook
           (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (dolist (write-mode-hook
@@ -63,5 +69,11 @@
 ;; (add-hook 'switch-buffer-functions
 ;;           (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
 
+(define-minor-mode w/toggle-read-only-mode
+  "add a keymap to read-only-mode which does not have a keymap"
+  :lighter nil
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map "i" (lambda () (interactive) (read-only-mode -1)))
+            map))
 
 (provide 'read-only-by-default)
