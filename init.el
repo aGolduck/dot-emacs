@@ -14,18 +14,18 @@
 (straight-use-package 'diminish)
 (require 'init-grep)
 (require 'init-buffer)
-;; (require 'init-lisp)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))
 
 ;; other settings including extra variable, faces and keybindings
 (load (w/locate-in-current-directory "settings"))
-
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)
 
+(require 'init-lisp)
+(require 'read-only-by-default)
 
 (add-hook 'after-init-hook
           (lambda ()
@@ -34,6 +34,5 @@
               (server-start))))
 (desktop-read)
 (tab-bar-mode 1)
-(require 'read-only-by-default)
 
 (provide 'init)

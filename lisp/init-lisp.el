@@ -8,7 +8,6 @@
   (define-key lispy-mode-map (kbd "]") nil)
   (define-key lispy-mode-map (kbd "M-a") #'lispy-backward)
   (define-key lispy-mode-map (kbd "M-e") #'lispy-forward)
-;  (define-key lispy-mode-map (kbd "e") (lambda () (if view-mode #'view-exit #'lispy-eval)))
-  )
+  (define-key lispy-mode-map (kbd "i") nil))
 
 (provide 'init-lisp)
