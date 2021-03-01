@@ -1400,5 +1400,7 @@ unwanted space when exporting org-mode to html."
   ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
   )
 
+(use-package delsel :init (add-hook 'after-init-hook #'delete-selection-mode))
+
 (provide 'init-config)
 ;;; init-config ends here
