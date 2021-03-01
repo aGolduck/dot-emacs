@@ -1,13 +1,22 @@
 (setq view-read-only nil)
-;;; cursor-type
+
+(define-minor-mode w/extra-read-only-mode
+  "add a keymap to read-only-mode which does not have a keymap"
+  :lighter nil
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map "i" (lambda () (interactive) (read-only-mode -1)))
+            map))
+
 (add-hook 'read-only-mode-hook
           (lambda () (if buffer-read-only
                          (progn
                            (setq cursor-type 'box)
-                           (w/toggle-read-only-mode 1))
+                           (w/extra-read-only-mode 1))
                        (progn
                          (setq cursor-type 'bar)
-                          (w/toggle-read-only-mode -1)))))
+                          (w/extra-read-only-mode -1)))))
+
+;;; cursor-type for not file buffer
 (add-hook 'vterm-copy-mode-hook
           (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
 (dolist (write-mode-hook
@@ -24,8 +33,8 @@
           'org-agenda-mode-hook
           ))
   (add-hook read-mode-hook (lambda () (setq cursor-type 'box))))
+
 ;;; read-only-mode for file buffers
-(defvar w/original-read-only-mode-buffers nil)
 (defun w/read-only-mode-hook-for-find-file ()
   (if (or
        (string-match-p ".emacs.d/var" (buffer-file-name))
@@ -35,7 +44,9 @@
        (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
       (setq cursor-type 'bar)
     (read-only-mode 1)))
-;; TODO: add variable watcher for buffer-read-only to set cursor-type
+;; TODO: add variable watcher to 'buffer-read-only for buffer-read-only to set cursor-type
+(defvar w/original-read-only-mode-buffers nil)
+(defvar w/read-only-by-default nil)
 (defun set-read-only-mode-by-default ()
   "add read-only-mode to find-file-hook"
   (interactive)
@@ -44,7 +55,8 @@
       (set-buffer buffer)
       (read-only-mode 1)))
   (setq w/original-read-only-mode-buffers nil)
-  (add-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file))
+  (add-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file)
+  (setq w/read-only-by-default t))
 (defun unset-read-only-mode-by-default ()
   "remove remove-read-only-mode from find-file-hook"
   (interactive)
@@ -57,7 +69,14 @@
         (ignore-errors
           (read-only-mode -1)
           (add-to-list 'w/original-read-only-mode-buffers buffer)))))
-  (remove-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file))
+  (remove-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file)
+  (setq w/read-only-by-default nil))
+(defun toggle-read-only-mode-by-default ()
+  "set or unset read-only-mode by default"
+  (interactive)
+  (if w/read-only-by-default
+      (unset-read-only-mode-by-default)
+    (set-read-only-mode-by-default)))
 (set-read-only-mode-by-default)
 
 ;; hooks provided by built-in emacs are not enough
@@ -68,12 +87,5 @@
 ;; (add-hook 'window-state-change-hook #'term-cursor--immediate)
 ;; (add-hook 'switch-buffer-functions
 ;;           (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
-
-(define-minor-mode w/toggle-read-only-mode
-  "add a keymap to read-only-mode which does not have a keymap"
-  :lighter nil
-  :keymap (let ((map (make-sparse-keymap)))
-            (define-key map "i" (lambda () (interactive) (read-only-mode -1)))
-            map))
 
 (provide 'read-only-by-default)
