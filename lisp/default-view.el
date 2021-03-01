@@ -1,9 +1,9 @@
 ;;; cursor-type
-(add-hook 'view-mode-hook
-          (lambda () (if view-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(add-hook 'read-only-mode-hook
+          (lambda () (if buffer-read-only (setq cursor-type 'box) (setq cursor-type 'bar))))
 (add-hook 'vterm-copy-mode-hook
           (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
-(dolist (writeonly-mode-hook
+(dolist (write-mode-hook
          (list
           'eshell-mode-hook
           'lisp-interaction-mode-hook
@@ -11,14 +11,15 @@
           'vterm-mode-hook
           'with-editor-mode-hook
           ))
-  (add-hook writeonly-mode-hook (lambda () (setq cursor-type 'bar))))
-(dolist (readonly-mode-hook
+  (add-hook write-mode-hook (lambda () (setq cursor-type 'bar))))
+(dolist (read-mode-hook
          (list
           'org-agenda-mode-hook
           ))
-  (add-hook readonly-mode-hook (lambda () (setq cursor-type 'box))))
-(defvar w/view-mode-buffers nil)
-(defun w/view-mode-hook-for-find-file ()
+  (add-hook read-mode-hook (lambda () (setq cursor-type 'box))))
+;;; read-only-mode for file buffers
+(defvar w/original-read-only-mode-buffers nil)
+(defun w/read-only-mode-hook-for-find-file ()
   (if (or
        (string-match-p ".emacs.d/var" (buffer-file-name))
        (string-match-p "org/orgzly" (buffer-file-name))
@@ -26,28 +27,31 @@
        (string-match-p "org/journal" (buffer-file-name))
        (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
       (setq cursor-type 'bar)
-    (view-mode 1)))
+    (read-only-mode 1)))
 ;; TODO: add variable watcher for buffer-read-only to set cursor-type
-(defun set-default-view-mode ()
-  "add view mode to find-file-hook"
+(defun set-read-only-mode-by-default ()
+  "add read-only-mode to find-file-hook"
   (interactive)
-  (dolist (buffer w/view-mode-buffers)
+  (dolist (buffer w/read-only-mode-buffers)
     (save-excursion
       (set-buffer buffer)
-      (view-mode 1)))
-  (setq w/view-mode-buffers nil)
-  (add-hook 'find-file-hook #'w/view-mode-hook-for-find-file))
-(defun unset-default-view-mode ()
-  "remove view mode from find-file-hook"
+      (read-only-mode 1)))
+  (setq w/original-read-only-mode-buffers nil)
+  (add-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file))
+(defun unset-read-only-mode-by-default ()
+  "remove remove-read-only-mode from find-file-hook"
   (interactive)
   (dolist (buffer (buffer-list))
     (save-excursion
       (set-buffer buffer)
-      (when view-mode
-        (view-mode -1)
-        (add-to-list 'w/view-mode-buffers buffer))))
-  (remove-hook 'find-file-hook #'w/view-mode-hook-for-find-file))
-(set-default-view-mode)
+      ;; for file buffers only
+      (when (and buffer-read-only buffer-file-name)
+        ;; some files are trully read-only, just ignore errors when failed
+        (ignore-errors
+          (read-only-mode -1)
+          (add-to-list 'w/original-read-only-mode-buffers buffer)))))
+  (remove-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file))
+(set-read-only-mode-by-default)
 
 ;; hooks provided by built-in emacs are not enough
 ;; (add-hook 'window-buffer-change-functions
