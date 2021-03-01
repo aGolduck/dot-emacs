@@ -129,7 +129,7 @@
  ("shackle" . "171c3f437d853f34782b201d86ef765665b755e2")
  ("smartparens" . "7f5825dd655942c3d56d14acabab1ffab1aa2ae2")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
- ("straight.el" . "e1390a933b6f5a15079d6dec91eac97a17aad10c")
+ ("straight.el" . "2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1")
  ("sudo-edit" . "a7ae1713bb659988bb1465a13b837fbc2d699504")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("telega.el" . "3d2cd636099872a7514cc02f63875acfdc0e623e")
