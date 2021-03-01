@@ -1,3 +1,4 @@
+(setq view-read-only nil)
 ;;; cursor-type
 (add-hook 'read-only-mode-hook
           (lambda () (if buffer-read-only (setq cursor-type 'box) (setq cursor-type 'bar))))
@@ -32,7 +33,7 @@
 (defun set-read-only-mode-by-default ()
   "add read-only-mode to find-file-hook"
   (interactive)
-  (dolist (buffer w/read-only-mode-buffers)
+  (dolist (buffer w/original-read-only-mode-buffers)
     (save-excursion
       (set-buffer buffer)
       (read-only-mode 1)))
@@ -63,4 +64,4 @@
 ;;           (lambda (previous-buffer currrent-buffer) (term-cursor--immediate)))
 
 
-(provide 'default-view)
+(provide 'read-only-by-default)

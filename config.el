@@ -223,7 +223,6 @@
 	  auto-save-delete-trailing-whitespace t)
     (add-hook 'after-init-hook #'auto-save-enable))
   (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
-  (use-package default-view :demand t)
   (use-package recentf
     :init
     (setq recentf-auto-cleanup 'never

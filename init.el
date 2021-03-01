@@ -34,5 +34,6 @@
               (server-start))))
 (desktop-read)
 (tab-bar-mode 1)
+(require 'read-only-by-default)
 
 (provide 'init)
