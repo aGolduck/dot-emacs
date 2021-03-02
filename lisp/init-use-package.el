@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; use-package powers all
 (straight-use-package 'use-package)
 ;; decouple code related to straight.el and use-package

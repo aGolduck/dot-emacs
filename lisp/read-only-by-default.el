@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (setq view-read-only nil)
 
 (define-minor-mode w/extra-read-only-mode

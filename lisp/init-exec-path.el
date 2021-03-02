@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; set PATH manually, https://blog.galeo.me/path-environment-variable-on-mac-os-x-emacs-app.html
 ;; TODO: add other variables like MANPATH
 ;; when more and more env vars need to be set, referece doom-load-envvars-file

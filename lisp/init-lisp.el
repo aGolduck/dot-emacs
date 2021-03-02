@@ -1,4 +1,5 @@
-;;; keybindgs conflictd with view-mode
+;; -*- lexical-binding: t; -*-
+
 (use-package lispy
   :straight t
   :init

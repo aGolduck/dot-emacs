@@ -1,4 +1,5 @@
-;;; bootstrap straight.el
+;;; bootstrap straight.el  -*- lexical-binding: t; -*-
+
 (defconst w/STRAIGHT (locate-user-emacs-file "straight"))
 (defconst w/STRAIGHT-REPOS (locate-user-emacs-file "straight/repos"))
 (defconst w/STRAIGHT-VERSIONS (locate-user-emacs-file "straight/versions"))

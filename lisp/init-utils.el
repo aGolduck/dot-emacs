@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; M-SPC is key to my emacs world
 (global-unset-key (kbd "M-SPC"))
 
