@@ -13,7 +13,9 @@
 (straight-use-package 'company-prescient)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
-(straight-use-package 'company-box)
-(add-hook 'company-mode-hook #'company-box-mode)
+;; need some tweaks to work
+;; (straight-use-package 'company-box)
+;; (add-hook 'company-mode-hook #'company-box-mode)
+;; (with-eval-after-load 'company-box (diminish 'company-box-mode))
 
 (provide 'init-company)
