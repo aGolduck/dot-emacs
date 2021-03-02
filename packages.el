@@ -3,12 +3,6 @@
 
 (dolist (w/package
          (list
-          ;;; for reading others' emacs configs
-          'fullframe
-          'exec-path-from-shell
-          'dimmer
-
-          ;;; my own packages
 	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
           '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*"))
@@ -28,8 +22,6 @@
           'ccls
           'cider
           'clojure-mode
-          'company
-          'company-prescient
           'consult
           'crux
           'ctable

@@ -61,17 +61,6 @@
   ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
   )
 
-(use-package company
-  :init
-  (setq company-minimum-prefix-length 1
-        company-tooltip-align-annotations t
-        ;; default is 0.2
-        company-idle-delay 0.0)
-  :config
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
-  (diminish 'company-mode "补"))
-
 (use-package crux
   :init
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
@@ -903,7 +892,6 @@ unwanted space when exporting org-mode to html."
   :commands (prescient-persist-mode)
   :init
   (add-hook 'after-init-hook #'prescient-persist-mode)
-  (use-package company-prescient :init (add-hook 'company-mode-hook #'company-prescient-mode))
   (use-package selectrum-prescient :init (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)))
 
 (use-package projectile
