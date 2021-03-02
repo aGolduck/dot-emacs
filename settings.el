@@ -3,6 +3,7 @@
 (setq create-lockfiles nil
       ;; confirm-kill-emacs nil
       delete-by-moving-to-trash t
+      frame-inhibit-implied-resize t    ;; stop resizing when toggling tab-bar-mode
       frame-resize-pixelwise t
       initial-major-mode 'fundamental-mode
       mac-command-modifier 'super
@@ -13,16 +14,16 @@
 (setq-default indent-tabs-mode nil
 	      line-spacing 0.2
               header-line-format '(
-                                 "%e"
-                                 mode-line-front-space
-                                 mode-line-mule-info
-                                 mode-line-position
-                                 (vc-mode vc-mode)
-                                 " "
-                                 ;; mode-line-modes
-                                 mode-line-buffer-identification
-                                 ;; mode-line-misc-info
-                                 mode-line-end-spaces)
+                                   "%e"
+                                   mode-line-front-space
+                                   mode-line-mule-info
+                                   mode-line-position
+                                   (vc-mode vc-mode)
+                                   " "
+                                   ;; mode-line-modes
+                                   mode-line-buffer-identification
+                                   ;; mode-line-misc-info
+                                   mode-line-end-spaces)
               mode-line-format '(
                                  "%e"
                                  mode-line-front-space
