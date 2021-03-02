@@ -145,7 +145,7 @@
       (_ (apply fn file args))))
   (advice-add #'find-file :around #'eaf-find-file-advice)
   :config
-  (when (string-equal w/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.25"))
+  (when (string-equal w/HOST "xps") (eaf-setq eaf-browser-default-zoom "1.00"))
   (define-key eaf-mode-map* (kbd "M-t") #'toggle-input-method)
   (define-key eaf-mode-map* (kbd "M-i") #'ace-window)
   (eaf-bind-key toggle-input-method "M-t" eaf-browser-keybinding)
@@ -528,6 +528,7 @@ That is, remove a non kept dired from the recent list."
     :init
     (setq dap-breakpoints-file (w/locate-emacs-var-file ".dap-breakpoints"))
     (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
+    ;; (add-hook 'dap-terminated-hook (lambda (_args) (dap-hydra/nil)))
     :config
     (dap-auto-configure-mode))
   :config
@@ -1389,6 +1390,11 @@ unwanted space when exporting org-mode to html."
   )
 
 (use-package delsel :init (add-hook 'after-init-hook #'delete-selection-mode))
+
+(use-package paren
+  :init
+  (setq show-paren-when-point-in-periphery t
+        show-paren-when-point-inside-paren t))
 
 (provide 'init-config)
 ;;; init-config ends here
