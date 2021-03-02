@@ -15,6 +15,7 @@
 (require 'init-grep)
 (require 'init-buffer)
 (require 'init-company)
+(require 'init-prog)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))

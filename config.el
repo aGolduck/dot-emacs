@@ -115,7 +115,13 @@
                                          ("\\.xls\\'" "libreoffice")
                                          ("\\.xlsx\\'" "libreoffice")))
     (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
-  (use-package image-dired :init (setq image-dired-dir (w/locate-emacs-var-file "image-dired"))))
+  (use-package image-dired :init (setq image-dired-dir (w/locate-emacs-var-file "image-dired")))
+  (use-package dired-quick-sort
+    :straight t
+    :commands (hydra-dired-quick-sort/body)
+    :init
+    (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
+    (add-hook 'dired-mode-hook #'dired-quick-sort)))
 
 (use-package direnv
   :if (executable-find "direnv")
