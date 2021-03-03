@@ -171,15 +171,6 @@
   :commands (eldoc-add-command)
   :config (diminish 'eldoc-mode "册"))
 
-(use-package elisp-mode
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
-  ;; :config
-  ;; (define-key emacs-lisp-mode-map (kbd "M-;") #'paredit-comment-dwim)
-  )
-
 (use-package emmit-mode)
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
@@ -544,7 +535,7 @@ That is, remove a non kept dired from the recent list."
   (define-key lsp-mode-map (kbd "M-'") #'lsp-goto-implementation)
   (define-key lsp-mode-map (kbd "M-\"") #'lsp-find-references)
   ;; (diminish 'lsp-mode "语")
-  (diminish 'lsp-lens-mode "透"))
+  )
 
 (use-package lsp-python-ms)
 
@@ -842,47 +833,6 @@ unwanted space when exporting org-mode to html."
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents)))
   (define-key org-mode-map (kbd "C-<tab>") nil))
-
-(use-package paredit
-  :commands (enable-paredit-mode)
-  :init
-  (dolist (hook (list
-                 'eval-expression-minibuffer-setup-hook
-                 'ielm-mode-hook
-                 'lisp-mode-hook
-                 'lisp-interaction-mode-hook
-                 'scheme-mode-hook
-                 ))
-    (add-hook hook #'paredit-mode))
-  :config
-  ;; https://emacs-china.org/t/paredit-smartparens/6727/11
-  (defun paredit/space-for-delimiter-p (endp delm)
-    (or (member 'font-lock-keyword-face (text-properties-at (1- (point))))
-        (not (derived-mode-p 'basic-mode
-                             'c++-mode
-                             'c-mode
-                             'coffee-mode
-                             'csharp-mode
-                             'd-mode
-                             'dart-mode
-                             'go-mode
-                             'java-mode
-                             'js-mode
-                             'lua-mode
-                             'objc-mode
-                             'pascal-mode
-                             'python-mode
-                             'r-mode
-                             'ruby-mode
-                             'rust-mode
-                             'typescript-mode))))
-  (add-to-list 'paredit-space-for-delimiter-predicates #'paredit/space-for-delimiter-p)
-  (eldoc-add-command
-   'paredit-backward-delete
-   'paredit-close-round)
-  (define-key paredit-mode-map (kbd ";") nil) ;; conflict with lispy-comment
-  (define-key paredit-mode-map (kbd "M-r") nil)
-  (diminish 'paredit-mode "括"))
 
 (use-package pdf-tools)
 
