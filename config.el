@@ -357,6 +357,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package isearch
   :config
+  (diminish 'isearch-mode)
   (global-set-key (kbd "C-s") #'isearch-forward-regexp)
   (global-set-key (kbd "C-M-s") #'isearch-forward)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
@@ -366,7 +367,7 @@ That is, remove a non kept dired from the recent list."
   :init
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook (lambda ()
-                            (when (equal (shell-command "command -v tsserver") 0)
+                            (when (executable-find "tsserver")
                               (tide-setup)
                               (unless (tide-current-server) (tide-restart-server))
                               (tide-hl-identifier-mode 1))))
@@ -527,6 +528,7 @@ That is, remove a non kept dired from the recent list."
           ;; lsp-ui-doc-delay .2
           lsp-ui-doc-position 'top)
     :config
+    (diminish 'lsp-lens-mode "透")
     (set-face-attribute 'lsp-ui-sideline-code-action nil :foreground "dark green")
     (set-face-attribute 'lsp-ui-sideline-current-symbol nil :background "black")
     (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
@@ -1018,7 +1020,9 @@ unwanted space when exporting org-mode to html."
   :init
   (add-hook 'after-init-hook #'global-visual-line-mode)
   (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
-  (global-set-key (kbd "M-SPC u") #'universal-argument))
+  (global-set-key (kbd "M-SPC u") #'universal-argument)
+  :config
+  (diminish 'visual-line-mode "⮒"))
 
 (use-package smartparens :config (require 'smartparens-config))
 
@@ -1152,7 +1156,7 @@ unwanted space when exporting org-mode to html."
                    #'paredit-mode
                    ))
     (add-hook 'typescript-mode-hook hooked))
-  (when (equal (shell-command "command -v tsserver") 0)
+  (when (executable-find "tsserver")
     (dolist (hooked (list #'tide-setup #'tide-hl-identifier-mode))
       (add-hook 'typescript-mode-hook hooked)))
   ;; :config
