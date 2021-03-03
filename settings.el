@@ -35,16 +35,16 @@
                                  mode-line-misc-info
                                  mode-line-end-spaces)
               frame-title-format ;; '(buffer-file-name "%f" "%b")
-              '((:eval (string-join (list
-                                     (if (buffer-file-name)
-                                         (abbreviate-file-name (buffer-file-name))
-                                       "%b")
-                                     (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
-                                         (string-join org-pomodoro-mode-line)
-                                       "")
-                                     (if (and (boundp 'org-mode-line-string) org-mode-line-string)
-                                         org-mode-line-string
-                                       ""))))))
+              '((:eval (concat
+                        (if (buffer-file-name)
+                            (abbreviate-file-name (buffer-file-name))
+                          "%b")
+                        (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
+                            (apply #'concat org-pomodoro-mode-line)
+                          "")
+                        (if (and (boundp 'org-mode-line-string) org-mode-line-string)
+                            org-mode-line-string
+                          "")))))
 
 
 ;;; fonts and faces
