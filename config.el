@@ -880,6 +880,7 @@ unwanted space when exporting org-mode to html."
   (eldoc-add-command
    'paredit-backward-delete
    'paredit-close-round)
+  (define-key paredit-mode-map (kbd ";") nil) ;; conflict with lispy-comment
   (define-key paredit-mode-map (kbd "M-r") nil)
   (diminish 'paredit-mode "括"))
 
