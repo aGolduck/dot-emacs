@@ -620,7 +620,7 @@ That is, remove a non kept dired from the recent list."
 		("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
 		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
   (add-hook 'org-mode-hook #'visual-line-mode)
-  (add-hook 'org-mode-hook #'valign-mode)
+  ;; (add-hook 'org-mode-hook #'valign-mode)
   (use-package ol
     :init
     (defun w/org-link-search-elisp (addressing-string)
