@@ -36,15 +36,15 @@
                                  mode-line-end-spaces)
               frame-title-format ;; '(buffer-file-name "%f" "%b")
               '((:eval (concat
-                        (if (buffer-file-name)
-                            (abbreviate-file-name (buffer-file-name))
-                          "%b")
                         (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
                             (apply #'concat org-pomodoro-mode-line)
                           "")
                         (if (and (boundp 'org-mode-line-string) org-mode-line-string)
                             org-mode-line-string
-                          "")))))
+                          "")
+                        (if (buffer-file-name)
+                            (abbreviate-file-name (buffer-file-name))
+                          "%b")))))
 
 
 ;;; fonts and faces
