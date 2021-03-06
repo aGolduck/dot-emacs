@@ -3,14 +3,15 @@
 (setq create-lockfiles nil
       ;; confirm-kill-emacs nil
       delete-by-moving-to-trash t
-      frame-inhibit-implied-resize t    ;; stop resizing when toggling tab-bar-mode
+      frame-inhibit-implied-resize t ;; stop resizing when toggling tab-bar-mode
       frame-resize-pixelwise t
       initial-major-mode 'fundamental-mode
       mac-command-modifier 'super
       mac-option-modifier 'meta
       next-screen-context-lines 5
       nsm-trust-local-network t
-      visible-bell t)
+      visible-bell t
+      word-wrap-by-category t)
 (setq-default indent-tabs-mode nil
 	      line-spacing 0.2
               header-line-format '(
