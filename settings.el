@@ -37,7 +37,9 @@
               frame-title-format ;; '(buffer-file-name "%f" "%b")
               '((:eval (concat
                         (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
-                            (apply #'concat org-pomodoro-mode-line)
+                            (if (listp org-pomodoro-mode-line)
+                              (apply #'concat org-pomodoro-mode-line)
+                              org-pomodoro-mode-line)
                           "")
                         (if (and (boundp 'org-mode-line-string) org-mode-line-string)
                             org-mode-line-string
