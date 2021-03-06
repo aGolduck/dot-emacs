@@ -50,6 +50,7 @@
  ("flycheck" . "a11b789807d1d942d6fcfac17508d072b9cf7ba8")
  ("flycheck-posframe" . "c45da18e606e2a85b4d4f836cb7cbe54c6b6386a")
  ("flymake-posframe" . "b4fb58c05d5083eb97f1c60d1a67bb087c5e1c74")
+ ("flyspell-correct" . "d19a090b978a249fc8f6d8b14309a5705a6bb483")
  ("fuz.el" . "0b6b64cebde5675be3a28520ee16234db48d3b8b")
  ("gcmh" . "b1bde5089169a74f62033d027e06e98cbeedd43f")
  ("geiser" . "cd00be69b26e6fd748b183d127d8b6f4c91ba622")
