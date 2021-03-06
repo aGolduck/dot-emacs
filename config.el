@@ -27,10 +27,10 @@
   (setq bookmark-default-file (w/locate-emacs-var-file "bookmarks"))
   (global-set-key (kbd "M-SPC b s") #'bookmark-set))
 
-(use-package browse-url
-  :init
-  (when (string-equal w/HOST "xps")
-    (setq browse-url-browser-function 'eaf-open-browser)))
+;; (use-package browse-url
+;;   :init
+;;   (when (string-equal w/HOST "xps")
+;;     (setq browse-url-browser-function 'eaf-open-browser)))
 
 (use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
 
@@ -140,7 +140,7 @@
   (setq browse-url-browser-function 'eaf-open-browser
         eaf-browser-continue-where-left-off t
         eaf-config-location (w/locate-emacs-var-file "eaf"))
-  (defalias 'browse-web #'eaf-open-browser)
+  ;; (defalias 'browse-web #'eaf-open-browser)
   (global-set-key (kbd "M-SPC s s") #'eaf-search-it)
   (global-set-key (kbd "M-SPC b o") #'eaf-open-browser)
   (global-set-key (kbd "M-SPC b r") #'eaf-open-browser-with-history)
