@@ -64,7 +64,8 @@
 (use-package crux
   :init
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
-  (global-set-key (kbd "M-o") #'crux-smart-open-line-above))
+  (global-set-key (kbd "M-o") #'crux-smart-open-line-above)
+  (global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file))
 
 (use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
@@ -955,7 +956,7 @@ unwanted space when exporting org-mode to html."
     :init
     (setq consult-preview-key nil)
     (setq-default consult-project-root-function #'projectile-project-root)
-    (global-set-key (kbd "M-SPC f r") #'consult-recent-file)
+    ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
     (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
     ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
     ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
