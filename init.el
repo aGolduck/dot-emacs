@@ -16,6 +16,7 @@
 (require 'init-buffer)
 (require 'init-company)
 (require 'init-prog)
+(require 'init-lsp)
 (require 'init-flyspell)
 
 (load (w/locate-in-current-directory "packages"))
