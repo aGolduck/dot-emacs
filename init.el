@@ -6,6 +6,8 @@
 (add-to-list 'load-path (w/locate-in-current-directory "lisp"))
 (add-to-list 'load-path (w/locate-in-current-directory "site-lisp"))
 
+(load (w/locate-in-current-directory "private"))
+
 (require 'init-utils)
 (require 'init-exec-path)
 (require 'init-straight)
@@ -18,6 +20,7 @@
 (require 'init-prog)
 (require 'init-lsp)
 (require 'init-flyspell)
+;; (require 'init-rss)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))
