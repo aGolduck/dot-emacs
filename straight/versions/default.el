@@ -92,6 +92,7 @@
  ("markdown-mode" . "399df42755ccf31cecb61c9f5d8ad72bc30d7e4b")
  ("melpa" . "ececaeddf8d7d17ddd9bb20401ff96edb707c06f")
  ("ob-groovy" . "091513bce46fc906752afa8f07320a6b3536d678")
+ ("ob-http" . "b1428ea2a63bcb510e7382a1bf5fe82b19c104a7")
  ("ob-typescript" . "0b2766b9d136cd6d81f4c15f1ad4b28542f484b9")
  ("olivetti" . "61d26644fd9dd2d45b80b9b82f5f930ed17530d0")
  ("orderless" . "ea60844b8275f6615f2b3376971f64cfc78f3f37")

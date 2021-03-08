@@ -27,6 +27,7 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)
 
+(require 'init-org)
 (require 'init-lisp)
 (require 'read-only-by-default)
 

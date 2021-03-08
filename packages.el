@@ -71,7 +71,6 @@
           'olivetti
           'orderless
           'org-cliplink
-          'org-download
           'org-journal
           'org-pomodoro
           'org-ql
