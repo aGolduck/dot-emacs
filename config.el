@@ -1,6 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(use-package abbrev :config (diminish 'abbrev-mode "缩"))
-
 (use-package ansi-color
   :init
   (add-hook 'compilation-filter-hook
@@ -546,12 +544,13 @@ That is, remove a non kept dired from the recent list."
            (shortened-project-name (if (< (length project-name) 10)
                                        project-name
                                      (concat (substring project-name 0 7) "..." (substring project-name -3 nil)))))
-      (format "%s[%s%s]"
+      (format "%s[%s]"
               projectile-mode-line-prefix
               (or shortened-project-name "-")
-              (if project-type
-                  (format ":%s" project-type)
-                ""))))
+              ;; (if project-type
+              ;;     (format ":%s" project-type)
+              ;;   "")
+              )))
   (setq ;; projectile-completion-system 'ivy
    projectile-cache-file (w/locate-emacs-var-file "projectile.cache")
    projectile-known-projects-file (w/locate-emacs-var-file "projectile-bookmarks.eld")
@@ -896,6 +895,7 @@ That is, remove a non kept dired from the recent list."
   ;; (define-key yas-minor-mode-map (kbd "<tab>") #'yas-expand)
   ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
   (diminish 'yas-minor-mode "模")
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
   (use-package yasnippet-snippets))
 
 (use-package zeal-at-point)
@@ -958,11 +958,6 @@ That is, remove a non kept dired from the recent list."
 ;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; (use-package lsp-ivy)
-
-;; (use-package lsp-java-boot
-;;   :init (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
-
-;; (use-package lsp-java-boot)
 
 ;; (use-package mini-frame
 ;;   :init
