@@ -6,4 +6,4 @@
 (setq straight-use-package-by-default nil)
 (setq use-package-always-defer t)
 
-(provide 'init-use-package)
+(provide 'w-use-package)

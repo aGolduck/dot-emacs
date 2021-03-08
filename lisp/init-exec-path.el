@@ -9,4 +9,4 @@
 		  path-separator (getenv "PATH")))
   (setq exec-path (split-string (getenv "PATH") path-separator)))
 
-(provide 'init-exec-path)
+(provide 'w-exec-path)

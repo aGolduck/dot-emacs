@@ -1030,5 +1030,5 @@ That is, remove a non kept dired from the recent list."
   (setq show-paren-when-point-in-periphery t
         show-paren-when-point-inside-paren t))
 
-(provide 'init-config)
+(provide 'w-config)
 ;;; init-config ends here

@@ -254,4 +254,4 @@ unwanted space when exporting org-mode to html."
 ;;   :init
 ;;   (setq alert-default-style 'libnotify))
 
-(provide 'init-org)
+(provide 'w-org)

@@ -9,4 +9,4 @@
 (defun w/locate-emacs-var-file (file)
   (expand-file-name file w/EMACS-VAR))
 
-(provide 'init-utils)
+(provide 'w-utils)

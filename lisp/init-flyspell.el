@@ -13,4 +13,4 @@
     (define-key flyspell-mode-map (kbd "C-,") nil)
     (define-key flyspell-mode-map (kbd "C-.") nil)))
 
-(provide 'init-flyspell)
+(provide 'w-flyspell)

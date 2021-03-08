@@ -31,4 +31,4 @@
 (setq straight-default-vc 'git
       straight-vc-git-default-clone-depth 1)
 
-(provide 'init-straight)
+(provide 'w-straight)

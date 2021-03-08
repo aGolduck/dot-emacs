@@ -21,4 +21,4 @@
   ;; (define-key emacs-lisp-mode-map (kbd "M-;") #'paredit-comment-dwim)
   )
 
-(provide 'init-lisp)
+(provide 'w-lisp)

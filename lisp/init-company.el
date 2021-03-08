@@ -18,4 +18,4 @@
 ;; (add-hook 'company-mode-hook #'company-box-mode)
 ;; (with-eval-after-load 'company-box (diminish 'company-box-mode))
 
-(provide 'init-company)
+(provide 'w-company)

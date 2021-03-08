@@ -7,4 +7,4 @@
 (setq elfeed-feeds `(,w/nextcloud-feed))
 (add-hook 'after-init-hook #'elfeed-protocol-enable)
 
-(provide 'init-rss)
+(provide 'w-rss)

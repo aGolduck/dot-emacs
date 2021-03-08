@@ -114,4 +114,4 @@
           ))
   (straight-use-package w/package))
 
-(provide 'init-packages)
+(provide 'w-packages)

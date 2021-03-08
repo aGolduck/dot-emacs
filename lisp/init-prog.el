@@ -43,4 +43,4 @@
   (define-key paredit-mode-map (kbd "M-r") nil)
   (diminish 'paredit-mode "括"))
 
-(provide 'init-prog)
+(provide 'w-prog)

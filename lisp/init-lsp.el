@@ -53,4 +53,4 @@
   (define-key lsp-mode-map (kbd "M-\"") #'lsp-find-references))
 
 
-(provide 'init-lsp)
+(provide 'w-lsp)

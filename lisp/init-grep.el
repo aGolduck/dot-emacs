@@ -12,4 +12,4 @@
         (global-set-key (kbd "M-SPC s p") #'ag-project))
     (straight-use-package 'wgrep)))
 
-(provide 'init-grep)
+(provide 'w-grep)

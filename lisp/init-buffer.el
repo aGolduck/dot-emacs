@@ -11,4 +11,4 @@
 (setq uniquify-ignore-buffers-re "^\\*")
 
 
-(provide 'init-buffer)
+(provide 'w-buffer)
