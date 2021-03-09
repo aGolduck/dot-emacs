@@ -163,9 +163,9 @@
   :config
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
-(use-package eldoc
-  :commands (eldoc-add-command)
-  :config (diminish 'eldoc-mode "册"))
+;; (use-package eldoc
+;;   :commands (eldoc-add-command)
+;;   :config (diminish 'eldoc-mode "册"))
 
 (use-package emmit-mode)
 
@@ -362,7 +362,6 @@ That is, remove a non kept dired from the recent list."
                    #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
-                   #'paredit-mode
                    ))
     (add-hook 'js-mode-hook hooked)))
 
@@ -441,9 +440,8 @@ That is, remove a non kept dired from the recent list."
   (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
-  (add-hook 'java-mode-hook #'paredit-mode)
   (add-hook 'java-mode-hook #'lsp)
-  (add-hook 'java-mode-hook #'lsp-ui-mode)
+  ;; (add-hook 'java-mode-hook #'lsp-ui-mode)
   (add-hook 'java-mode-hook (lambda ()
                               (require 'lsp-java-boot)
                               (lsp-java-boot-lens-mode)
@@ -505,8 +503,7 @@ That is, remove a non kept dired from the recent list."
 
 (use-package newcomment
   :init
-  (global-set-key [remap comment-dwim] #'comment-line)
-  (global-set-key [remap paredit-comment-dwim] #'comment-line))
+  (global-set-key [remap comment-dwim] #'comment-line))
 
 (use-package nxml-mode
   :init
@@ -788,7 +785,6 @@ That is, remove a non kept dired from the recent list."
                    #'company-mode
                    #'eldoc-mode
                    #'electric-pair-local-mode
-                   #'paredit-mode
                    ))
     (add-hook 'typescript-mode-hook hooked))
   (when (executable-find "tsserver")
