@@ -14,7 +14,6 @@
 (use-package elisp-mode
   :init
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
   ;; :config
