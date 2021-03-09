@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
+(use-package abbrev :config (diminish 'abbrev-mode "缩")) ;; just to diminish
+
 (use-package ansi-color
   :init
   (add-hook 'compilation-filter-hook

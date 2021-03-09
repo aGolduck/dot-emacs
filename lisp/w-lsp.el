@@ -47,10 +47,11 @@
     (dap-auto-configure-mode))
   :config
   ;; (diminish 'lsp-mode "语")
-  (diminish 'lsp-lens-mode "透")
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "M-'") #'lsp-goto-implementation)
   (define-key lsp-mode-map (kbd "M-\"") #'lsp-find-references))
 
+(with-eval-after-load 'lsp-lens
+  (diminish 'lsp-lens-mode "透"))
 
 (provide 'w-lsp)
