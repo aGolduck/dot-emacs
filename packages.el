@@ -3,13 +3,11 @@
 
 (dolist (w/package
          (list
-	  '(org :type built-in)
           '(color-rg :host github :repo "manateelazycat/color-rg")
           '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*"))
           '(flymake-posframe :host github :repo "Ladicle/flymake-posframe")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
-          '(ob-groovy :host github :repo "zweifisch/ob-groovy")
-          '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
+          ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
           '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
@@ -67,16 +65,8 @@
           'marginalia
           'markdown-mode
           'mini-frame
-          'ob-typescript
           'olivetti
           'orderless
-          'org-cliplink
-          'org-journal
-          'org-pomodoro
-          'org-ql
-          'org-roam
-          'org-roam-server
-          'ox-hugo
           'pdf-tools
           'pkgbuild-mode
           'pocket-reader

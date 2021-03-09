@@ -19,6 +19,7 @@
 (require 'w-company)
 (require 'w-prog)
 (require 'w-lsp)
+(require 'w-org)
 (require 'w-flyspell)
 ;; (require 'w-rss)
 
@@ -31,7 +32,6 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; (load custom-file 'no-error 'no-message)
 
-(require 'w-org)
 (require 'w-lisp)
 (require 'read-only-by-default)
 
