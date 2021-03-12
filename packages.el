@@ -20,18 +20,14 @@
           'ccls
           'cider
           'clojure-mode
-          'consult
           'crux
           'ctable
           'dap-mode
           'deferred
           'devdocs
-          'diminish
           'dired-rsync
           'direnv
           'dotenv-mode
-          'embark
-          'embark-consult
           'emmet-mode
           'epc
           'esh-autosuggest
@@ -62,7 +58,6 @@
           'magit
           'magit-delta
           'magit-todos
-          'marginalia
           'markdown-mode
           'mini-frame
           'olivetti
@@ -71,18 +66,14 @@
           'pkgbuild-mode
           'pocket-reader
           'posframe
-          'prescient
           'projectile
           'ranger
           'rime
           'rust-mode
           's
           'selectric-mode
-          'selectrum
-          'selectrum-prescient
           'shackle
           'smartparens
-          'sudo-edit
           'tide
           'transient
           'treemacs

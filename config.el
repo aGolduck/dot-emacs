@@ -189,51 +189,6 @@
   (setq expand-region-contract-fast-key "V")
   (global-set-key (kbd "M-SPC v") #'er/expand-region))
 
-(use-package files
-  :init
-  (setq auto-save-default nil
-        make-backup-files nil
-        safe-local-variable-values '((flycheck-disable-checker '(emacs-lisp-checkdoc))
-                                     (org-startup-with-inline-images . t)))
-  (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
-  (global-set-key (kbd "M-SPC f f") #'find-file)
-  (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal)
-  (use-package auto-save
-    :commands (auto-save-enable)
-    :init
-    (setq auto-save-silent t
-	  auto-save-delete-trailing-whitespace t)
-    (add-hook 'after-init-hook #'auto-save-enable))
-  (use-package autorevert :init (add-hook 'after-init-hook #'global-auto-revert-mode))
-  (use-package recentf
-    :init
-    (setq recentf-auto-cleanup 'never
-          recentf-save-file (w/locate-emacs-var-file "recentf")
-          recentf-max-saved-items nil)
-    ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
-    (defun recentd-track-opened-file ()
-      "Insert the name of the directory just opened into the recent list."
-      (and (derived-mode-p 'dired-mode) default-directory
-           (recentf-add-file (substring default-directory 0 -1)))
-      ;; Must return nil because it is run from `write-file-functions'.
-      nil)
-    (defun recentd-track-closed-file ()
-      "Update the recent list when a dired buffer is killed.
-That is, remove a non kept dired from the recent list."
-      (and (derived-mode-p 'dired-mode) default-directory
-           (recentf-remove-if-non-kept (substring default-directory 0 -1))))
-    (add-hook 'dired-after-readin-hook 'recentd-track-opened-file)
-    (add-hook 'kill-buffer-hook 'recentd-track-closed-file)
-    (add-hook 'after-init-hook #'recentf-mode))
-  (use-package saveplace
-    :init
-    (setq auto-save-list-file-prefix nil)
-    (setq save-place-file (w/locate-emacs-var-file "places"))
-    (add-hook 'after-init-hook #'save-place-mode)
-    (use-package sudo-edit))
-  (use-package tramp :init (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp")))
-  (use-package view :config (diminish 'view-mode "览")))
-
 (use-package find-func
   :init
   (setq find-function-C-source-directory "~/b/gnu.org/emacs/emacs-native-comp/src")
@@ -528,12 +483,6 @@ That is, remove a non kept dired from the recent list."
     :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode)
     :config (diminish 'flycheck-posframe-mode)))
 
-(use-package prescient
-  :commands (prescient-persist-mode)
-  :init
-  (add-hook 'after-init-hook #'prescient-persist-mode)
-  (use-package selectrum-prescient :init (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)))
-
 (use-package projectile
   :init
   (defun w/projectile-shortened-mode-line ()
@@ -617,34 +566,6 @@ That is, remove a non kept dired from the recent list."
   :config
   (diminish 'selectric-mode))
 
-(use-package selectrum
-  :init
-  ;; (defun display-buffer-show-in-posframe (buffer _alist)
-  ;;   (frame-root-window
-  ;;    (posframe-show buffer
-  ;;                   :min-height 10
-  ;;                   :min-width (truncate (* (frame-width) 0.8))
-  ;;                   :internal-border-width 1
-  ;;                   :left-fringe 8
-  ;;                   :right-fringe 8
-  ;;                   :poshandler 'posframe-poshandler-frame-center)))
-  ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
-  ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
-  (setq magit-completing-read-function #'selectrum-completing-read)
-  (add-hook 'after-init-hook #'selectrum-mode)
-  (use-package consult
-    :init
-    (setq consult-preview-key nil)
-    (setq-default consult-project-root-function #'projectile-project-root)
-    ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
-    (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
-    ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
-    ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
-    )
-  (use-package marginalia
-    :init
-    (add-hook 'after-init-hook 'marginalia-mode)
-    (setq-default marginalia-annotators '(marginalia-annotators-heavy))))
 
 (use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
 
@@ -908,10 +829,6 @@ That is, remove a non kept dired from the recent list."
 ;;   (global-set-key (kbd "M-SPC f r") #'counsel-recentf)
 ;;   (global-set-key (kbd "C-h f") #'counsel-describe-function)
 ;;   (global-set-key (kbd "C-h v") #'counsel-describe-variable))
-
-;; (use-package embark
-;;   :config
-;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
 
 ;; (use-package embark-consult)
 

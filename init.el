@@ -16,6 +16,8 @@
 (straight-use-package 'diminish)
 (require 'w-grep)
 (require 'w-buffer)
+(require 'w-file)
+(require 'w-selectrum)
 (require 'w-company)
 (require 'w-prog)
 (require 'w-lsp)
