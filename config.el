@@ -29,11 +29,6 @@
 
 (use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
 
-(use-package cc-mode
-  :init
-  (add-hook 'c-mode-hook (lambda () (require 'ccls) (lsp)))
-  (use-package ccls))
-
 (use-package clojure-mode
   :init
   (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
@@ -61,8 +56,6 @@
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
   (global-set-key (kbd "M-o") #'crux-smart-open-line-above)
   (global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file))
-
-(use-package css-mode :init (add-hook 'css-mode-hook #'lsp))
 
 (use-package desktop
   :init
@@ -226,8 +219,9 @@
 
 (use-package groovy-mode
   :init
-  (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
-  (add-hook 'groovy-mode-hook #'lsp)
+  (when (equal w/lsp-client "lsp")
+    (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
+    (add-hook 'groovy-mode-hook #'lsp))
   (add-hook 'groovy-mode-hook #'company-mode)
   (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
 
@@ -237,10 +231,11 @@
   :init
   (use-package lsp-haskell
     :init
-    (add-hook 'haskell-mode-hook #'lsp)
-    (add-hook 'haskell-mode-hook #'lsp-ui-mode)
-    (add-hook 'haskell-literate-mode-hook #'lsp)
-    (add-hook 'haskell-mode-hook #'lsp)))
+    (when (equal w/lsp-client "lsp")
+      (add-hook 'haskell-mode-hook #'lsp)
+      (add-hook 'haskell-mode-hook #'lsp-ui-mode)
+      (add-hook 'haskell-literate-mode-hook #'lsp)
+      (add-hook 'haskell-mode-hook #'lsp))))
 
 (use-package helpful
   :init
@@ -385,53 +380,52 @@
 
 (use-package lsp-java
   :init
-  (setq w/path-to-lombok "/usr/share/java/lombok.jar")
-  (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
-        lsp-java-vmargs `("-noverify"
-                          "-Xmx1G" "-XX:+UseG1GC"
-                          "-XX:+UseStringDeduplication"
-                          ,(concat "-javaagent:" w/path-to-lombok)
-                          ,(concat "-Xbootclasspath/a:" w/path-to-lombok)))
   (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'display-line-numbers-mode)
   (add-hook 'java-mode-hook #'electric-pair-local-mode)
-  (add-hook 'java-mode-hook #'lsp)
-  ;; (add-hook 'java-mode-hook #'lsp-ui-mode)
-  (add-hook 'java-mode-hook (lambda ()
-                              (require 'lsp-java-boot)
-                              (lsp-java-boot-lens-mode)
-                              (diminish 'lsp-java-boot-lens-mode "弹")))
+  (when (equal w/lsp-client "lsp")
+    (setq w/path-to-lombok "/usr/share/java/lombok.jar")
+    (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
+          lsp-java-vmargs `("-noverify"
+                            "-Xmx1G" "-XX:+UseG1GC"
+                            "-XX:+UseStringDeduplication"
+                            ,(concat "-javaagent:" w/path-to-lombok)
+                            ,(concat "-Xbootclasspath/a:" w/path-to-lombok)))
+    (add-hook 'java-mode-hook #'lsp)
+    ;; (add-hook 'java-mode-hook #'lsp-ui-mode)
+    (add-hook 'java-mode-hook (lambda ()
+                                (require 'lsp-java-boot)
+                                (lsp-java-boot-lens-mode)
+                                (diminish 'lsp-java-boot-lens-mode "弹")))
+    (use-package dap-java
+      :commands (dap-java-debug
+                 dap-java-run-test-method
+                 dap-java-debug-test-method
+                 dap-java-run-test-class
+                 dap-java-debug-test-class)
+      :init
+      (setq dap-java-test-runner
+            (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
+      (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
+      :config
+      (dap-register-debug-template
+       "Java run"
+       (list :type "java"
+             :request "launch"
+             :args ""
+             :noDebug t
+             :cwd nil
+             :host "localhost"
+             :request "launch"
+             :modulePaths []
+             :classPaths nil
+             :name "JavaRun"
+             :projectName nil
+             :mainClass nil))))
   (add-hook 'java-mode-hook
             (lambda ()
               (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
-  (use-package dap-java
-    :commands (dap-java-debug
-               dap-java-run-test-method
-               dap-java-debug-test-method
-               dap-java-run-test-class
-               dap-java-debug-test-class)
-    :init
-    (setq dap-java-test-runner
-          (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
-    (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
-    :config
-    (dap-register-debug-template
-     "Java run"
-     (list :type "java"
-           :request "launch"
-           :args ""
-           :noDebug t
-           :cwd nil
-           :host "localhost"
-           :request "launch"
-           :modulePaths []
-           :classPaths nil
-           :name "JavaRun"
-           :projectName nil
-           :mainClass nil)))
   (use-package autodisass-java-bytecode :demand t))
-
-(use-package lsp-python-ms)
 
 (use-package magit
   :init
@@ -462,10 +456,11 @@
 
 (use-package nxml-mode
   :init
-  ;; download from http://mirrors.ustc.edu.cn/eclipse/lemminx/
-  (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
-  (add-hook 'nxml-mode-hook #'smartparens-mode)
-  (add-hook 'nxml-mode-hook #'lsp))
+  (when (equal w/lsp-client "lsp")
+    ;; download from http://mirrors.ustc.edu.cn/eclipse/lemminx/
+    (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
+    (add-hook 'nxml-mode-hook #'lsp))
+  (add-hook 'nxml-mode-hook #'smartparens-mode))
 
 (use-package olivetti)
 
@@ -514,10 +509,10 @@
 
 (use-package python
   :init
-  (setq lsp-python-ms-auto-install-server nil
-        lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-  (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
-  (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp))))
+  ;; (setq lsp-python-ms-auto-install-server nil
+  ;;       lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+  ;; (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp)))
+  (add-hook 'python-mode-hook #'highlight-indent-guides-mode))
 
 (use-package ranger
   :init
@@ -551,10 +546,6 @@
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available.")))
 
-(use-package rust-mode
-  :init
-  (add-hook 'rust-mode-hook #'lsp))
-
 (use-package screenshot-svg)
 
 (use-package selectric-mode
@@ -565,9 +556,6 @@
   (add-hook 'after-init-hook #'selectric-mode)
   :config
   (diminish 'selectric-mode))
-
-
-(use-package sgml-mode :init (add-hook 'html-mode-hook #'lsp))
 
 (use-package simple
   :init

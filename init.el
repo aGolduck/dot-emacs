@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(setq w/lsp-client "lsp")               ;; lsp or eglot
+
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
 
@@ -20,7 +22,7 @@
 (require 'w-selectrum)
 (require 'w-company)
 (require 'w-prog)
-(require 'w-lsp)
+(if (equal w/lsp-client "lsp") (require 'w-lsp) (require 'w-eglot))
 (require 'w-org)
 (require 'w-flyspell)
 ;; (require 'w-rss)
