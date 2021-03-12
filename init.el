@@ -21,11 +21,13 @@
 (require 'w-file)
 (require 'w-selectrum)
 (require 'w-company)
-(require 'w-prog)
-(if (equal w/lsp-client "lsp") (require 'w-lsp) (require 'w-eglot))
 (require 'w-org)
 (require 'w-flyspell)
+(require 'w-prog)
 ;; (require 'w-rss)
+
+(if (equal w/lsp-client "lsp") (require 'w-lsp) (require 'w-eglot))
+(require 'w-java)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))

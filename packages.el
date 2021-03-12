@@ -50,7 +50,6 @@
           'keyfreq
           'link-hint
           'lsp-haskell
-          'lsp-java
           'lsp-mode
           'lsp-python-ms
           'lsp-treemacs
