@@ -1,5 +1,5 @@
 ;;; org-mode common
-(straight-use-package '(org :type built-in))
+(straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
 (require 'bh-org)
 (setq org-directory "~/org"
       org-archive-location "%s_archive::* Archived Tasks"

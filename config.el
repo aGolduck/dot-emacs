@@ -635,8 +635,7 @@
 (use-package tab-line
   :if (> emacs-major-version 26)
   :init
-  (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
-  (add-hook 'after-init-hook #'global-tab-line-mode))
+)
 
 (use-package telega
   :init

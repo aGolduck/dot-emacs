@@ -5,7 +5,7 @@
       gc-cons-percentage 0.6)
 
 ;; Package initialize occurs automatically, before `user-init-file' is
-;; loaded, but after `early-init-file'. We handle package
+;; loaded, but after `early-init-file'. We use straight to handle package
 ;; initialization, so we must prevent Emacs from doing it early!
 (setq package-enable-at-startup nil)
 
@@ -20,3 +20,7 @@
 ;;   (push '(ns-transparent-titlebar . t) default-frame-alist))
 
 (setq comp-deferred-compilation t)
+
+;; disable emacs-native-comp warings
+;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=44746
+(setq comp-async-report-waring-errors nil)

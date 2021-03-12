@@ -43,6 +43,9 @@
             (unless (server-running-p)
               (server-start))))
 (desktop-read)
-(tab-bar-mode 1)
+;; (tab-bar-mode 1)
+;; (when (> emacs-major-version 26)
+;;     (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
+;;     (global-tab-line-mode 1))
 
 (provide 'init)
