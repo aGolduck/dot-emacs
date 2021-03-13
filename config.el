@@ -423,11 +423,7 @@
 
 (use-package posframe
   :init
-  (use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
-  (use-package flymake-posframe
-    :commands (flymake-posframe-mode)
-    :init (add-hook 'flymake-mode-hook #'flymake-posframe-mode)
-    :config (diminish 'flycheck-posframe-mode)))
+  (use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)))
 
 (use-package projectile
   :init
@@ -559,7 +555,7 @@
   :config (diminish 'subword-mode))
 
 (use-package tab-bar
-  :if (> emacs-major-version 26)
+  :if (>= emacs-major-version 27)
   :init
   (setq tab-bar-show t
         tab-bar-select-tab-modifiers '(meta)
@@ -570,11 +566,6 @@
   ;;                (file-name (buffer-file-name buffer)))
   ;;           (if file-name file-name (format "%s" buffer)))))
   )
-
-(use-package tab-line
-  :if (> emacs-major-version 26)
-  :init
-)
 
 (use-package telega
   :init
@@ -858,7 +849,7 @@
 ;;   ;; smex is needed to order candidates for ivy
 ;;   :init (setq smex-save-file (w/locate-emacs-var-file "smex-items")))
 
-;; (use-package so-long :if (> emacs-major-version 26) :init (add-hook 'after-init-hook #'global-so-long-mode))
+;; (use-package so-long :if (>= emacs-major-version 27) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
 ;; (use-package term-cursor
 ;;   :init

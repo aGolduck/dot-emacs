@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-(setq w/lsp-client "lsp")               ;; lsp or eglot
+(if (>= emacs-major-version 28)
+    (setq w/lsp-client "lsp")
+  (setq w/lsp-client "eglot"))
 
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
@@ -26,7 +28,8 @@
 (require 'w-prog)
 ;; (require 'w-rss)
 
-(if (equal w/lsp-client "lsp") (require 'w-lsp) (require 'w-eglot))
+(when (equal w/lsp-client "lsp") (require 'w-lsp))
+(when (equal w/lsp-client "eglot") (require 'w-eglot))
 (require 'w-java)
 
 (load (w/locate-in-current-directory "packages"))
@@ -47,8 +50,8 @@
             (unless (server-running-p)
               (server-start))))
 (desktop-read)
-;; (tab-bar-mode 1)
-;; (when (> emacs-major-version 26)
+;; (when (>= emacs-major-version 27)
+;;     (tab-bar-mode 1)
 ;;     (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
 ;;     (global-tab-line-mode 1))
 
