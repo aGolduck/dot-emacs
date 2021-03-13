@@ -32,6 +32,7 @@
 (when (equal w/lsp-client "lsp") (require 'w-lsp))
 (when (equal w/lsp-client "eglot") (require 'w-eglot))
 (require 'w-java)
+(require 'w-haskell)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))

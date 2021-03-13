@@ -196,16 +196,6 @@
 
 (use-package guix)
 
-(use-package haskell-mode
-  :init
-  (use-package lsp-haskell
-    :init
-    (when (equal w/lsp-client "lsp")
-      (add-hook 'haskell-mode-hook #'lsp)
-      (add-hook 'haskell-mode-hook #'lsp-ui-mode)
-      (add-hook 'haskell-literate-mode-hook #'lsp)
-      (add-hook 'haskell-mode-hook #'lsp))))
-
 (use-package helpful
   :init
   ;; (setq counsel-describe-function-function #'helpful-callable
