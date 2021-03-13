@@ -1,8 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
-(if (>= emacs-major-version 28)
-    (setq w/lsp-client "lsp")
-  (setq w/lsp-client "eglot"))
+;; (setq w/lsp-client "lsp")
+(setq w/lsp-client "eglot")
+;; (if (>= emacs-major-version 28)
+;;     (setq w/lsp-client "lsp")
+;;   (setq w/lsp-client "eglot"))
 
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
@@ -29,8 +31,9 @@
 (require 'w-prog)
 ;; (require 'w-rss)
 
-(when (equal w/lsp-client "lsp") (require 'w-lsp))
-(when (equal w/lsp-client "eglot") (require 'w-eglot))
+(require 'w-lsp)
+(require 'w-eglot)                      ;; eglot is not hooked to major modes by default
+
 (require 'w-java)
 (require 'w-haskell)
 
