@@ -1,3 +1,6 @@
+;;; install lsp-java no matter what lsp client is, avoiding changing straigt version file
+(straight-use-package 'lsp-java)
+
 (add-hook 'java-mode-hook #'company-mode)
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'electric-pair-local-mode)
@@ -5,9 +8,20 @@
           (lambda ()
             (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
 
+(when (equal w/lsp-client "eglot")
+  (defconst my-eglot-eclipse-jdt-home (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar"))
+  (defun my-eglot-eclipse-jdt-contact (interactive)
+    "Contact with the jdt server input INTERACTIVE."
+    (let ((cp (getenv "CLASSPATH")))
+      (setenv "CLASSPATH" (concat cp ":" my-eglot-eclipse-jdt-home))
+      (unwind-protect (eglot--eclipse-jdt-contact nil)
+        (setenv "CLASSPATH" cp))))
+
+  (with-eval-after-load 'eglot
+    (setcdr (assq 'java-mode eglot-server-programs) #'my-eglot-eclipse-jdt-contact)))
+
 ;;; lsp-java
 (when (equal w/lsp-client "lsp")
-  (straight-use-package 'lsp-java)
   (setq w/path-to-lombok "/usr/share/java/lombok.jar")
   (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
         lsp-java-vmargs `("-noverify"
