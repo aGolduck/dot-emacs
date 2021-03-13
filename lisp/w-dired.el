@@ -11,15 +11,17 @@
                                      ("\\.pptx\\'" "libreoffice")
                                      ("\\.xls\\'" "libreoffice")
                                      ("\\.xlsx\\'" "libreoffice")))
-(add-hook 'dired-mode-hook (lambda () (require 'dired-x)))
 (autoload 'dired-jump "dired-x")
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
+
 (with-eval-after-load 'dired
   ;; do not open extra dired buffer
   (put 'dired-find-alternate-file 'disabled nil)
   (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
   (define-key dired-mode-map
     (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+
+  (require 'dired-x)
 
   ;; image-dired
   (setq image-dired-dir (w/locate-emacs-var-file "image-dired"))
