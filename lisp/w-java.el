@@ -30,11 +30,11 @@
                           ,(concat "-javaagent:" w/path-to-lombok)
                           ,(concat "-Xbootclasspath/a:" w/path-to-lombok)))
   (add-hook 'java-mode-hook #'lsp)
-  ;; (add-hook 'java-mode-hook #'lsp-ui-mode)
-  (add-hook 'java-mode-hook (lambda ()
-                              (require 'lsp-java-boot)
-                              (lsp-java-boot-lens-mode)
-                              (diminish 'lsp-java-boot-lens-mode "弹")))
+  (add-hook 'java-mode-hook #'lsp-ui-mode)
+  ;; (add-hook 'java-mode-hook (lambda ()
+  ;;                             (require 'lsp-java-boot)
+  ;;                             (lsp-java-boot-lens-mode)
+  ;;                             (diminish 'lsp-java-boot-lens-mode "弹")))
 
   ;;; dap-java
   (use-package dap-java
