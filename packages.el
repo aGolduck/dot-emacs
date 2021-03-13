@@ -24,7 +24,6 @@
           'dap-mode
           'deferred
           'devdocs
-          'dired-rsync
           'direnv
           'dotenv-mode
           'emmet-mode

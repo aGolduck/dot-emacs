@@ -21,6 +21,7 @@
 (require 'w-grep)
 (require 'w-buffer)
 (require 'w-file)
+(require 'w-dired)
 (require 'w-selectrum)
 (require 'w-company)
 (require 'w-org)

@@ -81,37 +81,6 @@
 
 (use-package devdocs)
 
-(use-package dired
-  :init
-  (setq dired-listing-switches "-Afhlv"
-        dired-auto-revert-buffer t
-        dired-dwim-target t
-        dired-recursive-copies 'always
-        dired-recursive-deletes 'top)
-  (global-set-key (kbd "M-SPC ^") #'dired-jump)
-  :config
-  (put 'dired-find-alternate-file 'disabled nil)
-  (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
-  (define-key dired-mode-map
-    (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
-  (use-package dired-rsync)
-  (use-package dired-x
-    :init
-    (setq dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
-                                         ("\\.docx\\'" "libreoffice")
-                                         ("\\.ppt\\'" "libreoffice")
-                                         ("\\.pptx\\'" "libreoffice")
-                                         ("\\.xls\\'" "libreoffice")
-                                         ("\\.xlsx\\'" "libreoffice")))
-    (add-hook 'dired-mode-hook (lambda () (require 'dired-x))))
-  (use-package image-dired :init (setq image-dired-dir (w/locate-emacs-var-file "image-dired")))
-  (use-package dired-quick-sort
-    :straight t
-    :commands (hydra-dired-quick-sort/body)
-    :init
-    (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
-    (add-hook 'dired-mode-hook #'dired-quick-sort)))
-
 (use-package direnv
   :if (executable-find "direnv")
   :init (add-hook 'after-init-hook #'direnv-mode))
