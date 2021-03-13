@@ -23,7 +23,6 @@
           'ctable
           'dap-mode
           'deferred
-          'devdocs
           'direnv
           'dotenv-mode
           'emmet-mode
@@ -40,14 +39,12 @@
           'graphql-mode
           'groovy-mode
           'guix
-          'haskell-mode
           'helpful
           'highlight-indent-guides
           'hl-todo
           'json-mode
           'keyfreq
           'link-hint
-          'lsp-haskell
           'lsp-mode
           'lsp-python-ms
           'lsp-treemacs
@@ -78,7 +75,6 @@
           'vterm
           'yaml-mode
           'yasnippet
-          'zeal-at-point
           ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           ;; 'ivy
           ;; 'ivy-hydra
@@ -88,7 +84,6 @@
           ;; 'ivy-xref
           ;; 'lsp-ivy
           ;; 'swiper
-          'dumb-jump
           ))
   (straight-use-package w/package))
 

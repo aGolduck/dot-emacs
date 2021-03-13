@@ -79,8 +79,6 @@
               (when window-system
                 (desktop-save-mode)))))
 
-(use-package devdocs)
-
 (use-package direnv
   :if (executable-find "direnv")
   :init (add-hook 'after-init-hook #'direnv-mode))
@@ -241,6 +239,8 @@
   (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
   (diminish 'hs-minor-mode "折"))
 
+;; It is reported that highlight-indent-guides takes too much cpu time
+;; https://emacs-china.org/t/highlight-indent-guides/16532/4
 (use-package highlight-indent-guides
   :init
   (setq highlight-indent-guides-method 'character
@@ -705,8 +705,6 @@
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (use-package yasnippet-snippets))
 
-(use-package zeal-at-point)
-
 ;; (use-package battery)
 
 ;; (use-package counsel
@@ -818,13 +816,6 @@
 ;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 ;; (use-package treemacs-magit :demand t)
-
-(use-package dumb-jump
-  :init
-  ;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
-  (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
-  ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
-  )
 
 (use-package delsel :init (add-hook 'after-init-hook #'delete-selection-mode))
 

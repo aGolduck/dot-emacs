@@ -2,6 +2,14 @@
 
 (straight-use-package 'quickrun)
 
+(straight-use-package 'dumb-jump)
+;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
+(global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
+;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
+
+(straight-use-package 'devdocs)
+(straight-use-package 'zeal-at-point)
+
 ;; (use-package paredit
 ;;   :commands (enable-paredit-mode)
 ;;   :init
