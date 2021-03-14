@@ -1,10 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; (setq w/lsp-client "lsp")
-(setq w/lsp-client "eglot")
-;; (if (>= emacs-major-version 28)
-;;     (setq w/lsp-client "lsp")
-;;   (setq w/lsp-client "eglot"))
+(defvar w/lsp-client "lsp" "language service protocol client")
+;; (setq w/lsp-client "eglot")
 
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
