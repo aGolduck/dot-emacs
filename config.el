@@ -325,19 +325,6 @@
   ;; (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp)))
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode))
 
-(use-package ranger
-  :init
-  (setq ranger-map-style 'emacs)
-  (setq ranger-key (kbd "M-R"))
-  (global-set-key (kbd "M-r") #'ranger)
-  :config
-  (define-key ranger-emacs-mode-map (kbd "n") #'ranger-next-file)
-  (define-key ranger-emacs-mode-map (kbd "p") #'ranger-prev-file)
-  (define-key ranger-emacs-mode-map (kbd "b") #'ranger-up-directory)
-  (define-key ranger-emacs-mode-map (kbd "f") #'ranger-find-file)
-  (define-key ranger-emacs-mode-map (kbd "C-n") #'ranger-next-file)
-  (define-key ranger-emacs-mode-map (kbd "C-p") #'ranger-prev-file))
-
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
 (use-package screenshot-svg)

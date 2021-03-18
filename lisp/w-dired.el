@@ -1,3 +1,4 @@
+;;;  -*- lexical-binding: t; -*-
 (setq dired-listing-switches "-Afhlv"
       dired-auto-revert-buffer t
       dired-dwim-target t
@@ -38,5 +39,18 @@
   ;;   (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
   ;;   (add-hook 'dired-mode-hook #'dired-quick-sort))
   )
+
+;;; ranger
+(setq ranger-map-style 'emacs)
+(setq ranger-key (kbd "M-R"))
+(global-set-key (kbd "M-r") #'ranger)
+(with-eval-after-load 'ranger
+  (define-key ranger-emacs-mode-map (kbd "n") #'ranger-next-file)
+  (define-key ranger-emacs-mode-map (kbd "p") #'ranger-prev-file)
+  (define-key ranger-emacs-mode-map (kbd "b") #'ranger-up-directory)
+  (define-key ranger-emacs-mode-map (kbd "f") #'ranger-find-file)
+  (define-key ranger-emacs-mode-map (kbd "C-n") #'ranger-next-file)
+  (define-key ranger-emacs-mode-map (kbd "C-p") #'ranger-prev-file))
+
 
 (provide 'w-dired)
