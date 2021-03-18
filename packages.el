@@ -26,18 +26,15 @@
           'groovy-mode
           'guix
           'helpful
-          'hl-todo
           'json-mode
           'keyfreq
           'link-hint
           'markdown-mode
           'mini-frame
-          'olivetti
           'orderless
           'pdf-tools
           'pkgbuild-mode
           'pocket-reader
-          'posframe
           'projectile
           'ranger
           'rime
@@ -46,7 +43,6 @@
           'shackle
           'smartparens
           'tide
-          'transient
           'treemacs
           'typescript-mode
           'vterm
