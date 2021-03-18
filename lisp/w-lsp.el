@@ -54,4 +54,6 @@
 (with-eval-after-load 'lsp-lens
   (diminish 'lsp-lens-mode "透"))
 
+(straight-use-package 'lsp-treemacs)
+
 (provide 'w-lsp)

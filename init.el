@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defvar w/lsp-client "lsp" "language service protocol client")
-(setq w/lsp-client "eglot")
+(defvar w/lsp-client nil "language service protocol client")
+;; (setq w/lsp-client "eglot")
+;; (setq w/lsp-client "lsp")
 
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
