@@ -140,15 +140,13 @@
   (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
   (global-set-key (kbd "M-SPC F v") #'find-variable))
 
-(use-package flycheck :config (diminish 'flycheck-mode "检"))
-
 (use-package font-lock
   :config
   (set-face-attribute 'font-lock-comment-face nil :height 0.9))
 
 (use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 
-(use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
+;; (use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
 
 (use-package gcmh
   :init (add-hook 'after-init-hook #'gcmh-mode)
@@ -219,18 +217,6 @@
         (overlay-put w/overlay 'display (propertize info 'face w/hideshow-folded-face)))))
   (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
   (diminish 'hs-minor-mode "折"))
-
-;; It is reported that highlight-indent-guides takes too much cpu time
-;; https://emacs-china.org/t/highlight-indent-guides/16532/4
-(use-package highlight-indent-guides
-  :init
-  (setq highlight-indent-guides-method 'character
-        ;; highlight-indent-guides-character ?┃
-        ;; highlight-indent-guides-character ?│
-        ;; highlight-indent-guides-character ?║
-        highlight-indent-guides-auto-odd-face-perc 15
-        highlight-indent-guides-auto-even-face-perc 55
-        highlight-indent-guides-auto-character-face-perc 61.8))
 
 (use-package isearch
   :config
@@ -344,10 +330,6 @@
 
 (use-package pocket-reader)
 
-(use-package posframe
-  :init
-  (use-package flycheck-posframe :init (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)))
-
 (use-package projectile
   :init
   (defun w/projectile-shortened-mode-line ()
@@ -436,42 +418,6 @@
   (diminish 'visual-line-mode "⮒"))
 
 (use-package smartparens :config (require 'smartparens-config))
-
-(use-package snails
-  :if window-system
-  ;; both w/snails snails need to be in commands, otherwise emacs can not recognize type of w/snails
-  :commands (w/snails snails)
-  :init
-  ;; (when (eq system-type 'darwin)
-  ;;   (setq snails-default-backends '(
-  ;;       			    snails-backend-buffer
-  ;;       			    snails-backend-recentf
-  ;;       			    snails-backend-imenu
-  ;;       			    snails-backend-current-buffer
-  ;;       			    snails-backend-rg
-  ;;       			    snails-backend-projectile
-  ;;       			    snails-backend-mdfind
-  ;;       			    snails-backend-fasd
-  ;;       			    snails-backend-command
-  ;;       			    )))
-  ;; (when (eq system-type 'gnu/linux)
-  ;;   (setq snails-default-backends '(
-  ;; 			    snails-backend-buffer
-  ;; 			    snails-backend-recentf
-  ;; 			    snails-backend-imenu
-  ;; 			    snails-backend-current-buffer
-  ;; 			    snails-backend-rg
-  ;; 			    snails-backend-projectile
-  ;; 			    snails-backend-fd
-  ;; 			    snails-backend-fasd
-  ;; 			    snails-backend-command
-  ;; 			    snails-backend-eaf-pdf-table
-  ;; 			    snails-backend-eaf-browser-history
-  ;; 			    snails-backend-eaf-browser-open
-  ;; 			    snails-backend-eaf-browser-search
-  ;; 			    snails-backend-eaf-github-search
-  ;; 			    )))
-  (setq snails-use-exec-path-from-shell nil))
 
 (use-package subword
   :init (add-hook 'after-init-hook #'global-subword-mode)
@@ -651,21 +597,11 @@
     :config
     (diminish 'winner-mode)))
 
-(use-package woman :init (global-set-key (kbd "M-SPC d m") #'woman))
-
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
   (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
-
-(use-package yasnippet
-  :config
-  ;; (define-key yas-minor-mode-map (kbd "<tab>") #'yas-expand)
-  ;; (define-key yas-minor-mode-map (kbd "TAB") #'yas-expand)
-  (diminish 'yas-minor-mode "模")
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (use-package yasnippet-snippets))
 
 ;; (use-package battery)
 

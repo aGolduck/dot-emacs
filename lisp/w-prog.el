@@ -5,6 +5,28 @@
 ;;; paren
 (setq show-paren-when-point-in-periphery t
       show-paren-when-point-inside-paren t)
+;;; yasnippet
+(straight-use-package 'yasnippet)
+(straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
+(with-eval-after-load 'yasnippet
+  (diminish 'yas-minor-mode "模")
+  (define-key yas-minor-mode-map (kbd "TAB") nil))
+;;; flycheck
+(straight-use-package 'flycheck)
+(with-eval-after-load 'flycheck
+  (diminish 'flycheck-mode "检"))
+(straight-use-package 'flycheck-posframe)
+(add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
+(straight-use-package 'highlight-indent-guides)
+;; It is reported that highlight-indent-guides takes too much cpu time
+;; https://emacs-china.org/t/highlight-indent-guides/16532/4
+(setq highlight-indent-guides-method 'character
+      ;; highlight-indent-guides-character ?┃
+      ;; highlight-indent-guides-character ?│
+      ;; highlight-indent-guides-character ?║
+      highlight-indent-guides-auto-odd-face-perc 15
+      highlight-indent-guides-auto-even-face-perc 55
+      highlight-indent-guides-auto-character-face-perc 61.8)
 
 (straight-use-package 'quickrun)
 
