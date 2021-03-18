@@ -84,17 +84,6 @@
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
-(use-package esh-mode
-  :init
-  (setq eshell-directory-name (w/locate-emacs-var-file "eshell"))
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input)))
-  (use-package esh-autosuggest :commands (esh-autosuggest-mode))
-  (use-package eshell-z))
-
 (use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
 (use-package expand-region
@@ -351,23 +340,6 @@
 
 (use-package re-builder :init (setq reb-re-syntax 'string))
 
-(use-package rime
-  ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
-  :init
-  (setq default-input-method "rime"
-	rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")  ;; 发往 librime 的快捷键
-	rime-librime-root (if (eq system-type 'darwin) (locate-user-emacs-file "rime/librime-mac/dist"))
-	rime-user-data-dir (locate-user-emacs-file "rime")
-	rime-show-candidate 'posframe
-	rime-posframe-style 'simple)
-  (global-set-key (kbd "M-t") #'toggle-input-method)
-  (global-set-key (kbd "s-SPC") #'toggle-input-method)
-  :config
-  (define-key rime-mode-map (kbd "C-`") #'rime-send-keybinding)
-  (define-key rime-mode-map (kbd "C-S-`") #'rime-send-keybinding)
-  (unless (fboundp 'rime--posframe-display-content)
-    (error "Function `rime--posframe-display-content' is not available.")))
-
 (use-package screenshot-svg)
 
 (use-package selectric-mode
@@ -464,19 +436,6 @@
 (use-package url-cookie :init (setq url-cookie-file (w/locate-emacs-var-file "url/cookies")))
 
 (use-package valign :config (diminish 'valign-mode))
-
-(use-package vterm
-  :init
-  (setq vterm-buffer-name-string "vterm %s"
-        vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i" "M-c")
-        vterm-kill-buffer-on-exit t
-        vterm-shell "zsh"
-        vterm-term-environment-variable "eterm-color")
-  ;; (add-hook 'vterm-mode-hook
-  ;;           (lambda ()
-  ;;             (set (make-local-variable 'buffer-face-mode-face) 'fixed-pitch-serif)
-  ;;             (buffer-face-mode t)))
-  :config (set-face-attribute 'vterm-color-green nil :foreground "dark green"))
 
 (use-package window
   :init
@@ -652,13 +611,6 @@
 ;;   :init (setq smex-save-file (w/locate-emacs-var-file "smex-items")))
 
 ;; (use-package so-long :if (>= emacs-major-version 27) :init (add-hook 'after-init-hook #'global-so-long-mode))
-
-;; (use-package term-cursor
-;;   :init
-;;   (setq term-cursor-triggers '(blink-cursor-mode-hook
-;;                                post-command-hook
-;;                                lsp-ui-doc-frame-hook))
-;;   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
 ;; (use-package treemacs-magit :demand t)
 

@@ -4,7 +4,6 @@
 (dolist (w/package
          (list
           ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
-          '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
           'ace-window
@@ -16,9 +15,6 @@
           'direnv
           'dotenv-mode
           'emmet-mode
-          'esh-autosuggest
-          'eshell-z
-          'eterm-256color
           'expand-region
           'gcmh
           'go-translate
@@ -37,7 +33,6 @@
           'pocket-reader
           'projectile
           'ranger
-          'rime
           'rust-mode
           'selectric-mode
           'shackle
@@ -45,7 +40,6 @@
           'tide
           'treemacs
           'typescript-mode
-          'vterm
           'yaml-mode
           ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           ;; 'ivy
