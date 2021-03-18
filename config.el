@@ -34,23 +34,6 @@
   (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
   (use-package cider))
 
-(use-package color-rg
-  :commands
-  (color-rg-search-input
-   color-rg-search-symbol
-   color-rg-search-input-in-project
-   color-rg-search-symbol-in-project
-   color-rg-search-symbol-in-current-file
-   color-rg-search-input-in-current-file
-   color-rg-search-project-rails
-   color-rg-search-symbol-with-type
-   color-rg-search-project-with-type
-   color-rg-search-project-rails-with-type)
-  :init
-  (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
-  ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
-  )
-
 (use-package crux
   :init
   (global-set-key (kbd "C-o") #'crux-smart-open-line)
