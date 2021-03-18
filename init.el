@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; M-SPC is key to my emacs world
+(global-unset-key (kbd "M-SPC"))
+
 (defvar w/lsp-client nil "language service protocol client")
 ;; (setq w/lsp-client "eglot")
 ;; (setq w/lsp-client "lsp")

@@ -34,12 +34,6 @@
   (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
   (use-package cider))
 
-(use-package crux
-  :init
-  (global-set-key (kbd "C-o") #'crux-smart-open-line)
-  (global-set-key (kbd "M-o") #'crux-smart-open-line-above)
-  (global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file))
-
 (use-package desktop
   :init
   (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") w/EMACS-VAR)

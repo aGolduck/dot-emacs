@@ -11,7 +11,6 @@
           'ccls
           'cider
           'clojure-mode
-          'crux
           'direnv
           'dotenv-mode
           'emmet-mode
