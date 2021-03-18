@@ -24,6 +24,7 @@
 (require 'w-dired)
 (require 'w-git)
 (require 'w-ui)
+(require 'w-rime)
 (require 'w-eaf)
 (require 'w-flyspell)
 (require 'w-selectrum)
