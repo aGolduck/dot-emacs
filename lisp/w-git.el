@@ -2,7 +2,6 @@
 ;;; magit
 (straight-use-package 'magit)
 (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
-      magit-post-commit-hook #'winner-undo
       magit-process-finish-apply-ansi-colors t
       ;; emacsclient is not usable for gccemacs now
       with-editor-emacsclient-executable nil)
