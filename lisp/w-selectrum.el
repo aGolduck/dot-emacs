@@ -43,4 +43,8 @@
 ;;   :config
 ;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
 
+(straight-use-package 'mini-frame)
+(straight-use-package 'orderless)
+
+
 (provide 'w-selectrum)

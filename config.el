@@ -93,10 +93,6 @@
   (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
   (global-set-key (kbd "M-SPC F v") #'find-variable))
 
-(use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
-
-;; (use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
-
 (use-package gcmh
   :init (add-hook 'after-init-hook #'gcmh-mode)
   :config (diminish 'gcmh-mode))

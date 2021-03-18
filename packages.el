@@ -25,13 +25,10 @@
           'keyfreq
           'link-hint
           'markdown-mode
-          'mini-frame
-          'orderless
           'pdf-tools
           'pkgbuild-mode
           'pocket-reader
           'projectile
-          'ranger
           'rust-mode
           'selectric-mode
           'shackle

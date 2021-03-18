@@ -17,8 +17,8 @@
 
 (straight-use-package 'magit-todos)
 (add-hook 'magit-mode-hook #'magit-todos-mode)
-(with-eval-after-load 'magit-todos
-  (define-key magit-todos-section-map "j" nil))
+;; (with-eval-after-load 'magit-todos
+;;   (define-key magit-todos-section-map "j" nil))
 
 
 ;;; git link

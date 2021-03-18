@@ -28,13 +28,14 @@
 (require 'w-git)
 (require 'w-ui)
 (require 'w-rime)
-(require 'w-eaf)
 (require 'w-flyspell)
+(require 'w-eaf)
 (require 'w-selectrum)
 (require 'w-company)
 ;; (require 'w-rss)
 (require 'w-telega)
 
+(require 'w-term)
 (require 'w-org)
 (require 'w-prog)
 
