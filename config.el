@@ -345,7 +345,7 @@
   (use-package magit-delta
     :if (executable-find "delta")
     :init (add-hook 'magit-mode-hook #'magit-delta-mode)
-    :config (diminish 'magit-delta-mode ""))
+    :config (diminish 'magit-delta-mode))
   (use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
   :config
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
@@ -359,10 +359,6 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (setq markdown-command "multimarkdown"))
-
-(use-package newcomment
-  :init
-  (global-set-key [remap comment-dwim] #'comment-line))
 
 (use-package nxml-mode
   :init
@@ -818,11 +814,6 @@
 ;; (use-package treemacs-magit :demand t)
 
 (use-package delsel :init (add-hook 'after-init-hook #'delete-selection-mode))
-
-(use-package paren
-  :init
-  (setq show-paren-when-point-in-periphery t
-        show-paren-when-point-inside-paren t))
 
 (provide 'w-config)
 ;;; init-config ends here

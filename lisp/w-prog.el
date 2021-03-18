@@ -1,5 +1,11 @@
 ;; -*- lexical-binding: t; -*-
 
+;;; new comment
+(global-set-key [remap comment-dwim] #'comment-line)
+;;; paren
+(setq show-paren-when-point-in-periphery t
+      show-paren-when-point-inside-paren t)
+
 (straight-use-package 'quickrun)
 
 (straight-use-package 'dumb-jump)
