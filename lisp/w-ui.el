@@ -26,5 +26,17 @@
 
 ;;; transient for magit,org-ql,rg...
 (straight-use-package 'transient)
+(setq transient-history-file (w/locate-emacs-var-file "transient/history.el"))
+
+;;; tab-bar
+(when (>= emacs-major-version 27)
+  (setq tab-bar-show t
+        tab-bar-select-tab-modifiers '(meta)
+        tab-bar-tab-hints t))
+;; (setq tab-bar-tab-name-function
+;;       (defun w/tab-bar-show-file-name ()
+;;         (let* ((buffer (window-buffer (minibuffer-selected-window)))
+;;                (file-name (buffer-file-name buffer)))
+;;           (if file-name file-name (format "%s" buffer)))))
 
 (provide 'w-ui)

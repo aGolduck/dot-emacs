@@ -99,10 +99,6 @@
   (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
   (global-set-key (kbd "M-SPC F v") #'find-variable))
 
-(use-package font-lock
-  :config
-  (set-face-attribute 'font-lock-comment-face nil :height 0.9))
-
 (use-package frame :init (add-hook 'after-init-hook #'blink-cursor-mode))
 
 ;; (use-package fuz :config (unless (require 'fuz-core nil t) (fuz-build-and-load-dymod)))
@@ -144,19 +140,6 @@
   (global-set-key (kbd "C-h o") #'helpful-symbol))
 
 (use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
-
-(use-package hi-lock
-  :init
-  ;; remove ugly hi-yellow from default
-  (setq hi-lock-face-defaults '("hi-pink" "hi-green" "hi-blue" "hi-salmon" "hi-aquamarine" "hi-black-b" "hi-blue-b" "hi-red-b" "hi-green-b" "hi-black-hb"))
-  (global-set-key (kbd "M-SPC h f") #'hi-lock-find-patterns)
-  (global-set-key (kbd "M-SPC h l") #'highlight-lines-matching-regexp)
-  (global-set-key (kbd "M-SPC h p") #'highlight-phrase)
-  (global-set-key (kbd "M-SPC h r") #'highlight-regexp)
-  (global-set-key (kbd "M-SPC h s") #'highlight-symbol-at-point)
-  (global-set-key (kbd "M-SPC h u") #'unhighlight-regexp)
-  (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
-  :config (diminish 'hi-lock-mode "亮"))
 
 (use-package hideshow
   :init
@@ -281,8 +264,6 @@
     (add-hook 'nxml-mode-hook #'lsp))
   (add-hook 'nxml-mode-hook #'smartparens-mode))
 
-(use-package olivetti)
-
 (use-package pdf-tools)
 
 (use-package pkgbuild-mode)
@@ -352,19 +333,6 @@
   :init (add-hook 'after-init-hook #'global-subword-mode)
   :config (diminish 'subword-mode))
 
-(use-package tab-bar
-  :if (>= emacs-major-version 27)
-  :init
-  (setq tab-bar-show t
-        tab-bar-select-tab-modifiers '(meta)
-        tab-bar-tab-hints t)
-  ;; (setq tab-bar-tab-name-function
-  ;;       (defun w/tab-bar-show-file-name ()
-  ;;         (let* ((buffer (window-buffer (minibuffer-selected-window)))
-  ;;                (file-name (buffer-file-name buffer)))
-  ;;           (if file-name file-name (format "%s" buffer)))))
-  )
-
 (use-package thing-edit)
 
 (use-package tide
@@ -376,8 +344,6 @@
         ;; so we up it to 512kb.
         tide-server-max-response-length 524288)
   :config (diminish 'tide-mode "型"))
-
-(use-package transient :init (setq transient-history-file (w/locate-emacs-var-file "transient/history.el")))
 
 (use-package treemacs
   :commands (treemacs-current-visibilit)
