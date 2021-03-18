@@ -4,7 +4,6 @@
 (dolist (w/package
          (list
           '(color-rg :host github :repo "manateelazycat/color-rg")
-          '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*"))
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
           '(telega :host github :repo "zevlg/telega.el" :branch "releases")
@@ -20,13 +19,10 @@
           'cider
           'clojure-mode
           'crux
-          'ctable
           'dap-mode
-          'deferred
           'direnv
           'dotenv-mode
           'emmet-mode
-          'epc
           'esh-autosuggest
           'eshell-z
           'eterm-256color
@@ -60,7 +56,6 @@
           'ranger
           'rime
           'rust-mode
-          's
           'selectric-mode
           'shackle
           'smartparens
