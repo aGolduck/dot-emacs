@@ -171,8 +171,6 @@
   :init (add-hook 'after-init-hook #'gcmh-mode)
   :config (diminish 'gcmh-mode))
 
-(use-package git-link :init (global-set-key (kbd "M-SPC g L") #'git-link))
-
 (use-package go-translate
   :init
   ;; (setq go-translate-base-url "https://translate.google.cn")
@@ -336,19 +334,6 @@
   (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
 (use-package link-hint)
-
-(use-package magit
-  :init
-  (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
-  (setq magit-process-finish-apply-ansi-colors t)
-  (global-set-key (kbd "M-SPC g s") #'magit-status)
-  (use-package magit-delta
-    :if (executable-find "delta")
-    :init (add-hook 'magit-mode-hook #'magit-delta-mode)
-    :config (diminish 'magit-delta-mode))
-  (use-package magit-todos :init (add-hook 'magit-mode-hook #'magit-todos-mode))
-  :config
-  (define-key magit-status-mode-map (kbd "C-<tab>") nil))
 
 (use-package make-mode
   :init (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode)))
@@ -603,8 +588,6 @@
 (use-package url-cookie :init (setq url-cookie-file (w/locate-emacs-var-file "url/cookies")))
 
 (use-package valign :config (diminish 'valign-mode))
-
-(use-package vc-hooks :init (setq vc-follow-symlinks t))
 
 (use-package vterm
   :init

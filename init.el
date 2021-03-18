@@ -21,15 +21,16 @@
 (require 'w-buffer)
 (require 'w-file)
 (require 'w-dired)
+(require 'w-git)
+(require 'w-flyspell)
 (require 'w-selectrum)
 (require 'w-company)
 (require 'w-org)
-(require 'w-flyspell)
 (require 'w-prog)
 ;; (require 'w-rss)
 
 (require 'w-lsp)
-(require 'w-eglot)                      ;; eglot is not hooked to major modes by default
+(require 'w-eglot)
 
 (require 'w-java)
 (require 'w-haskell)

@@ -34,7 +34,6 @@
           'flycheck
           'flycheck-posframe
           'gcmh
-          'git-link
           'go-translate
           'graphql-mode
           'groovy-mode
@@ -49,9 +48,6 @@
           'lsp-python-ms
           'lsp-treemacs
           'lsp-ui
-          'magit
-          'magit-delta
-          'magit-todos
           'markdown-mode
           'mini-frame
           'olivetti
