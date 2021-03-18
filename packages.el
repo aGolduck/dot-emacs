@@ -6,7 +6,6 @@
           '(color-rg :host github :repo "manateelazycat/color-rg")
           '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
-          '(telega :host github :repo "zevlg/telega.el" :branch "releases")
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")

@@ -26,9 +26,11 @@
 (require 'w-flyspell)
 (require 'w-selectrum)
 (require 'w-company)
+;; (require 'w-rss)
+(require 'w-telega)
+
 (require 'w-org)
 (require 'w-prog)
-;; (require 'w-rss)
 
 (require 'w-lsp)
 (require 'w-eglot)
