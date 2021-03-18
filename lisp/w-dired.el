@@ -14,6 +14,8 @@
 (autoload 'dired-jump "dired-x")
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
 
+(straight-use-package 'dired-rsync)
+(straight-use-package 'dired-quick-sort)
 (with-eval-after-load 'dired
   ;; do not open extra dired buffer
   (put 'dired-find-alternate-file 'disabled nil)
@@ -26,8 +28,6 @@
   ;; image-dired
   (setq image-dired-dir (w/locate-emacs-var-file "image-dired"))
 
-  (straight-use-package 'dired-rsync)
-  (straight-use-package 'dired-quick-sort)
   (autoload 'hydra-dired-quick-sort/body "dired-quick-sort")
   (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
   (add-hook 'dired-mode-hook #'dired-quick-sort)

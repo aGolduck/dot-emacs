@@ -2,13 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
+(straight-use-package 'rg)
+(straight-use-package '(color-rg :host github :repo "manateelazycat/color-rg"))
+(straight-use-package 'ag)
+(straight-use-package 'wgrep-ag)
+(straight-use-package 'wgrep)
+
 (if (executable-find "rg")
     (progn
       ;; rg
-      (straight-use-package 'rg)
+
       (global-set-key (kbd "M-SPC s p") #'rg-project)
       ;; color-rg
-      (straight-use-package '(color-rg :host github :repo "manateelazycat/color-rg"))
       (dolist (color-rg-command (list
                                  'color-rg-search-input
                                  'color-rg-search-symbol
@@ -22,13 +27,12 @@
                                  'color-rg-search-project-rails-with-type))
         (autoload color-rg-command "color-rg"))
       (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
-  ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
-)
-  (if (and (executable-find "ag")
-           (straight-use-package 'ag))
+      ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
+      )
+  (if (executable-find "ag")
       (progn
-        (straight-use-package 'wgrep-ag)
         (global-set-key (kbd "M-SPC s p") #'ag-project))
-    (straight-use-package 'wgrep)))
+    ;; for grep
+    nil))
 
 (provide 'w-grep)

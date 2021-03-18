@@ -3,22 +3,16 @@
 
 (dolist (w/package
          (list
-          '(color-rg :host github :repo "manateelazycat/color-rg")
-          '(fuz :host github :repo "rustify-emacs/fuz.el" :files ("src" "Cargo*" "*.el"))
           ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
           '(term-cursor :host github :repo "h0d/term-cursor.el")
           '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
-          '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git"))
           'ace-window
-          'ag
-          'autodisass-java-bytecode
           'avy
           'ccls
           'cider
           'clojure-mode
           'crux
-          'dap-mode
           'direnv
           'dotenv-mode
           'emmet-mode
@@ -26,23 +20,16 @@
           'eshell-z
           'eterm-256color
           'expand-region
-          'flycheck
-          'flycheck-posframe
           'gcmh
           'go-translate
           'graphql-mode
           'groovy-mode
           'guix
           'helpful
-          'highlight-indent-guides
           'hl-todo
           'json-mode
           'keyfreq
           'link-hint
-          'lsp-mode
-          'lsp-python-ms
-          'lsp-treemacs
-          'lsp-ui
           'markdown-mode
           'mini-frame
           'olivetti
@@ -64,7 +51,6 @@
           'typescript-mode
           'vterm
           'yaml-mode
-          'yasnippet
           ;; 'counsel ;; ivy, counsel and swiper belongs to the same repo, but straight.el builds them into different packages
           ;; 'ivy
           ;; 'ivy-hydra

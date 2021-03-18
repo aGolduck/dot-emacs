@@ -210,11 +210,12 @@
 (straight-use-package 'ox-hugo)
 (straight-use-package 'ob-typescript)
 (straight-use-package 'ob-http)
+(straight-use-package 'org-projectile)
 
 ;;; lazy load
 (with-eval-after-load 'org
   (require 'org-download)
-  ;;; org babel
+;;; org babel
   ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
         "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
