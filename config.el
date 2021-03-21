@@ -70,15 +70,9 @@
   :config
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
-;; (use-package eldoc
-;;   :commands (eldoc-add-command)
-;;   :config (diminish 'eldoc-mode "册"))
-
 (use-package emmit-mode)
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
-
-(use-package eww :init (add-hook 'eww-mode #'visual-line-mode))
 
 (use-package expand-region
   :init

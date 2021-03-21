@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; -*-
 
 ;;; new comment
 (global-set-key [remap comment-dwim] #'comment-line)
@@ -35,6 +35,7 @@
 (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
 ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
 
+(with-eval-after-load 'eldoc (diminish 'eldoc-mode "档"))
 (straight-use-package 'devdocs)
 (straight-use-package 'zeal-at-point)
 
