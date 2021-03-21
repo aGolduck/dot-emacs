@@ -22,9 +22,13 @@
 
 (straight-use-package 'diminish)
 (require 'w-utils)
-(require 'w-grep)
+(require 'w-emacs)
+
 (require 'w-buffer)
 (require 'w-file)
+(require 'w-grep)
+(require 'w-edit)
+
 (require 'w-dired)
 (require 'w-git)
 (require 'w-ui)
@@ -45,6 +49,9 @@
 
 (require 'w-java)
 (require 'w-haskell)
+
+(require 'w-system)
+(require 'w-z)
 
 (load (w/locate-in-current-directory "packages"))
 (load (w/locate-in-current-directory "config"))

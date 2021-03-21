@@ -13,41 +13,7 @@
       visible-bell t
       word-wrap-by-category t)
 (setq-default indent-tabs-mode nil
-	      line-spacing 0.2
-              header-line-format '(
-                                   "%e"
-                                   mode-line-front-space
-                                   mode-line-mule-info
-                                   mode-line-position
-                                   (vc-mode vc-mode)
-                                   " "
-                                   ;; mode-line-modes
-                                   mode-line-buffer-identification
-                                   ;; mode-line-misc-info
-                                   mode-line-end-spaces)
-              mode-line-format '(
-                                 "%e"
-                                 mode-line-front-space
-                                 ;; mode-line-mule-info
-                                 ;; mode-line-position
-                                 ;; (vc-mode vc-mode)
-                                 mode-line-modes
-                                 ;; mode-line-buffer-identification
-                                 mode-line-misc-info
-                                 mode-line-end-spaces)
-              frame-title-format ;; '(buffer-file-name "%f" "%b")
-              '((:eval (concat
-                        (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
-                            (if (listp org-pomodoro-mode-line)
-                              (apply #'concat org-pomodoro-mode-line)
-                              org-pomodoro-mode-line)
-                          "")
-                        (if (and (boundp 'org-mode-line-string) org-mode-line-string)
-                            org-mode-line-string
-                          "")
-                        (if (buffer-file-name)
-                            (abbreviate-file-name (buffer-file-name))
-                          "%b")))))
+	      line-spacing 0.2)
 
 
 ;;; fonts and faces
@@ -97,17 +63,14 @@
 ;;; available punctuations
 ;; (global-set-key (kbd "C-;"))
 ;; (global-set-key (kbd "C-'"))
-;; (global-set-key (kbd "C-."))
 ;; (global-set-key (kbd "C-="))
 ;; (global-set-key (kbd "C--"))
 ;; (global-set-key (kbd "M-="))
-;; (global-set-key (kbd "M--"))
 ;;; Commands of these keybindings are almost never used, just rebind them
 ;; (global-set-key (kbd "C-l"))
 ;; (global-set-key (kbd "C-o"))
 ;; (global-set-key (kbd "C-z"))
 ;; (global-set-key (kbd "M-`"))
-;; (global-set-key (kbd "M-i"))
 ;; (global-set-key (kbd "M-j"))
 ;; (global-set-key (kbd "M-m"))
 ;; (global-set-key (kbd "M-r"))
@@ -115,11 +78,9 @@
 ;;; C-M-x keybindings
 ;; (global-set-key (kbd "C-m-...") ...)
 ;;; abbrev keybindings which need to be research
-;; (global-set-key (kbd "M-'"))
 ;; (global-set-key (kbd "M-/"))
 ;;; These keybindings are for English writing, which I rarely used,
 ;; So they are worth rebinding
-;; (global-set-key (kbd "M-a"))
 ;; (global-set-key (kbd "M-c"))
 ;; (global-set-key (kbd "M-h"))
 ;; (global-set-key (kbd "M-l"))
@@ -136,4 +97,3 @@
 ;; (global-set-key (kbd "M-SPC SPC") #'w/snails)
 ;;; M-SPC 3 key strokes zone
 ;; (global-set-key (kbd "M-SPC B B") #'w/ivy-switch-buffer-in-other-window)
-(global-set-key (kbd "M-SPC b k") #'kill-buffer)

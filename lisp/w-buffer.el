@@ -10,5 +10,6 @@
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
+(global-set-key (kbd "M-SPC b k") #'kill-buffer)
 
 (provide 'w-buffer)

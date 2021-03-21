@@ -4,7 +4,6 @@
 (dolist (w/package
          (list
           ;; '(paredit :repo "http://mumble.net/~campbell/git/paredit.git/")
-          '(thing-edit :host github :repo "manateelazycat/thing-edit")
           '(valign :host github :repo "casouri/valign")
           'ace-window
           'avy
@@ -14,25 +13,18 @@
           'direnv
           'dotenv-mode
           'emmet-mode
-          'expand-region
-          'gcmh
           'go-translate
           'graphql-mode
           'groovy-mode
-          'guix
-          'helpful
           'json-mode
-          'keyfreq
           'link-hint
           'markdown-mode
           'pdf-tools
           'pkgbuild-mode
           'pocket-reader
-          'projectile
           'rust-mode
           'selectric-mode
           'shackle
-          'smartparens
           'tide
           'treemacs
           'typescript-mode

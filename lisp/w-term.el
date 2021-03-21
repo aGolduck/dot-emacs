@@ -1,6 +1,10 @@
 ;;;  -*- lexical-binding: t; -*-
 
 ;;; common
+(add-hook 'compilation-filter-hook
+          (lambda ()
+            (let ((buffer-read-only nil))
+              (ansi-color-apply-on-region (point-min) (point-max)))))
 (straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
 ;; (setq term-cursor-triggers '(blink-cursor-mode-hook
 ;;                                post-command-hook

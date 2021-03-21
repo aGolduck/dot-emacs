@@ -1,13 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(use-package abbrev :config (diminish 'abbrev-mode "缩")) ;; just to diminish
-
-(use-package ansi-color
-  :init
-  (add-hook 'compilation-filter-hook
-            (lambda ()
-              (let ((buffer-read-only nil))
-                (ansi-color-apply-on-region (point-min) (point-max))))))
-
 (use-package auth-source
   :init (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg")))))
 
@@ -17,44 +8,15 @@
   (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
   (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
 
-(use-package bookmark
-  :init
-  (setq bookmark-default-file (w/locate-emacs-var-file "bookmarks"))
-  (global-set-key (kbd "M-SPC b s") #'bookmark-set))
-
 ;; (use-package browse-url
 ;;   :init
 ;;   (when (string-equal w/HOST "xps")
 ;;     (setq browse-url-browser-function 'eaf-open-browser)))
 
-(use-package calendar :init (setq calendar-chinese-all-holidays-flag t))
-
 (use-package clojure-mode
   :init
   (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
   (use-package cider))
-
-(use-package desktop
-  :init
-  (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") w/EMACS-VAR)
-        desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") w/EMACS-VAR)
-        desktop-globals-to-save '()
-        desktop-locals-to-save '()
-        desktop-files-not-to-save ".*"
-        desktop-buffers-not-to-save ".*"
-        desktop-minor-mode-table '((defining-kbd-macro nil)
-                                   (isearch-mode nil)
-                                   (vc-mode nil)
-                                   (vc-dir-mode nil)
-                                   (erc-track-minor-mode nil)
-                                   (savehist-mode nil)
-                                   (tab-bar-mode nil))
-        desktop-save t)
-  (add-hook 'desktop-save-hook (lambda () (tab-bar-mode -1)))
-  (add-hook 'after-init-hook
-            (lambda ()
-              (when window-system
-                (desktop-save-mode)))))
 
 (use-package direnv
   :if (executable-find "direnv")
@@ -74,23 +36,6 @@
 
 (use-package epg-config :init (setq epg-pinentry-mode 'loopback))
 
-(use-package expand-region
-  :init
-  (setq expand-region-contract-fast-key "V")
-  (global-set-key (kbd "M-SPC v") #'er/expand-region))
-
-(use-package find-func
-  :init
-  (setq find-function-C-source-directory "~/b/gnu.org/emacs/emacs-native-comp/src")
-  (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
-  (global-set-key (kbd "M-SPC F f") #'find-function)
-  (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
-  (global-set-key (kbd "M-SPC F v") #'find-variable))
-
-(use-package gcmh
-  :init (add-hook 'after-init-hook #'gcmh-mode)
-  :config (diminish 'gcmh-mode))
-
 (use-package go-translate
   :init
   ;; (setq go-translate-base-url "https://translate.google.cn")
@@ -109,19 +54,6 @@
     (add-hook 'groovy-mode-hook #'lsp))
   (add-hook 'groovy-mode-hook #'company-mode)
   (add-hook 'groovy-mode-hook #'electric-pair-local-mode))
-
-(use-package guix)
-
-(use-package helpful
-  :init
-  ;; (setq counsel-describe-function-function #'helpful-callable
-  ;;       counsel-describe-variable-function #'helpful-variable)
-  ;; (global-set-key (kbd "C-h f") #'helpful-callable)
-  ;; (global-set-key (kbd "C-h v") #'helpful-variable)
-  ;; (global-set-key (kbd "C-h F") #'helpful-function)
-  ;; (global-set-key (kbd "C-h C") #'helpful-command)
-  (global-set-key (kbd "C-h k") #'helpful-key)
-  (global-set-key (kbd "C-h o") #'helpful-symbol))
 
 (use-package hexl :init (add-hook 'hexl-mode-hook #'view-mode))
 
@@ -144,14 +76,6 @@
   (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
   (diminish 'hs-minor-mode "折"))
 
-(use-package isearch
-  :config
-  (diminish 'isearch-mode)
-  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
-  (global-set-key (kbd "C-M-s") #'isearch-forward)
-  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
-  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-
 (use-package js-mode
   :init
   (setq js-indent-level 2)
@@ -168,65 +92,6 @@
     (add-hook 'js-mode-hook hooked)))
 
 (use-package json-mode)
-
-(use-package keyfreq
-  :init
-  (setq keyfreq-excluded-commands 'nil)
-  ;; (setq keyfreq-excluded-commands '(
-  ;;                                   self-insert-command
-  ;;                                   next-line
-  ;;                                   previous-line
-  ;;                                   org-self-insert-command
-  ;;                                   dired-previous-line
-  ;;                                   dired-next-line
-  ;;                                   mwheel-scroll
-  ;;                                   mouse-set-point
-  ;;                                   mouse-drag-region
-  ;;                                   org-agenda-next-line
-  ;;                                   backward-word
-  ;;                                   vterm--self-insert
-  ;;                                   magit-section-forward
-  ;;                                   paredit-backward
-  ;;                                   paredit-forward
-  ;;                                   magit-section-backward
-  ;;                                   org-agenda-previous-line
-  ;;                                   forward-word
-  ;;                                   backward-char
-  ;;                                   dired-find-file
-  ;;                                   ace-window
-  ;;                                   ivy-done
-  ;;                                   eaf-send-key
-  ;;                                   rime--backspace
-  ;;                                   scroll-up-command
-  ;;                                   ignore
-  ;;                                   eaf-proxy-scroll_up_page
-  ;;                                   ivy-backward-delete-char
-  ;;                                   magit-next-line
-  ;;                                   isearch-repeat-forward
-  ;;                                   delete-backward-char
-  ;;                                   org-delete-backward-char
-  ;;                                   eaf-proxy-scroll_down_page
-  ;;                                   beginning-of-buffer
-  ;;                                   ivy-next-line
-  ;;                                   move-end-of-line
-  ;;                                   newline
-  ;;                                   forward-sexp
-  ;;                                   dap-tooltip-mouse-motion
-  ;;                                   scroll-down-command
-  ;;                                   isearch-printing-char
-  ;;                                   magit-section-toggle
-  ;;                                   paredit-backward-delete
-  ;;                                   end-of-buffer
-  ;;                                   company-complete-selection
-  ;;                                   forward-char
-  ;;                                   dired-up-directory
-  ;;                                   counsel-recentf
-  ;;                                   minibuffer-keyboard-quit
-  ;;                                   set-mark-command
-  ;;                                   dired-jump
-  ;;                                   magit-previous-line))
-  (add-hook 'after-init-hook #'keyfreq-mode)
-  (add-hook 'after-init-hook #'keyfreq-autosave-mode))
 
 (use-package link-hint)
 
@@ -254,43 +119,12 @@
 
 (use-package pocket-reader)
 
-(use-package projectile
-  :init
-  (defun w/projectile-shortened-mode-line ()
-    "Report project name shortened and type in the modeline."
-    (let* ((project-name (projectile-project-name))
-           (project-type (projectile-project-type))
-           (shortened-project-name (if (< (length project-name) 10)
-                                       project-name
-                                     (concat (substring project-name 0 7) "..." (substring project-name -3 nil)))))
-      (format "%s[%s]"
-              projectile-mode-line-prefix
-              (or shortened-project-name "-")
-              ;; (if project-type
-              ;;     (format ":%s" project-type)
-              ;;   "")
-              )))
-  (setq ;; projectile-completion-system 'ivy
-   projectile-cache-file (w/locate-emacs-var-file "projectile.cache")
-   projectile-known-projects-file (w/locate-emacs-var-file "projectile-bookmarks.eld")
-   projectile-mode-line-function 'w/projectile-shortened-mode-line
-   projectile-mode-line-prefix "项"
-   projectile-project-search-path '("~/g" "~/r" "~/b"))
-  (when (executable-find "rg")
-    (setq-default projectile-generic-command "rg --files --hidden"))
-  (add-hook 'after-init-hook #'projectile-mode)
-  (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
-  (global-set-key (kbd "M-SPC p t") #'projectile-run-vterm)
-  (use-package treemacs-projectile))
-
 (use-package python
   :init
   ;; (setq lsp-python-ms-auto-install-server nil
   ;;       lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
   ;; (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp)))
   (add-hook 'python-mode-hook #'highlight-indent-guides-mode))
-
-(use-package re-builder :init (setq reb-re-syntax 'string))
 
 (use-package screenshot-svg)
 
@@ -310,14 +144,6 @@
   (global-set-key (kbd "M-SPC u") #'universal-argument)
   :config
   (diminish 'visual-line-mode "⮒"))
-
-(use-package smartparens :config (require 'smartparens-config))
-
-(use-package subword
-  :init (add-hook 'after-init-hook #'global-subword-mode)
-  :config (diminish 'subword-mode))
-
-(use-package thing-edit)
 
 (use-package tide
   :init
@@ -550,8 +376,6 @@
 ;; (use-package so-long :if (>= emacs-major-version 27) :init (add-hook 'after-init-hook #'global-so-long-mode))
 
 ;; (use-package treemacs-magit :demand t)
-
-(use-package delsel :init (add-hook 'after-init-hook #'delete-selection-mode))
 
 (provide 'w-config)
 ;;; init-config ends here

@@ -1,4 +1,41 @@
 ;;; -*- lexical-binding: t; -*-
+;;; mode-line, header-line, frame-title
+(setq-default
+ header-line-format '(
+                      "%e"
+                      mode-line-front-space
+                      mode-line-mule-info
+                      mode-line-position
+                      (vc-mode vc-mode)
+                      " "
+                      ;; mode-line-modes
+                      mode-line-buffer-identification
+                      ;; mode-line-misc-info
+                      mode-line-end-spaces)
+ mode-line-format '(
+                    "%e"
+                    mode-line-front-space
+                    ;; mode-line-mule-info
+                    ;; mode-line-position
+                    ;; (vc-mode vc-mode)
+                    mode-line-modes
+                    ;; mode-line-buffer-identification
+                    mode-line-misc-info
+                    mode-line-end-spaces)
+ frame-title-format ;; '(buffer-file-name "%f" "%b")
+ '((:eval (concat
+           (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
+               (if (listp org-pomodoro-mode-line)
+                   (apply #'concat org-pomodoro-mode-line)
+                 org-pomodoro-mode-line)
+             "")
+           (if (and (boundp 'org-mode-line-string) org-mode-line-string)
+               org-mode-line-string
+             "")
+           (if (buffer-file-name)
+               (abbreviate-file-name (buffer-file-name))
+             "%b")))))
+
 ;;; font-lock
 (with-eval-after-load 'font-lock
   (set-face-attribute 'font-lock-comment-face nil :height 0.9))
