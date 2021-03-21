@@ -49,6 +49,7 @@
 
 (require 'w-java)
 (require 'w-haskell)
+(require 'w-web)
 
 (require 'w-system)
 (require 'w-z)

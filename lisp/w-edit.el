@@ -11,4 +11,6 @@
 
 (straight-use-package '(thing-edit :host github :repo "manateelazycat/thing-edit"))
 
+(add-hook 'hexl-mode-hook #'view-mode)
+
 (provide 'w-edit)
