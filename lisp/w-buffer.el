@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; -*-
 
 ;;----------------------------------------------------------------------------
 ;; Nicer naming of buffers for files with identical names

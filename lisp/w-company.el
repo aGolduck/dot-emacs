@@ -10,6 +10,7 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
+(straight-use-package 'prescient)
 (straight-use-package 'company-prescient)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 

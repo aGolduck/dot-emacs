@@ -23,6 +23,7 @@
 (straight-use-package 'diminish)
 (require 'w-utils)
 (require 'w-emacs)
+(require 'w-ui)
 
 (require 'w-window)
 (require 'w-buffer)
@@ -32,26 +33,26 @@
 
 (require 'w-dired)
 (require 'w-git)
-(require 'w-ui)
+
 (require 'w-rime)
 (require 'w-flyspell)
-(require 'w-eaf)
+
 (require 'w-selectrum)
 (require 'w-company)
-;; (require 'w-rss)
-(require 'w-telega)
 
-(require 'w-term)
-(require 'w-org)
 (require 'w-prog)
-
 (require 'w-lsp)
 (require 'w-eglot)
-
 (require 'w-java)
 (require 'w-haskell)
 (require 'w-web)
 
+(require 'w-org)
+
+;; (require 'w-rss)
+(require 'w-telega)
+(require 'w-eaf)
+(require 'w-term)
 (require 'w-system)
 (require 'w-z)
 
