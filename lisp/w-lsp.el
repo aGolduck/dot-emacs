@@ -25,7 +25,7 @@
 (add-hook 'lsp-mode-hook #'yas-minor-mode-on)
 (global-unset-key (kbd "M--"))
 (global-unset-key (kbd "M-'"))
-(with-eval-after-load 'lsp
+(with-eval-after-load 'lsp-mode
   ;; (diminish 'lsp-mode "语")
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "M-'") #'lsp-goto-implementation)

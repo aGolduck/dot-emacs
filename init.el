@@ -18,7 +18,6 @@
 (require 'w-prepare)
 (require 'w-exec-path)
 (require 'w-straight)
-(require 'w-use-package)
 
 (straight-use-package 'diminish)
 (require 'w-utils)
