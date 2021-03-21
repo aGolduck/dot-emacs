@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (add-hook 'java-mode-hook #'company-mode)
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'electric-pair-local-mode)
@@ -34,6 +35,13 @@
   ;;                             (lsp-java-boot-lens-mode)
   ;;                             (diminish 'lsp-java-boot-lens-mode "弹")))
   )
+(defun toggle-on-lsp-java ()
+  (interactive)
+  (add-hook 'java-mode-hook #'lsp))
+
+(defun toggle-off-lsp-java ()
+  (interactive)
+  (remove-hook 'java-mode-hook #'lsp))
 
 ;;; dap-java
 (use-package dap-java

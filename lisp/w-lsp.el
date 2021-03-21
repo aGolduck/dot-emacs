@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (straight-use-package 'lsp-mode)
 (setq lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
       ;; lsp-diagnostic-package :none
@@ -23,6 +24,7 @@
 ;; 主动激活 yas-minor-mode 能避免该问题
 (add-hook 'lsp-mode-hook #'yas-minor-mode-on)
 (global-unset-key (kbd "M--"))
+(global-unset-key (kbd "M-'"))
 (with-eval-after-load 'lsp
   ;; (diminish 'lsp-mode "语")
   (define-key lsp-mode-map (kbd "M--") #'lsp-execute-code-action)
