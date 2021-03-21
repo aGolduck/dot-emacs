@@ -17,10 +17,8 @@
 (add-hook 'after-init-hook #'selectrum-mode)
 
 (straight-use-package 'prescient)
-(use-package prescient
-  :commands (prescient-persist-mode)
-  :init
-  (add-hook 'after-init-hook #'prescient-persist-mode))
+(autoload 'prescient-persist-mode "prescient")
+(add-hook 'after-init-hook #'prescient-persist-mode)
 
 (straight-use-package 'selectrum-prescient)
 (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)
@@ -39,8 +37,7 @@
 
 ;; (straight-use-package 'embark)
 ;; (straight-use-package 'embark-consult)
-;; (use-package embark
-;;   :config
+;; (with-eval-after-load 'embark
 ;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
 
 (straight-use-package 'mini-frame)

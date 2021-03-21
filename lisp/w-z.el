@@ -42,5 +42,63 @@
 (straight-use-package 'graphql-mode)
 (straight-use-package 'pkgbuild-mode)
 (straight-use-package 'rust-mode)
+(straight-use-package 'link-hint)
+(straight-use-package 'pdf-tools)
+(straight-use-package 'pocket-reader)
+
+
+;;; TODO to organise
+(straight-use-package 'avy)
+(use-package avy
+  :init
+  (global-set-key (kbd "M-SPC g g") #'avy-goto-char-timer)
+  (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
+  (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0))
+(straight-use-package 'go-translate)
+(use-package go-translate
+  :init
+  ;; (setq go-translate-base-url "https://translate.google.cn")
+  (setq go-translate-local-language "zh-CN")
+  :config
+  (defun go-translate-token--extract-tkk () (cons 430675 2721866130)))
+(use-package auth-source
+  :init (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg")))))
+(use-package ediff-wind
+  :init
+  (setq ediff-merge-split-window-function 'split-window-vertically
+        ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain)
+  :config
+  (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
+(use-package epg-config :init (setq epg-pinentry-mode 'loopback))
+(use-package goto-addr :init (add-hook 'after-init-hook #'goto-address-mode))
+(use-package hideshow
+  :init
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
+  (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
+  (global-set-key (kbd "M-SPC z S") #'hs-show-all)
+  (global-set-key (kbd "M-SPC z h") #'hs-hide-block)
+  (global-set-key (kbd "M-SPC z s") #'hs-show-block)
+  (global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
+  :config
+  (defconst w/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+  (defun w/hide-show-overlay-fn (w/overlay)
+    (when (eq 'code (overlay-get w/overlay 'hs))
+      (let* ((nlines (count-lines (overlay-start w/overlay)
+                                  (overlay-end w/overlay)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put w/overlay 'display (propertize info 'face w/hideshow-folded-face)))))
+  (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
+  (diminish 'hs-minor-mode "折"))
+(use-package screenshot-svg)
+(use-package simple
+  :init
+  (add-hook 'after-init-hook #'global-visual-line-mode)
+  (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
+  (global-set-key (kbd "M-SPC u") #'universal-argument)
+  :config
+  (diminish 'visual-line-mode "⮒"))
+(use-package url-cookie :init (setq url-cookie-file (w/locate-emacs-var-file "url/cookies")))
+
 
 (provide 'w-z)

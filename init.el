@@ -24,6 +24,7 @@
 (require 'w-utils)
 (require 'w-emacs)
 
+(require 'w-window)
 (require 'w-buffer)
 (require 'w-file)
 (require 'w-grep)
@@ -53,9 +54,6 @@
 
 (require 'w-system)
 (require 'w-z)
-
-(load (w/locate-in-current-directory "packages"))
-(load (w/locate-in-current-directory "config"))
 
 ;; other settings including extra variable, faces and keybindings
 (load (w/locate-in-current-directory "settings"))

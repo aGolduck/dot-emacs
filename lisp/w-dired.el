@@ -31,14 +31,7 @@
 
   (autoload 'hydra-dired-quick-sort/body "dired-quick-sort")
   (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
-  (add-hook 'dired-mode-hook #'dired-quick-sort)
-  ;; (use-package dired-quick-sort
-  ;;   :straight t
-  ;;   :commands (hydra-dired-quick-sort/body)
-  ;;   :init
-  ;;   (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body)
-  ;;   (add-hook 'dired-mode-hook #'dired-quick-sort))
-  )
+  (add-hook 'dired-mode-hook #'dired-quick-sort))
 
 ;;; ranger
 (setq ranger-map-style 'emacs)
@@ -51,6 +44,11 @@
   (define-key ranger-emacs-mode-map (kbd "f") #'ranger-find-file)
   (define-key ranger-emacs-mode-map (kbd "C-n") #'ranger-next-file)
   (define-key ranger-emacs-mode-map (kbd "C-p") #'ranger-prev-file))
+
+(straight-use-package 'dotenv-mode)
+(straight-use-package 'direnv)
+(when (executable-find "direnv")
+  (add-hook 'after-init-hook #'direnv-mode))
 
 
 (provide 'w-dired)

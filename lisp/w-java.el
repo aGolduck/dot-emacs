@@ -44,17 +44,15 @@
   (remove-hook 'java-mode-hook #'lsp))
 
 ;;; dap-java
-(use-package dap-java
-  :commands (dap-java-debug
-             dap-java-run-test-method
-             dap-java-debug-test-method
-             dap-java-run-test-class
-             dap-java-debug-test-class)
-  :init
-  (setq dap-java-test-runner
+(autoload 'dap-java-debug "dap-java")
+(autoload 'dap-java-debug-test-class "dap-java")
+(autoload 'dap-java-debug-test-method "dap-java")
+(autoload 'dap-java-run-test-class "dap-java")
+(autoload 'dap-java-run-test-method "dap-java")
+(setq dap-java-test-runner
         (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
   (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)
-  :config
+(with-eval-after-load 'dap-java
   (dap-register-debug-template
    "Java run"
    (list :type "java"
@@ -70,6 +68,7 @@
          :projectName nil
          :mainClass nil)))
 
+;;; java bytecode
 (straight-use-package 'autodisass-java-bytecode)
 (require 'autodisass-java-bytecode)
 

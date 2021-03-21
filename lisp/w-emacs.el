@@ -116,6 +116,5 @@
 (add-hook 'after-init-hook #'keyfreq-mode)
 (add-hook 'after-init-hook #'keyfreq-autosave-mode)
 
-(use-package re-builder :init )
 
 (provide 'w-emacs)

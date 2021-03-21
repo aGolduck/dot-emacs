@@ -76,4 +76,37 @@
 ;;                (file-name (buffer-file-name buffer)))
 ;;           (if file-name file-name (format "%s" buffer)))))
 
+;;; valign
+(straight-use-package '(valign :host github :repo "casouri/valign"))
+(with-eval-after-load 'valign (diminish 'valign-mode))
+
+;;; treemacs
+(straight-use-package 'treemacs)
+(autoload 'treemacs-current-visibilit "treemacs")
+(setq treemacs-no-png-images t
+      treemacs-persist-file (w/locate-emacs-var-file ".cache/treemacs-persist"))
+(add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))
+(defun w/treemacs-goto-treemacs ()
+  (interactive)
+  (pcase (treemacs-current-visibility)
+    ('visible (treemacs-select-window))
+    ('exists (treemacs-select-window))
+    ('none (treemacs-add-and-display-current-project))))
+;; n for navigate?
+(global-set-key (kbd "M-n") #'w/treemacs-goto-treemacs)
+(with-eval-after-load 'treemacs
+  (set-face-attribute 'treemacs-directory-face nil :inherit font-lock-function-name-face :height 0.9)
+  ;; TODO :inherit variable-pitch
+  (set-face-attribute 'treemacs-file-face nil :height 0.9)
+  (set-face-attribute 'treemacs-git-ignored-face nil :inherit font-lock-comment-face :height 0.8 :weight 'light)
+  ;; (define-key treemacs-mode-map (kbd "M-n") nil)
+  )
+
+;;; selectric-mode
+(straight-use-package 'selectric-mode)
+(when (executable-find "aplay")
+  (setq selectric-affected-bindings-list nil)
+  (add-hook 'after-init-hook #'selectric-mode)
+  (with-eval-after-load 'selectric-mode (diminish 'selectric-mode)))
+
 (provide 'w-ui)
