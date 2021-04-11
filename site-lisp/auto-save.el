@@ -81,7 +81,7 @@
   (interactive)
   (when auto-save-delete-trailing-whitespace
     (let ((begin (line-beginning-position))
-          (end (line-end-position)))
+          (end (point)))
       (save-excursion
         (when (< (point-min) begin)
           (save-restriction
@@ -89,7 +89,7 @@
             (delete-trailing-whitespace)))
         (when (> (point-max) end)
           (save-restriction
-            (narrow-to-region (1+ end) (point-max))
+            (narrow-to-region end (point-max))
             (delete-trailing-whitespace)))))))
 
 (defvar auto-save-timer nil)
