@@ -1,6 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
 (straight-use-package 'company)
+(straight-use-package 'prescient)
+(straight-use-package 'company-prescient)
+
 (setq company-minimum-prefix-length 1
       company-tooltip-align-annotations t
       ;; default is 0.2
@@ -10,8 +13,6 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
-(straight-use-package 'prescient)
-(straight-use-package 'company-prescient)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
 ;; need some tweaks to work

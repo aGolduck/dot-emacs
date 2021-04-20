@@ -8,6 +8,8 @@
 (global-set-key (kbd "M-SPC g s") #'magit-status)
 (with-eval-after-load 'magit
   (define-key magit-status-mode-map (kbd "C-<tab>") nil))
+(with-eval-after-load 'selectrum
+  (setq magit-completing-read-function #'selectrum-completing-read))
 
 (when (executable-find "delta")
   (straight-use-package 'magit-delta)

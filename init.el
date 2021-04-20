@@ -50,7 +50,7 @@
 
 ;; (require 'w-rss)
 (require 'w-telega)
-(require 'w-eaf)
+;; (require 'w-eaf)
 (require 'w-term)
 (require 'w-system)
 (require 'w-z)

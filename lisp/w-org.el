@@ -248,6 +248,9 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil))
+  (define-key org-mode-map (kbd "C-<tab>") nil)
+
+  ;; set faces
+  (set-face-attribute 'org-headline-done nil :strike-through t))
 
 (provide 'w-org)

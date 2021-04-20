@@ -11,8 +11,7 @@
 ;;                   :poshandler 'posframe-poshandler-frame-center)))
 ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
-(setq magit-completing-read-function #'selectrum-completing-read
-      selectrum-fix-vertical-window-height t
+(setq selectrum-fix-vertical-window-height t
       selectrum-max-window-height 10)
 (add-hook 'after-init-hook #'selectrum-mode)
 

@@ -2,6 +2,7 @@
 (add-hook 'java-mode-hook #'company-mode)
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'electric-pair-local-mode)
+(add-hook 'java-mode-hook #'yas-minor-mode)
 (add-hook 'java-mode-hook
           (lambda ()
             (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))

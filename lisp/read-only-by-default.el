@@ -1,4 +1,6 @@
 ;; -*- lexical-binding: t; -*-
+(require 'simple)                       ;; for read-only-mode
+
 (setq view-read-only nil)
 
 (define-minor-mode w/extra-read-only-mode
@@ -18,8 +20,9 @@
                           (w/extra-read-only-mode -1)))))
 
 ;;; cursor-type for not file buffer
-(add-hook 'vterm-copy-mode-hook
-          (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar))))
+(with-eval-after-load 'vterm
+  (add-hook 'vterm-copy-mode-hook
+            (lambda () (if vterm-copy-mode (setq cursor-type 'box) (setq cursor-type 'bar)))))
 (dolist (write-mode-hook
          (list
           'eshell-mode-hook

@@ -28,6 +28,7 @@
 
 ;;; 4. lazy setup
 (with-eval-after-load 'dired
+  ;; TODO 4.5 set faces
   ;; 4.1 require packages
   (require 'dired-x)
   ;; 4.2 local mode map hook
