@@ -252,6 +252,7 @@ unwanted space when exporting org-mode to html."
   (define-key org-mode-map (kbd "C-<tab>") nil)
 
   ;; set faces
-  (set-face-attribute 'org-headline-done nil :strike-through t))
+  (set-face-attribute 'org-headline-done nil :strike-through t)
+  (set-face-attribute 'org-agenda-done nil :strike-through t))
 
 (provide 'w-org)
