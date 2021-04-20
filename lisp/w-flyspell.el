@@ -1,4 +1,6 @@
 ;; -*- lexical-binding: t; -*-
+(straight-use-package 'flyspell-correct)
+
 (when (executable-find "aspell")
   (setq flyspell-issue-message-flag t
         ispell-program-name "aspell"
@@ -6,7 +8,6 @@
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'outline-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode #'flyspell-prog-mode)
-  (straight-use-package 'flyspell-correct)
   (with-eval-after-load 'flyspell
     (diminish 'flyspell-mode)
     (define-key flyspell-mode-map (kbd "C-;") #'flyspell-correct-wrapper)

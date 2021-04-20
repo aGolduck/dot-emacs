@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'lispy)
+
 (with-eval-after-load 'lispy
   (diminish 'lispy-mode)
   (define-key lispy-mode-map (kbd "[") nil)

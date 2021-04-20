@@ -1,6 +1,18 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; org-mode common
 (straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
+(straight-use-package 'org-roam)
+(straight-use-package 'org-roam-server)
+(straight-use-package 'org-journal)
+(straight-use-package 'org-pomodoro)
+(straight-use-package 'org-ql)
+(straight-use-package 'org-cliplink)
+(straight-use-package 'org-download)
+(straight-use-package 'ox-hugo)
+(straight-use-package 'ob-typescript)
+(straight-use-package 'ob-http)
+(straight-use-package 'org-projectile)
+
 (require 'bh-org)
 (setq org-directory "~/org"
       org-archive-location "%s_archive::* Archived Tasks"
@@ -167,7 +179,6 @@
 (global-set-key (kbd "M-SPC l s") #'org-store-link)
 
 ;;; org roam
-(straight-use-package 'org-roam)
 (setq org-roam-directory (file-truename "~/org/roam")
       org-roam-db-location (w/locate-emacs-var-file "org-roam.db"))
 (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
@@ -180,7 +191,6 @@
   (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
   (diminish 'org-roam-mode "记"))
 (when window-system
-  (straight-use-package 'org-roam-server)
   (with-eval-after-load 'org-roam-server
     (setq org-roam-server-host "127.0.0.1"
           org-roam-server-port 4242
@@ -191,7 +201,6 @@
     (diminish 'org-roam-server-mode "图")))
 
 ;;; org third-party packages
-(straight-use-package 'org-journal)
 (setq org-journal-dir "~/org/journal"
       org-journal-cache-file (w/locate-emacs-var-file "org-journal.cache")
       org-journal-file-format "%Y%m%d.org"
@@ -203,15 +212,7 @@
       org-journal-date-format "%A, %x"
       org-journal-time-prefix "** "
       org-journal-time-format "%R ")
-(straight-use-package 'org-pomodoro)
 (global-set-key (kbd "M-c") #'org-pomodoro)
-(straight-use-package 'org-ql)
-(straight-use-package 'org-cliplink)
-(straight-use-package 'org-download)
-(straight-use-package 'ox-hugo)
-(straight-use-package 'ob-typescript)
-(straight-use-package 'ob-http)
-(straight-use-package 'org-projectile)
 
 ;;; lazy load
 (with-eval-after-load 'org

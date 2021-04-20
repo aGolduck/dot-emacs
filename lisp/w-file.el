@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
+(straight-use-package 'sudo-edit)
+
 ;;; common settings
 (setq auto-save-default nil
       make-backup-files nil
@@ -45,8 +47,5 @@ That is, remove a non kept dired from the recent list."
 
 ;;; tramp
 (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp"))
-
-;;; others
-(straight-use-package 'sudo-edit)
 
 (provide 'w-file)

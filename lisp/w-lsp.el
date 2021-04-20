@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'lsp-mode)
+(straight-use-package 'lsp-ui)
+(straight-use-package 'dap-mode)
+(straight-use-package 'lsp-treemacs)
+
 (setq lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
       ;; lsp-diagnostic-package :none
       ;; lsp-enable-file-watchers nil
@@ -34,7 +38,6 @@
 (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
 
 ;;; lsp-ui
-(straight-use-package 'lsp-ui)
 (setq lsp-ui-sideline-enable nil
       lsp-ui-doc-enable t
       ;; lsp-ui-doc-delay .2
@@ -45,7 +48,6 @@
   (set-face-attribute 'lsp-ui-doc-background nil :background "light grey"))
 
 ;;; dap-mode
-(straight-use-package 'dap-mode)
 (setq dap-breakpoints-file (w/locate-emacs-var-file ".dap-breakpoints"))
 (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra)))
 ;; (add-hook 'dap-terminated-hook (lambda (_args) (dap-hydra/nil)))
@@ -56,6 +58,5 @@
 (with-eval-after-load 'lsp-lens
   (diminish 'lsp-lens-mode "透"))
 
-(straight-use-package 'lsp-treemacs)
 
 (provide 'w-lsp)

@@ -1,4 +1,7 @@
 ;; -*- lexical-binding: t; -*-
+(straight-use-package 'lsp-java)
+(straight-use-package 'autodisass-java-bytecode)
+
 (add-hook 'java-mode-hook #'company-mode)
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'electric-pair-local-mode)
@@ -19,8 +22,7 @@
     (setcdr (assq 'java-mode eglot-server-programs) #'my-eglot-eclipse-jdt-contact))
 
 ;;; lsp-java
-;; install lsp-java no matter what lsp client is, avoiding changing straigt version file
-(straight-use-package 'lsp-java)
+;; install lsp-java no matter what lsp client is, avoiding changing straight version file
 (setq w/path-to-lombok "/usr/share/java/lombok.jar")
 (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
       lsp-java-vmargs `("-noverify"
@@ -70,9 +72,7 @@
          :mainClass nil)))
 
 ;;; java bytecode
-(straight-use-package 'autodisass-java-bytecode)
 (require 'autodisass-java-bytecode)
-
 
 
 (provide 'w-java)

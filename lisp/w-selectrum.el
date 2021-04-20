@@ -1,5 +1,14 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'selectrum)
+(straight-use-package 'prescient)
+(straight-use-package 'selectrum-prescient)
+(straight-use-package 'consult)
+(straight-use-package 'marginalia)
+;; (straight-use-package 'embark)
+;; (straight-use-package 'embark-consult)
+(straight-use-package 'mini-frame)
+(straight-use-package 'orderless)
+
 ;; (defun display-buffer-show-in-posframe (buffer _alist)
 ;;   (frame-root-window
 ;;    (posframe-show buffer
@@ -15,14 +24,11 @@
       selectrum-max-window-height 10)
 (add-hook 'after-init-hook #'selectrum-mode)
 
-(straight-use-package 'prescient)
 (autoload 'prescient-persist-mode "prescient")
 (add-hook 'after-init-hook #'prescient-persist-mode)
 
-(straight-use-package 'selectrum-prescient)
 (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)
 
-(straight-use-package 'consult)
 (setq consult-preview-key nil)
 (setq-default consult-project-root-function #'projectile-project-root)
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
@@ -30,17 +36,11 @@
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 
-(straight-use-package 'marginalia)
 (setq-default marginalia-annotators '(marginalia-annotators-heavy))
 (add-hook 'after-init-hook 'marginalia-mode)
 
-;; (straight-use-package 'embark)
-;; (straight-use-package 'embark-consult)
 ;; (with-eval-after-load 'embark
 ;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
-
-(straight-use-package 'mini-frame)
-(straight-use-package 'orderless)
 
 
 (provide 'w-selectrum)

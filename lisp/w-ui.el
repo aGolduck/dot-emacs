@@ -1,4 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
+(straight-use-package 'olivetti)
+(straight-use-package 'posframe)
+(straight-use-package 'transient)
+(straight-use-package '(valign :host github :repo "casouri/valign"))
+(straight-use-package 'treemacs)
+(straight-use-package 'selectric-mode)
+
 ;;; mode-line, header-line, frame-title
 (setq-default
  header-line-format '(
@@ -56,13 +63,10 @@
 (add-hook 'after-init-hook #'blink-cursor-mode)
 
 ;;; olivetti
-(straight-use-package 'olivetti)
 
 ;;; posframe
-(straight-use-package 'posframe)
 
 ;;; transient for magit,org-ql,rg...
-(straight-use-package 'transient)
 (setq transient-history-file (w/locate-emacs-var-file "transient/history.el"))
 
 ;;; tab-bar
@@ -77,11 +81,9 @@
 ;;           (if file-name file-name (format "%s" buffer)))))
 
 ;;; valign
-(straight-use-package '(valign :host github :repo "casouri/valign"))
 (with-eval-after-load 'valign (diminish 'valign-mode))
 
 ;;; treemacs
-(straight-use-package 'treemacs)
 (autoload 'treemacs-current-visibilit "treemacs")
 (setq treemacs-no-png-images t
       treemacs-persist-file (w/locate-emacs-var-file ".cache/treemacs-persist"))
@@ -103,7 +105,6 @@
   )
 
 ;;; selectric-mode
-(straight-use-package 'selectric-mode)
 (when (executable-find "aplay")
   (setq selectric-affected-bindings-list nil)
   (add-hook 'after-init-hook #'selectric-mode)

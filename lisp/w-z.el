@@ -96,4 +96,8 @@
 ;;; url-cookie
 (setq url-cookie-file (w/locate-emacs-var-file "url/cookies"))
 
+(straight-use-package 'zotero)
+
+
+
 (provide 'w-z)

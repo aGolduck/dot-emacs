@@ -1,6 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
-;;; magit
 (straight-use-package 'magit)
+(straight-use-package 'magit-delta)
+(straight-use-package 'magit-todos)
+(straight-use-package 'git-link)
+
+;;; magit
 (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
       magit-process-finish-apply-ansi-colors t
       ;; emacsclient is not usable for gccemacs now
@@ -12,19 +16,16 @@
   (setq magit-completing-read-function #'selectrum-completing-read))
 
 (when (executable-find "delta")
-  (straight-use-package 'magit-delta)
   (add-hook 'magit-mode-hook #'magit-delta-mode)
   (with-eval-after-load 'magit-delta
     (diminish 'magit-delta-mode)))
 
-(straight-use-package 'magit-todos)
 (add-hook 'magit-mode-hook #'magit-todos-mode)
 ;; (with-eval-after-load 'magit-todos
 ;;   (define-key magit-todos-section-map "j" nil))
 
 
 ;;; git link
-(straight-use-package 'git-link)
 (global-set-key (kbd "M-SPC g L") #'git-link)
 
 (setq vc-follow-symlinks t)

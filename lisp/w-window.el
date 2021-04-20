@@ -1,4 +1,5 @@
 ;;;  -*- lexical-binding: t; -*-
+(straight-use-package 'ace-window)
 
 (defun w/split-window-right ()
   "split-window-right with right window having a max width of 100 columns"
@@ -29,7 +30,6 @@
 (with-eval-after-load 'winner (diminish 'winner-mode))
 
 ;;; ace-window
-(straight-use-package 'ace-window)
 ;; (defun w/get-window-list ()
 ;;   (if (<= (length (window-list)) 2)
 ;;       (window-list)
@@ -63,8 +63,5 @@
 	                  (?o delete-other-windows "Delete Other Windows")
 	                  (?? aw-show-dispatch-help)))
 (global-set-key (kbd "M-i") #'ace-window)
-
-;;; shackle
-(straight-use-package 'shackle)
 
 (provide 'w-window)

@@ -1,19 +1,21 @@
 ;;;  -*- lexical-binding: t; -*-
+(straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
+(straight-use-package 'eterm-256color)
+(straight-use-package 'vterm)
+(straight-use-package 'esh-autosuggest)
+(straight-use-package 'eshell-z)
 
 ;;; common
 (add-hook 'compilation-filter-hook
           (lambda ()
             (let ((buffer-read-only nil))
               (ansi-color-apply-on-region (point-min) (point-max)))))
-(straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
 ;; (setq term-cursor-triggers '(blink-cursor-mode-hook
 ;;                                post-command-hook
 ;;                                lsp-ui-doc-frame-hook))
 ;; (add-hook 'after-init-hook #'global-term-cursor-mode)
-(straight-use-package 'eterm-256color)
 
 ;;; vterm
-(straight-use-package 'vterm)
 (setq vterm-buffer-name-string "vterm %s"
       vterm-keymap-exceptions '("C-c" "C-x" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "M-i" "M-c")
       vterm-kill-buffer-on-exit t
@@ -27,9 +29,7 @@
   (set-face-attribute 'vterm-color-green nil :foreground "dark green"))
 
 ;;; eshell
-(straight-use-package 'esh-autosuggest)
 (autoload 'esh-autosuggest-mode "esh-autosuggest")
-(straight-use-package 'eshell-z)
 (setq eshell-directory-name (w/locate-emacs-var-file "eshell"))
 (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
 (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))

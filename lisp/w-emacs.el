@@ -1,4 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
+(straight-use-package 'gcmh)
+(straight-use-package 'helpful)
+(straight-use-package 'keyfreq)
+
 ;;; emacs regex builder
 (setq reb-re-syntax 'string)
 
@@ -42,7 +46,6 @@
 (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
 (global-set-key (kbd "M-SPC F v") #'find-variable)
 
-(straight-use-package 'gcmh)
 (add-hook 'after-init-hook #'gcmh-mode)
 ;; restore original gc-cons-percentage
 (add-hook 'after-init-hook (lambda () (setq gc-cons-percentage 0.1)))
@@ -50,7 +53,6 @@
   (diminish 'gcmh-mode))
 
 ;;; helpful
-(straight-use-package 'helpful)
 ;; (setq counsel-describe-function-function #'helpful-callable
 ;;       counsel-describe-variable-function #'helpful-variable)
 ;; (global-set-key (kbd "C-h f") #'helpful-callable)
@@ -60,7 +62,6 @@
 (global-set-key (kbd "C-h k") #'helpful-key)
 (global-set-key (kbd "C-h o") #'helpful-symbol)
 
-(straight-use-package 'keyfreq)
 (setq keyfreq-excluded-commands 'nil)
 ;; (setq keyfreq-excluded-commands '(
 ;;                                   self-insert-command
