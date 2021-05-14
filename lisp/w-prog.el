@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'yasnippet)
-;; (straight-use-package 'yasnippet-snippets)
-(straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
+(straight-use-package 'yasnippet-snippets)
+;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
 (straight-use-package 'highlight-indent-guides)
