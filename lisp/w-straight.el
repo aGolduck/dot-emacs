@@ -24,8 +24,8 @@
 (setq straight-repository-branch "master"
       ;; straight-check-for-modifications
       straight-use-package-by-default nil
-      straight-default-vc 'git
-      straight-vc-git-default-clone-depth 1)
+      ;; straight-vc-git-default-clone-deptha 1  ;; shallow clone causes lots of headache when thawing or freezing versions
+      straight-default-vc 'git)
 
 ;; bootstrap straight
 (defvar bootstrap-version)
