@@ -1,7 +1,7 @@
 ;;;  -*- lexical-binding: t; -*-
 
 ;; mostly copy from https://github.com/cnsunyour/.doom.d/blob/develop/modules/cnsunyour/chinese/config.el
-(straight-use-package 'rime)
+(w/straight-use-package-unless-featurep 'rime #'rime-activate)
 (setq default-input-method "rime"
       rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") ;; 发往 librime 的快捷键
       rime-librime-root (if (eq system-type 'darwin) (locate-user-emacs-file "rime/librime-mac/dist"))

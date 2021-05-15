@@ -41,4 +41,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(defun w/straight-use-package-unless-featurep (package function)
+  "in case package is installed by guix for now"
+  (unless (fboundp function)
+    (straight-use-package package)))
+
 (provide 'w-straight)

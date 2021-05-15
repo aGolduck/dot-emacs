@@ -1,7 +1,7 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
 (straight-use-package 'eterm-256color)
-(straight-use-package 'vterm)
+(w/straight-use-package-unless-featurep 'vterm #'vterm)
 (straight-use-package 'esh-autosuggest)
 (straight-use-package 'eshell-z)
 
