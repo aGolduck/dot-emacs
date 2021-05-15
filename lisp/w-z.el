@@ -15,10 +15,6 @@
   ;; download from http://mirrors.ustc.edu.cn/eclipse/lemminx/
   (add-hook 'nxml-mode-hook #'lsp))
 (add-hook 'nxml-mode-hook #'smartparens-mode)
-;;; clojure
-(straight-use-package 'clojure-mode)
-(straight-use-package 'cider)
-(add-hook 'clojure-mode-hook #'electric-pair-local-mode)
 ;;; groovy
 (straight-use-package 'groovy-mode)
 (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))

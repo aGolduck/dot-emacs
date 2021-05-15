@@ -110,7 +110,8 @@
   (add-hook 'after-init-hook #'selectric-mode)
   (with-eval-after-load 'selectric-mode (diminish 'selectric-mode)))
 
-;;; fonts and faces
+;;; fonts and faces, wrapped in window-system block, becouse there is no set-font-font function for emacs-nox
+;; to use in multiple frames, wrap in after-make-frame-functions, see https://stackoverflow.com/a/5801740
 (when window-system
   (setq w/font-default-height
         (cond
