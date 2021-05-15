@@ -1,19 +1,22 @@
 ;;; -*- lexical-binding: t; -*-
-(straight-use-package 'yasnippet)
-(straight-use-package 'yasnippet-snippets)
-;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
+(straight-use-package 'devdocs)
+(straight-use-package 'dumb-jump)
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
 (straight-use-package 'highlight-indent-guides)
-(straight-use-package 'quickrun)
-(straight-use-package 'dumb-jump)
-(straight-use-package 'smartparens)
-(straight-use-package 'devdocs)
-(straight-use-package 'zeal-at-point)
 (straight-use-package 'projectile)
+(straight-use-package 'quickrun)
+(straight-use-package 'smartparens)
+(straight-use-package 'xref)
+(straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
+(straight-use-package 'zeal-at-point)
+;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
 
 ;;; new comment
 (global-set-key [remap comment-dwim] #'comment-line)
+;;; xref
+(setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 ;;; paren
 (setq show-paren-when-point-in-periphery t
       show-paren-when-point-inside-paren t)
@@ -35,7 +38,10 @@
       highlight-indent-guides-auto-even-face-perc 55
       highlight-indent-guides-auto-character-face-perc 61.8)
 
+;;; dumb-jump
 ;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
+(with-eval-after-load 'xref
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
 ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
 
@@ -43,6 +49,7 @@
 
 (with-eval-after-load 'eldoc (diminish 'eldoc-mode "档"))
 
+;;; projectile
 (defun w/projectile-shortened-mode-line ()
   "Report project name shortened and type in the modeline."
   (let* ((project-name (projectile-project-name))
