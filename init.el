@@ -16,8 +16,8 @@
 (load (w/locate-in-current-directory "private"))
 
 (require 'w-prepare)
-(require 'w-exec-path)
 (require 'w-straight)
+(require 'w-exec-path)
 
 (straight-use-package 'diminish)
 (require 'w-utils)
