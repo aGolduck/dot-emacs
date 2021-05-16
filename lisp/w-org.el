@@ -218,6 +218,7 @@
 (with-eval-after-load 'org
   (require 'org-download)
 ;;; org babel
+  (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
   ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
         "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
@@ -232,10 +233,11 @@
 			       '((awk . t)
                                  (clojure . t)
                                  (emacs-lisp . t)
-                                 (http . t)
                                  (groovy . t)
                                  (haskell . t)
+                                 (http . t)
                                  (js . t)
+                                 (plantuml . t)
                                  (shell . t)
                                  (typescript . t)))
   (defadvice org-html-paragraph (before org-html-paragraph-advice
