@@ -8,6 +8,7 @@
 (straight-use-package 'org-ql)
 (straight-use-package 'org-cliplink)
 (straight-use-package 'org-download)
+(straight-use-package 'ox-gfm)
 (straight-use-package 'ox-hugo)
 (straight-use-package 'ob-typescript)
 (straight-use-package 'ob-http)

@@ -110,6 +110,7 @@
  ("org-super-agenda" . "dd0d104c269fab9ebe5af7009bc1dd2a3a8f3c12")
  ("org-web-tools" . "ebc7888f4f4cad26ec1298edd7bf606a5ea2d564")
  ("ov" . "c5b9aa4e1b00d702eb2caedd61c69a22a5fa1fab")
+ ("ox-gfm" . "99f93011b069e02b37c9660b8fcb45dab086a07f")
  ("ox-hugo" . "77050d256fc2cb58483284bc56617e25596e445b")
  ("parseclj" . "b34d3e13a249d4b92f1a008cdc1df20a92f866c5")
  ("parseedn" . "90cfe3df51b96f85e346f336c0a0ee6bf7fee508")
