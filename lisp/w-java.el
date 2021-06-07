@@ -1,4 +1,5 @@
 ;; -*- lexical-binding: t; -*-
+;; IMPORTANT: java 11 is needed or jdtls, the java lsp-server
 (straight-use-package 'lsp-java)
 (straight-use-package 'autodisass-java-bytecode)
 
@@ -23,7 +24,7 @@
 
 ;;; lsp-java
 ;; install lsp-java no matter what lsp client is, avoiding changing straight version file
-(setq w/path-to-lombok "/usr/share/java/lombok.jar")
+(setq w/path-to-lombok (expand-file-name (locate-user-emacs-file "resources/lombok.jar")))
 (setq lsp-java-workspace-dir (w/locate-emacs-var-file "workspace")
       lsp-java-vmargs `("-noverify"
                         "-Xmx1G" "-XX:+UseG1GC"
