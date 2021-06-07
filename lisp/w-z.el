@@ -93,6 +93,7 @@
 (setq url-cookie-file (w/locate-emacs-var-file "url/cookies"))
 
 (straight-use-package 'zotero)
+(straight-use-package 'lua-mode)
 
 
 

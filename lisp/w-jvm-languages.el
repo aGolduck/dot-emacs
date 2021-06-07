@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (straight-use-package 'clojure-mode)
+(straight-use-package 'lsp-metals)
 (straight-use-package 'cider)
 (straight-use-package 'scala-mode)
 

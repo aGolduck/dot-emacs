@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'devdocs)
+(straight-use-package 'devdocs-browser)
 (straight-use-package 'dumb-jump)
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
@@ -76,5 +77,7 @@
 (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
 (global-set-key (kbd "M-SPC p t") #'projectile-run-vterm)
 
+;;; documentations
+(setq devdocs-browser-cache-directory (w/locate-emacs-var-file "devdocs-browser"))
 
 (provide 'w-prog)
