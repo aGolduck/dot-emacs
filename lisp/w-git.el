@@ -3,6 +3,9 @@
 (straight-use-package 'magit-delta)
 (straight-use-package 'magit-todos)
 (straight-use-package 'git-link)
+(straight-use-package 'diff-hl)
+
+(setq vc-follow-symlinks t)
 
 ;;; magit
 (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
@@ -28,6 +31,7 @@
 ;;; git link
 (global-set-key (kbd "M-SPC g L") #'git-link)
 
-(setq vc-follow-symlinks t)
+;; (add-hook 'after-init-hook #'global-hiff-hl-mode) ;; do not know why global-diff-hl-mode can't be added, it's autoloaded
+(global-diff-hl-mode)
 
 (provide 'w-git)
