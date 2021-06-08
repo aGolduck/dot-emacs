@@ -17,7 +17,7 @@
       lsp-enable-xref t
       lsp-file-watch-threshold 10000
       lsp-headerline-breadcrumb-enable t
-      lsp-log-io t
+      lsp-log-io nil
       lsp-print-performance t
       lsp-semantic-highlighting nil
       lsp-server-install-dir (w/locate-emacs-var-file ".cache/lsp")
