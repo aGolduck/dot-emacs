@@ -23,9 +23,10 @@
   (with-eval-after-load 'magit-delta
     (diminish 'magit-delta-mode)))
 
-(add-hook 'magit-mode-hook #'magit-todos-mode)
-;; (with-eval-after-load 'magit-todos
-;;   (define-key magit-todos-section-map "j" nil))
+(add-hook 'magit-mode-hook (lambda () (let ((inhibit-message t)) (magit-todos-mode 1))))
+;; T conflicts with magit-note
+;; (with-eval-after-load 'magit-todos-mode (transient-append-suffix 'magit-status-jump '(0 0 -1)
+;;                                           '("T " "Todos" magit-todos-jump-to-todos)))
 
 
 ;;; git link
