@@ -46,6 +46,7 @@
 (require 'w-jvm-languages)
 (require 'w-haskell)
 (require 'w-web)
+(require 'w-mmm)
 
 (require 'w-org)
 
