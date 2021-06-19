@@ -24,3 +24,5 @@
 ;; disable emacs-native-comp warings
 ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=44746
 (setq comp-async-report-waring-errors nil)
+
+(setq native-comp-deferred-compilation-deny-list nil)
