@@ -6,6 +6,9 @@
 
 (setq company-minimum-prefix-length 1
       company-tooltip-align-annotations t
+      ;; down downcase candidates, but correct inputs before point
+      company-dabbrev-downcase nil
+      company-dabbrev-ignore-case t
       ;; default is 0.2
       company-idle-delay 0.0)
 (with-eval-after-load 'company
