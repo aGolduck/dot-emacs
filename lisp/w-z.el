@@ -101,4 +101,7 @@
 (setq csv-separators '("," ";" "|" " "))
 
 
+(straight-use-package 'page-break-lines)
+(add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode)
+
 (provide 'w-z)
