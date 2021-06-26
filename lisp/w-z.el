@@ -96,5 +96,9 @@
 (straight-use-package 'lua-mode)
 
 
+(straight-use-package 'csv-mode)
+(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+(setq csv-separators '("," ";" "|" " "))
+
 
 (provide 'w-z)

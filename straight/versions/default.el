@@ -12,6 +12,7 @@
  ("company-mode" . "656ad10670512e135a0a5881f127bb7a789ef8ca")
  ("consult" . "d1f3a85d02f673aaede11b0d2bbb63373b6b320f")
  ("crux" . "20c07848049716a0e1aa2560e23b5f4149f2a74f")
+ ("csv-mode" . "8da54e8b4ef9e5fe8a0afa147c625ced603dc0aa")
  ("dap-mode" . "35db94e81c592246675f300aaca4a70966b8a5fc")
  ("dash.el" . "aab346ed9d8f0f7ea033029c9688810353052e7e")
  ("devdocs.el" . "425f68a7272f54d1045b18d9fbc2c8e9da96af3b")
