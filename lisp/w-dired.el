@@ -1,18 +1,28 @@
 ;;;  -*- lexical-binding: t; -*-
 ;;; set up a template for complex configuration modules
 
-;;; 1. load third-party packages
+
+
+;;; load third-party packages
 (straight-use-package 'dired-rsync)
 (straight-use-package 'dired-quick-sort)
 (straight-use-package 'dotenv-mode)
 (straight-use-package 'direnv)
 (straight-use-package 'ranger)
 
-;;; 2. autoload
+
+
+;;; autoload
 (autoload 'dired-jump "dired-x")
 (autoload 'hydra-dired-quick-sort/body "dired-quick-sort")
 
-;;; 3. customize variables
+
+
+;;; self defined functions
+
+
+
+;;; customize variables
 (setq dired-listing-switches "-Afhlv"
       dired-auto-revert-buffer t
       dired-dwim-target t
@@ -26,7 +36,9 @@
                                      ("\\.xlsx\\'" "libreoffice"))
       image-dired-dir (w/locate-emacs-var-file "image-dired"))
 
-;;; 4. lazy setup
+
+
+;;; lazy setup
 (with-eval-after-load 'dired
   ;; TODO 4.5 set faces
   ;; 4.1 require packages
@@ -42,14 +54,20 @@
     (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
   (define-key dired-mode-map (kbd "s") #'hydra-dired-quick-sort/body))
 
-;;; 5. global hooks
+
+
+;;; global hooks
 (when (executable-find "direnv")
   (add-hook 'after-init-hook #'direnv-mode))
 
-;;; 6. global key bindings
+
+
+;;; global key bindings
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
 
-;;; 7. extra third-party set up
+
+
+;;; extra third-party set up
 ;;; ranger
 (setq ranger-map-style 'emacs)
 (setq ranger-key (kbd "M-R"))
@@ -62,5 +80,7 @@
   (define-key ranger-emacs-mode-map (kbd "C-n") #'ranger-next-file)
   (define-key ranger-emacs-mode-map (kbd "C-p") #'ranger-prev-file))
 
-;;; 8. provide feature
+
+
+;;; provide feature
 (provide 'w-dired)
