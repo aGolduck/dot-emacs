@@ -36,7 +36,7 @@
 (require 'w-rime)
 (require 'w-flyspell)
 
-(require 'w-selectrum)
+(require 'w-minibuffer)
 (require 'w-company)
 
 (require 'w-prog)

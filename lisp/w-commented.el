@@ -164,3 +164,16 @@
 ;;   (define-key paredit-mode-map (kbd ";") nil) ;; conflict with lispy-comment
 ;;   (define-key paredit-mode-map (kbd "M-r") nil)
 ;;   (diminish 'paredit-mode "括"))
+
+;; (straight-use-package 'mini-frame)
+;; (defun display-buffer-show-in-posframe (buffer _alist)
+;;   (frame-root-window
+;;    (posframe-show buffer
+;;                   :min-height 10
+;;                   :min-width (truncate (* (frame-width) 0.8))
+;;                   :internal-border-width 1
+;;                   :left-fringe 8
+;;                   :right-fringe 8
+;;                   :poshandler 'posframe-poshandler-frame-center)))
+;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
+;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
