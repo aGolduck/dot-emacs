@@ -23,10 +23,9 @@
 
 (setq selectrum-fix-vertical-window-height t
       selectrum-max-window-height 10)
-;; (add-hook 'after-init-hook #'selectrum-mode)
-
 (autoload 'prescient-persist-mode "prescient")
 (add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)
+;; (add-hook 'after-init-hook #'selectrum-mode)
 ;; (add-hook 'after-init-hook #'prescient-persist-mode)
 
 
@@ -37,7 +36,7 @@
   (defun w/use-orderless-in-minibuffer ()
     (setq-local completion-styles '(substring orderless)))
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))
-(add-hook 'after-init-hook #'vertico-mode)
+;; (add-hook 'after-init-hook #'vertico-mode)
 
 
 ;; icomplete-vertical
@@ -49,11 +48,15 @@
     (setq-local completion-styles '(substring orderless)))
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer)
 
-  (define-key icomplete-minibuffer-map (kbd "<tab>") #'icomplete-force-complete)
+  ;; <RETURN> is not available for command line, see http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
+  (define-key icomplete-minibuffer-map (kbd "RET") #'icomplete-force-complete-and-exit)
+  (define-key icomplete-minibuffer-map (kbd "TAB") #'icomplete-force-complete)
+  (define-key icomplete-minibuffer-map (kbd "C-j") #'icomplete-ret)
   (define-key icomplete-minibuffer-map (kbd "<down>") #'icomplete-forward-completions)
   (define-key icomplete-minibuffer-map (kbd "C-n") #'icomplete-forward-completions)
   (define-key icomplete-minibuffer-map (kbd "<up>") #'icomplete-backward-completions)
   (define-key icomplete-minibuffer-map (kbd "C-p") #'icomplete-backward-completions))
+(add-hook 'after-init-hook #'icomplete-mode)
 ;; (icomplete-vertical-mode)
 
 
@@ -63,12 +66,12 @@
 (setq consult-preview-key nil)          ;; consult-buffer previews files too, just inhibit preview
 (setq-default consult-project-root-function #'projectile-project-root)
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
-(global-set-key (kbd "M-SPC b b") #'consult-buffer)
-(global-set-key (kbd "M-SPC b B") #'consult-buffer-other-window)
+(global-set-key [remap switch-to-buffer] 'consult-buffer)
+(global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
 (defun sanityinc/consult-ripgrep-at-point (&optional dir initial)
-        (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
-                                        (symbol-name s))))
-        (consult-ripgrep dir initial))
+  (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
+                                  (symbol-name s))))
+  (consult-ripgrep dir initial))
 (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
 (global-set-key (kbd "M-SPC s P") #'sanityinc/consult-ripgrep-at-point)
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串

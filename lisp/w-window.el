@@ -14,6 +14,7 @@
   (w/split-window-right)
   (other-window 1))
 (global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
+(global-set-key (kbd "M-SPC b B") #'switch-to-buffer-other-window)
 (global-set-key (kbd "M-SPC w D") #'delete-other-windows)
 (global-set-key (kbd "M-SPC w S") #'w/split-window-right-and-focus)
 (global-set-key (kbd "M-SPC w V") (defun w/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
