@@ -11,7 +11,7 @@
 (if (executable-find "rg")
     (progn
       ;; rg
-
+      ;; TODO how to organise commands and their coresponding consult commands
       (global-set-key (kbd "M-SPC s p") #'rg-project)
       ;; color-rg
       (dolist (color-rg-command (list
@@ -26,7 +26,8 @@
                                  'color-rg-search-project-with-type
                                  'color-rg-search-project-rails-with-type))
         (autoload color-rg-command "color-rg"))
-      (global-set-key (kbd "M-SPC s P") #'color-rg-search-symbol-in-project)
+      (global-set-key (kbd "M-SPC S p") #'color-rg-search-input)
+      (global-set-key (kbd "M-SPC S P") #'color-rg-search-symbol-in-project)
       ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
       )
   (if (executable-find "ag")
