@@ -46,7 +46,9 @@
 (global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
 ;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
 
-(with-eval-after-load 'smartparens (require 'smartparens-config))
+(with-eval-after-load 'smartparens
+  (require 'smartparens-config)
+  (define-key smartparens-mode-map (kbd "C-(") #'sp-wrap-round))
 
 (with-eval-after-load 'eldoc (diminish 'eldoc-mode "档"))
 
