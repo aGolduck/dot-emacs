@@ -1,6 +1,7 @@
 (("Emacs-wgrep" . "f0ef9bfa44db503cdb2f83fcfbd2fa4e2382ef1f")
  ("a.el" . "18966975db7110d0aac726be95b593e2fc3d44ed")
  ("ace-window" . "c7cb315c14e36fded5ac4096e158497ae974bec9")
+ ("affe" . "dee51350e1d7d3cfbfb12069dea9246454a3df31")
  ("ag.el" . "bd81d68466e44301505629454dfc689b6c17d94b")
  ("alert" . "7046393272686c7a1a9b3e7f7b1d825d2e5250a6")
  ("autodisass-java-bytecode" . "3d61dbe266133c950b39e880f78d142751c7dc4c")

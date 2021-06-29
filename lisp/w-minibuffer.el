@@ -7,6 +7,7 @@
 (straight-use-package 'consult)
 (straight-use-package 'marginalia)
 (straight-use-package 'orderless)
+(straight-use-package 'affe)
 ;; (straight-use-package 'embark)
 ;; (straight-use-package 'embark-consult)
 ;; (straight-use-package 'mini-frame)
@@ -36,7 +37,7 @@
   (defun w/use-orderless-in-minibuffer ()
     (setq-local completion-styles '(substring orderless)))
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))
-;; (add-hook 'after-init-hook #'vertico-mode)
+(add-hook 'after-init-hook #'vertico-mode)
 
 
 ;; icomplete-vertical
@@ -56,7 +57,7 @@
   (define-key icomplete-minibuffer-map (kbd "C-n") #'icomplete-forward-completions)
   (define-key icomplete-minibuffer-map (kbd "<up>") #'icomplete-backward-completions)
   (define-key icomplete-minibuffer-map (kbd "C-p") #'icomplete-backward-completions))
-(add-hook 'after-init-hook #'icomplete-mode)
+;; (add-hook 'after-init-hook #'icomplete-mode)
 ;; (icomplete-vertical-mode)
 
 
@@ -68,12 +69,16 @@
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
 (global-set-key [remap switch-to-buffer] 'consult-buffer)
 (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
-(defun sanityinc/consult-ripgrep-at-point (&optional dir initial)
-  (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
-                                  (symbol-name s))))
-  (consult-ripgrep dir initial))
-(global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
-(global-set-key (kbd "M-SPC s P") #'sanityinc/consult-ripgrep-at-point)
+;; (defun sanityinc/consult-ripgrep-at-point (&optional dir initial)
+;;   (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
+;;                                   (symbol-name s))))
+;;   (consult-ripgrep dir initial))
+(defun sanityinc/affe-grep-at-point (&optional dir initial)
+        (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
+                                        (symbol-name s))))
+        (affe-grep dir initial))
+(global-set-key (kbd "M-SPC s p") #'affe-grep)
+(global-set-key (kbd "M-SPC s P") #'sanityinc/affe-grep-at-point)
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 (with-eval-after-load 'isearch
