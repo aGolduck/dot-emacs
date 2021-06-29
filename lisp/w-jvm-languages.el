@@ -12,6 +12,6 @@
 ;;; scala
 (add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
 (add-hook 'scala-mode-hook #'electric-pair-local-mode)
-(add-hook 'clojure-mode-hook #'company-mode)
+(add-hook 'scala-mode-hook #'company-mode)
 
 (provide 'w-jvm-languages)
