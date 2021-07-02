@@ -64,6 +64,8 @@
 
 ;;; set up minibuffer common packages
 
+(setq savehist-file (w/locate-emacs-var-file "history"))
+(add-hook 'after-init-hook #'savehist-mode)
 (setq consult-preview-key nil)          ;; consult-buffer previews files too, just inhibit preview
 (setq-default consult-project-root-function #'projectile-project-root)
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information

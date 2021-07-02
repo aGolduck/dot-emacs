@@ -91,7 +91,7 @@
  ("lsp-treemacs" . "08e256c45d2e95b510a98a8b88b0531e8785e519")
  ("lsp-ui" . "e49780e41d33b73882453f25675324aa4bebc9d0")
  ("lua-mode" . "2d9a468b94acd8480299d47449b53136060b7b23")
- ("magit" . "4a8646a30df99bbafc95d4f21a0b2bf0a6f6566f")
+ ("magit" . "1173134ad5de3224903f6267a4f90a0de551bbd9")
  ("magit-delta" . "1164a6c3e501e944f1a6a2e91f15374a193bb8d3")
  ("magit-popup" . "d8585fa39f88956963d877b921322530257ba9f5")
  ("magit-todos" . "d6712f3a254e4e067e6cdc3e949bb13af83a4de5")
