@@ -12,7 +12,7 @@
 ;;; xml
 (setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
 (when (equal w/lsp-client "lsp")
-  ;; download from http://mirrors.ustc.edu.cn/eclipse/lemminx/
+  ;; xml lsp server is downloaded from http://mirrors.ustc.edu.cn/eclipse/lemminx/
   (add-hook 'nxml-mode-hook #'lsp))
 (add-hook 'nxml-mode-hook #'smartparens-mode)
 ;;; groovy

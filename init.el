@@ -57,6 +57,8 @@
 (require 'w-system)
 (require 'w-z)
 
+(require 'w-local)
+
 ;; other settings including extra variable, faces and keybindings
 (load (w/locate-in-current-directory "settings"))
 ;;; ignore custom file

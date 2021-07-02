@@ -5,6 +5,9 @@
 (setq default-input-method "rime"
       rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g") ;; 发往 librime 的快捷键
       rime-librime-root (if (eq system-type 'darwin) (locate-user-emacs-file "rime/librime-mac/dist"))
+      ;; TODO locate emacs home dynamically, or emacs should be installed into /usr or /usr/local
+      ;; or just add emacs header files in emacs configuration
+      ;; rime-emacs-module-header-root (if (eq system-type 'darwin) "/usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.2/include")
       rime-user-data-dir (locate-user-emacs-file "rime")
       rime-show-candidate 'posframe
       rime-posframe-style 'simple)
