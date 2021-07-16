@@ -64,6 +64,9 @@
 
 ;;; set up minibuffer common packages
 
+(setq enable-recursive-minibuffers t
+      read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 (setq savehist-file (w/locate-emacs-var-file "history"))
 (add-hook 'after-init-hook #'savehist-mode)
 (setq consult-preview-key nil)          ;; consult-buffer previews files too, just inhibit preview

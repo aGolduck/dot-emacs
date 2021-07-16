@@ -16,6 +16,7 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (diminish 'company-mode "补"))
 
+;; TODO find company-prescient-mode replacement to drop prescient dependency
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
 ;; need some tweaks to work
