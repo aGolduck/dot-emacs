@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'devdocs)
 (straight-use-package 'devdocs-browser)
-(straight-use-package 'dumb-jump)
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
 (straight-use-package 'highlight-indent-guides)
@@ -38,13 +37,6 @@
       highlight-indent-guides-auto-odd-face-perc 15
       highlight-indent-guides-auto-even-face-perc 55
       highlight-indent-guides-auto-character-face-perc 61.8)
-
-;;; dumb-jump
-;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
-(with-eval-after-load 'xref
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
-(global-set-key (kbd "M-SPC M-.") #'dumb-jump-go)
-;; (global-set-key (kbd "M-SPC M-,") #'dumb-jump-back) ;; not neccesary, use M-,
 
 (with-eval-after-load 'smartparens
   (require 'smartparens-config)
