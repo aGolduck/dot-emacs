@@ -27,6 +27,7 @@
       dired-auto-revert-buffer t
       dired-dwim-target t
       dired-recursive-copies 'always
+      dired-kill-when-opening-new-dired-buffer t
       dired-recursive-deletes 'top
       dired-guess-shell-alist-user '(("\\.doc\\'" "libreoffice")
                                      ("\\.docx\\'" "libreoffice")
@@ -46,6 +47,7 @@
   ;; 4.2 local mode map hook
   (add-hook 'dired-mode-hook #'dired-quick-sort)
   ;; 4.3 lazy set up
+  ;; TODO use dired-kill-when-opening-new-dired-buffer for emacs 28
   ;; do not open extra dired buffer
   (put 'dired-find-alternate-file 'disabled nil)
   ;; 4.4 local mode map keybindings set up

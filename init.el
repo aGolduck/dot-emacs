@@ -43,6 +43,7 @@
 (require 'w-jump)
 (require 'w-lsp)
 (require 'w-eglot)
+(require 'w-c)
 (require 'w-java)
 (require 'w-jvm-languages)
 (require 'w-haskell)

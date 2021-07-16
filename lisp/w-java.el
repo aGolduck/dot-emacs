@@ -7,9 +7,9 @@
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'electric-pair-local-mode)
 (add-hook 'java-mode-hook #'yas-minor-mode)
-(add-hook 'java-mode-hook
-          (lambda ()
-            (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
+;; (add-hook 'java-mode-hook
+;;           (lambda ()
+;;             (face-remap-add-relative 'font-lock-function-name-face :height 1.5)))
 
 ;;; eglot
 (defconst my-eglot-eclipse-jdt-home (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar"))
