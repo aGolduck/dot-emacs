@@ -27,7 +27,7 @@
 (require 'w-window)
 (require 'w-buffer)
 (require 'w-file)
-(require 'w-grep)
+(require 'w-search)
 (require 'w-edit)
 
 (require 'w-dired)

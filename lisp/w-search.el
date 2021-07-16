@@ -36,4 +36,13 @@
     ;; for grep
     nil))
 
-(provide 'w-grep)
+;;; isearch
+(with-eval-after-load 'isearch
+  (diminish 'isearch-mode)
+  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
+  (global-set-key (kbd "C-M-s") #'isearch-forward)
+  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
+  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
+
+
+(provide 'w-search)

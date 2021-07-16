@@ -6,14 +6,6 @@
 ;;; emacs regex builder
 (setq reb-re-syntax 'string)
 
-;;; isearch
-(with-eval-after-load 'isearch
-  (diminish 'isearch-mode)
-  (global-set-key (kbd "C-s") #'isearch-forward-regexp)
-  (global-set-key (kbd "C-M-s") #'isearch-forward)
-  (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
-  (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-
 ;;; desktop
 (setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") w/EMACS-VAR)
       desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") w/EMACS-VAR)
