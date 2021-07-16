@@ -158,7 +158,7 @@
  ("ts.el" . "df48734ef046547c1aa0de0f4c07d11964ef1f7f")
  ("typescript.el" . "e6f68ab2dd998af0b50ae89a781e1c04539d23d6")
  ("valign" . "e8a5ce10838a473dc07f4d8183637c0e493f73e6")
- ("vertico" . "c822049b489fa4503498f7abf68a6388d6ca2f53")
+ ("vertico" . "5e9a91822ac4b845bc4386cf49f1eca32b1221ee")
  ("visual-fill-column" . "5b08b9ae9da5b95e42e94e4c9ec01d63e8848ea2")
  ("with-editor" . "7c512887c6d69864fb600d32fb92857c51babcff")
  ("xref" . "c0381045d1a82592eda3d9ac3f924b949640f11c")
