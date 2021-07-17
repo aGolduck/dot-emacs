@@ -56,8 +56,10 @@
   (interactive)
   (dolist (buffer w/original-read-only-mode-buffers)
     (save-excursion
-      (set-buffer buffer)
-      (read-only-mode 1)))
+      ;; in case buffer is deleted
+      (ignore-errors
+        (set-buffer buffer)
+        (read-only-mode 1))))
   (setq w/original-read-only-mode-buffers nil)
   (add-hook 'find-file-hook #'w/read-only-mode-hook-for-find-file)
   (setq w/read-only-by-default t))
