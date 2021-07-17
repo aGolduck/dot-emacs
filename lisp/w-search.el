@@ -7,6 +7,7 @@
 (straight-use-package 'ag)
 (straight-use-package 'wgrep-ag)
 (straight-use-package 'wgrep)
+(straight-use-package 'anzu)
 
 (if (executable-find "rg")
     (progn
@@ -43,6 +44,9 @@
   (global-set-key (kbd "C-M-s") #'isearch-forward)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-
+(setq anzu-mode-lighter "")
+(add-hook 'after-init-hook #'global-anzu-mode)
+(global-set-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
+(global-set-key [remap query-replace] #'anzu-query-replace)
 
 (provide 'w-search)
