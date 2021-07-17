@@ -54,7 +54,8 @@
 (global-set-key (kbd "C-h k") #'helpful-key)
 (global-set-key (kbd "C-h o") #'helpful-symbol)
 
-(setq keyfreq-excluded-commands 'nil)
+(setq keyfreq-file (w/locate-emacs-var-file "keyfreq")
+      keyfreq-excluded-commands 'nil)
 ;; (setq keyfreq-excluded-commands '(
 ;;                                   self-insert-command
 ;;                                   next-line
