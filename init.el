@@ -33,7 +33,8 @@
 (require 'w-dired)
 (require 'w-git)
 
-(require 'w-rime)
+;; (require 'w-rime)
+(require 'w-pyim)
 (require 'w-flyspell)
 
 (require 'w-minibuffer)
