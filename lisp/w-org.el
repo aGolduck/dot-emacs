@@ -2,7 +2,7 @@
 ;;; org-mode common
 (straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
 (straight-use-package 'org-roam)
-(straight-use-package 'org-roam-server)
+;; (straight-use-package 'org-roam-server)
 (straight-use-package 'org-journal)
 (straight-use-package 'org-pomodoro)
 (straight-use-package 'org-ql)
@@ -183,25 +183,26 @@
 
 ;;; org roam
 (setq org-roam-directory (file-truename "~/org/roam")
+      org-roam-dailies-directory (file-truename "~/org/roam/daily")
       org-roam-db-location (w/locate-emacs-var-file "org-roam.db"))
 (global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
 (global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
-(global-set-key (kbd "M-SPC n n") #'org-roam-find-file)
-(global-set-key (kbd "M-SPC n N") #'org-roam-find-file-immediate)
-(global-set-key (kbd "M-SPC n i") #'org-roam-insert)
+(global-set-key (kbd "M-SPC n c") #'org-roam-capture)
+(global-set-key (kbd "M-SPC n i") #'org-roam-node-insert)
+(global-set-key (kbd "M-SPC n n") #'org-roam-node-find)
 (with-eval-after-load 'org-roam
-  (define-key org-roam-mode-map (kbd "M-SPC n l") #'org-roam)
-  (define-key org-roam-mode-map (kbd "M-SPC n h") #'org-roam-jump-to-index)
+  (org-roam-setup)
+  (global-set-key (kbd "M-SPC n l") #'org-roam-buffer-toggle)
   (diminish 'org-roam-mode "记"))
-(when window-system
-  (with-eval-after-load 'org-roam-server
-    (setq org-roam-server-host "127.0.0.1"
-          org-roam-server-port 4242
-          org-roam-server-authenticate nil
-          org-roam-server-label-truncate t
-          org-roam-server-label-truncate-length 60
-          org-roam-server-label-wrap-length 20)
-    (diminish 'org-roam-server-mode "图")))
+;; (when window-system
+;;   (with-eval-after-load 'org-roam-server
+;;     (setq org-roam-server-host "127.0.0.1"
+;;           org-roam-server-port 4242
+;;           org-roam-server-authenticate nil
+;;           org-roam-server-label-truncate t
+;;           org-roam-server-label-truncate-length 60
+;;           org-roam-server-label-wrap-length 20)
+;;     (diminish 'org-roam-server-mode "图")))
 
 ;;; org third-party packages
 (setq org-journal-dir "~/org/journal"
