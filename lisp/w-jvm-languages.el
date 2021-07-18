@@ -10,6 +10,13 @@
 (add-hook 'clojure-mode-hook #'company-mode)
 
 ;;; scala
+(defun toggle-on-lsp-scala ()
+  (interactive)
+  (add-hook 'scala-mode-hook #'lsp))
+(defun toggle-off-lsp-scala ()
+  (interactive)
+  (remove-hook 'scala-mode-hook #'lsp))
+;; (setq lsp-metals-server-args lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
 (add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
 (add-hook 'scala-mode-hook #'electric-pair-local-mode)
 (add-hook 'scala-mode-hook #'company-mode)
