@@ -23,7 +23,10 @@
 (with-eval-after-load 'citre-peek
   (define-key citre-peek-keymap (kbd "M-SPC M-.") #'citre-peek-through))
 
-(global-set-key (kbd "M-SPC M-.") #'citre-peek)
+(defun citre-peek-or-dump-jump ()
+  (interactive)
+  (if citre-mode (citre-peek) (dumb-jump-go)))
+(global-set-key (kbd "M-SPC M-.") #'citre-peek-or-dump-jump)
 (global-set-key (kbd "M-SPC M-,") #'citre-jump-back)
 
 (provide 'w-jump)
