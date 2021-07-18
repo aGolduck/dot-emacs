@@ -5,6 +5,7 @@
 (straight-use-package '(valign :host github :repo "casouri/valign"))
 (straight-use-package 'treemacs)
 (straight-use-package 'selectric-mode)
+(straight-use-package 'page-break-lines)
 
 ;;; mode-line, header-line, frame-title
 (setq-default
@@ -150,5 +151,8 @@
   ;; using Noto Sans CJK to stop hight changing of tab-bar
   (set-face-attribute 'variable-pitch nil :family "Noto Sans CJK SC"))
 
+;;; page break line
+(with-eval-after-load 'page-break-lines (diminish 'page-break-lines-mode))
+(add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode)
 
 (provide 'w-ui)
