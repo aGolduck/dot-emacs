@@ -11,7 +11,7 @@
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
 (straight-use-package 'zeal-at-point)
-;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
+;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host github :repo "aGolduck/yasnippet-snippets.git")))
 
 ;;; new comment
 (global-set-key [remap comment-dwim] #'comment-line)
