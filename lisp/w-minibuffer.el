@@ -84,6 +84,8 @@
         (affe-grep dir initial))
 (global-set-key (kbd "M-SPC s p") #'affe-grep)
 (global-set-key (kbd "M-SPC s P") #'sanityinc/affe-grep-at-point)
+(with-eval-after-load 'consult
+  (consult-customize affe-grep :preview-key (kbd "M-.")))
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 (with-eval-after-load 'isearch
