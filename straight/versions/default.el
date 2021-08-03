@@ -4,7 +4,6 @@
  ("affe" . "dee51350e1d7d3cfbfb12069dea9246454a3df31")
  ("ag.el" . "bd81d68466e44301505629454dfc689b6c17d94b")
  ("alert" . "7046393272686c7a1a9b3e7f7b1d825d2e5250a6")
- ("anzu" . "bdb3da5028935a4aea55c40769bc191a81afb54e")
  ("autodisass-java-bytecode" . "3d61dbe266133c950b39e880f78d142751c7dc4c")
  ("avy" . "bbf1e7339eba06784dfe86643bb0fbddf5bb0342")
  ("bui.el" . "28a9b0a36cb69b931cf32db7546ad5c6589752cf")
