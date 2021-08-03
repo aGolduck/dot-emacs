@@ -8,7 +8,7 @@
  ("avy" . "bbf1e7339eba06784dfe86643bb0fbddf5bb0342")
  ("bui.el" . "28a9b0a36cb69b931cf32db7546ad5c6589752cf")
  ("cider" . "fe8cf244fd3426261f9f630c981a6296afd433a4")
- ("citre" . "4fd99e80592e21813dbbb2f6c041ecf5bedfbd8f")
+ ("citre" . "4e0ff7c28145bea0a071399bdbeca79e85feb59c")
  ("clojure-mode" . "3e426b3a479f479963f2c7d1147cc826ed1a0ee1")
  ("clue" . "1af8b78ac9ef96ac7d4d67cc8af3411f3845f597")
  ("color-rg" . "d7be8215a75e553f682f12659eebfe2c853d5d07")
