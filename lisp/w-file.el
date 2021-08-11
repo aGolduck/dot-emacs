@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(straight-use-package 'sudo-edit)
 
 ;;; common settings
 (setq auto-save-default nil

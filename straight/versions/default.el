@@ -147,7 +147,6 @@
  ("spinner" . "34905eae12a236753fa88abc831eff1e41e8576e")
  ("squiggly-clojure" . "592c4f89efb5112784cbf94c9ea6fdd045771b62")
  ("straight.el" . "521173e0b48a03b7094bb964da88ea5c008e35f6")
- ("sudo-edit" . "a7ae1713bb659988bb1465a13b837fbc2d699504")
  ("swiper" . "e005666df39ca767e6d5ab71b1a55d8c08395259")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
