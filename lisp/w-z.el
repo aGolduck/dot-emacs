@@ -40,7 +40,6 @@
 (straight-use-package 'rust-mode)
 (straight-use-package 'link-hint)
 (straight-use-package 'pdf-tools)
-(straight-use-package 'pocket-reader)
 
 
 ;;; TODO to organise
@@ -92,7 +91,14 @@
 ;;; url-cookie
 (setq url-cookie-file (w/locate-emacs-var-file "url/cookies"))
 
-(straight-use-package 'zotero)
+;; (straight-use-package 'oauth)
+;; (require 'oauth)
+;; (straight-use-package 'zotero)
+;; (autoload 'zotero-auth-token-create "zotero-auth")
+;; (require 'zotero-browser)
+;; (autoload 'zotero-browser "zotero-browser")
+
+
 (straight-use-package 'lua-mode)
 
 

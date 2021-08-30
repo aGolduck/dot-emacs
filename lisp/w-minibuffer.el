@@ -65,6 +65,7 @@
 ;;; set up minibuffer common packages
 
 (setq enable-recursive-minibuffers t
+      completion-ignore-case t
       read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
 (setq savehist-file (w/locate-emacs-var-file "history"))

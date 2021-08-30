@@ -8,7 +8,8 @@
   (setq-default line-spacing 0)
 
   (add-hook 'nxml-mode-hook #'lsp)
-  
-  (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height))
+
+  (when window-system
+    (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height)))
 
 (provide 'w-local)

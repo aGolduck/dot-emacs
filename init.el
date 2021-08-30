@@ -40,6 +40,7 @@
 (require 'w-edit)
 (require 'w-flyspell)
 (require 'w-pyim)
+;; (require 'w-rime)
 
 ;;; complete anything
 (require 'w-minibuffer)
@@ -81,7 +82,8 @@
             (require 'server)
             (unless (server-running-p)
               (server-start))))
-(desktop-read)
+(when window-system
+  (desktop-read))
 ;; (when (>= emacs-major-version 27)
 ;;     (tab-bar-mode 1)
 ;;     (setq tab-line-tab-name-function 'tab-line-tab-name-truncated-buffer)
