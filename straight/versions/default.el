@@ -72,7 +72,6 @@
  ("hydra" . "8a9124f80b6919ad5288172b3e9f46c5332763ca")
  ("icomplete-vertical" . "3bee30b374226deecde8a5cbbc6ca8471c303348")
  ("iedit" . "0d6d2387188763a88cdf84f749e6f32d5a72bbd6")
- ("isearch-mb" . "519adf6279f78f5611ab197ab6786a433756d645")
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
