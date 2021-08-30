@@ -4,7 +4,7 @@
 ;;                                         :fork (:host github :repo "aGolduck/org-clock-watch")))
 
 (setq org-agenda-restore-windows-after-quit t
-      org-agenda-files '("~/org/orgzly")
+      org-agenda-files '("~/org/orgzly" "~/org/roam/agenda")
       org-agenda-log-mode-items '(closed)
       org-agenda-log-mode-items (quote (closed state))
       org-agenda-show-future-repeats 'next

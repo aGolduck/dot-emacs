@@ -2,7 +2,7 @@
 ;;; org-mode common
 (straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
 (straight-use-package 'org-roam)
-;; (straight-use-package 'org-roam-server)
+(straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
 (straight-use-package 'zotxt)
 (straight-use-package 'org-journal)
 (straight-use-package 'org-pomodoro)
@@ -28,7 +28,12 @@
       org-outline-path-complete-in-steps nil
       org-preview-latex-default-process 'dvisvgm
       org-refile-target-verify-function 'bh/verify-refile-target
-      org-refile-targets (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)))
+      org-refile-targets '((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)
+                           (("~/org/roam/notes.org"
+                             "~/org/roam/work.org"
+                             "~/org/roam/emacs.org"
+                             "~/org/roam/unix.org")
+                            :maxlevel . 3))
       org-refile-use-outline-path t
       org-return-follows-link t
       org-stuck-projects (quote ("" nil nil ""))
@@ -59,18 +64,19 @@
       '(
 	("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
 	 "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	("n" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
+	("N" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
 	 "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
-	("N" "NOTE" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
-	("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
+	("n" "NOTE" entry (file+headline "~/org/roam/notes.org" "NOTES")
+	 "* %?\n  :PROPERTIES:\n  :ID:  %(org-id-uuid)\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
+	("j" "JOURNAL" entry (file+headline "~/org/roam/journal.org" "journal")
+	 "* %U\n  :PROPERTIES:\n  :ID:  %(org-id-uuid)\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n%?")
+	;; ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
+	;;  "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
 	("s" "source code" entry (file+headline org-default-notes-file "NOTES")
 	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
 	("g" "template group")
 	("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
-	))
+	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")))
 (global-set-key (kbd "C-c c") #'org-capture)
 
 ;;; org-colview
@@ -89,6 +95,7 @@
 
 ;;; org roam
 (setq org-roam-v2-ack t
+      org-roam-db-update-on-save t
       org-roam-directory (file-truename "~/org/roam")
       org-roam-dailies-directory (file-truename "~/org/roam/daily")
       org-roam-db-location (w/locate-emacs-var-file "org-roam.db"))
@@ -98,18 +105,15 @@
 (global-set-key (kbd "M-SPC n i") #'org-roam-node-insert)
 (global-set-key (kbd "M-SPC n n") #'org-roam-node-find)
 (with-eval-after-load 'org-roam
-  (org-roam-setup)
   (global-set-key (kbd "M-SPC n l") #'org-roam-buffer-toggle)
   (diminish 'org-roam-mode "记"))
-;; (when window-system
-;;   (with-eval-after-load 'org-roam-server
-;;     (setq org-roam-server-host "127.0.0.1"
-;;           org-roam-server-port 4242
-;;           org-roam-server-authenticate nil
-;;           org-roam-server-label-truncate t
-;;           org-roam-server-label-truncate-length 60
-;;           org-roam-server-label-wrap-length 20)
-;;     (diminish 'org-roam-server-mode "图")))
+(with-eval-after-load 'org-roam-ui
+  (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+(with-eval-after-load 'org
+  (org-roam-db-autosync-enable))
 ;;; zotxt
 ;; (setq org-zotxt-link-description-style :citation)
 (setq zotxt-default-bibliography-style "mkbehr-short")
