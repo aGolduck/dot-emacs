@@ -3,6 +3,7 @@
 (straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
 (straight-use-package 'org-roam)
 ;; (straight-use-package 'org-roam-server)
+(straight-use-package 'zotxt)
 (straight-use-package 'org-journal)
 (straight-use-package 'org-pomodoro)
 (straight-use-package 'org-ql)
@@ -109,6 +110,16 @@
 ;;           org-roam-server-label-truncate-length 60
 ;;           org-roam-server-label-wrap-length 20)
 ;;     (diminish 'org-roam-server-mode "图")))
+;;; zotxt
+;; (setq org-zotxt-link-description-style :citation)
+(setq zotxt-default-bibliography-style "mkbehr-short")
+(add-hook 'org-mode-hook #'org-zotxt-mode)
+(with-eval-after-load 'org
+  (org-link-set-parameters "zotero" :follow
+                           (lambda (zpath)
+                             (browse-url
+                              ;; we get the "zotero:"-less url, so we put it back.
+                              (format "zotero:%s" zpath)))))
 
 ;;; org third-party packages
 (setq org-journal-dir "~/org/journal"
