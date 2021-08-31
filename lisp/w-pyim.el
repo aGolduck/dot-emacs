@@ -4,7 +4,6 @@
                                     :fork (:host github :repo "aGolduck/pyim-wbdict")))
 
 
-(require 'w-ui)                         ;; posframe is needed for pyim
 (setq default-input-method "pyim"
       pyim-default-scheme 'wubi
       pyim-dcache-directory (w/locate-emacs-var-file "pyim/cache"))

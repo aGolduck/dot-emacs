@@ -129,4 +129,4 @@
 (with-eval-after-load 'page-break-lines (diminish 'page-break-lines-mode))
 (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode)
 
-(provide 'w-ui)
+(provide 'w-gui)

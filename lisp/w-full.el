@@ -59,7 +59,7 @@
 (add-hook 'after-init-hook #'keyfreq-mode)
 (add-hook 'after-init-hook #'keyfreq-autosave-mode)
 
-(require 'w-ui)
+(require 'w-gui)
 
 (straight-use-package 'vlf)
 
