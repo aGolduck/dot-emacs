@@ -1,6 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(straight-use-package 'vlf)
-
 ;;; common settings
 (setq auto-save-default nil
       make-backup-files nil
@@ -47,9 +45,6 @@ That is, remove a non kept dired from the recent list."
 
 ;;; tramp
 (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp"))
-
-;;; vlf
-(add-hook 'after-init-hook (lambda () (require 'vlf-setup)))
 
 ;;; so long mode
 (add-hook 'after-init-hook #'global-so-long-mode)

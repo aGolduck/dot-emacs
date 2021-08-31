@@ -20,50 +20,8 @@
 (require 'w-straight)
 (require 'w-exec-path)
 
-(straight-use-package 'diminish)
-;;; utils
-(require 'w-utils)
-(require 'w-emacs)
-(require 'w-ui)
-
-;;; emacs/system tools
-(require 'w-window)
-(require 'w-buffer)
-(require 'w-file)
-(require 'w-dired)
-(require 'w-git)
-(require 'w-term)
-(require 'w-system)
-
-;;; text edit
-(require 'w-search)
-(require 'w-edit)
-(require 'w-flyspell)
-(require 'w-pyim)
-;; (require 'w-rime)
-
-;;; complete anything
-(require 'w-minibuffer)
-(require 'w-company)
-
-;;; programming
-(require 'w-prog)
-(require 'w-jump)
-(require 'w-lsp)
-(require 'w-eglot)
-
-(require 'w-c)
-(require 'w-java)
-(require 'w-jvm-languages)
-(require 'w-haskell)
-(require 'w-web)
-(require 'w-mmm)
-
-;;; org-mode
-(require 'w-org)
-
-;;; anything else
-(require 'w-z)
+(require 'w-core)
+(require 'w-full)
 
 ;;; local settings
 (require 'w-local)

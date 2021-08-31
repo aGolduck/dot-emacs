@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
 (straight-use-package 'expand-region)
-(straight-use-package '(thing-edit :host github :repo "manateelazycat/thing-edit"))
 (straight-use-package 'undo-fu)
 
 (add-hook 'after-init-hook #'delete-selection-mode)

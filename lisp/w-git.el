@@ -2,7 +2,6 @@
 (straight-use-package 'magit)
 (straight-use-package 'magit-delta)
 (straight-use-package 'magit-todos)
-(straight-use-package 'git-link)
 (straight-use-package 'diff-hl)
 
 (setq vc-follow-symlinks t)
@@ -28,9 +27,6 @@
 ;; (with-eval-after-load 'magit-todos-mode (transient-append-suffix 'magit-status-jump '(0 0 -1)
 ;;                                           '("T " "Todos" magit-todos-jump-to-todos)))
 
-
-;;; git link
-(global-set-key (kbd "M-SPC g L") #'git-link)
 
 ;; (add-hook 'after-init-hook #'global-hiff-hl-mode) ;; do not know why global-diff-hl-mode can't be added, it's autoloaded
 (global-diff-hl-mode)
