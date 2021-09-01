@@ -110,4 +110,8 @@
 ;; url
 (setq url-cache-directory (w/locate-emacs-var-file ".cache/url"))
 
+(straight-use-package 'git-link)
+;;; git link
+(global-set-key (kbd "M-SPC g L") #'git-link)
+
 (provide 'w-z)
