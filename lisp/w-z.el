@@ -1,9 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(setq calendar-chinese-all-holidays-flag t)
-(with-eval-after-load 'abbrev (diminish 'abbrev-mode "缩"))
-
-;;; makefile
-(add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
 ;;; python
 ;; (setq lsp-python-ms-auto-install-server nil
 ;;       lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
@@ -54,12 +49,6 @@
   (defun go-translate-token--extract-tkk () (cons 430675 2721866130)))
 ;;; auth-source
 (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg"))))
-;;; ediff-wind
-(setq ediff-merge-split-window-function 'split-window-vertically
-      ediff-split-window-function 'split-window-horizontally
-      ediff-window-setup-function 'ediff-setup-windows-plain)
-(with-eval-after-load 'ediff-wind
-  (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 ;;; epg-config
 (setq epg-pinentry-mode 'loopback)
 ;;; go-to-address
@@ -82,12 +71,6 @@
   (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
   (diminish 'hs-minor-mode "折"))
 (require 'screenshot-svg)
-;;; simple
-(add-hook 'after-init-hook #'global-visual-line-mode)
-(global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
-(global-set-key (kbd "M-SPC u") #'universal-argument)
-(with-eval-after-load 'simple
-  (diminish 'visual-line-mode "⮒"))
 ;;; url-cookie
 (setq url-cookie-file (w/locate-emacs-var-file "url/cookies"))
 
@@ -101,17 +84,11 @@
 
 (straight-use-package 'lua-mode)
 
-
-(straight-use-package 'csv-mode)
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(setq csv-separators '("," ";" "|" " "))
-
-
 ;; url
 (setq url-cache-directory (w/locate-emacs-var-file ".cache/url"))
 
-(straight-use-package 'git-link)
 ;;; git link
+(straight-use-package 'git-link)
 (global-set-key (kbd "M-SPC g L") #'git-link)
 
 (provide 'w-z)
