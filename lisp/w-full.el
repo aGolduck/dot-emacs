@@ -93,7 +93,7 @@
 ;;; git link
 (global-set-key (kbd "M-SPC g L") #'git-link)
 
-(require 'w-term)
+(require 'w-term-full)
 (require 'w-system)
 (straight-use-package '(thing-edit :host github :repo "manateelazycat/thing-edit"))
 (require 'w-flyspell)

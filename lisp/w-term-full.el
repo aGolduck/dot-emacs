@@ -25,4 +25,4 @@
           (lambda ()
             (define-key eshell-mode-map (kbd "C-u") #'eshell-kill-input)))
 
-(provide 'w-term)
+(provide 'w-term-full)
