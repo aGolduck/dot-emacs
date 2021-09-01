@@ -15,6 +15,13 @@
 
 
 
+;;; self-defined function
+(defun w/use-orderless-in-minibuffer ()
+  (setq-local completion-styles '(substring orderless)
+              completion-category-overrides '((file (styles basic partial-completion)))))
+
+
+
 ;;;  choose one minibuffer completion framework
 
 ;; selectrum
@@ -34,8 +41,6 @@
 (straight-use-package 'vertico)
 (with-eval-after-load 'vertico
   (require 'orderless)
-  (defun w/use-orderless-in-minibuffer ()
-    (setq-local completion-styles '(substring orderless)))
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))
 (add-hook 'after-init-hook #'vertico-mode)
 
@@ -45,8 +50,6 @@
 (with-eval-after-load 'icomplete
   (icomplete-vertical-mode 1)
   (require 'orderless)
-  (defun w/use-orderless-in-minibuffer ()
-    (setq-local completion-styles '(substring orderless)))
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer)
 
   ;; <RETURN> is not available for command line, see http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
