@@ -1,7 +1,6 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package 'dumb-jump)
 (straight-use-package 'citre)
-(straight-use-package '(clue :host github :repo "AmaiKinono/clue"))
 
 
 ;;; dumb-jump

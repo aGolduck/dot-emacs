@@ -10,7 +10,6 @@
 
 ;;; programming
 (require 'w-prog)
-(require 'w-jump)
 (require 'w-lsp)
 (require 'w-eglot)
 
@@ -21,7 +20,6 @@
 (require 'w-web)
 (require 'w-other-languages)
 (require 'w-mmm)
-
 
 
 ;;; org-mode

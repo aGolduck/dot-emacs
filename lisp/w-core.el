@@ -22,5 +22,9 @@
 (require 'w-minibuffer)
 (require 'w-company)
 
+;;; programming
+(require 'w-prog-core)
+(require 'w-jump)
+
 
 (provide 'w-core)

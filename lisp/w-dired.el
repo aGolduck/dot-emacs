@@ -56,9 +56,16 @@
 
 
 
+;;; global hooks
+
+
+
 ;;; global key bindings
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
 
+
+
+;;; extra third-party set up
 
 
 

@@ -1,4 +1,6 @@
 ;;;  -*- lexical-binding: t; -*-
+(require 'w-term-core)
+
 (straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
 (straight-use-package 'eterm-256color)
 (straight-use-package 'esh-autosuggest)

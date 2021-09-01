@@ -1,21 +1,17 @@
 (require 'w-dired)
 
 (straight-use-package 'vlf)
+(straight-use-package 'dotenv-mode)
+(straight-use-package 'direnv)
+(straight-use-package 'ranger)
 
 ;;; vlf
 (add-hook 'after-init-hook (lambda () (require 'vlf-setup)))
 
-(straight-use-package 'dotenv-mode)
-(straight-use-package 'direnv)
-(straight-use-package 'ranger)
-
-
-;;; global hooks
+;;; direnv
 (when (executable-find "direnv")
   (add-hook 'after-init-hook #'direnv-mode))
-
 
-;;; extra third-party set up
 ;;; ranger
 (setq ranger-map-style 'emacs)
 (setq ranger-key (kbd "M-R"))

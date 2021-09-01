@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; org-mode common
-(straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
+(require 'w-org-core)
+
 (straight-use-package 'org-roam)
 (straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
 (straight-use-package 'zotxt)
@@ -11,17 +12,12 @@
 (straight-use-package 'org-download)
 (straight-use-package 'ox-gfm)
 (straight-use-package 'ox-hugo)
-(straight-use-package 'ob-typescript)
-(straight-use-package 'ob-http)
 (straight-use-package 'org-projectile)
 
 (require 'bh-org)
-(setq org-directory "~/org"
-      org-archive-location "%s_archive::* Archived Tasks"
+(setq org-archive-location "%s_archive::* Archived Tasks"
       org-archive-mark-done nil
-      org-confirm-babel-evaluate nil
       org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
-      org-export-with-sub-superscripts nil
       org-html-inline-images t
       org-id-locations-file (w/locate-emacs-var-file ".org-id-locations")
       org-log-done 'time
@@ -36,24 +32,8 @@
                             :maxlevel . 3))
       org-refile-use-outline-path t
       org-return-follows-link t
-      org-stuck-projects (quote ("" nil nil ""))
-      org-use-sub-superscripts nil)
-(setq org-todo-keywords
-      (quote ((sequence "TODO(T)" "NEXT(n)" "|" "DONE(t)")
-	      (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c!)" "PHONE" "MEETING")
-	      ;; 下面这行会导致 spacemacs 的 org headings 效果消失，因为关键词重复
-	      ;; (type "EXPERIENCE(e) DEBUG(d) | "DONE")
-	      (type "EXPERIENCE(e)" "DEBUG(d)" "BOOKMARK(b)" "MARKBOOK(m)")
-	      )))
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-	      ("WAITING" ("WAITING" . t))
-	      ("HOLD" ("WAITING") ("HOLD" . t))
-	      (done ("WAITING") ("HOLD"))
-	      ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-	      ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-	      ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-(add-hook 'org-mode-hook #'visual-line-mode)
+      org-stuck-projects (quote ("" nil nil "")))
+
 ;; (add-hook 'org-mode-hook #'valign-mode)  ;; valign-mode is buggy
 
 ;;; org agenda
@@ -142,30 +122,7 @@
 ;;; lazy load
 (with-eval-after-load 'org
   (require 'org-download)
-;;; org babel
-  (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
-  ;; fix error of org-babel-js evaluation
-  (setq org-babel-js-function-wrapper
-        "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
-  ;; TODO ob-jshell
-  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
-  (defun org-babel-execute:jsh (body params)
-    "Execute a block of jshell code snippets or commands with org-babel"
-    (message "Executing jshell snippets")
-    (org-babel-eval "jshell --feedback concise" (concat body "\n/exit")))
-  (add-to-list 'org-src-lang-modes '("jsh" . "java"))
-  (org-babel-do-load-languages 'org-babel-load-languages
-			       '((awk . t)
-                                 (clojure . t)
-                                 (emacs-lisp . t)
-                                 (groovy . t)
-                                 (haskell . t)
-                                 (http . t)
-                                 (js . t)
-                                 (plantuml . t)
-                                 (shell . t)
-                                 (sql . t)
-                                 (typescript . t)))
+
   (defadvice org-html-paragraph (before org-html-paragraph-advice
 					(paragraph contents info) activate)
     "Join consecutive Chinese lines into a single long line without
@@ -177,10 +134,6 @@ unwanted space when exporting org-mode to html."
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
       (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil)
-
-  ;; set faces
-  (set-face-attribute 'org-headline-done nil :strike-through t)
-  (set-face-attribute 'org-agenda-done nil :strike-through t))
+  (define-key org-mode-map (kbd "C-<tab>") nil))
 
 (provide 'w-org)
