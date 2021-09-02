@@ -1,8 +1,17 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package 'pyim)
-(straight-use-package '(pyim-wbdict :host github :repo "tumashu/pyim-wbdict"
-                                    :fork (:host github :repo "aGolduck/pyim-wbdict")))
+(straight-use-package 'pyim-wbdict)
 
+(defun w/pyim-wbdict-v86-single-enable ()
+  "Add wubi dict (86 version, single character) to pyim."
+  (interactive)
+  (require 'pyim-wbdict)
+  (let* ((file (expand-file-name (locate-user-emacs-file "resources/pyim-wbdict-v86-single.pyim"))))
+    (when (file-exists-p file)
+      (if (featurep 'pyim)
+          (pyim-extra-dicts-add-dict
+           `(:name "w/wbdict-v86-single-elpa" :file ,file :elpa t))
+        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
 
 (setq default-input-method "pyim"
       pyim-default-scheme 'wubi
