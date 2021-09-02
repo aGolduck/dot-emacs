@@ -127,7 +127,6 @@
  ("project" . "7af9b2a50917389cdd45c2ad9ccb42b147099a5e")
  ("projectile" . "4e22746dcf8d6dcec1122766c966db776a57a2ef")
  ("pyim" . "ace904840c676297138ed62abb4f1d05c837fd4c")
- ("pyim-wbdict" . "40dcd08e5abb07e890ddb5cb486287639b01e549")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("quickrun" . "80087806741a4d7fd5ce0f74c8e27f4779a737d9")
  ("ranger.el" . "2498519cb21dcd5791d240607a72a204d1761668")
