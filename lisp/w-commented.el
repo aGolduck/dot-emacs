@@ -177,3 +177,17 @@
 ;;                   :poshandler 'posframe-poshandler-frame-center)))
 ;; (setq selectrum-display-action '(display-buffer-show-in-posframe))
 ;; (add-hook 'minibuffer-exit-hook 'posframe-delete-all)
+
+;; (straight-use-package 'org-journal)
+;;; org third-party packages
+;; (setq org-journal-dir "~/org/journal"
+;;       org-journal-cache-file (w/locate-emacs-var-file "org-journal.cache")
+;;       org-journal-file-format "%Y%m%d.org"
+;;       org-journal-find-file #'find-file
+;;       org-journal-file-type 'daily
+;;       org-extend-today-until 2
+;;       ;; org-journal-carryover-items nil
+;;       org-journal-date-prefix "* "
+;;       org-journal-date-format "%A, %x"
+;;       org-journal-time-prefix "** "
+;;       org-journal-time-format "%R ")

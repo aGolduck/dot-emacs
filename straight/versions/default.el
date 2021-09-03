@@ -102,7 +102,6 @@
  ("orderless" . "9637d7fd59f76a5b6d37470b1543ab827a0f9b8d")
  ("org-cliplink" . "82402cae7e118d67de7328417fd018a18f95fac2")
  ("org-download" . "947ca223643d28e189480e607df68449c15786cb")
- ("org-journal" . "f4b15499135d43e98244dda4606a5b97462b3f39")
  ("org-pomodoro" . "aa07c11318f91219336197e62c47bc7a3d090479")
  ("org-projectile" . "96a57a43555e24e5e0d81e79f0fbb47001c41bac")
  ("org-ql" . "87b3d0bd972c357d5d80005e99e012209e6c0d2f")

@@ -5,7 +5,6 @@
 (straight-use-package 'org-roam)
 (straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
 (straight-use-package 'zotxt)
-(straight-use-package 'org-journal)
 (straight-use-package 'org-pomodoro)
 (straight-use-package 'org-ql)
 (straight-use-package 'org-cliplink)
@@ -105,18 +104,6 @@
                               ;; we get the "zotero:"-less url, so we put it back.
                               (format "zotero:%s" zpath)))))
 
-;;; org third-party packages
-(setq org-journal-dir "~/org/journal"
-      org-journal-cache-file (w/locate-emacs-var-file "org-journal.cache")
-      org-journal-file-format "%Y%m%d.org"
-      org-journal-find-file #'find-file
-      org-journal-file-type 'daily
-      org-extend-today-until 2
-      ;; org-journal-carryover-items nil
-      org-journal-date-prefix "* "
-      org-journal-date-format "%A, %x"
-      org-journal-time-prefix "** "
-      org-journal-time-format "%R ")
 (global-set-key (kbd "M-c") #'org-pomodoro)
 
 ;;; lazy load
