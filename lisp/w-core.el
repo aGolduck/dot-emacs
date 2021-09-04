@@ -1,3 +1,14 @@
+;;; declare built-in packages, in case to be installed from other sources by other org third party packages
+(straight-use-package '(eldoc :type built-in))
+(straight-use-package '(flymake :type built-in))
+(straight-use-package '(jsonrpc :type built-in))
+(straight-use-package '(let-alist :type built-in))
+(straight-use-package '(map :type built-in))
+(straight-use-package '(org :type built-in))
+(straight-use-package '(project :type built-in))
+;; (straight-use-package '(xref :type built-in)) use new version xref for xref-show-definitions-completing-read
+
+;;; packages which should be built-in
 (straight-use-package 'diminish)
 
 ;;; utils

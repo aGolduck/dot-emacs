@@ -1,4 +1,3 @@
-(straight-use-package '(org :type built-in)) ;; in case org-mode will be installed by other org third party packages
 (straight-use-package 'ob-typescript)
 (straight-use-package 'ob-http)
 
