@@ -10,7 +10,6 @@
 (straight-use-package 'smartparens)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)
-(straight-use-package 'zeal-at-point)
 ;; git ssh address example, don't remove this comment
 ;; (straight-use-package '(yasnippet-snippets :host github :repo "AndreaCrotti/yasnippet-snippets" :fork (:host nil :repo "git@github.com:wpchou/yasnippet-snippets.git")))
 

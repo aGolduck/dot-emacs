@@ -157,7 +157,6 @@
  ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
  ("yasnippet" . "d3d6d70b1cd4818d271752468e0fdb0788db750d")
  ("yasnippet-snippets" . "be823d7e1a1a46454d60a9f3dabb16b68b5dd853")
- ("zeal-at-point" . "0fc3263f44e95acd3e9d91057677621ce4d297ee")
  ("zotxt-emacs" . "45961801f9e0350d7457d0d84c5004f63aed9070")
  ("zoutline" . "63756846f8540b6faf89d885438186e4fe1c7d8a"))
 :beta
