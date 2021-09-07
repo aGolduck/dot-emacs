@@ -13,6 +13,7 @@
  ("color-rg" . "d7be8215a75e553f682f12659eebfe2c853d5d07")
  ("company-mode" . "656ad10670512e135a0a5881f127bb7a789ef8ca")
  ("consult" . "d1f3a85d02f673aaede11b0d2bbb63373b6b320f")
+ ("consult-lsp" . "e8a50f2c94f40c86934ca2eaff007f9c00586272")
  ("crux" . "6bfd212a7f7ae32e455802fde1f9e3f4fba932a0")
  ("csv-mode" . "8da54e8b4ef9e5fe8a0afa147c625ced603dc0aa")
  ("dap-mode" . "35db94e81c592246675f300aaca4a70966b8a5fc")

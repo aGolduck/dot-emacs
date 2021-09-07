@@ -3,6 +3,7 @@
 (straight-use-package 'lsp-ui)
 (straight-use-package 'dap-mode)
 (straight-use-package 'lsp-treemacs)
+(straight-use-package 'consult-lsp)
 
 (setq lsp-file-watch-ignored '("[/\\\\]\\.git$" "[/\\\\]\\.hg$" "[/\\\\]\\.bzr$" "[/\\\\]_darcs$" "[/\\\\]\\.svn$" "[/\\\\]_FOSSIL_$" "[/\\\\]\\.idea$" "[/\\\\]\\.ensime_cache$" "[/\\\\]\\.eunit$" "[/\\\\]node_modules$" "[/\\\\]\\.fslckout$" "[/\\\\]\\.tox$" "[/\\\\]\\.stack-work$" "[/\\\\]\\.bloop$" "[/\\\\]\\.metals$" "[/\\\\]target$" "[/\\\\]\\.ccls-cache$" "[/\\\\]\\.deps$" "[/\\\\]build-aux$" "[/\\\\]autom4te.cache$" "[/\\\\]\\.reference$" "/usr/include.*" "[/\\\\]\\.ccls-cache$")
       ;; lsp-diagnostic-package :none
@@ -57,6 +58,11 @@
 ;;; lsp-lens
 (with-eval-after-load 'lsp-lens
   (diminish 'lsp-lens-mode "透"))
+
+;;; consult-lsp
+(with-eval-after-load 'lsp
+  (require 'w-minibuffer)
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
 
 
 (provide 'w-lsp)
