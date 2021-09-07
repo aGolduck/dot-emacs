@@ -4,6 +4,7 @@
 
 (straight-use-package 'org-roam)
 (straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
+(straight-use-package 'org-drill)
 (straight-use-package 'zotxt)
 (straight-use-package 'org-pomodoro)
 (straight-use-package 'org-ql)
@@ -104,6 +105,10 @@
                               ;; we get the "zotero:"-less url, so we put it back.
                               (format "zotero:%s" zpath)))))
 
+;;; org-drill
+(setq persist--directory-location (w/locate-emacs-var-file "persist"))
+
+;;; org-pomodoro
 (global-set-key (kbd "M-c") #'org-pomodoro)
 
 ;;; lazy load
