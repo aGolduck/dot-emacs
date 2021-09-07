@@ -49,4 +49,27 @@ That is, remove a non kept dired from the recent list."
 ;;; so long mode
 (add-hook 'after-init-hook #'global-so-long-mode)
 
+;;; self-defined functions
+(defun w/copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let* ((file-path (if (equal major-mode 'dired-mode)
+                        default-directory
+                      (buffer-file-name)))
+         (file-name (file-name-nondirectory file-path)))
+    (when file-name
+      (kill-new file-name)
+      (message "Copied buffer file name '%s' to the clipboard." file-name))))
+
+(defun w/copy-file-path-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let* ((file-path (if (equal major-mode 'dired-mode)
+                        default-directory
+                      (buffer-file-name))))
+    (when file-path
+      (kill-new file-path)
+      (message "Copied buffer file path '%s' to the clipboard." file-path))))
+
+
 (provide 'w-file)
