@@ -4,12 +4,6 @@
 ;;       lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
 ;; (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp)))
 (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
-;;; xml
-(setq lsp-xml-jar-file (expand-file-name (locate-user-emacs-file "resources/org.eclipse.lemminx-uber.jar")))
-(when (equal w/lsp-client "lsp")
-  ;; xml lsp server is downloaded from http://mirrors.ustc.edu.cn/eclipse/lemminx/
-  (add-hook 'nxml-mode-hook #'lsp))
-(add-hook 'nxml-mode-hook #'smartparens-mode)
 ;;; groovy
 (straight-use-package 'groovy-mode)
 (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
