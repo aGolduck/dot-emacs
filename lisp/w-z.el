@@ -47,23 +47,7 @@
 (setq epg-pinentry-mode 'loopback)
 ;;; go-to-address
 (add-hook 'after-init-hook #'goto-address-mode)
-;;; hideshow
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-(global-set-key (kbd "M-SPC z H") #'hs-hide-all)
-(global-set-key (kbd "M-SPC z S") #'hs-show-all)
-(global-set-key (kbd "M-SPC z h") #'hs-hide-block)
-(global-set-key (kbd "M-SPC z s") #'hs-show-block)
-(global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
-(with-eval-after-load 'hideshow
-  (defconst w/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
-  (defun w/hide-show-overlay-fn (w/overlay)
-    (when (eq 'code (overlay-get w/overlay 'hs))
-      (let* ((nlines (count-lines (overlay-start w/overlay)
-                                  (overlay-end w/overlay)))
-             (info (format " ... #%d " nlines)))
-        (overlay-put w/overlay 'display (propertize info 'face w/hideshow-folded-face)))))
-  (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
-  (diminish 'hs-minor-mode "折"))
+
 (require 'screenshot-svg)
 ;;; url-cookie
 (setq url-cookie-file (w/locate-emacs-var-file "url/cookies"))

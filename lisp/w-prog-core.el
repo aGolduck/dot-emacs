@@ -28,11 +28,29 @@
  projectile-known-projects-file (w/locate-emacs-var-file "projectile-bookmarks.eld")
  projectile-mode-line-function 'w/projectile-shortened-mode-line
  projectile-mode-line-prefix "项"
- projectile-project-search-path '("~/g" "~/r" "~/b"))
+ projectile-project-search-path '("~/g" "~/r" "~/b" "~/w"))
 (when (executable-find "rg")
   (setq-default projectile-generic-command "rg --files --hidden"))
 (add-hook 'after-init-hook #'projectile-mode)
 (global-set-key (kbd "M-SPC p f") #'projectile-find-file)
 (global-set-key (kbd "M-SPC p t") #'projectile-run-vterm)
+
+;;; hideshow
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+(global-set-key (kbd "M-SPC z H") #'hs-hide-all)
+(global-set-key (kbd "M-SPC z S") #'hs-show-all)
+(global-set-key (kbd "M-SPC z h") #'hs-hide-block)
+(global-set-key (kbd "M-SPC z s") #'hs-show-block)
+(global-set-key (kbd "M-SPC z z") #'hs-toggle-hiding)
+(with-eval-after-load 'hideshow
+  (defconst w/hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+  (defun w/hide-show-overlay-fn (w/overlay)
+    (when (eq 'code (overlay-get w/overlay 'hs))
+      (let* ((nlines (count-lines (overlay-start w/overlay)
+                                  (overlay-end w/overlay)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put w/overlay 'display (propertize info 'face w/hideshow-folded-face)))))
+  (setq hs-set-up-overlay 'w/hide-show-overlay-fn)
+  (diminish 'hs-minor-mode "折"))
 
 (provide 'w-prog-core)
