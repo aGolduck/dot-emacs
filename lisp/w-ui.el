@@ -25,6 +25,21 @@
   ;; (define-key treemacs-mode-map (kbd "M-n") nil)
   )
 
+;;; tab-bar
+;;; tab-bar
+(when (>= emacs-major-version 27)
+  (setq tab-bar-show 1
+        tab-bar-select-tab-modifiers '(meta)
+        tab-bar-tab-hints t)
+
+  ;; (setq tab-bar-tab-name-function
+  ;;       (defun w/tab-bar-show-file-name ()
+  ;;         (let* ((buffer (window-buffer (minibuffer-selected-window)))
+  ;;                (file-name (buffer-file-name buffer)))
+  ;;           (if file-name file-name (format "%s" buffer)))))
+
+  (global-set-key (kbd "C-<tab>") #'tab-bar-switch-to-next-tab))
+
 
 
 (provide 'w-ui)
