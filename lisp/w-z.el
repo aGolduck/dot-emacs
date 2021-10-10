@@ -36,11 +36,6 @@
 (global-set-key (kbd "M-SPC g g") #'avy-goto-char-timer)
 (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
 (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0)
-(straight-use-package 'go-translate)
-;; (setq go-translate-base-url "https://translate.google.cn")
-(setq go-translate-local-language "zh-CN")
-(with-eval-after-load 'go-translate
-  (defun go-translate-token--extract-tkk () (cons 430675 2721866130)))
 ;;; auth-source
 (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg"))))
 ;;; epg-config

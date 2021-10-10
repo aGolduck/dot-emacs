@@ -59,7 +59,6 @@
  ("git-link" . "f76bffd42fb4ed8ffe09d48c084f6577b0b99fa6")
  ("gntp.el" . "767571135e2c0985944017dc59b0be79af222ef5")
  ("gnu-elpa-mirror" . "0ed8c5ac06306b9b5f5900eb01c1a48bed4b6110")
- ("go-translate" . "7a9b7978057bf747ed06fa6c9d2f30047714aa05")
  ("graphql-mode" . "2371316a750b807de941184d49ca19d277ecadcd")
  ("groovy-emacs-modes" . "cafdd98e06a3bbff213f3ccb163de2c42d412b66")
  ("guix.el" . "bb2a0539f8d68b2292b3d0f3174c139b4c304028")
