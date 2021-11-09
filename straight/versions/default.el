@@ -30,7 +30,6 @@
  ("el-get" . "463f5e985fc53300f87ab7eb054d1738fc6ac93b")
  ("elisp-refs" . "0e7ea1574717108ddc2eda5e1bc883d44cd28257")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
- ("emacs-ccls" . "675a5704c14a27931e835a431beea3631d92e8e6")
  ("emacs-deferred" . "2239671d94b38d92e9b28d4e12fd79814cfb9c16")
  ("emacs-devdocs-browser" . "d3702670eb361715e41440eb699523b3f4c60bee")
  ("emacs-direnv" . "381176f301dea8414a5a395c0d6546507838f6ce")

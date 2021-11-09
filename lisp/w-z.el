@@ -18,7 +18,6 @@
 (add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
 (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
 
-(straight-use-package 'ccls)
 (straight-use-package 'graphql-mode)
 (straight-use-package 'pkgbuild-mode)
 (straight-use-package 'rust-mode)
