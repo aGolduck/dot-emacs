@@ -28,6 +28,7 @@
 (setq default-input-method "pyim"
       pyim-default-scheme 'wubi
       pyim-dcache-directory (w/locate-emacs-var-file "pyim/cache"))
+(setq-default pyim-punctuation-translate-p '(auto yes no))
 (global-set-key (kbd "M-t") #'toggle-input-method)
 (add-hook 'after-init-hook #'w/pyim-wbdict-v86-single-enable)
 (with-eval-after-load 'pyim

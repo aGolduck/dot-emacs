@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
+(require 'w-ui)
+
 (straight-use-package 'magit)
 (straight-use-package 'magit-delta)
 (straight-use-package 'magit-todos)
@@ -22,6 +24,7 @@
   (with-eval-after-load 'magit-delta
     (diminish 'magit-delta-mode)))
 
+(setq magit-todos-exclude-globs '("*.css.map"))
 (add-hook 'magit-mode-hook (lambda () (let ((inhibit-message t)) (magit-todos-mode 1))))
 ;; T conflicts with magit-note
 ;; (with-eval-after-load 'magit-todos-mode (transient-append-suffix 'magit-status-jump '(0 0 -1)
