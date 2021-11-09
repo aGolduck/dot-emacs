@@ -1,9 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-;;; python
-;; (setq lsp-python-ms-auto-install-server nil
-;;       lsp-python-ms-executable "~/g/Microsoft/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-;; (add-hook 'python-mode-hook (lambda () (require 'lsp-python-ms) (lsp)))
-(add-hook 'python-mode-hook #'highlight-indent-guides-mode)
 ;;; groovy
 (straight-use-package 'groovy-mode)
 (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))

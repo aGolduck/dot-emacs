@@ -15,6 +15,7 @@
 
 (require 'w-c)
 (require 'w-java)
+(require 'w-python)
 (require 'w-jvm-languages)
 (require 'w-haskell)
 (require 'w-web)
