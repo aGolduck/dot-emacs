@@ -37,7 +37,7 @@
   (interactive)
   (let ((autosave-buffer-list))
     (ignore-errors
-      (save-excursion
+      (save-current-buffer
         (dolist (buf (buffer-list))
           (set-buffer buf)
           (when (and
@@ -113,6 +113,7 @@
   (add-hook 'before-save-hook 'font-lock-flush))
 
 (defun auto-save-disable ()
+  (interactive)
   (auto-save-cancel-timer)
   (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
   (remove-hook 'before-save-hook 'font-lock-flush))
