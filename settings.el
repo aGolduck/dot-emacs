@@ -14,6 +14,8 @@
       word-wrap-by-category t)
 (setq-default indent-tabs-mode nil
 	      line-spacing 0.2)
+;; (setq-default max-specpdl-size 10000)
+;; (setq-default max-lisp-eval-depth 10000)
 
 ;;; extra keybindings
 ;;; -*- lexical-binding: t; -*-

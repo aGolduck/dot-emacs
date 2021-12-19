@@ -7,7 +7,6 @@
 (straight-use-package 'consult)
 (straight-use-package 'marginalia)
 (straight-use-package 'orderless)
-(straight-use-package 'affe)
 ;; (straight-use-package 'embark)
 ;; (straight-use-package 'embark-consult)
 ;; (straight-use-package 'mini-frame)
@@ -82,14 +81,7 @@
 ;;   (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
 ;;                                   (symbol-name s))))
 ;;   (consult-ripgrep dir initial))
-(defun sanityinc/affe-grep-at-point (&optional dir initial)
-        (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
-                                        (symbol-name s))))
-        (affe-grep dir initial))
-(global-set-key (kbd "M-SPC s p") #'affe-grep)
-(global-set-key (kbd "M-SPC s P") #'sanityinc/affe-grep-at-point)
-(with-eval-after-load 'consult
-  (consult-customize affe-grep :preview-key (kbd "M-.")))
+
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 (with-eval-after-load 'isearch
