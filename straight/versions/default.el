@@ -138,7 +138,6 @@
  ("swiper" . "e005666df39ca767e6d5ab71b1a55d8c08395259")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("term-cursor.el" . "d6c9b46c6ad73875db4ce04cac335846f86fb7e7")
- ("tide" . "7f7334b42a40dd3093b830e887c36cdb4ef40858")
  ("transient" . "601ebf55475856f64c03a4393472302a2d65af2a")
  ("treemacs" . "90088cee342fe3418b4b6435094e51ff78f37efc")
  ("ts.el" . "df48734ef046547c1aa0de0f4c07d11964ef1f7f")

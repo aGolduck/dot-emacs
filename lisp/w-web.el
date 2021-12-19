@@ -2,17 +2,6 @@
 (straight-use-package 'emmet-mode)
 (straight-use-package 'json-mode)
 (straight-use-package 'typescript-mode)
-(straight-use-package 'tide)
-
-;;; tide
-(setq tide-completion-detailed t
-      tide-always-show-documentation t
-      ;; Fix #1792: by default, tide ignores payloads larger than 100kb. This
-      ;; is too small for larger projects that produce long completion lists,
-      ;; so we up it to 512kb.
-      tide-server-max-response-length 524288)
-(with-eval-after-load 'tide
-  (diminish 'tide-mode "型"))
 
 ;;; js
 (setq js-indent-level 2)
