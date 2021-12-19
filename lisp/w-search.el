@@ -3,21 +3,13 @@
 ;;; Code:
 
 (straight-use-package 'rg)
-(straight-use-package 'ag)
-(straight-use-package 'wgrep-ag)
 (straight-use-package 'wgrep)
-;; (straight-use-package 'anzu)
 
-(if (executable-find "rg")
-    (progn
-      ;; rg
-      ;; TODO how to organise commands and their coresponding consult commands
-      (global-set-key (kbd "M-SPC s p") #'rg-project))
-  (if (executable-find "ag")
-      (progn
-        (global-set-key (kbd "M-SPC s p") #'ag-project))
-    ;; for grep
-    nil))
+(when (executable-find "rg")
+  ;; rg
+  ;; TODO how to organise commands and their coresponding consult commands
+  ;; (global-set-key (kbd "M-SPC s p") #'rg-project)
+  (global-set-key (kbd "M-SPC s") #'rg-menu))
 
 ;;; isearch
 (setq-default isearch-lazy-count t
@@ -30,9 +22,5 @@
   (global-set-key (kbd "C-M-s") #'isearch-forward)
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
-;; (setq anzu-mode-lighter "")
-;; (add-hook 'after-init-hook #'global-anzu-mode)
-;; (global-set-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
-;; (global-set-key [remap query-replace] #'anzu-query-replace)
 
 (provide 'w-search)
