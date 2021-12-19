@@ -2,7 +2,7 @@
 ;;; org-mode common
 (require 'w-org-core)
 
-(straight-use-package 'org-roam)
+(straight-use-package '(org-roam :files ("*.el" "extensions/*.el")))
 (straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
 (straight-use-package 'org-drill)
 (straight-use-package 'zotxt)
