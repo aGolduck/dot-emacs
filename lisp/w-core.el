@@ -61,6 +61,8 @@
 (straight-use-package 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (setq csv-separators '("," ";" "|" " "))
+;; TODO truncate after align mode is on, revert if getting off
+(add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
 
 
 
