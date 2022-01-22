@@ -1,7 +1,7 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package 'pyim)
 
-(defun w/pyim-wbdict-v86-single-enable ()
+(defun 可达鸭/启动五笔单字输入法 ()
   "Add wubi dict (86 version, single character) to pyim."
   (interactive)
   (require 'pyim)
@@ -28,9 +28,33 @@
 (setq default-input-method "pyim"
       pyim-default-scheme 'wubi
       pyim-dcache-directory (w/locate-emacs-var-file "pyim/cache"))
-(setq-default pyim-punctuation-translate-p '(auto yes no))
+
+(defun 可达鸭/lispy-pyim-强制英文 ()
+  (or (lispy--edebug-commandp)
+      (region-active-p)
+      (lispy-left-p)
+      (lispy-right-p)
+      (and
+       (lispy-bolp)
+       (or
+        (looking-at lispy-outline-header)
+        (looking-at lispy-outline)))))
+
+(defun 可达鸭/是否编程模式半角 (char)
+  ;; 抄自 pyim-probe-program-mode
+  (when (derived-mode-p 'prog-mode)
+    (let* ((pos (point))
+           (ppss (syntax-ppss pos)))
+      (not
+       (or (car (setq ppss (nthcdr 3 ppss)))
+           (car (setq ppss (cdr ppss)))
+           (nth 3 ppss))))))
+
+(setq-default pyim-punctuation-translate-p '(auto yes no)
+              pyim-punctuation-half-width-functions '(可达鸭/是否编程模式半角)
+              pyim-english-input-switch-functions '(可达鸭/lispy-pyim-强制英文))
 (global-set-key (kbd "M-t") #'toggle-input-method)
-(add-hook 'after-init-hook #'w/pyim-wbdict-v86-single-enable)
+(add-hook 'after-init-hook #'可达鸭/启动五笔单字输入法)
 (with-eval-after-load 'pyim
   (set-face-attribute 'pyim-page nil :background "#dcdccc" :foreground "#333333"))
 
