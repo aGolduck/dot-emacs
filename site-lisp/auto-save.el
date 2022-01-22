@@ -25,8 +25,7 @@
 
 (defun w/buffer-is-org-capture-p (buffer)
   "buffer is org capture"
-  (save-excursion
-    (set-buffer buffer)
+  (with-current-buffer buffer
     (if (boundp 'org-capture-mode) org-capture-mode nil)))
 
 (defun w/any-buffer-is-org-capture-p ()
@@ -36,46 +35,43 @@
 (defun auto-save-buffers ()
   (interactive)
   (let ((autosave-buffer-list))
-    (ignore-errors
-      (save-current-buffer
-        (dolist (buf (buffer-list))
-          (set-buffer buf)
-          (when (and
-                 ;; Buffer is associated with a filename?
-                 (buffer-file-name)
-                 ;; Buffer is modified?
-                 (buffer-modified-p)
-                 ;; Yassnippet is not active?
-                 (or (not (boundp 'yas--active-snippets))
-                     (not yas--active-snippets))
-                 ;; Company is not active?
-                 (or (not (boundp 'company-candidates))
-                     (not company-candidates))
-                 (not (w/any-buffer-is-org-capture-p))
-                 ;; tell auto-save don't save
-                 (not (seq-some (lambda (predicate)
-                                  (funcall predicate))
-                                auto-save-disable-predicates)))
-            (push (buffer-name) autosave-buffer-list)
-            (if auto-save-silent
-                ;; `inhibit-message' can shut up Emacs, but what we want is
-                ;; it doesn't clean up echo area during saving
-                (with-temp-message ""
-                  (let ((inhibit-message t))
-                    (basic-save-buffer)))
-              (basic-save-buffer))
-            ))
-        ;; Tell user when auto save files.
-        (unless auto-save-silent
-          (cond
-           ;; It's stupid to tell user there's nothing to save.
-           ((= (length autosave-buffer-list) 1)
-            (message "# Saved %s" (car autosave-buffer-list)))
-           ((> (length autosave-buffer-list) 1)
-            (message "# Saved %d files: %s"
-                     (length autosave-buffer-list)
-                     (mapconcat 'identity autosave-buffer-list ", ")))))
-        ))))
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (when (and
+               ;; Buffer is associated with a filename?
+               (buffer-file-name)
+               ;; Buffer is modified?
+               (buffer-modified-p)
+               ;; Yassnippet is not active?
+               (or (not (boundp 'yas--active-snippets))
+                   (not yas--active-snippets))
+               ;; Company is not active?
+               (or (not (boundp 'company-candidates))
+                   (not company-candidates))
+               (not (w/any-buffer-is-org-capture-p))
+               ;; tell auto-save don't save
+               (not (seq-some (lambda (predicate)
+                                (funcall predicate))
+                              auto-save-disable-predicates)))
+          (message (buffer-name))
+          (push (buffer-name) autosave-buffer-list)
+          (if auto-save-silent
+              ;; `inhibit-message' can shut up Emacs, but what we want is
+              ;; it doesn't clean up echo area during saving
+              (with-temp-message ""
+                (let ((inhibit-message t))
+                  (basic-save-buffer)))
+            (basic-save-buffer)))))
+    ;; Tell user when auto save files.
+    (unless auto-save-silent
+      (cond
+       ;; It's stupid to tell user there's nothing to save.
+       ((= (length autosave-buffer-list) 1)
+        (message (concat (format-time-string "[%F %T.%3N %Z] ") "# Saved %s") (car autosave-buffer-list)))
+       ((> (length autosave-buffer-list) 1)
+        (message (concat (format-time-string "[%F %T.%3N %Z] ")  "# Saved %d files: %s")
+                 (length autosave-buffer-list)
+                 (mapconcat 'identity autosave-buffer-list ", ")))))))
 
 (defun auto-save-delete-trailing-whitespace-except-current-line ()
   (interactive)
