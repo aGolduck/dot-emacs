@@ -40,14 +40,19 @@
 
 ;;; read-only-mode for file buffers
 (defun w/read-only-mode-hook-for-find-file ()
-  (if (or
-       (string-match-p ".emacs.d/var" (buffer-file-name))
-       (string-match-p "org/orgzly" (buffer-file-name))
-       (string-match-p "org/roam" (buffer-file-name))
-       (string-match-p "org/journal" (buffer-file-name))
-       (string-match-p ".git/COMMIT_EDITMSG" (buffer-file-name)))
+  (if (可达鸭/是要排除的文件 (buffer-file-name))
       (setq cursor-type 'bar)
     (read-only-mode 1)))
+
+(defun 可达鸭/是要排除的文件 (目标文件名)
+  (cl-some (lambda (白名单文件) (string-match 白名单文件 目标文件名))
+           '(".emacs/var"
+             "org/orgzly"
+             "org/roam"
+             "org/journal"
+             ".git/COMMIT_EDITMSG"
+             ".dir-locals.el"
+             )))
 ;; TODO: add variable watcher to 'buffer-read-only for buffer-read-only to set cursor-type
 (defvar w/original-read-only-mode-buffers nil)
 (defvar w/read-only-by-default nil)
