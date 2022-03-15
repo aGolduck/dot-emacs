@@ -10,12 +10,24 @@
 (with-eval-after-load 'view
   (diminish 'view-mode "览"))
 
-;;; auto-save
-(require 'auto-save)
-(setq auto-save-silent t
-      auto-save-delete-trailing-whitespace t)
-(add-hook 'after-init-hook #'auto-save-enable)
-;; saveplace to save position visited last time
+;;; disable lazycat's auto-save, too complex, may conflict with org capture
+;; (require 'auto-save)
+;; (setq auto-save-silent t
+;;       auto-save-delete-trailing-whitespace t)
+;; (add-hook 'after-init-hook #'auto-save-enable)
+
+;;; use xah lee's simple auto-save solution, save all files when you switch out of emacs.
+;; http://xahlee.info/emacs/emacs/emacs_auto_save.html
+(defun xah-save-all-unsaved ()
+  "Save all unsaved files. no ask.
+Version 2019-11-05"
+  (interactive)
+  (save-some-buffers t ))
+(if (version< emacs-version "27")
+    (add-hook 'focus-out-hook 'xah-save-all-unsaved)
+  (setq after-focus-change-function 'xah-save-all-unsaved))
+
+;;; saveplace to save position visited last time
 (setq auto-save-list-file-prefix nil)
 (setq save-place-file (w/locate-emacs-var-file "places"))
 (add-hook 'after-init-hook #'save-place-mode)
