@@ -43,20 +43,20 @@
 (setq org-capture-templates
       '(
 	("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
-	 "* TODO %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	 "* TODO %?\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
 	("N" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
-	 "* NEXT %?\n  SCHEDULED:  %T\n  :PROPERTIES:\n  :CREATED:  %U\n  :END:\n%i\n  %a")
+	 "* NEXT %?\nSCHEDULED:  %T\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
 	("n" "NOTE" entry (file+headline "~/org/roam/notes.org" "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :ID:  %(org-id-uuid)\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n")
+	 "* %?\n:PROPERTIES:\n:ID:  %(org-id-uuid)\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n")
 	("j" "JOURNAL" entry (file+headline "~/org/roam/journal.org" "journal")
-	 "* %U\n  :PROPERTIES:\n  :ID:  %(org-id-uuid)\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n%i\n%?")
+	 "* %U\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n%?" :create-id t)
 	;; ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
-	;;  "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src js\n%i  #+end_src\n")
+	;;  "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src js\n%i  #+end_src\n")
 	("s" "source code" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")
+	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")
 	("g" "template group")
 	("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n  :PROPERTIES:\n  :CREATED:  %U\n  :CONTEXT:  %a\n:END:\n  #+begin_src %^{source language}\n%i%?  #+end_src\n")))
+	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")))
 (global-set-key (kbd "C-c c") #'org-capture)
 
 ;;; org-colview
