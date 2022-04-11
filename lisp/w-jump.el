@@ -1,6 +1,6 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package 'dumb-jump)
-(straight-use-package 'citre)
+;; (straight-use-package 'citre)
 
 
 ;;; dumb-jump
@@ -14,14 +14,17 @@
       citre-auto-enable-citre-mode-modes '(java-mode nxml-mode)
       citre-tags-file-global-cache-dir (w/locate-emacs-var-file ".cache/ctags"))
 
-(add-hook 'after-init-hook (lambda () (require 'citre-config)))
+;; citre 用着不顺手
+;; (add-hook 'after-init-hook (lambda () (require 'citre-config)))
 
 (with-eval-after-load 'citre-peek
   (define-key citre-peek-keymap (kbd "M-SPC M-.") #'citre-peek-through))
 
 (defun citre-peek-or-dump-jump ()
   (interactive)
-  (if citre-mode (citre-peek) (dumb-jump-go)))
+  (if (and (boundp 'citre-mode) citre-mode) (citre-peek) (dumb-jump-go)))
+
+
 (global-set-key (kbd "M-SPC M-.") #'citre-peek-or-dump-jump)
 (global-set-key (kbd "M-SPC M-,") #'citre-jump-back)
 

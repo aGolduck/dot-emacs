@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 (straight-use-package 'clojure-mode)
 (straight-use-package 'cider)
-(straight-use-package 'flycheck-clojure)
+;; (straight-use-package 'flycheck-clojure)
 (straight-use-package 'lsp-metals)
 (straight-use-package 'scala-mode)
 
@@ -9,10 +9,10 @@
 (add-hook 'clojure-mode-hook #'electric-pair-local-mode)
 (add-hook 'clojure-mode-hook #'lispy-mode)
 (add-hook 'clojure-mode-hook #'company-mode)
-(with-eval-after-load 'clojure-mode
-  (with-eval-after-load 'cider
-    (with-eval-after-load 'flycheck
-      (flycheck-clojure-setup))))
+;; (with-eval-after-load 'clojure-mode
+;;   (with-eval-after-load 'cider
+;;     (with-eval-after-load 'flycheck
+;;       (flycheck-clojure-setup))))
 
 ;;; scala
 (defun toggle-on-lsp-scala ()

@@ -20,8 +20,10 @@
 (require 'w-straight)
 (require 'w-exec-path)
 
+(require 'w-minimal)
 (require 'w-core)
-(require 'w-full)
+(require 'w-to-be-core)
+;; (require 'w-full)
 
 ;;; local settings
 (require 'w-local)
@@ -30,7 +32,7 @@
 (load (w/locate-in-current-directory "settings"))
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
-;; (load custom-file 'no-error 'no-message)
+(load custom-file 'no-error 'no-message)
 
 (require 'w-lisp)
 (require 'read-only-by-default)

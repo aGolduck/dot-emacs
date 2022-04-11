@@ -57,5 +57,16 @@
 ;;; git link
 (straight-use-package 'git-link)
 (global-set-key (kbd "M-SPC g L") #'git-link)
+;; TODO use add-to-list instead of setq
+;; (setq git-link-remote-alist
+;;       '(("git.sr.ht" git-link-sourcehut)
+;;         ("github" git-link-github)
+;;         ("bitbucket" git-link-bitbucket)
+;;         ("gitorious" git-link-gitorious)
+;;         ("gitlab" git-link-gitlab)
+;;         ("git\\.\\(sv\\|savannah\\)\\.gnu\\.org" git-link-savannah)
+;;         ("visualstudio\\|azure" git-link-azure)
+;;         ("sourcegraph" git-link-sourcegraph)
+;;         ("git.woa.com" git-link-gitlab)))
 
 (provide 'w-z)

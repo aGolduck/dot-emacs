@@ -6,10 +6,8 @@
           ;; 'ivy
           ;; 'ivy-hydra
           ;; 'ivy-posframe
-          ;; 'ivy-prescient
           ;; 'ivy-rich
           ;; 'ivy-xref
-          ;; 'lsp-ivy
           ;; 'swiper
           ))
   (straight-use-package w/package))
@@ -55,10 +53,6 @@
 ;;   (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
 ;;   (global-set-key (kbd "M-SPC T p") #'ivy-posframe-mode))
 
-;; (use-package ivy-prescient :init
-;;   (add-hook 'ivy-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1)))
-;;   (add-hook 'counsel-mode-hook (lambda () (ivy-prescient-mode -1) (ivy-prescient-mode 1))))
-
 ;; (use-package ivy-rich :init (add-hook 'ivy-mode-hook #'ivy-rich-mode))
 
 ;; (use-package ivy-xref
@@ -71,8 +65,6 @@
 ;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
 ;;   ;; as well
 ;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-;; (use-package lsp-ivy)
 
 ;; (use-package mini-frame
 ;;   :init

@@ -6,7 +6,7 @@
 (straight-use-package '(map :type built-in))
 (straight-use-package '(org :type built-in))
 (straight-use-package '(project :type built-in))
-;; (straight-use-package '(xref :type built-in)) use new version xref for xref-show-definitions-completing-read
+(straight-use-package '(xref :type built-in))
 
 ;;; packages which should be built-in
 (straight-use-package 'diminish)
@@ -36,6 +36,9 @@
 ;;; programming
 (require 'w-prog-core)
 (require 'w-jump)
+
+;; fonts
+(require 'w-font)
 
 (setq calendar-chinese-all-holidays-flag t)
 (with-eval-after-load 'abbrev (diminish 'abbrev-mode "缩"))

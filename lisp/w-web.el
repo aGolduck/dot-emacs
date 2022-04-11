@@ -19,8 +19,6 @@
 
 ;;; typescript
 (setq typescript-indent-level 2)
-;; (add-hook 'typescript-mode-hook #'lsp)
-;; (add-hook 'typescript-mode-hook #'lsp-deferred)
 (dolist (hooked (list
                  #'company-mode
                  #'eldoc-mode

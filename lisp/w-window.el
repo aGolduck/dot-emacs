@@ -50,6 +50,7 @@
 ;;         (add-to-list 'windows (selected-window) t)
 ;;         windows))))
 ;; (advice-add 'aw-window-list :override #'w/get-window-list)
+;; TODO disable ace-window
 (setq aw-keys '(?i ?u ?d ?h ?5 ?6 ?7 ?8 ?9 ?0 ?1 ?2 ?3 ?4)
       aw-dispatch-alist '((?x aw-delete-window "Delete Window")
 	                  (?m aw-swap-window "Swap Windows")
