@@ -9,6 +9,21 @@
 
   (add-hook 'nxml-mode-hook #'lsp)
 
+  ;; erlang
+  (setq erlang-root-dir
+        (concat "/usr/local/Cellar/erlang/"
+                (substring (shell-command-to-string "brew info erlang | head -n1 | cut -f3 -d' '") 0 -1)))
+  (setq load-path
+        (cons
+         (substring
+          (shell-command-to-string
+           (concat "ls -d " erlang-root-dir "/lib/erlang/lib/tools-*" "/emacs"))
+          0 -1)
+         load-path))
+  (require 'erlang-start)
+  (add-hook 'erlang-mode-hook #'company-mode)
+  (add-hook 'erlang-mode-hook #'electric-pair-local-mode)
+
   (when window-system
     (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height)))
 
