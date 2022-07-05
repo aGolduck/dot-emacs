@@ -12,10 +12,11 @@
 (straight-use-package 'org-download)
 (straight-use-package 'ox-gfm)
 (straight-use-package 'ox-hugo)
-(straight-use-package 'org-projectile)
+
 
 (require 'bh-org)
-(setq org-archive-location "%s_archive::* Archived Tasks"
+(setq org-adapt-indentation nil
+      org-archive-location "%s_archive::* Archived Tasks"
       org-archive-mark-done nil
       org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
       org-html-inline-images t
@@ -75,6 +76,7 @@
 
 ;;; org roam
 (setq org-roam-v2-ack t
+      org-roam-verbose t
       org-roam-db-update-on-save t
       org-roam-directory (file-truename "~/org/roam")
       org-roam-dailies-directory (file-truename "~/org/roam/daily")

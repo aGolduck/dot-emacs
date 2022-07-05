@@ -3,13 +3,15 @@
 ;; (straight-use-package '(org-clock-watch :host github :repo "wztdream/org-clock-watch" :files ("*")
 ;;                                         :fork (:host github :repo "aGolduck/org-clock-watch")))
 
-(setq org-agenda-restore-windows-after-quit t
-      org-agenda-files '("~/org/orgzly" "~/org/roam/agenda")
+(setq org-agenda-columns-add-appointments-to-effort-sum t
+      org-agenda-files '("~/org/orgzly")
       org-agenda-log-mode-items '(closed)
       org-agenda-log-mode-items (quote (closed state))
+      org-agenda-restore-windows-after-quit t
       org-agenda-show-future-repeats 'next
       org-agenda-span 'month
-      org-agenda-tags-todo-honor-ignore-options t)
+      org-agenda-tags-todo-honor-ignore-options t
+      org-columns-default-format "%60ITEM(Task) %TODO %6Effort(Estim){:}  %6CLOCKSUM(Clock) %TAGS")
 (setq org-agenda-custom-commands
       (quote (("A" "My Agenda"
 	       (
@@ -99,6 +101,16 @@
   (define-key org-agenda-keymap (kbd "R") #'org-agenda-refile))
 
 (setq org-global-properties '(("Effort_ALL" . "0 0:05 0:10 0:20 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00")))
+
+(defun w/org-agenda-add-extra-files ()
+  (interactive)
+  (with-current-buffer
+      (find-file-noselect "~/org/roam/agenda/reading.org")
+    (org-agenda-file-to-front)))
+
+(defun w/org-agenda-remove-extra-files ()
+  (interactive)
+  (org-remove-file "~/org/roam/agenda/reading.org"))
 
 ;; (add-hook 'after-init-hook (lambda () (org-clock-watch-toggle 'on)))
 

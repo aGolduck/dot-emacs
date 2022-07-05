@@ -1,4 +1,3 @@
-(straight-use-package 'transient)
 (straight-use-package 'treemacs)
 
 ;;; transient for magit,org-ql,rg...

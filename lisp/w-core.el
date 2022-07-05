@@ -1,4 +1,4 @@
-;;; declare built-in packages, in case to be installed from other sources by other org third party packages
+;;; declare built-in packages, in case to be installed from other sources by other third party packages
 (straight-use-package '(eldoc :type built-in))
 (straight-use-package '(flymake :type built-in))
 (straight-use-package '(jsonrpc :type built-in))
@@ -6,6 +6,7 @@
 (straight-use-package '(map :type built-in))
 (straight-use-package '(org :type built-in))
 (straight-use-package '(project :type built-in))
+(straight-use-package '(transient :type built-in))
 (straight-use-package '(xref :type built-in))
 
 ;;; packages which should be built-in
