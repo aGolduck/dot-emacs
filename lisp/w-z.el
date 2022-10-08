@@ -23,7 +23,6 @@
 (straight-use-package 'pkgbuild-mode)
 (straight-use-package 'rust-mode)
 (straight-use-package 'link-hint)
-(straight-use-package 'pdf-tools)
 
 
 ;;; TODO to organise
