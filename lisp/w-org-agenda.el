@@ -4,6 +4,7 @@
 ;;                                         :fork (:host github :repo "aGolduck/org-clock-watch")))
 
 (setq org-agenda-columns-add-appointments-to-effort-sum t
+      ;; agenda-files 用于初始化，用过 org-agenda-file-to-front 会保存到 custom.el 覆盖该值
       org-agenda-files '("~/org/orgzly")
       org-agenda-log-mode-items '(closed)
       org-agenda-log-mode-items (quote (closed state))

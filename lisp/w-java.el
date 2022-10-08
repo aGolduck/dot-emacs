@@ -5,7 +5,6 @@
 
 (add-hook 'java-mode-hook #'company-mode)
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
-(add-hook 'java-mode-hook #'electric-pair-local-mode)
 (add-hook 'java-mode-hook #'yas-minor-mode)
 ;; (add-hook 'java-mode-hook
 ;;           (lambda ()
@@ -50,11 +49,11 @@
   (remove-hook 'java-mode-hook #'lsp))
 
 ;;; dap-java
-(autoload 'dap-java-debug "dap-java")
-(autoload 'dap-java-debug-test-class "dap-java")
-(autoload 'dap-java-debug-test-method "dap-java")
-(autoload 'dap-java-run-test-class "dap-java")
-(autoload 'dap-java-run-test-method "dap-java")
+(autoload 'dap-java-debug "dap-java" nil t nil)
+(autoload 'dap-java-debug-test-class "dap-java" nil t nil)
+(autoload 'dap-java-debug-test-method "dap-java" nil t nil)
+(autoload 'dap-java-run-test-class "dap-java" nil t nil)
+(autoload 'dap-java-run-test-method "dap-java" nil t nil)
 (setq dap-java-test-runner
         (w/locate-emacs-var-file ".cache/lsp/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
   (global-set-key (kbd "M-SPC t t") #'dap-java-run-test-method)

@@ -59,6 +59,11 @@
 	("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
 	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")))
 (global-set-key (kbd "C-c c") #'org-capture)
+(defun 可达鸭/org-capture-添加ID ()
+  (when (org-capture-get :create-id)
+    (message "captured")
+    (org-id-get-create)))
+(add-hook 'org-capture-prepare-finalize-hook #'可达鸭/org-capture-添加ID)
 
 ;;; org-colview
 (with-eval-after-load 'org-colview
@@ -94,8 +99,8 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
-(with-eval-after-load 'org
-  (org-roam-db-autosync-enable))
+;; (with-eval-after-load 'org
+;;   (org-roam-db-autosync-enable))
 ;;; zotxt
 ;; (setq org-zotxt-link-description-style :citation)
 (setq zotxt-default-bibliography-style "mkbehr-short")

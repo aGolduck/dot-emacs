@@ -19,7 +19,7 @@
 
 
 ;;; eshell
-(autoload 'esh-autosuggest-mode "esh-autosuggest")
+(autoload 'esh-autosuggest-mode "esh-autosuggest" nil t nil)
 (setq eshell-directory-name (w/locate-emacs-var-file "eshell"))
 (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
 (add-hook 'eshell-mode-hook (lambda () (require 'eshell-z)))

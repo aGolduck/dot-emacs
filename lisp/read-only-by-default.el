@@ -52,6 +52,8 @@
              "org/journal"
              ".git/COMMIT_EDITMSG"
              ".dir-locals.el"
+             ".emacs.d/straight"        ;; for straight compiling packages
+             ".org-src-babel"
              )))
 ;; TODO: add variable watcher to 'buffer-read-only for buffer-read-only to set cursor-type
 (defvar w/original-read-only-mode-buffers nil)

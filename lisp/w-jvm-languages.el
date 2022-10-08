@@ -6,7 +6,6 @@
 (straight-use-package 'scala-mode)
 
 ;;; clojure
-(add-hook 'clojure-mode-hook #'electric-pair-local-mode)
 (add-hook 'clojure-mode-hook #'lispy-mode)
 (add-hook 'clojure-mode-hook #'company-mode)
 ;; (with-eval-after-load 'clojure-mode
@@ -23,7 +22,6 @@
   (remove-hook 'scala-mode-hook #'lsp))
 ;; (setq lsp-metals-server-args lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
 (add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
-(add-hook 'scala-mode-hook #'electric-pair-local-mode)
 (add-hook 'scala-mode-hook #'company-mode)
 
 

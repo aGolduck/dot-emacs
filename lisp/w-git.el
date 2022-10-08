@@ -31,7 +31,7 @@
 ;;                                           '("T " "Todos" magit-todos-jump-to-todos)))
 
 
-;; (add-hook 'after-init-hook #'global-hiff-hl-mode) ;; do not know why global-diff-hl-mode can't be added, it's autoloaded
+;; (add-hook 'after-init-hook #'global-hiff-hl-mode nil t nil) ;; do not know why global-diff-hl-mode can't be added, it's autoloaded
 (global-diff-hl-mode)
 
 (provide 'w-git)

@@ -1,4 +1,4 @@
-;; (w/straight-use-package-unless-featurep 'vterm #'vterm)
+(w/straight-use-package-unless-featurep 'vterm #'vterm)
 
 ;;; vterm
 (setq vterm-buffer-name-string "vterm %s"

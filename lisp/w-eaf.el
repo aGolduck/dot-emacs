@@ -4,8 +4,8 @@
 (straight-use-package 'deferred)
 (straight-use-package '(emacs-application-framework :host github :repo "manateelazycat/emacs-application-framework" :files ("*")))
 
-(autoload 'eaf-browser-restore-buffers "eaf")
-(autoload 'eaf-open-this-from-dired "eaf")
+(autoload 'eaf-browser-restore-buffers "eaf" nil t nil)
+(autoload 'eaf-open-this-from-dired "eaf" nil t nil)
 
 (setq browse-url-browser-function 'eaf-open-browser
       eaf-browser-continue-where-left-off t

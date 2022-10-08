@@ -31,7 +31,7 @@
 (global-set-key (kbd "M-SPC b s") #'bookmark-set)
 
 ;;; find-func
-(setq find-function-C-source-directory "~/b/gnu.org/emacs/emacs-native-comp/src")
+(setq find-function-C-source-directory "~/g/emacs-mirror/emacs/src")
 (global-set-key (kbd "M-SPC F F") #'find-function-other-window)
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)

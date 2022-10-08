@@ -2,7 +2,7 @@
 
 
 
-;;; load common packages for selectrum/vertico/icomplete
+;;; load common packages for selectrum/vertico/icomplete/fido
 
 (straight-use-package 'consult)
 (straight-use-package 'marginalia)
@@ -21,21 +21,6 @@
 
 
 
-;;;  choose one minibuffer completion framework
-
-;; selectrum
-(straight-use-package 'selectrum)
-(straight-use-package 'prescient)
-(straight-use-package 'selectrum-prescient)
-
-(setq selectrum-fix-vertical-window-height t
-      selectrum-max-window-height 10)
-(autoload 'prescient-persist-mode "prescient")
-(add-hook 'selectrum-mode-hook #'selectrum-prescient-mode)
-;; (add-hook 'after-init-hook #'selectrum-mode)
-;; (add-hook 'after-init-hook #'prescient-persist-mode)
-
-
 ;; vertico
 (straight-use-package 'vertico)
 (with-eval-after-load 'vertico
@@ -43,24 +28,13 @@
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))
 (add-hook 'after-init-hook #'vertico-mode)
 
-
-;; icomplete-vertical
-(straight-use-package 'icomplete-vertical)
-(with-eval-after-load 'icomplete
-  (icomplete-vertical-mode 1)
+;; fido-mode 启动后无法使用 orderless, 切 vertico 再切 fido 好像又可以，应该是 hook 有问题
+(with-eval-after-load 'fido-mode
   (require 'orderless)
-  (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer)
-
-  ;; <RETURN> is not available for command line, see http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
-  (define-key icomplete-minibuffer-map (kbd "RET") #'icomplete-force-complete-and-exit)
-  (define-key icomplete-minibuffer-map (kbd "TAB") #'icomplete-force-complete)
-  (define-key icomplete-minibuffer-map (kbd "C-j") #'icomplete-ret)
-  (define-key icomplete-minibuffer-map (kbd "<down>") #'icomplete-forward-completions)
-  (define-key icomplete-minibuffer-map (kbd "C-n") #'icomplete-forward-completions)
-  (define-key icomplete-minibuffer-map (kbd "<up>") #'icomplete-backward-completions)
-  (define-key icomplete-minibuffer-map (kbd "C-p") #'icomplete-backward-completions))
-;; (add-hook 'after-init-hook #'icomplete-mode)
-;; (icomplete-vertical-mode)
+  (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))
+;; (if (fboundp 'fido-vertical-mode)
+;;     (add-hook 'after-init-hook 'fido-vertical-mode)
+;;   (add-hook 'after-init-hook 'fido-mode))
 
 
 
@@ -85,7 +59,7 @@
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 (with-eval-after-load 'isearch
-  (define-key isearch-mode-map (kbd "M-e") #'consult-isearch))
+  (define-key isearch-mode-map (kbd "M-e") #'consult-isearch-history))
 
 (setq-default marginalia-annotators '(marginalia-annotators-heavy))
 (add-hook 'after-init-hook 'marginalia-mode)

@@ -10,8 +10,8 @@
 
 ;;; programming
 (require 'w-prog)
-(require 'w-lsp)
-(require 'w-eglot)
+;; (require 'w-lsp)
+;; (require 'w-eglot)
 
 (require 'w-c)
 (require 'w-java)

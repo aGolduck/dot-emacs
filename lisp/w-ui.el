@@ -4,7 +4,7 @@
 (setq transient-history-file (w/locate-emacs-var-file "transient/history.el"))
 
 ;;; treemacs
-(autoload 'treemacs-current-visibilit "treemacs")
+(autoload 'treemacs-current-visibilit "treemacs" nil t nil)
 (setq treemacs-no-png-images t
       treemacs-persist-file (w/locate-emacs-var-file ".cache/treemacs-persist"))
 (add-hook 'treemacs-mode-hook (lambda () (setq-local line-spacing 0)))

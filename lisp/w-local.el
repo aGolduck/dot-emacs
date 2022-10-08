@@ -7,7 +7,7 @@
 
   (setq-default line-spacing 0)
 
-  (add-hook 'nxml-mode-hook #'lsp)
+  ;; (add-hook 'nxml-mode-hook #'lsp)
 
   ;; erlang
   (setq erlang-root-dir
@@ -20,10 +20,9 @@
            (concat "ls -d " erlang-root-dir "/lib/erlang/lib/tools-*" "/emacs"))
           0 -1)
          load-path))
-  (require 'erlang-start)
+  ;; (require 'erlang-start)
   (add-hook 'erlang-mode-hook #'company-mode)
-  (add-hook 'erlang-mode-hook #'electric-pair-local-mode)
-
+  
   (when window-system
     (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height)))
 

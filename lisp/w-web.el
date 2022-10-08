@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'emmet-mode)
-(straight-use-package 'json-mode)
+;; (straight-use-package 'json-mode)
 (straight-use-package 'typescript-mode)
 
 ;;; js
@@ -13,7 +13,6 @@
 (dolist (hooked (list
                  #'company-mode
                  #'eldoc-mode
-                 #'electric-pair-local-mode
                  ))
   (add-hook 'js-mode-hook hooked))
 
@@ -22,7 +21,6 @@
 (dolist (hooked (list
                  #'company-mode
                  #'eldoc-mode
-                 #'electric-pair-local-mode
                  ))
   (add-hook 'typescript-mode-hook hooked))
 (when (executable-find "tsserver")

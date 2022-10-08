@@ -10,8 +10,8 @@
 
 
 ;;; autoload
-(autoload 'dired-jump "dired-x")
-(autoload 'hydra-dired-quick-sort/body "dired-quick-sort")
+(autoload 'dired-jump "dired-x" nil t nil)
+(autoload 'hydra-dired-quick-sort/body "dired-quick-sort" nil t nil)
 
 
 

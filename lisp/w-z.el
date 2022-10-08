@@ -5,8 +5,9 @@
 (when (equal w/lsp-client "lsp")
   (add-hook 'groovy-mode-hook #'lsp))
 (add-hook 'groovy-mode-hook #'company-mode)
-(add-hook 'groovy-mode-hook #'electric-pair-local-mode)
 ;;; markdown
+;; edit-indirect for editing source code in delicated buffer
+(straight-use-package 'edit-indirect)
 (straight-use-package 'markdown-mode)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -44,9 +45,9 @@
 ;; (straight-use-package 'oauth)
 ;; (require 'oauth)
 ;; (straight-use-package 'zotero)
-;; (autoload 'zotero-auth-token-create "zotero-auth")
+;; (autoload 'zotero-auth-token-create "zotero-auth" nil t nil)
 ;; (require 'zotero-browser)
-;; (autoload 'zotero-browser "zotero-browser")
+;; (autoload 'zotero-browser "zotero-browser" nil t nil)
 
 
 (straight-use-package 'lua-mode)

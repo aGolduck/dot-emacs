@@ -30,6 +30,8 @@
       pyim-dcache-directory (w/locate-emacs-var-file "pyim/cache"))
 
 (defun 可达鸭/lispy-pyim-强制英文 ()
+  ;; TODO fix this, only for lispy-mode
+  (and (boundp 'lispy-mode))
   (or (lispy--edebug-commandp)
       (region-active-p)
       (lispy-left-p)
@@ -52,7 +54,7 @@
 
 (setq-default pyim-punctuation-translate-p '(auto yes no)
               pyim-punctuation-half-width-functions '(可达鸭/是否编程模式半角)
-              pyim-english-input-switch-functions '(可达鸭/lispy-pyim-强制英文))
+              pyim-english-input-switch-functions '(nil))
 (global-set-key (kbd "M-t") #'toggle-input-method)
 (add-hook 'after-init-hook #'可达鸭/启动五笔单字输入法)
 (with-eval-after-load 'pyim
