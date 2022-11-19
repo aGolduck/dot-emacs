@@ -1,4 +1,4 @@
-(require 'w-built-in)
+(require 'w-minimal)
 
 (require 'w-straight)
 (require 'w-exec-path)

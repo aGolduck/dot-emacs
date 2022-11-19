@@ -13,7 +13,7 @@
   (expand-file-name file w/EMACS-VAR))
 
 
-(require 'w-built-in)
+(require 'w-minimal)
 
 
 (require 'w-straight)

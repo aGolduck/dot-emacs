@@ -138,4 +138,4 @@
 (require 'w-ui-built-in)
 (require 'w-font)
 
-(provide 'w-built-in)
+(provide 'w-minimal)
