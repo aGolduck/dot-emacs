@@ -4,6 +4,7 @@
 (setq org-directory "~/org"
       org-confirm-babel-evaluate nil
       org-export-with-sub-superscripts nil
+      org-export-with-toc nil
       org-use-sub-superscripts nil)
 
 (setq org-todo-keywords

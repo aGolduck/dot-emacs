@@ -1,35 +1,6 @@
 ;;;  -*- lexical-binding: t; -*-
 (straight-use-package 'ace-window)
 
-(defun w/split-window-right ()
-  "split-window-right with right window having a max width of 100 columns"
-  (interactive)
-  (if (> (window-total-width) 200)
-      (split-window-right -100)
-    (if (> (window-total-width) 180)
-        (split-window-right -90)
-      (split-window-right))))
-(defun w/split-window-right-and-focus ()
-  (interactive)
-  (w/split-window-right)
-  (other-window 1))
-(global-set-key (kbd "M-SPC b b") #'switch-to-buffer)
-(global-set-key (kbd "M-SPC b B") #'switch-to-buffer-other-window)
-(global-set-key (kbd "M-SPC w D") #'delete-other-windows)
-(global-set-key (kbd "M-SPC w S") #'w/split-window-right-and-focus)
-(global-set-key (kbd "M-SPC w V") (defun w/split-window-and-focus () (interactive) (split-window-below) (other-window 1)))
-(global-set-key (kbd "M-SPC w X") (defun w/swap-window-and-focus () (interactive) (window-swap-states) (other-window 1)))
-(global-set-key (kbd "M-SPC w d") #'delete-window)
-(global-set-key (kbd "M-SPC w s") #'w/split-window-right)
-(global-set-key (kbd "M-SPC w v") #'split-window-below)
-(global-set-key (kbd "M-SPC w x") #'window-swap-states)
-
-;;; winner
-(add-hook 'after-init-hook #'winner-mode)
-(global-set-key (kbd "M-SPC w u") #'winner-undo)
-(global-set-key (kbd "M-SPC w r") #'winner-redo)
-(with-eval-after-load 'winner (diminish 'winner-mode))
-
 ;;; ace-window
 ;; (defun w/get-window-list ()
 ;;   (if (<= (length (window-list)) 2)

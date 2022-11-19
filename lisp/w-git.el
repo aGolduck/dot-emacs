@@ -1,6 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(require 'w-ui)
-
 (straight-use-package 'magit)
 (straight-use-package 'magit-delta)
 (straight-use-package 'magit-todos)

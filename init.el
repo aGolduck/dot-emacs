@@ -1,29 +1,26 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; M-SPC is key to my emacs world
-(global-unset-key (kbd "M-SPC"))
-
-(defvar w/lsp-client nil "language service protocol client")
-;; (setq w/lsp-client "eglot")
-;; (setq w/lsp-client "lsp")
-
+;;; prepare
 (defun w/locate-in-current-directory (path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) path))
-
 (add-to-list 'load-path (w/locate-in-current-directory "lisp"))
 (add-to-list 'load-path (w/locate-in-current-directory "site-lisp"))
-
 (load (w/locate-in-current-directory "private"))
+(defconst w/HOST (substring (shell-command-to-string "hostname") 0 -1))
+(defconst w/EMACS-VAR (locate-user-emacs-file "var"))
+(unless (file-exists-p w/EMACS-VAR) (mkdir w/EMACS-VAR))
+(defun w/locate-emacs-var-file (file)
+  (expand-file-name file w/EMACS-VAR))
 
-;;; prepare
-(require 'w-prepare)
+
+(require 'w-built-in)
+
+
 (require 'w-straight)
-(require 'w-exec-path)
-
-(require 'w-minimal)
 (require 'w-core)
 (require 'w-to-be-core)
 
+;;; lsp-bridge
 (straight-use-package 'posframe)
 (straight-use-package 'markdown-mode)
 (straight-use-package 'yasnippet)

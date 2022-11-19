@@ -7,8 +7,6 @@
 (global-set-key (kbd "M-SPC f F") #'find-file-other-window)
 (global-set-key (kbd "M-SPC f f") #'find-file)
 (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal)
-(with-eval-after-load 'view
-  (diminish 'view-mode "览"))
 
 ;; save all files when you switch out of emacs.
 ;; (setq after-focus-change-function (lambda () (interactive) (save-some-buffers t)))
@@ -71,4 +69,4 @@ That is, remove a non kept dired from the recent list."
       (message "Copied buffer file path '%s' to the clipboard." file-path))))
 
 
-(provide 'w-file)
+(provide 'w-file-built-in)

@@ -5,38 +5,6 @@
 ;;; emacs regex builder
 (setq reb-re-syntax 'string)
 
-;;; desktop
-(setq desktop-base-file-name (expand-file-name (concat ".emacs-" emacs-version ".desktop") w/EMACS-VAR)
-      desktop-base-lock-name (expand-file-name (concat ".emacs-" emacs-version ".desktop.lock") w/EMACS-VAR)
-      desktop-globals-to-save '()
-      desktop-locals-to-save '()
-      desktop-files-not-to-save ".*"
-      desktop-buffers-not-to-save ".*"
-      desktop-minor-mode-table '((defining-kbd-macro nil)
-                                 (isearch-mode nil)
-                                 (vc-mode nil)
-                                 (vc-dir-mode nil)
-                                 (erc-track-minor-mode nil)
-                                 (savehist-mode nil)
-                                 (tab-bar-mode nil))
-      desktop-save t)
-(add-hook 'desktop-save-hook (lambda () (tab-bar-mode -1)))
-(add-hook 'after-init-hook
-          (lambda ()
-            (when window-system
-              (desktop-save-mode))))
-
-;;; bookmark
-(setq bookmark-default-file (w/locate-emacs-var-file "bookmarks"))
-(global-set-key (kbd "M-SPC b s") #'bookmark-set)
-
-;;; find-func
-(setq find-function-C-source-directory "~/g/emacs-mirror/emacs/src")
-(global-set-key (kbd "M-SPC F F") #'find-function-other-window)
-(global-set-key (kbd "M-SPC F f") #'find-function)
-(global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
-(global-set-key (kbd "M-SPC F v") #'find-variable)
-
 (add-hook 'after-init-hook #'gcmh-mode)
 ;; restore original gc-cons-percentage
 (add-hook 'after-init-hook (lambda () (setq gc-cons-percentage 0.1)))

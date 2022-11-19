@@ -18,7 +18,6 @@
 (require 'w-python)
 (require 'w-jvm-languages)
 (require 'w-haskell)
-(require 'w-web)
 (require 'w-other-languages)
 (require 'w-mmm)
 
