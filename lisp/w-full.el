@@ -6,7 +6,7 @@
 (require 'w-flyspell)
 
 ;;; programming
-(require 'w-prog)
+(require 'w-programming-full)
 
 (require 'w-java)
 (require 'w-other-languages)

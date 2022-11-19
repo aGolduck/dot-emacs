@@ -18,7 +18,6 @@
 
 (require 'w-straight)
 (require 'w-essential)
-(require 'w-lsp-bridge)
 (require 'w-org)
 
 

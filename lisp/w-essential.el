@@ -48,35 +48,8 @@
 (require 'w-minibuffer)
 (require 'w-company)
 
-;;; programming
-(require 'w-projectile)
-
-
 ;;; programming languages
-(straight-use-package 'typescript-mode)
-(setq js-indent-level 2
-      typescript-indent-leven 2)
-(straight-use-package 'go-mode)
-(straight-use-package 'clojure-mode)
-(straight-use-package 'cider)
-(straight-use-package 'scala-mode)
-(add-hook 'clojure-mode-hook #'lispy-mode)
-;;; TODO company 的相关配置全部转移到 w-company
-(add-hook 'clojure-mode-hook #'company-mode)
-;; (with-eval-after-load 'clojure-mode
-;;   (with-eval-after-load 'cider
-;;     (with-eval-after-load 'flycheck
-;;       (flycheck-clojure-setup))))
-(add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
-(add-hook 'scala-mode-hook #'company-mode)
-(straight-use-package 'haskell-mode)
-
-
-;; dumb-jump
-(straight-use-package 'dumb-jump)
-;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
-(with-eval-after-load 'xref
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+(require 'w-programming-essential)
 
 ;;; csv-mode
 (straight-use-package 'csv-mode)

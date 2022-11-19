@@ -107,11 +107,7 @@
 (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
 
 ;;; programming
-(add-hook 'prog-mode-hook #'electric-pair-local-mode)
-(global-set-key [remap comment-dwim] #'comment-line)
-(setq xref-show-definitions-function #'xref-show-definitions-completing-read)
-(add-hook 'python-mode-hook #'highlight-indent-guides-mode)
-
+(require 'w-programming-minimal)
 
 ;;; simple
 (add-hook 'after-init-hook #'global-visual-line-mode)

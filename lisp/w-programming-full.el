@@ -37,4 +37,4 @@
 ;;; documentations
 (setq devdocs-browser-cache-directory (w/locate-emacs-var-file "devdocs-browser"))
 
-(provide 'w-prog)
+(provide 'w-programming-full)
