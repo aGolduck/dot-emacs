@@ -2,7 +2,6 @@
 (straight-use-package 'lispy)
 
 (with-eval-after-load 'lispy
-  (diminish 'lispy-mode)
   ;; (define-key lispy-mode-map (kbd "[") nil)
   ;; (define-key lispy-mode-map (kbd "]") nil)
   (define-key lispy-mode-map (kbd "M-a") #'lispy-backward)

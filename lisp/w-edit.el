@@ -5,8 +5,6 @@
 
 (add-hook 'after-init-hook #'delete-selection-mode)
 (add-hook 'after-init-hook #'global-subword-mode)
-(with-eval-after-load 'subword
-  (diminish 'subword-mode))
 
 (setq expand-region-contract-fast-key "V")
 (global-set-key (kbd "M-SPC v") #'er/expand-region)

@@ -1,5 +1,6 @@
 ;;;  -*- lexical-binding: t; -*-
 ;;; set up a template for complex configuration modules
+;;; TODO 将 dired built-in 部分迁入 w-minimal 配置
 
 
 

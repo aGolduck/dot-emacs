@@ -18,9 +18,7 @@
   (setq magit-completing-read-function #'selectrum-completing-read))
 
 (when (executable-find "delta")
-  (add-hook 'magit-mode-hook #'magit-delta-mode)
-  (with-eval-after-load 'magit-delta
-    (diminish 'magit-delta-mode)))
+  (add-hook 'magit-mode-hook #'magit-delta-mode))
 
 (setq magit-todos-exclude-globs '("*.css.map"))
 (add-hook 'magit-mode-hook (lambda () (let ((inhibit-message t)) (magit-todos-mode 1))))

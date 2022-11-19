@@ -45,7 +45,6 @@
 (require 'w-font)
 
 (setq calendar-chinese-all-holidays-flag t)
-(with-eval-after-load 'abbrev (diminish 'abbrev-mode "缩"))
 
 (straight-use-package 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))

@@ -8,8 +8,7 @@
 (add-hook 'after-init-hook #'gcmh-mode)
 ;; restore original gc-cons-percentage
 (add-hook 'after-init-hook (lambda () (setq gc-cons-percentage 0.1)))
-(with-eval-after-load 'gcmh
-  (diminish 'gcmh-mode))
+
 
 ;;; helpful
 ;; (setq counsel-describe-function-function #'helpful-callable

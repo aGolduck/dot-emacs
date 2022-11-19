@@ -9,7 +9,6 @@
   (add-hook 'outline-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode #'flyspell-prog-mode)
   (with-eval-after-load 'flyspell
-    (diminish 'flyspell-mode)
     (define-key flyspell-mode-map (kbd "C-;") #'flyspell-correct-wrapper)
     (define-key flyspell-mode-map (kbd "C-,") nil)
     (define-key flyspell-mode-map (kbd "C-.") nil)))
