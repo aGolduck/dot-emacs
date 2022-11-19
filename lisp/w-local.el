@@ -21,7 +21,6 @@
           0 -1)
          load-path))
   ;; (require 'erlang-start)
-  (add-hook 'erlang-mode-hook #'company-mode)
   
   (when window-system
     (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height)))

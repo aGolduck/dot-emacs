@@ -20,8 +20,7 @@
         (lispy-newline-and-indent-plain)))))
 
 
-(add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
-  (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
+(add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
+(add-hook 'emacs-lisp-mode-hook #'lispy-mode)
 
 (provide 'w-lisp)

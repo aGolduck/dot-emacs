@@ -59,11 +59,6 @@
 (add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
 
 
-;;; quickrun
-(straight-use-package 'quickrun)
-(with-eval-after-load 'quickrun
-  (quickrun-set-default "typescript" "typescript/deno"))
-
 ;;; symbol-overlay
 (straight-use-package 'symbol-overlay)
 (global-set-key (kbd "M-s h .") 'symbol-overlay-put)

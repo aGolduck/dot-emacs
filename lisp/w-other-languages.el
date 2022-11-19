@@ -1,9 +1,5 @@
 ;; (straight-use-package 'sqlformat)
 
-(add-hook 'sql-mode-hook #'company-mode)
-
-(add-hook 'awk-mode-hook #'company-mode)
-
 ;;; xml
 (setq nxml-child-indent 4
       nxml-attribute-indent 4

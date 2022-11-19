@@ -18,12 +18,15 @@
 
 (require 'w-straight)
 (require 'w-essential)
-(require 'w-org)
 
+;;; w-org 待整理进 essential
+(require 'w-org)
 
 (straight-use-package 'interaction-log)
 (require 'interaction-log)
 (interaction-log-mode 1)
+
+
 
 (require 'w-full)
 
@@ -36,6 +39,7 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'no-error 'no-message)
 
+;;; 以下配置置前会出错
 (require 'w-lisp)
 (require 'read-only-by-default)
 
