@@ -4,7 +4,6 @@
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
 (straight-use-package 'highlight-indent-guides)
-(straight-use-package 'quickrun)
 (straight-use-package 'smartparens)
 (straight-use-package 'yasnippet)
 (straight-use-package 'yasnippet-snippets)

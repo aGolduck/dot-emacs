@@ -1,8 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-;;; groovy
-(straight-use-package 'groovy-mode)
-(setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
-(add-hook 'groovy-mode-hook #'company-mode)
 ;;; markdown
 ;; edit-indirect for editing source code in delicated buffer
 (straight-use-package 'edit-indirect)

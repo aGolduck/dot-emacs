@@ -52,11 +52,68 @@
 (require 'w-projectile)
 
 
+;;; programming languages
+(straight-use-package 'typescript-mode)
+(setq js-indent-level 2
+      typescript-indent-leven 2)
+(straight-use-package 'go-mode)
+(straight-use-package 'clojure-mode)
+(straight-use-package 'cider)
+(straight-use-package 'scala-mode)
+(add-hook 'clojure-mode-hook #'lispy-mode)
+;;; TODO company 的相关配置全部转移到 w-company
+(add-hook 'clojure-mode-hook #'company-mode)
+;; (with-eval-after-load 'clojure-mode
+;;   (with-eval-after-load 'cider
+;;     (with-eval-after-load 'flycheck
+;;       (flycheck-clojure-setup))))
+(add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
+(add-hook 'scala-mode-hook #'company-mode)
+(straight-use-package 'haskell-mode)
+
+
 ;; dumb-jump
 (straight-use-package 'dumb-jump)
 ;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
 (with-eval-after-load 'xref
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
+;;; csv-mode
+(straight-use-package 'csv-mode)
+(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+(setq csv-separators '("," ";" "|" " "))
+;; TODO truncate after align mode is on, revert if getting off
+(add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
+
+
+;;; quickrun
+(straight-use-package 'quickrun)
+(with-eval-after-load 'quickrun
+  (quickrun-set-default "typescript" "typescript/deno"))
+
+;;; symbol-overlay
+(straight-use-package 'symbol-overlay)
+(global-set-key (kbd "M-s h .") 'symbol-overlay-put)
+(global-set-key (kbd "M-s h c") 'symbol-overlay-remove-all)
+(global-set-key (kbd "M-p") #'symbol-overlay-switch-backward)
+(global-set-key (kbd "M-n") #'symbol-overlay-switch-forward)
+(with-eval-after-load 'symbol-overlay
+  (transient-define-prefix symbol-overlay-transient ()
+    "Symbol Overlay transient"
+    ["Symbol Overlay"
+     ["Overlays"
+      ("." "Add/Remove at point" symbol-overlay-put)
+      ("k" "Remove All" symbol-overlay-remove-all)
+      ]
+     ["Move to Symbol"
+      ("n" "Next" symbol-overlay-switch-forward)
+      ("p" "Previous" symbol-overlay-switch-backward)
+      ]
+     ["Other"
+      ("m" "Highlight symbol-at-point" symbol-overlay-mode)
+      ]
+     ])
+  (define-key symbol-overlay-map (kbd "?") 'symbol-overlay-transient))
 
 
 (provide 'w-essential)

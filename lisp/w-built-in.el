@@ -106,10 +106,12 @@
 ;;; makefile
 (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
 
-;;; programming common
+;;; programming
 (add-hook 'prog-mode-hook #'electric-pair-local-mode)
 (global-set-key [remap comment-dwim] #'comment-line)
 (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+(add-hook 'python-mode-hook #'highlight-indent-guides-mode)
+
 
 ;;; simple
 (add-hook 'after-init-hook #'global-visual-line-mode)
@@ -128,7 +130,7 @@
 (setq transient-history-file (w/locate-emacs-var-file "transient/history.el"))
 
 
-;;; emacs regex builder
+;;; misc
 (setq reb-re-syntax 'string)
 
 

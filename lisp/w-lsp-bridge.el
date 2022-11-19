@@ -31,4 +31,4 @@
         (when (string-equal (file-name-base project-path) "deno-bridge")
         "deno")))
 
-(require 'w-lsp-bridge)
+(provide 'w-lsp-bridge)
