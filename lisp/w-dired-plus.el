@@ -1,5 +1,3 @@
-(require 'w-dired)
-
 (straight-use-package 'vlf)
 (straight-use-package 'dotenv-mode)
 (straight-use-package 'direnv)

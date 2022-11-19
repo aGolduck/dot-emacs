@@ -1,6 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-(require 'w-prog-core)
-
 (straight-use-package 'devdocs)
 (straight-use-package 'devdocs-browser)
 (straight-use-package 'flycheck)
@@ -19,11 +17,9 @@
       show-paren-when-point-inside-paren t)
 ;;; yasnippet
 (with-eval-after-load 'yasnippet
-  (diminish 'yas-minor-mode "模")
+
   (define-key yas-minor-mode-map (kbd "TAB") nil))
 ;;; flycheck
-(with-eval-after-load 'flycheck
-  (diminish 'flycheck-mode "检"))
 (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
 ;; It is reported that highlight-indent-guides takes too much cpu time
 ;; https://emacs-china.org/t/highlight-indent-guides/16532/4

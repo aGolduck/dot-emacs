@@ -2,8 +2,6 @@
 ;;; groovy
 (straight-use-package 'groovy-mode)
 (setq lsp-groovy-server-file (locate-user-emacs-file "resources/groovy-language-server-all.jar"))
-(when (equal w/lsp-client "lsp")
-  (add-hook 'groovy-mode-hook #'lsp))
 (add-hook 'groovy-mode-hook #'company-mode)
 ;;; markdown
 ;; edit-indirect for editing source code in delicated buffer

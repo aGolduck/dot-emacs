@@ -37,4 +37,4 @@
 	                  (?? aw-show-dispatch-help)))
 (global-set-key (kbd "M-i") #'ace-window)
 
-(provide 'w-window)
+(provide 'w-ace-window)

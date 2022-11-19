@@ -2,16 +2,9 @@
 ;;; org-mode common
 (require 'w-org-core)
 
+;; TODO 移除 org-roam
 (straight-use-package '(org-roam :files ("*.el" "extensions/*.el")))
-(straight-use-package '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out")))
-(straight-use-package 'org-drill)
-(straight-use-package 'zotxt)
-(straight-use-package 'org-pomodoro)
-(straight-use-package 'org-ql)
-(straight-use-package 'org-cliplink)
-(straight-use-package 'org-download)
 (straight-use-package 'ox-gfm)
-(straight-use-package 'ox-hugo)
 
 
 (require 'bh-org)
@@ -34,8 +27,6 @@
       org-refile-use-outline-path t
       org-return-follows-link t
       org-stuck-projects (quote ("" nil nil "")))
-
-;; (add-hook 'org-mode-hook #'valign-mode)  ;; valign-mode is buggy
 
 ;;; org agenda
 (require 'w-org-agenda)
@@ -94,45 +85,40 @@
 (with-eval-after-load 'org-roam
   (global-set-key (kbd "M-SPC n l") #'org-roam-buffer-toggle)
   (diminish 'org-roam-mode "记"))
-(with-eval-after-load 'org-roam-ui
-  (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
 ;; (with-eval-after-load 'org
 ;;   (org-roam-db-autosync-enable))
 ;;; zotxt
 ;; (setq org-zotxt-link-description-style :citation)
-(setq zotxt-default-bibliography-style "mkbehr-short")
-(add-hook 'org-mode-hook #'org-zotxt-mode)
-(with-eval-after-load 'org
-  (org-link-set-parameters "zotero" :follow
-                           (lambda (zpath)
-                             (browse-url
-                              ;; we get the "zotero:"-less url, so we put it back.
-                              (format "zotero:%s" zpath)))))
+;; (setq zotxt-default-bibliography-style "mkbehr-short")
+;; (add-hook 'org-mode-hook #'org-zotxt-mode)
+;; (with-eval-after-load 'org
+;;   (org-link-set-parameters "zotero" :follow
+;;                            (lambda (zpath)
+;;                              (browse-url
+;;                               ;; we get the "zotero:"-less url, so we put it back.
+;;                               (format "zotero:%s" zpath)))))
 
 ;;; org-drill
-(setq persist--directory-location (w/locate-emacs-var-file "persist"))
+;; (setq persist--directory-location (w/locate-emacs-var-file "persist"))
 
 ;;; org-pomodoro
-(global-set-key (kbd "M-c") #'org-pomodoro)
+;; (global-set-key (kbd "M-c") #'org-pomodoro)
 
 ;;; lazy load
-(with-eval-after-load 'org
-  (require 'org-download)
+;; (with-eval-after-load 'org
+;;   (require 'org-download)
 
-  (defadvice org-html-paragraph (before org-html-paragraph-advice
-					(paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
-  (define-key org-mode-map (kbd "C-<tab>") nil))
+;;   (defadvice org-html-paragraph (before org-html-paragraph-advice
+;; 					(paragraph contents info) activate)
+;;     "Join consecutive Chinese lines into a single long line without
+;; unwanted space when exporting org-mode to html."
+;;     (let* ((origin-contents (ad-get-arg 1))
+;;            (fix-regexp "[[:multibyte:]]")
+;;            (fixed-contents
+;;             (replace-regexp-in-string
+;;              (concat
+;;               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+;;       (ad-set-arg 1 fixed-contents)))
+;;   (define-key org-mode-map (kbd "C-<tab>") nil))
 
 (provide 'w-org)

@@ -15,4 +15,4 @@
 
 
 
-(provide 'w-term-core)
+(provide 'w-term-extra)

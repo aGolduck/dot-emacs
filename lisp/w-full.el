@@ -1,11 +1,9 @@
-(require 'w-core)
+(require 'w-essential)
 
 ;; (require 'w-rime)
-(require 'w-gui)
 (require 'w-dired-plus)
 
 (require 'w-term-full)
-(require 'w-system)
 (require 'w-flyspell)
 
 ;;; programming
@@ -13,13 +11,11 @@
 ;; (require 'w-lsp)
 ;; (require 'w-eglot)
 
-(require 'w-c)
 (require 'w-java)
 (require 'w-python)
 (require 'w-jvm-languages)
 (require 'w-haskell)
 (require 'w-other-languages)
-(require 'w-mmm)
 
 
 ;;; org-mode

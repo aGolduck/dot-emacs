@@ -17,28 +17,63 @@
 
 
 (require 'w-straight)
-(require 'w-core)
-(require 'w-to-be-core)
+(require 'w-essential)
+(require 'w-org)
+(require 'w-jvm-languages)
 
-;;; lsp-bridge
-(straight-use-package 'posframe)
-(straight-use-package 'markdown-mode)
-(straight-use-package 'yasnippet)
-(straight-use-package '(lsp-bridge :host github :repo "manateelazycat/lsp-bridge" :files ("*")))
-;; (yas-global-mode)
-;; (setq lsp-bridge-enable-log t
-;;       lsp-bridge-enable-debug t)
-;; org-babel js/shell 等不支持，原因不明
-(setq lsp-bridge-org-babel-lang-list '("css" "python"))
-(with-eval-after-load 'lsp-bridge
-  (define-key lsp-bridge-mode-map (kbd "M-.") #'lsp-bridge-find-def)
-  (define-key lsp-bridge-mode-map (kbd "M-,") #'lsp-bridge-return-from-def))
-(add-hook 'lsp-bridge-mode-hook #'yas-minor-mode)
-;; (add-hook 'emacs-lisp-mode-hook #'lsp-bridge-mode)
-(add-hook 'css-mode-hook #'lsp-bridge-mode)
-(add-hook 'js-mode-hook #'lsp-bridge-mode)
-(add-hook 'python-mode-hook #'lsp-bridge-mode)
-;; (require 'w-full)
+;;; csv-mode
+(straight-use-package 'csv-mode)
+(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+(setq csv-separators '("," ";" "|" " "))
+;; TODO truncate after align mode is on, revert if getting off
+(add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
+
+;; (require 'w-lsp-bridge)
+
+
+(straight-use-package 'typescript-mode)
+(setq js-indent-level 2
+      typescript-indent-leven 2)
+
+;; quickrun
+(straight-use-package 'quickrun)
+(with-eval-after-load 'quickrun
+  (quickrun-set-default "typescript" "typescript/deno"))
+
+
+;; symbol-overlay
+(straight-use-package 'symbol-overlay)
+(global-set-key (kbd "M-s h .") 'symbol-overlay-put)
+(global-set-key (kbd "M-s h c") 'symbol-overlay-remove-all)
+(global-set-key (kbd "M-p") #'symbol-overlay-switch-backward)
+(global-set-key (kbd "M-n") #'symbol-overlay-switch-forward)
+(with-eval-after-load 'symbol-overlay
+  (transient-define-prefix symbol-overlay-transient ()
+    "Symbol Overlay transient"
+    ["Symbol Overlay"
+     ["Overlays"
+      ("." "Add/Remove at point" symbol-overlay-put)
+      ("k" "Remove All" symbol-overlay-remove-all)
+      ]
+     ["Move to Symbol"
+      ("n" "Next" symbol-overlay-switch-forward)
+      ("p" "Previous" symbol-overlay-switch-backward)
+      ]
+     ["Other"
+      ("m" "Highlight symbol-at-point" symbol-overlay-mode)
+      ]
+     ])
+  (define-key symbol-overlay-map (kbd "?") 'symbol-overlay-transient))
+
+
+;; go-mode
+(straight-use-package 'go-mode)
+
+(straight-use-package 'interaction-log)
+(require 'interaction-log)
+(interaction-log-mode 1)
+
+(require 'w-full)
 
 ;;; local settings
 (require 'w-local)
@@ -58,6 +93,7 @@
             (unless (server-running-p)
               (server-start))))
 (when window-system
+  (desktop-save-mode 1)
   (desktop-read))
 (when (>= emacs-major-version 27)
     (tab-bar-mode 1)

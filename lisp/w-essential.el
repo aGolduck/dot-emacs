@@ -17,41 +17,46 @@
 
 (require 'w-diminish)
 
-;;; utils
-(require 'w-utils)
-(require 'w-emacs)
+;;; crux
+(straight-use-package 'crux)
+(global-set-key (kbd "C-o") #'crux-smart-open-line)
+(global-set-key (kbd "M-o") #'crux-smart-open-line-above)
+(global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file)
+
+;;; gcmh
+(straight-use-package 'gcmh)
+(add-hook 'after-init-hook #'gcmh-mode)
+
+;;; helpful
+(straight-use-package 'helpful)
+(global-set-key (kbd "C-h k") #'helpful-key)
+(global-set-key (kbd "C-h o") #'helpful-symbol)
+
 (require 'w-pyim)
 
 ;;; emacs/system tools
-(require 'w-window)
-(require 'w-buffer)
-(require 'w-term-core)
-(require 'w-dired)
+(require 'w-ace-window)
+(require 'w-term-extra)
+(require 'w-dired-extra)
 (require 'w-git)
 
 ;;; text edit
-(require 'w-search)
-(require 'w-edit)
+(require 'w-search-extra)
+(require 'w-edit-extra)
 
 ;;; complete anything
 (require 'w-minibuffer)
 (require 'w-company)
 
 ;;; programming
-(require 'w-prog-core)
-(require 'w-jump)
-
-;; fonts
-(require 'w-font)
-
-(setq calendar-chinese-all-holidays-flag t)
-
-(straight-use-package 'csv-mode)
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(setq csv-separators '("," ";" "|" " "))
-;; TODO truncate after align mode is on, revert if getting off
-(add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
+(require 'w-projectile)
 
 
+;; dumb-jump
+(straight-use-package 'dumb-jump)
+;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
+(with-eval-after-load 'xref
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
-(provide 'w-core)
+
+(provide 'w-essential)

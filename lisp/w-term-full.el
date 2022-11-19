@@ -1,19 +1,14 @@
 ;;;  -*- lexical-binding: t; -*-
-(require 'w-term-core)
-
 (straight-use-package '(term-cursor :host github :repo "h0d/term-cursor.el"))
 (straight-use-package 'eterm-256color)
 (straight-use-package 'esh-autosuggest)
 (straight-use-package 'eshell-z)
 
 ;;; common
-;; (add-hook 'compilation-filter-hook
-;;           (lambda ()
-;;             (let ((buffer-read-only nil))
-;;               (ansi-color-apply-on-region (point-min) (point-max)))))
-;; (setq term-cursor-triggers '(blink-cursor-mode-hook
-;;                                post-command-hook
-;;                                lsp-ui-doc-frame-hook))
+
+(setq term-cursor-triggers '(blink-cursor-mode-hook
+                               post-command-hook
+                               lsp-ui-doc-frame-hook))
 (when (not window-system)
   (add-hook 'after-init-hook #'global-term-cursor-mode))
 
