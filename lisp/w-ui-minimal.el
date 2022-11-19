@@ -100,5 +100,5 @@
 (global-set-key (kbd "M-SPC w u") #'winner-undo)
 (global-set-key (kbd "M-SPC w r") #'winner-redo)
 
-(provide 'w-ui-built-in)
+(provide 'w-ui-minimal)
 

@@ -18,9 +18,5 @@
 ;; TODO find company-prescient-mode replacement to drop prescient dependency
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
-;; need some tweaks to work
-;; (straight-use-package 'company-box)
-;; (add-hook 'company-mode-hook #'company-box-mode)
-;; (with-eval-after-load 'company-box (diminish 'company-box-mode))
 
 (provide 'w-company)

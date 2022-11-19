@@ -69,4 +69,4 @@ That is, remove a non kept dired from the recent list."
       (message "Copied buffer file path '%s' to the clipboard." file-path))))
 
 
-(provide 'w-file-built-in)
+(provide 'w-file-minimal)

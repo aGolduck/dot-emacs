@@ -8,9 +8,6 @@
 ;;; programming
 (require 'w-programming-full)
 
-(require 'w-java)
-(require 'w-other-languages)
-
 ;;; anything else
 (require 'w-z)
 

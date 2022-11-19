@@ -130,8 +130,8 @@
 (setq reb-re-syntax 'string)
 
 
-(require 'w-file-built-in)
-(require 'w-ui-built-in)
+(require 'w-file-minimal)
+(require 'w-ui-minimal)
 (require 'w-font)
 
 (provide 'w-minimal)

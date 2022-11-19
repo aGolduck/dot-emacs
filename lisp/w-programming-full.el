@@ -37,4 +37,9 @@
 ;;; documentations
 (setq devdocs-browser-cache-directory (w/locate-emacs-var-file "devdocs-browser"))
 
+;;; java
+(straight-use-package 'autodisass-java-bytecode)
+(require 'autodisass-java-bytecode)
+
+
 (provide 'w-programming-full)
