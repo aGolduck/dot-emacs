@@ -3,7 +3,8 @@
 (require 'w-dired-plus)
 
 (require 'w-term-full)
-(require 'w-flyspell)
+
+(require 'w-org)
 
 ;;; programming
 (require 'w-programming-full)

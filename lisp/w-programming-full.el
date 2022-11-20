@@ -20,6 +20,8 @@
   (define-key yas-minor-mode-map (kbd "TAB") nil))
 ;;; flycheck
 (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
+
+;;; highlight-indent-guides
 ;; It is reported that highlight-indent-guides takes too much cpu time
 ;; https://emacs-china.org/t/highlight-indent-guides/16532/4
 (setq highlight-indent-guides-method 'character
@@ -29,10 +31,13 @@
       highlight-indent-guides-auto-odd-face-perc 15
       highlight-indent-guides-auto-even-face-perc 55
       highlight-indent-guides-auto-character-face-perc 61.8)
+(add-hook 'python-mode-hook #'highlight-indent-guides-mode)
 
 (with-eval-after-load 'smartparens
   (require 'smartparens-config)
   (define-key smartparens-mode-map (kbd "C-(") #'sp-wrap-round))
+(add-hook 'nxml-mode-hook #'smartparens-mode)
+
 
 ;;; documentations
 (setq devdocs-browser-cache-directory (w/locate-emacs-var-file "devdocs-browser"))
@@ -41,5 +46,16 @@
 (straight-use-package 'autodisass-java-bytecode)
 (require 'autodisass-java-bytecode)
 
+;;; lua
+(straight-use-package 'lua-mode)
+
+;;; rust
+(straight-use-package 'rust-mode)
+
+;;; yaml
+(straight-use-package 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
+(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
 
 (provide 'w-programming-full)

@@ -72,6 +72,16 @@
 (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
 (global-set-key (kbd "M-SPC F v") #'find-variable)
 
+;;; flyspell
+(when (executable-find "aspell")
+  (setq flyspell-issue-message-flag t
+        ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'outline-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode #'flyspell-prog-mode))
+
+
 ;;; hideshow
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
@@ -96,7 +106,6 @@
               search-ring-max 200
               regexp-search-ring-max 200)
 (with-eval-after-load 'isearch
-
   (global-set-key (kbd "C-s") #'isearch-forward-regexp)
   (global-set-key (kbd "C-r") #'isearch-backward-regexp)
   (global-set-key (kbd "C-M-s") #'isearch-forward)
@@ -105,9 +114,6 @@
 
 ;;; makefile
 (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
-
-;;; programming
-(require 'w-programming-minimal)
 
 ;;; simple
 (add-hook 'after-init-hook #'global-visual-line-mode)
@@ -130,6 +136,7 @@
 (setq reb-re-syntax 'string)
 
 
+(require 'w-programming-minimal)
 (require 'w-file-minimal)
 (require 'w-ui-minimal)
 (require 'w-font)

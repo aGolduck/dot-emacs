@@ -30,5 +30,29 @@
   ;; (global-set-key (kbd "M-SPC s p") #'color-rg-search-input-in-project)
   )
 
+;;; symbol-overlay
+(straight-use-package 'symbol-overlay)
+(global-set-key (kbd "M-s h .") 'symbol-overlay-put)
+(global-set-key (kbd "M-s h c") 'symbol-overlay-remove-all)
+(global-set-key (kbd "M-p") #'symbol-overlay-switch-backward)
+(global-set-key (kbd "M-n") #'symbol-overlay-switch-forward)
+(with-eval-after-load 'symbol-overlay
+  (transient-define-prefix symbol-overlay-transient ()
+    "Symbol Overlay transient"
+    ["Symbol Overlay"
+     ["Overlays"
+      ("." "Add/Remove at point" symbol-overlay-put)
+      ("k" "Remove All" symbol-overlay-remove-all)
+      ]
+     ["Move to Symbol"
+      ("n" "Next" symbol-overlay-switch-forward)
+      ("p" "Previous" symbol-overlay-switch-backward)
+      ]
+     ["Other"
+      ("m" "Highlight symbol-at-point" symbol-overlay-mode)
+      ]
+     ])
+  (define-key symbol-overlay-map (kbd "?") 'symbol-overlay-transient))
+
 
 (provide 'w-search-extra)

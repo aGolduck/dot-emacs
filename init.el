@@ -19,13 +19,7 @@
 (require 'w-straight)
 (require 'w-essential)
 
-;;; w-org 待整理进 essential
-(require 'w-org)
-
-(straight-use-package 'interaction-log)
-(require 'interaction-log)
-(interaction-log-mode 1)
-
+;;; exploring zone
 
 
 (require 'w-full)

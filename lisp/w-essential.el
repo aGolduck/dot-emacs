@@ -27,31 +27,24 @@
 (straight-use-package 'gcmh)
 (add-hook 'after-init-hook #'gcmh-mode)
 
+;;; interaction
+(straight-use-package 'interaction-log)
+(require 'interaction-log)
+(add-hook 'after-init-hook #'interaction-log-mode)
+
 ;;; helpful
 (straight-use-package 'helpful)
 (global-set-key (kbd "C-h k") #'helpful-key)
 (global-set-key (kbd "C-h o") #'helpful-symbol)
 
-(require 'w-pyim)
-
-;;; emacs/system tools
-(require 'w-ace-window)
-(require 'w-term-extra)
-(require 'w-dired-extra)
-(require 'w-git)
-
 ;;; text edit
-(require 'w-search-extra)
-(require 'w-edit-extra)
-
-;;; complete anything
-(require 'w-minibuffer)
-(require 'w-company)
-
-;;; programming languages
-(require 'w-programming-essential)
-
-;;; csv-mode
+(require 'w-pyim)
+(straight-use-package 'flyspell-correct)
+(with-eval-after-load 'flyspell
+  (define-key flyspell-mode-map (kbd "C-;") #'flyspell-correct-wrapper)
+  (define-key flyspell-mode-map (kbd "C-,") nil)
+  (define-key flyspell-mode-map (kbd "C-.") nil))
+;; csv-mode
 (straight-use-package 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (setq csv-separators '("," ";" "|" " "))
@@ -59,29 +52,23 @@
 (add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
 
 
-;;; symbol-overlay
-(straight-use-package 'symbol-overlay)
-(global-set-key (kbd "M-s h .") 'symbol-overlay-put)
-(global-set-key (kbd "M-s h c") 'symbol-overlay-remove-all)
-(global-set-key (kbd "M-p") #'symbol-overlay-switch-backward)
-(global-set-key (kbd "M-n") #'symbol-overlay-switch-forward)
-(with-eval-after-load 'symbol-overlay
-  (transient-define-prefix symbol-overlay-transient ()
-    "Symbol Overlay transient"
-    ["Symbol Overlay"
-     ["Overlays"
-      ("." "Add/Remove at point" symbol-overlay-put)
-      ("k" "Remove All" symbol-overlay-remove-all)
-      ]
-     ["Move to Symbol"
-      ("n" "Next" symbol-overlay-switch-forward)
-      ("p" "Previous" symbol-overlay-switch-backward)
-      ]
-     ["Other"
-      ("m" "Highlight symbol-at-point" symbol-overlay-mode)
-      ]
-     ])
-  (define-key symbol-overlay-map (kbd "?") 'symbol-overlay-transient))
+;;; emacs/system tools
+(require 'w-ace-window)
+(require 'w-term-extra)
+(require 'w-dired-extra)
+(require 'w-git)
+
+;;; edit
+(require 'w-search-extra)
+(require 'w-edit-extra)
+
+
+;;; complete anything
+(require 'w-minibuffer)
+(require 'w-company)
+
+;;; programming languages
+(require 'w-programming-essential)
 
 
 (provide 'w-essential)
