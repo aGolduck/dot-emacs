@@ -23,6 +23,11 @@
 (global-set-key (kbd "M-o") #'crux-smart-open-line-above)
 (global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file)
 
+;;; edit
+(straight-use-package 'expand-region)
+(setq expand-region-contract-fast-key "V")
+(global-set-key (kbd "M-SPC v") #'er/expand-region)
+
 ;;; gcmh
 (straight-use-package 'gcmh)
 (add-hook 'after-init-hook #'gcmh-mode)
@@ -37,20 +42,13 @@
 (global-set-key (kbd "C-h k") #'helpful-key)
 (global-set-key (kbd "C-h o") #'helpful-symbol)
 
-;;; text edit
+;;; text input
 (require 'w-pyim)
 (straight-use-package 'flyspell-correct)
 (with-eval-after-load 'flyspell
   (define-key flyspell-mode-map (kbd "C-;") #'flyspell-correct-wrapper)
   (define-key flyspell-mode-map (kbd "C-,") nil)
   (define-key flyspell-mode-map (kbd "C-.") nil))
-;; csv-mode
-(straight-use-package 'csv-mode)
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(setq csv-separators '("," ";" "|" " "))
-;; TODO truncate after align mode is on, revert if getting off
-(add-hook 'csv-align-mode-hook (lambda () (setq-local truncate-lines nil)))
-
 
 ;;; emacs/system tools
 (require 'w-ace-window)
@@ -58,16 +56,15 @@
 (require 'w-dired-extra)
 (require 'w-git)
 
-;;; edit
+;;; search
 (require 'w-search-extra)
-(require 'w-edit-extra)
-
 
 ;;; complete anything
 (require 'w-minibuffer)
 (require 'w-company)
 
 ;;; programming languages
+(require 'w-lisp)
 (require 'w-programming-essential)
 
 
