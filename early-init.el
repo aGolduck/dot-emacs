@@ -26,14 +26,16 @@
 ;; (when (featurep 'ns)
 ;;   (push '(ns-transparent-titlebar . t) default-frame-alist))
 
-(when (and (fboundp 'native-comp-available-p)
-	   (native-comp-available-p))
+;; (when (and (fboundp 'native-comp-available-p)
+;; 	   (native-comp-available-p))
   
-  (setq comp-deferred-compilation t)
+;;   (setq comp-deferred-compilation t)
 
-  ;; disable emacs-native-comp warings
-  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=44746
-  (setq comp-async-report-waring-errors nil)
+;;   ;; disable emacs-native-comp warings
+;;   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=44746
+;;   (setq comp-async-report-waring-errors nil)
 
-  ;; (setq native-comp-deferred-compilation-deny-list '("vertico\\.el$" "vertico-.+\\.el$"))
-  )
+;;   ;; (setq native-comp-deferred-compilation-deny-list '("vertico\\.el$" "vertico-.+\\.el$"))
+;;   )
+(setq no-native-compile t
+      native-comp-deferred-compilation nil)
