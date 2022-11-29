@@ -17,11 +17,18 @@
 
 
 (require 'w-straight)
-(require 'w-essential)
 
 ;;; exploring zone
 
+(defun idea ()
+  (interactive)
+  (shell-command "idea" (project-root (project-current)))
+  ;; sleep for 1 second, or emacs will be stuck
+  (sleep-for 1)
+  (ns-do-applescript "tell application \"IntelliJ IDEA\" to activate"))
 
+
+(require 'w-essential)
 (require 'w-full)
 
 ;;; local settings
@@ -33,8 +40,7 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'no-error 'no-message)
 
-;;; 以下配置置前会出错
-(require 'w-lisp)
+;;; TODO 以下配置置前会出错, debug this
 (require 'read-only-by-default)
 
 (add-hook 'after-init-hook
