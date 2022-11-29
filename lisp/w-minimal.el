@@ -3,6 +3,9 @@
 ;; M-SPC is key to my emacs world
 (global-unset-key (kbd "M-SPC"))
 
+;; minimal exec-path for executable-find to work, not working
+(setq exec-path '("/usr/local/bin" "/usr/bin" "/bin" "/usr/local/sbin" "/usr/sbin" "/sbin"))
+
 ;;; bookmark
 (setq bookmark-default-file (w/locate-emacs-var-file "bookmarks"))
 (global-set-key (kbd "M-SPC b s") #'bookmark-set)
@@ -79,7 +82,7 @@
         ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'outline-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode #'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
 
 
 ;;; hideshow
