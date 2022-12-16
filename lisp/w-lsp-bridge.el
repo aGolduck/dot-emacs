@@ -30,10 +30,11 @@
 (setq lsp-bridge-jdtls-workspace (expand-file-name "~/.emacs.d/var/.cache/lsp-bridge-jdtls")
       lsp-bridge-jdtls-jvm-args `(,(concat "-javaagent:" (expand-file-name "~/.emacs.d/resources/lombok.jar"))
                                   ,(concat "-Xbootclasspath/a:" (expand-file-name "~/.emacs.d/resources/lombok.jar"))))
+;; jdtls 会干扰 idea 编译
 ;; 仅 lsp-bridge-mode 无法激活 jdtls 的参数配置
-(add-hook 'java-mode-hook (lambda ()
-                            (setq-local lsp-bridge-get-single-lang-server-by-project 'lsp-bridge-get-jdtls-server-by-project)
-                            (lsp-bridge-mode 1)))
+;; (add-hook 'java-mode-hook (lambda ()
+;;                             (setq-local lsp-bridge-get-single-lang-server-by-project 'lsp-bridge-get-jdtls-server-by-project)
+;;                             (lsp-bridge-mode 1)))
 ;; (add-hook 'java-mode-hook #'lsp-bridge-mode)
 
 

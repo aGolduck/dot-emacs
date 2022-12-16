@@ -37,5 +37,5 @@
 
 ;;   ;; (setq native-comp-deferred-compilation-deny-list '("vertico\\.el$" "vertico-.+\\.el$"))
 ;;   )
-(setq no-native-compile t
-      native-comp-deferred-compilation nil)
+(setq no-native-compile nil
+      native-comp-deferred-compilation t)

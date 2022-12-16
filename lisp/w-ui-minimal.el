@@ -24,9 +24,7 @@
  frame-title-format ;; '(buffer-file-name "%f" "%b")
  '((:eval (concat
            "emacs-"
-           (number-to-string emacs-major-version)
-           "."
-           (number-to-string emacs-minor-version)
+           emacs-version
            " "
            (if (and (boundp 'org-pomodoro-mode-line) org-pomodoro-mode-line)
                (if (listp org-pomodoro-mode-line)

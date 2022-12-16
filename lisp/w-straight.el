@@ -23,7 +23,7 @@
 ;; straight options
 (setq straight-repository-branch "master"
       ;; straight-check-for-modifications
-      straight-disable-native-compile t
+      straight-disable-native-compile nil
       straight-use-package-by-default nil
       ;; straight-vc-git-default-clone-deptha 1  ;; shallow clone causes lots of headache when thawing or freezing versions
       straight-default-vc 'git)
