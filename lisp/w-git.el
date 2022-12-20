@@ -20,8 +20,9 @@
 (when (executable-find "delta")
   (add-hook 'magit-mode-hook #'magit-delta-mode))
 
+;; disable magit-todos to speed up magit
 (setq magit-todos-exclude-globs '("*.css.map"))
-(add-hook 'magit-mode-hook (lambda () (let ((inhibit-message t)) (magit-todos-mode 1))))
+;; (add-hook 'magit-mode-hook (lambda () (let ((inhibit-message t)) (magit-todos-mode 1))))
 ;; T conflicts with magit-note
 ;; (with-eval-after-load 'magit-todos-mode (transient-append-suffix 'magit-status-jump '(0 0 -1)
 ;;                                           '("T " "Todos" magit-todos-jump-to-todos)))
