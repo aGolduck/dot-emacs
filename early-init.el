@@ -39,3 +39,7 @@
 ;;   )
 (setq no-native-compile nil
       native-comp-deferred-compilation t)
+
+(setq no-native-compile t
+      native-comp-deferred-compilation nil
+      inhibit-automatic-native-compilation t)
