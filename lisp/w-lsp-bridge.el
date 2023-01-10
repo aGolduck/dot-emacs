@@ -63,16 +63,29 @@
 (setq lsp-bridge-jdtls-workspace (expand-file-name "~/.emacs.d/var/.cache/lsp-bridge-jdtls")
       lsp-bridge-jdtls-jvm-args `(,(concat "-javaagent:" (expand-file-name "~/.emacs.d/resources/lombok.jar"))
                                   ,(concat "-Xbootclasspath/a:" (expand-file-name "~/.emacs.d/resources/lombok.jar"))))
-;; jdtls 会干扰 idea 编译
+;; jdtls 会干扰 idea 编译，java 文件仅当非 idea 项目时启动 lsp-bridge
+(defun w/maybe-enable-lsp-bridge-for-java ()
+  "enable lsp-bridge-mode for java files if not in idea project"
+  (message (concat (project-root (project-current)) ".idea"))
+  (unless (file-exists-p (concat (project-root (project-current)) ".idea"))
+    (message "echo")
+    (lsp-bridge-mode 1)))
 ;; 仅 lsp-bridge-mode 无法激活 jdtls 的参数配置
-;; (add-hook 'java-mode-hook (lambda ()
-;;                             (setq-local lsp-bridge-get-single-lang-server-by-project 'lsp-bridge-get-jdtls-server-by-project)
-;;                             (lsp-bridge-mode 1)))
-;; (add-hook 'java-mode-hook #'lsp-bridge-mode)
-;; 
-(setq lsp-bridge-get-single-lang-server-by-project
-      (lambda (project-path filepath)
-        (when (string-equal (file-name-base project-path) "deno-bridge")
-          "deno")))
+(add-hook 'java-mode-hook (lambda ()
+                            (setq-local lsp-bridge-get-single-lang-server-by-project
+                                        'lsp-bridge-get-jdtls-server-by-project)
+                            (w/maybe-enable-lsp-bridge-for-java)))
+
+
+;; preferred deno already, no need to set specifically
+;; (setq lsp-bridge-get-single-lang-server-by-project
+;;       (lambda (project-path filepath)
+;;         (when (string-equal (file-name-base project-path) "deno-bridge")
+;;           "deno")))
+
+(defun w/lsp-bridge-get-project-path-by-filepath (filepath)
+  (project-root (project-current nil filepath)))
+;; lsp-bridge-get-project-path-by-filepath 的参数实际是文件所在目录
+(setq lsp-bridge-get-project-path-by-filepath #'w/lsp-bridge-get-project-path-by-filepath)
 
 (provide 'w-lsp-bridge)
