@@ -32,7 +32,7 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (locate-user-emacs-file "straight/repos/straight.el/bootstrap.el"))
-      (bootstrap-version 5))
+      (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
