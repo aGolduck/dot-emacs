@@ -13,6 +13,20 @@
 ;;; quickrun
 (straight-use-package 'quickrun)
 (with-eval-after-load 'quickrun
+  (add-to-list 'quickrun--language-alist
+               '("java/maven" .
+                 ((:command . "mvn")
+                  (:exec . ((lambda ()
+                              (concat  "%c -f " (concat (projectile-project-root) "pom.xml") " compile exec:java -Dexec.mainClass=\""
+                                       (string-replace "/" "."
+                                                       (string-remove-suffix ".java"
+                                                                             (string-remove-prefix
+                                                                              (concat (projectile-project-root) "src/main/java/")
+                                                                              (buffer-file-name))))
+                                       "\""))))
+                  (:tempfile . nil)
+                  (:description . "run java file with maven"))))
+  ;; (add-to-list 'quicklang/lang-candidates '("java" . ("" "mave")))
   (quickrun-set-default "typescript" "typescript/deno"))
 
 
