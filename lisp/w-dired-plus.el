@@ -13,7 +13,8 @@
 ;;; ranger
 (setq ranger-map-style 'emacs)
 (setq ranger-key (kbd "M-R"))
-(global-set-key (kbd "M-r") #'ranger)
+;; disable M-r which conflicts lsp-bridge-rename
+;; (global-set-key (kbd "M-r") #'ranger)
 (with-eval-after-load 'ranger
   (define-key ranger-emacs-mode-map (kbd "n") #'ranger-next-file)
   (define-key ranger-emacs-mode-map (kbd "p") #'ranger-prev-file)
