@@ -1,25 +1,6 @@
-;;;  -*- lexical-binding: t; -*-
-;;; set up variables not categorised
-(setq create-lockfiles nil
-      ;; confirm-kill-emacs nil
-      delete-by-moving-to-trash t
-      frame-inhibit-implied-resize t ;; stop resizing when toggling tab-bar-mode
-      frame-resize-pixelwise t
-      initial-major-mode 'fundamental-mode
-      mac-command-modifier 'super
-      mac-option-modifier 'meta
-      next-screen-context-lines 5
-      nsm-trust-local-network t
-      visible-bell t
-      word-wrap-by-category t)
-(setq-default indent-tabs-mode nil
-	      line-spacing 0.2)
-;; (setq-default max-specpdl-size 10000)
-;; (setq-default max-lisp-eval-depth 10000)
+;;; -*- lexical-binding: t; -*-
 
 ;;; extra keybindings
-;;; -*- lexical-binding: t; -*-
-(define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
 ;; (defun w/ivy-switch-buffer-in-other-window ()
 ;;   (interactive)
 ;;   (call-interactively #'ivy-switch-buffer-other-window)

@@ -3,7 +3,7 @@
 ;; M-SPC is key to my emacs world
 (global-unset-key (kbd "M-SPC"))
 
-;; minimal exec-path for executable-find to work, not working
+;; FIXME minimal exec-path for executable-find to work, not working
 (setq exec-path '("/usr/local/bin" "/usr/bin" "/bin" "/usr/local/sbin" "/usr/sbin" "/sbin"))
 
 ;;; bookmark
@@ -73,6 +73,7 @@
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
 (global-set-key (kbd "M-SPC F v") #'find-variable)
+(define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
 
 ;;; flyspell
 (when (executable-find "aspell")

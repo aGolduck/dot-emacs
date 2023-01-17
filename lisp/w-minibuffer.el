@@ -29,6 +29,7 @@
 (add-hook 'after-init-hook #'vertico-mode)
 
 ;; fido-mode 启动后无法使用 orderless, 切 vertico 再切 fido 好像又可以，应该是 hook 有问题
+;; fido-mode 界面不友好，fido-vertical-mode 卡顿较严重
 (with-eval-after-load 'fido-mode
   (require 'orderless)
   (add-hook 'minibuffer-setup-hook #'w/use-orderless-in-minibuffer))

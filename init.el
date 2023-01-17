@@ -41,8 +41,6 @@
 ;;; local settings
 (require 'w-local)
 
-;; other settings including extra variable, faces and keybindings
-(load (w/locate-in-current-directory "settings"))
 ;;; ignore custom file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'no-error 'no-message)

@@ -53,6 +53,8 @@
 (global-set-key (kbd "M-SPC h w") #'hi-lock-write-interactive-patterns)
 
 ;;; frame
+(setq frame-inhibit-implied-resize t ;; stop resizing when toggling tab-bar-mode
+      frame-resize-pixelwise t)
 (add-hook 'after-init-hook #'blink-cursor-mode)
 
 ;;; tab-bar
@@ -70,6 +72,7 @@
   (global-set-key (kbd "C-<tab>") #'tab-bar-switch-to-next-tab))
 
 ;;; window
+(setq next-screen-context-lines 5)
 (defun w/split-window-right ()
   "split-window-right with right window having a max width of 100 columns"
   (interactive)
@@ -97,6 +100,16 @@
 (add-hook 'after-init-hook #'winner-mode)
 (global-set-key (kbd "M-SPC w u") #'winner-undo)
 (global-set-key (kbd "M-SPC w r") #'winner-redo)
+
+;; others
+(setq initial-major-mode 'fundamental-mode
+      mac-command-modifier 'super
+      mac-option-modifier 'meta
+      visible-bell t
+      word-wrap-by-category t)
+(setq-default indent-tabs-mode nil
+	      line-spacing 0.2)
+
 
 (provide 'w-ui-minimal)
 

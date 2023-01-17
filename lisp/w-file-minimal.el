@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; common settings
 (setq auto-save-default nil
+      create-lockfiles nil
+      delete-by-moving-to-trash t
       make-backup-files nil
       safe-local-variable-values '((flycheck-disable-checker '(emacs-lisp-checkdoc))
                                    (org-startup-with-inline-images . t)))
