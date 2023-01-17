@@ -32,6 +32,7 @@
       highlight-indent-guides-auto-even-face-perc 55
       highlight-indent-guides-auto-character-face-perc 61.8)
 (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
+(add-hook 'yaml-ts-mode-hook #'highlight-indent-guides-mode)
 
 (with-eval-after-load 'smartparens
   (require 'smartparens-config)
@@ -49,13 +50,6 @@
 ;;; lua
 (straight-use-package 'lua-mode)
 
-;;; rust
-(straight-use-package 'rust-mode)
 
-;;; yaml
-(straight-use-package 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\.'" . yaml-mode))
-(add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
 
 (provide 'w-programming-full)
