@@ -8,8 +8,9 @@
 
 (when (executable-find "rg")
   ;; rg
-  (global-set-key (kbd "M-SPC s") #'rg-menu)
+  (defun w/rg-menu () (interactive) (rg-enable-menu) (rg-menu))
   ;; color-rg
+  (global-set-key (kbd "M-SPC s") #'w/rg-menu)
   (setq color-rg-search-ignore-rules "-g \"!node_modules\" -g \"!dist\" -g\"!straight\"")
   (dolist
       (color-rg-command
