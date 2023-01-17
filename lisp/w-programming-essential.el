@@ -31,7 +31,6 @@
 
 
 ;;; languages
-(straight-use-package 'typescript-mode)
 (setq typescript-indent-leven 2)
 (straight-use-package 'go-mode)
 (straight-use-package 'scala-mode)
