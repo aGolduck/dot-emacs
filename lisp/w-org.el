@@ -8,21 +8,6 @@
       org-export-with-toc nil
       org-use-sub-superscripts nil)
 
-(setq org-todo-keywords
-      (quote ((sequence "TODO(T)" "NEXT(n)" "|" "DONE(t)")
-	      (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c!)" "PHONE" "MEETING")
-	      ;; 下面这行会导致 spacemacs 的 org headings 效果消失，因为关键词重复
-	      ;; (type "EXPERIENCE(e) DEBUG(d) | "DONE")
-	      (type "EXPERIENCE(e)" "DEBUG(d)" "BOOKMARK(b)" "MARKBOOK(m)")
-	      )))
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-	      ("WAITING" ("WAITING" . t))
-	      ("HOLD" ("WAITING") ("HOLD" . t))
-	      (done ("WAITING") ("HOLD"))
-	      ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-	      ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-	      ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 (add-hook 'org-mode-hook #'visual-line-mode)
 
 (with-eval-after-load 'org
@@ -54,12 +39,9 @@
   (set-face-attribute 'org-headline-done nil :strike-through t)
   (set-face-attribute 'org-agenda-done nil :strike-through t))
 
-;; TODO 移除 org-roam
-(straight-use-package '(org-roam :files ("*.el" "extensions/*.el")))
 (straight-use-package 'ox-gfm)
 
 
-(require 'bh-org)
 (setq org-adapt-indentation nil
       org-archive-location "%s_archive::* Archived Tasks"
       org-archive-mark-done nil
@@ -80,34 +62,6 @@
       org-return-follows-link t
       org-stuck-projects (quote ("" nil nil "")))
 
-;;; org agenda
-(require 'w-org-agenda)
-
-;;; org capture
-(setq org-capture-templates
-      '(
-	("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
-	 "* TODO %?\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
-	("N" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
-	 "* NEXT %?\nSCHEDULED:  %T\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
-	("n" "NOTE" entry (file+headline "~/org/roam/notes.org" "NOTES")
-	 "* %?\n:PROPERTIES:\n:ID:  %(org-id-uuid)\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n")
-	("j" "JOURNAL" entry (file+headline "~/org/roam/journal.org" "journal")
-	 "* %U\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n%?" :create-id t)
-	;; ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
-	;;  "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src js\n%i  #+end_src\n")
-	("s" "source code" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")
-	("g" "template group")
-	("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
-	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")))
-(global-set-key (kbd "C-c c") #'org-capture)
-(defun 可达鸭/org-capture-添加ID ()
-  (when (org-capture-get :create-id)
-    (message "captured")
-    (org-id-get-create)))
-(add-hook 'org-capture-prepare-finalize-hook #'可达鸭/org-capture-添加ID)
-
 ;;; org-colview
 (with-eval-after-load 'org-colview
   (define-key org-columns-map (kbd "SPC") #'org-columns-open-link))
@@ -122,23 +76,7 @@
 (add-hook 'org-execute-file-search-functions #'w/org-link-search-elisp)
 (global-set-key (kbd "M-SPC l s") #'org-store-link)
 
-;;; org roam
-(setq org-roam-v2-ack t
-      org-roam-verbose t
-      org-roam-db-update-on-save t
-      org-roam-directory (file-truename "~/org/roam")
-      org-roam-dailies-directory (file-truename "~/org/roam/daily")
-      org-roam-db-location (w/locate-emacs-var-file "org-roam.db"))
-(global-set-key (kbd "M-SPC n d") #'org-roam-dailies-capture-today)
-(global-set-key (kbd "M-SPC n D") #'org-roam-dailies-today)
-(global-set-key (kbd "M-SPC n c") #'org-roam-capture)
-(global-set-key (kbd "M-SPC n i") #'org-roam-node-insert)
-(global-set-key (kbd "M-SPC n n") #'org-roam-node-find)
-(with-eval-after-load 'org-roam
-  (global-set-key (kbd "M-SPC n l") #'org-roam-buffer-toggle)
-  (diminish 'org-roam-mode "记"))
-;; (with-eval-after-load 'org
-;;   (org-roam-db-autosync-enable))
+
 ;;; zotxt
 ;; (setq org-zotxt-link-description-style :citation)
 ;; (setq zotxt-default-bibliography-style "mkbehr-short")
@@ -149,12 +87,6 @@
 ;;                              (browse-url
 ;;                               ;; we get the "zotero:"-less url, so we put it back.
 ;;                               (format "zotero:%s" zpath)))))
-
-;;; org-drill
-;; (setq persist--directory-location (w/locate-emacs-var-file "persist"))
-
-;;; org-pomodoro
-;; (global-set-key (kbd "M-c") #'org-pomodoro)
 
 ;;; lazy load
 ;; (with-eval-after-load 'org

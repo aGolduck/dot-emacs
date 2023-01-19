@@ -3,6 +3,24 @@
 ;; (straight-use-package '(org-clock-watch :host github :repo "wztdream/org-clock-watch" :files ("*")
 ;;                                         :fork (:host github :repo "aGolduck/org-clock-watch")))
 
+(require 'bh-org)
+
+(setq org-todo-keywords
+      (quote ((sequence "TODO(T)" "NEXT(n)" "|" "DONE(t)")
+	      (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c!)" "PHONE" "MEETING")
+	      ;; 下面这行会导致 spacemacs 的 org headings 效果消失，因为关键词重复
+	      ;; (type "EXPERIENCE(e) DEBUG(d) | "DONE")
+	      (type "EXPERIENCE(e)" "DEBUG(d)" "BOOKMARK(b)" "MARKBOOK(m)")
+	      )))
+(setq org-todo-state-tags-triggers
+      (quote (("CANCELLED" ("CANCELLED" . t))
+	      ("WAITING" ("WAITING" . t))
+	      ("HOLD" ("WAITING") ("HOLD" . t))
+	      (done ("WAITING") ("HOLD"))
+	      ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+	      ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+	      ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
 (setq org-agenda-columns-add-appointments-to-effort-sum t
       ;; agenda-files 用于初始化，用过 org-agenda-file-to-front 会保存到 custom.el 覆盖该值
       org-agenda-files '("~/org/orgzly")
@@ -114,5 +132,34 @@
   (org-remove-file "~/org/roam/agenda/reading.org"))
 
 ;; (add-hook 'after-init-hook (lambda () (org-clock-watch-toggle 'on)))
+
+;;; org capture
+(setq org-capture-templates
+      '(
+	("t" "TODO" entry (file+headline org-default-notes-file "INBOX")
+	 "* TODO %?\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
+	("N" "Today NEXT" entry (file+headline org-default-notes-file "INBOX")
+	 "* NEXT %?\nSCHEDULED:  %T\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%i\n%a")
+	("n" "NOTE" entry (file+headline "~/org/roam/notes.org" "NOTES")
+	 "* %?\n:PROPERTIES:\n:ID:  %(org-id-uuid)\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n")
+	("j" "JOURNAL" entry (file+headline "~/org/roam/journal.org" "journal")
+	 "* %U\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n%i\n%?" :create-id t)
+	;; ("j" "js source code" entry (file+headline org-default-notes-file "NOTES")
+	;;  "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src js\n%i  #+end_src\n")
+	("s" "source code" entry (file+headline org-default-notes-file "NOTES")
+	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")
+	("g" "template group")
+	("ga" "Template Group A holder" entry (file+headline org-default-notes-file "NOTES")
+	 "* %?\n:PROPERTIES:\n:CREATED:  %U\n:CONTEXT:  %a\n:END:\n#+begin_src %^{source language}\n%i%?  #+end_src\n")))
+(global-set-key (kbd "C-c c") #'org-capture)
+(defun 可达鸭/org-capture-添加ID ()
+  (when (org-capture-get :create-id)
+    (message "captured")
+    (org-id-get-create)))
+(add-hook 'org-capture-prepare-finalize-hook #'可达鸭/org-capture-添加ID)
+
+;;; org-pomodoro
+;; (global-set-key (kbd "M-c") #'org-pomodoro)
+
 
 (provide 'w-org-agenda)
