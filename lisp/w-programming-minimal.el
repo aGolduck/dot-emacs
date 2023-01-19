@@ -2,9 +2,12 @@
 (global-set-key [remap comment-dwim] #'comment-line)
 (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 
+;;; treesit
+;; build treesit language definitions by https://github.com/casouri/tree-sitter-module
+(setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"))
 
+;;; js
 (setq js-indent-level 2)
-
 
 ;;; xml
 (setq nxml-child-indent 4
