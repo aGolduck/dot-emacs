@@ -34,6 +34,7 @@
            (if (and (boundp 'org-mode-line-string) org-mode-line-string)
                org-mode-line-string
              "")
+           ;; FIXME buffer-file-name for dired buffer is nil
            (if (buffer-file-name)
                (abbreviate-file-name (buffer-file-name))
              "%b")))))

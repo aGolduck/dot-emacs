@@ -84,7 +84,11 @@
 ;;           "deno")))
 
 (defun w/lsp-bridge-get-project-path-by-filepath (filepath)
-  (project-root (project-current nil filepath)))
+  ;; filepath 是当前文件的文件夹
+  ;; (project-root (project-current nil filepath))
+  (require 'projectile)
+  (projectile-project-root filepath)
+  )
 ;; lsp-bridge-get-project-path-by-filepath 的参数实际是文件所在目录
 (setq lsp-bridge-get-project-path-by-filepath #'w/lsp-bridge-get-project-path-by-filepath)
 

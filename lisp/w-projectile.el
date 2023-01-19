@@ -1,3 +1,4 @@
+;; replace projectile with project.el, see site-lisp/project-extra.el
 (straight-use-package 'projectile)
 
 ;;; projectile

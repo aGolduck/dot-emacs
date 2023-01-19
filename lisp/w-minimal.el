@@ -48,7 +48,7 @@
                                      ("\\.xlsx\\'" "libreoffice"))
       image-dired-dir (w/locate-emacs-var-file "image-dired"))
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
+  ;; (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file)
   (define-key dired-mode-map
     (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
@@ -118,6 +118,20 @@
 ;;; makefile
 (add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
 
+;;; project
+(defun w/project-try-local (dir)
+  "Determine if DIR is a non-Git project."
+  (catch 'ret
+    (let ((pr-flags '((".project")
+                      ("go.mod" "Cargo.toml" "project.clj" "pom.xml" "package.json") ;; higher priority
+                      ("Makefile" "README.org" "README.md"))))
+      (dolist (current-level pr-flags)
+        (dolist (f current-level)
+          (when-let ((root (locate-dominating-file dir f)))
+            (throw 'ret (cons 'local root))))))))
+
+(setq project-find-functions '(w/project-try-local project-try-vc))
+
 ;;; simple
 (add-hook 'after-init-hook #'global-visual-line-mode)
 (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
@@ -125,6 +139,7 @@
 
 ;;; terms
 ;;; ansi-color for compilation mode
+;; https://stackoverflow.com/questions/5819719/emacs-shell-command-output-not-showing-ansi-colors-but-the-code
 (add-hook 'compilation-filter-hook
           (lambda ()
             (let ((buffer-read-only nil))
