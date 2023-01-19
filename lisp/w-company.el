@@ -18,5 +18,6 @@
 
 
 (add-hook 'emacs-lisp-mode-hook #'company-mode)
+(add-hook 'clojure-mode-hook #'company-mode)
 
 (provide 'w-company)
