@@ -56,7 +56,7 @@
 (add-hook 'css-mode-hook #'lsp-bridge-mode)
 (add-hook 'js-mode-hook #'lsp-bridge-mode)
 (add-hook 'sh-mode-hook #'lsp-bridge-mode)
-(add-hook 'typescript-mode-hook #'lsp-bridge-mode)
+(add-hook 'typescript-ts-mode-hook #'lsp-bridge-mode)
 (add-hook 'python-mode-hook #'lsp-bridge-mode)
 (add-hook 'go-mode-hook #'lsp-bridge-mode)
 ;; java
