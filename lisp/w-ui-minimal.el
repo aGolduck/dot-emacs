@@ -103,6 +103,7 @@
 (global-set-key (kbd "M-SPC w r") #'winner-redo)
 
 ;; others
+(defvaralias 'scratch-major-mode 'initial-major-mode)
 (setq initial-major-mode 'fundamental-mode
       mac-command-modifier 'super
       mac-option-modifier 'meta

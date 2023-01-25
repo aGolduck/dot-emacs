@@ -36,7 +36,8 @@
 (global-set-key (kbd "M-SPC g l") #'avy-goto-line)
 (global-set-key (kbd "M-SPC g w") #'avy-goto-word-0)
 ;;; auth-source
-(setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg"))))
+;; macos 影响 tramp 登录，可能是因为没有设置好 gpg
+;; (setq auth-sources '((:source (w/locate-emacs-var-file ".authinfo.gpg"))))
 ;;; epg-config
 (setq epg-pinentry-mode 'loopback)
 ;;; go-to-address

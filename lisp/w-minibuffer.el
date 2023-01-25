@@ -61,6 +61,8 @@
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
 (with-eval-after-load 'isearch
   (define-key isearch-mode-map (kbd "M-e") #'consult-isearch-history))
+(with-eval-after-load 'em-hist
+  (define-key eshell-hist-mode-map (kbd "M-r") #'consult-history))
 
 (setq-default marginalia-annotators '(marginalia-annotators-heavy))
 (add-hook 'after-init-hook 'marginalia-mode)

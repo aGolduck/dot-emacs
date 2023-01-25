@@ -150,8 +150,10 @@
 (setq transient-history-file (w/locate-emacs-var-file "transient/history.el"))
 
 
-;;; misc
-(setq reb-re-syntax 'string)
+;;; 正则表达式
+;; 简单的正则表达式可手打，复杂的启用 re-builder 使用 rx 表达式构建
+;; 输入如 '(one-or-more "a") 的表达式
+(setq reb-re-syntax 'rx)
 
 
 (require 'w-programming-minimal)

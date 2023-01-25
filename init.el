@@ -34,6 +34,11 @@
   (call-process "idea" nil nil nil (expand-file-name (project-root (project-current))))
   )
 
+(add-to-list 'auto-mode-alist '("\\.cnf\\'" . conf-mode))
+
+;; 用 tramp 时读入 zshenv 配置的 PATH
+(with-eval-after-load 'tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (require 'w-essential)
 (require 'w-full)
