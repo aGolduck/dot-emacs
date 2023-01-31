@@ -1,3 +1,4 @@
+;; https://manateelazycat.github.io/emacs/elisp/2022/11/18/write-emacs-plugin.html
 (defun add-subdirs-to-load-path (search-dir)
   (interactive)
   (let* ((dir (file-name-as-directory search-dir)))

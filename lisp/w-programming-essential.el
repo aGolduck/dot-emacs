@@ -12,22 +12,39 @@
 
 ;;; quickrun
 (straight-use-package 'quickrun)
+(setq quickrun-debug t)
 (with-eval-after-load 'quickrun
-  (add-to-list 'quickrun--language-alist
-               '("java/maven" .
-                 ((:command . "mvn")
-                  (:exec . ((lambda ()
-                              (concat  "%c -f " (concat (projectile-project-root) "pom.xml") " compile exec:java -Dexec.mainClass=\""
-                                       (string-replace "/" "."
-                                                       (string-remove-suffix ".java"
-                                                                             (string-remove-prefix
-                                                                              (concat (projectile-project-root) "src/main/java/")
-                                                                              (buffer-file-name))))
-                                       "\""))))
-                  (:tempfile . nil)
-                  (:description . "run java file with maven"))))
-  ;; (add-to-list 'quicklang/lang-candidates '("java" . ("" "mave")))
-  (quickrun-set-default "typescript" "typescript/deno"))
+  (quickrun-add-command "java/maven"
+    '((:command . "mvn")
+      (:exec . ((lambda ()
+                  (concat  "%c -f " (concat (projectile-project-root) "pom.xml") " compile exec:java -Dexec.mainClass=\""
+                           (string-replace "/" "."
+                                           (string-remove-suffix ".java"
+                                                                 (string-remove-prefix
+                                                                  (concat (projectile-project-root) "src/main/java/")
+                                                                  (buffer-file-name))))
+                           "\""))))
+      (:tempfile . nil)
+      (:description . "run java file with maven"))
+    :default nil :mode 'java-mode :override t)
+  (quickrun-add-command "typescript/deno"
+    '((:command . "deno")
+      (:exec . "%c run -A %s --std-log-level=DEBUG")
+      (:compile-only . "%c compile %s")
+      (:compile-conf . ((:compilation-mode . nil) (:mode . js-mode)))
+      (:remove  . ("%n.js"))
+      (:description . "Run TypeScript script with deno --log-level=debug"))
+    :default "typescript" ;; 和 (quickrun-set-default "typescript" "typescript/deno") 效果一样, 可以是列表
+    :mode 'typescript-mode
+    :override t)
+  (quickrun-add-command "c++/clang++"
+    '((:command . "clang++")
+      (:exec    . ("%c -std=c++2a -x c++ %o -o %e %s" "%e %a"))
+      (:compile-only . "%c -std=c++2a -Wall -Werror %o -o %e %s")
+      (:remove  . ("%e"))
+      (:description . "Compile C++ file with llvm/clang++ and execute"))
+    :default "c++"
+    :override t))
 
 
 ;;; languages
