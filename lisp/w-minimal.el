@@ -115,9 +115,6 @@
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
 
-;;; makefile
-(add-to-list 'auto-mode-alist '("\\.gmk" . makefile-mode))
-
 ;;; project
 (defun w/project-try-local (dir)
   "Determine if DIR is a non-Git project."

@@ -44,6 +44,10 @@ That is, remove a non kept dired from the recent list."
 
 ;;; tramp
 (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp"))
+;; 用 tramp 时读入 zshenv 配置的 PATH，另需极简化 tramp 作为 TERM 时的 zsh prompt
+;; 见 https://github.com/aGolduck/etc/blob/6d8b87ef85cbc853dd0aad423e5d16a78c3732c5/zsh/interactive.sh#L3
+(with-eval-after-load 'tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 ;;; so long mode
 (add-hook 'after-init-hook #'global-so-long-mode)
