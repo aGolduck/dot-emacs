@@ -25,6 +25,7 @@
   (add-to-list 'org-src-lang-modes '("jsh" . "java"))
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((awk . t)
+                                 (C . t)
                                  (clojure . t)
                                  (emacs-lisp . t)
                                  (groovy . t)
