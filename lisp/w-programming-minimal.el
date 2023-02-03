@@ -6,6 +6,14 @@
 ;; build treesit language definitions by https://github.com/casouri/tree-sitter-module
 (setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"))
 
+
+;;; auto-insert
+(setq auto-insert-directory "~/.emacs.d/auto-insert-templates"
+      auto-insert-query t)
+(define-auto-insert "\.ts" "with-logger.ts")
+(define-auto-insert "\.java" "with-Logger.java")
+(add-hook 'after-init-hook #'auto-insert-mode)
+
 ;;; js
 (setq js-indent-level 2)
 
