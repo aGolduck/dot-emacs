@@ -7,6 +7,12 @@
 (setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"))
 
 
+;;; eglot
+;; (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
+(with-eval-after-load 'eglot
+  (define-key eglot-mode-map (kbd "M-r") #'eglot-rename))
+
+
 ;;; auto-insert
 (setq auto-insert-directory "~/.emacs.d/auto-insert-templates"
       auto-insert-query t)
