@@ -22,10 +22,15 @@
 
 
 ;;; auto-mode-alist
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
+(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 (add-to-list 'auto-mode-alist '("\\.cnf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.gmk\\'" . makefile-mode))
+
+;; go-ts-mode 对中文标识符支持有问题，如常用需考虑回退为 go-mode
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+
 
 ;;; java
 ;; java 文件经常巨长，打开行号方便定位
