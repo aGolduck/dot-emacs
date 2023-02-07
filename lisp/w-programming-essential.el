@@ -45,7 +45,14 @@
       (:remove  . ("%e"))
       (:description . "Compile C++ file with llvm/clang++ and execute"))
     :default "c++"
-    :override t))
+    :override t)
+  (quickrun-add-command "clojure/clj"
+    '((:command . "clj")
+      (:exec . ("TAOENSSO_TIMBRE_MIN_LEVEL_EDN=':debug' %c %s"))
+      (:description . "run clojure file with plain clj"))
+    :default "clojure"
+    :override nil)
+  )
 
 
 ;;; languages
