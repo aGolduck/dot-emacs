@@ -13,6 +13,7 @@
 ;;; quickrun
 (straight-use-package 'quickrun)
 (setq quickrun-debug t)
+;; quickrun-add-command, :override nil 表示增加，override t 表示覆盖原选项
 (with-eval-after-load 'quickrun
   (quickrun-add-command "java/maven"
     '((:command . "mvn")
@@ -26,7 +27,7 @@
                            "\""))))
       (:tempfile . nil)
       (:description . "run java file with maven"))
-    :default nil :mode 'java-mode :override t)
+    :default nil :mode 'java-mode :override nil)
   (quickrun-add-command "typescript/deno"
     '((:command . "deno")
       (:exec . "%c run -A %s --std-log-level=DEBUG")
