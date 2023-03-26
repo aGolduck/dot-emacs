@@ -19,6 +19,16 @@
 (require 'w-straight)
 
 ;;; exploring zone
+;; copied from https://emacs.stackexchange.com/questions/58590/why-set-window-dedicated-p-doesnt-work-with-certain-buffers
+(defun toggle-current-window-dedication-and-fix ()
+  (interactive)
+  (let* ((window    (selected-window))
+         (dedicated-and-fixed-p (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated-and-fixed-p))
+    (set-window-parameter window 'no-delete-other-windows (not dedicated-and-fixed-p))
+    (message "Window fixed and %sdedicated to %s"
+             (if dedicated-and-fixed-p "no longer " "")
+             (buffer-name))))
 
 (defun idea ()
   (interactive)
