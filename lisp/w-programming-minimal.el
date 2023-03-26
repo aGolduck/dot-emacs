@@ -4,11 +4,13 @@
 
 ;;; treesit
 ;; build treesit language definitions by https://github.com/casouri/tree-sitter-module
-(setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"))
+(setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"
+                                "~/.emacs.d/tree-sitter"))
 
 
 ;;; eglot
 ;; (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
+(setq eglot-extend-to-xref t)
 (with-eval-after-load 'eglot
   (define-key eglot-mode-map (kbd "M-r") #'eglot-rename))
 
@@ -16,20 +18,28 @@
 ;;; auto-insert
 (setq auto-insert-directory "~/.emacs.d/auto-insert-templates"
       auto-insert-query t)
-(define-auto-insert "\.ts" "with-logger.ts")
-(define-auto-insert "\.java" "with-Logger.java")
+(define-auto-insert "\\.ts\\'" "with-logger.ts")
+(define-auto-insert "\\.java\\'" "with-Logger.java")
+(define-auto-insert "CMakeLists\\.txt\\'" "CMakeLists.txt")
 (add-hook 'after-init-hook #'auto-insert-mode)
 
 
 ;;; auto-mode-alist
-(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
-(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 (add-to-list 'auto-mode-alist '("\\.cnf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.gmk\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("/\\.gitignore\\'" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("/info/exclude\\'" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("/git/ignore\\'" . conf-unix-mode))
 
+
+;;; auto-mode-alist for treesit modes
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-ts-mode))
 ;; go-ts-mode 对中文标识符支持有问题，如常用需考虑回退为 go-mode
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'". yaml-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-ts-mode))
 
 
 ;;; java
