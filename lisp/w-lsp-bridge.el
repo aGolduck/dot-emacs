@@ -2,9 +2,14 @@
 (straight-use-package 'markdown-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package '(lsp-bridge :host github :repo "manateelazycat/lsp-bridge" :files ("*")))
+
+;; 日志选项必须在启动 python 进程前设置才能生效
+(setq lsp-bridge-enable-log nil
+      lsp-bridge-enable-profile nil
+      lsp-bridge-enable-diagnostics t)
+
+
 ;; (yas-global-mode)
-;; (setq lsp-bridge-enable-log t
-;;       lsp-bridge-enable-debug t)
 ;; org-babel js/shell 等不支持，原因不明
 (setq acm-enable-search-file-words nil
       lsp-bridge-enable-diagnostics nil
@@ -52,6 +57,7 @@
 
 
 ;;; programming languages setting
+;; (add-hook 'cmake-ts-mode-hook #'lsp-bridge-mode)
 ;; (add-hook 'emacs-lisp-mode-hook #'lsp-bridge-mode)
 ;; (add-hook 'css-mode-hook #'lsp-bridge-mode)
 ;; (add-hook 'js-mode-hook #'lsp-bridge-mode)

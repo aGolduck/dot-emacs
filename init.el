@@ -18,7 +18,8 @@
 
 (require 'w-straight)
 
-;;; exploring zone
+;;; exploring zone before loading third-party packages
+
 ;; copied from https://emacs.stackexchange.com/questions/58590/why-set-window-dedicated-p-doesnt-work-with-certain-buffers
 (defun toggle-current-window-dedication-and-fix ()
   (interactive)
@@ -52,6 +53,8 @@
 
 (require 'w-essential)
 (require 'w-full)
+
+;;; exploring zone after full initialization
 
 ;;; local settings
 (require 'w-local)
