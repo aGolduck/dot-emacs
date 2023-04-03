@@ -50,6 +50,19 @@
 ;;; js
 (setq js-indent-level 2)
 
+;;; whitespace
+(with-eval-after-load 'whitespace
+  (set-face-attribute 'whitespace-tab nil :background "burlywood4"))
+(add-hook 'makefile-mode-hook (lambda ()
+                                (setq-local whitespace-style '(
+                                                               face ;; face 高亮
+                                                               ;; tab-mark ;; tab 使用字符标示
+                                                               tabs ;; 高亮 tab 占据的长度
+                                                               space-before-tab::tab ;; 高亮 tab 前面的空格
+                                                               space-after-tab::tab ;; 高亮 tab 后超过 tab 长度的空格
+                                                               ))
+                                (whitespace-mode 1)))
+
 ;;; xml
 (setq nxml-child-indent 4
       nxml-attribute-indent 4
