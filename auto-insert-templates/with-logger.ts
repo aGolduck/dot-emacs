@@ -1,5 +1,5 @@
-import * as log from "https://deno.land/std@0.173.0/log/mod.ts";
-import { parse } from "https://deno.land/std@0.168.0/flags/mod.ts";
+import * as log from "https://deno.land/std/log/mod.ts";
+import { parse } from "https://deno.land/std/flags/mod.ts";
 const flags = parse(Deno.args, {
   string: ["std-log-level"]
 })
