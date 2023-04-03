@@ -115,6 +115,10 @@
   (define-key isearch-mode-map (kbd "C-w") #'isearch-yank-symbol-or-char)
   (define-key isearch-mode-map (kbd "C-M-w") #'isearch-yank-word-or-char))
 
+
+;;; minimal org-mode set up
+(setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE")))
+
 ;;; project
 (defun w/project-try-local (dir)
   "Determine if DIR is a non-Git project."
