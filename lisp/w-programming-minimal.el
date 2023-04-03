@@ -9,9 +9,12 @@
 
 
 ;;; eglot
-;; (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
+;; (setq eglot-log-level 6)
+(add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
 (setq eglot-extend-to-xref t)
 (with-eval-after-load 'eglot
+  ;; (add-to-list 'eglot-server-programs '((typescript-mode typescript-ts-mode) . ("deno" "lsp")))
+  (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . ("deno" "lsp")))
   (define-key eglot-mode-map (kbd "M-r") #'eglot-rename))
 
 

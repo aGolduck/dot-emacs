@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 (straight-use-package 'devdocs)
 (straight-use-package 'devdocs-browser)
+(straight-use-package 'fish-mode)
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-posframe)
 (straight-use-package 'highlight-indent-guides)
