@@ -53,12 +53,12 @@
 
 ;;; programming languages setting
 ;; (add-hook 'emacs-lisp-mode-hook #'lsp-bridge-mode)
-(add-hook 'css-mode-hook #'lsp-bridge-mode)
-(add-hook 'js-mode-hook #'lsp-bridge-mode)
-(add-hook 'sh-mode-hook #'lsp-bridge-mode)
-(add-hook 'typescript-ts-mode-hook #'lsp-bridge-mode)
-(add-hook 'python-mode-hook #'lsp-bridge-mode)
-(add-hook 'go-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'css-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'js-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'sh-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'typescript-ts-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'python-mode-hook #'lsp-bridge-mode)
+;; (add-hook 'go-mode-hook #'lsp-bridge-mode)
 ;; java
 (setq lsp-bridge-jdtls-workspace (expand-file-name "~/.emacs.d/var/.cache/lsp-bridge-jdtls")
       lsp-bridge-jdtls-jvm-args `(,(concat "-javaagent:" (expand-file-name "~/.emacs.d/resources/lombok.jar"))
@@ -83,13 +83,13 @@
 ;;         (when (string-equal (file-name-base project-path) "deno-bridge")
 ;;           "deno")))
 
-(defun w/lsp-bridge-get-project-path-by-filepath (filepath)
-  ;; filepath 是当前文件的文件夹
-  ;; (project-root (project-current nil filepath))
-  (require 'projectile)
-  (projectile-project-root filepath)
-  )
+;; TODO projectile-project-root 找不到 root 时会给一个默认值，不符合要求，需要一个返回 nil 使得 lsp-bridge-mode 能够启动单文件模式
+;; (defun w/lsp-bridge-get-project-path-by-filepath (filepath)
+;;   ;; filepath 是当前文件的文件夹
+;;   ;; (project-root (project-current nil filepath))
+;;   (require 'projectile)
+;;   (projectile-project-root filepath))
 ;; lsp-bridge-get-project-path-by-filepath 的参数实际是文件所在目录
-(setq lsp-bridge-get-project-path-by-filepath #'w/lsp-bridge-get-project-path-by-filepath)
+;; (setq lsp-bridge-get-project-path-by-filepath #'w/lsp-bridge-get-project-path-by-filepath)
 
 (provide 'w-lsp-bridge)
