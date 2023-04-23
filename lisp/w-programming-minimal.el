@@ -23,8 +23,14 @@
     (list :enable t
           :lint t))
 
+  ;; TODO 原eglot-rename 的 default 参数不起作用，需要用废弃的 INITIAL-CONTENTS，不知道为什么
+  ;; copy from lsp-bridge-rename
+  (defun w/eglot-rename-with-initial-contents ()
+    (interactive)
+    (let ((new-name (read-string "Rename to: " (thing-at-point 'symbol 'no-properties))))
+      (eglot-rename new-name)))
   ;; keybindings
-  (define-key eglot-mode-map (kbd "M-r") #'eglot-rename))
+  (define-key eglot-mode-map (kbd "M-r") #'w/eglot-rename-with-initial-contents))
 
 
 ;;; auto-insert
