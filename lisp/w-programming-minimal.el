@@ -13,8 +13,17 @@
 (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
 (setq eglot-extend-to-xref t)
 (with-eval-after-load 'eglot
+  ;; deno lsp
   ;; (add-to-list 'eglot-server-programs '((typescript-mode typescript-ts-mode) . ("deno" "lsp")))
-  (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . ("deno" "lsp")))
+  (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . (eglot-deno "deno" "lsp")))
+  (defclass eglot-deno (eglot-lsp-server) ()
+    :documentation "A custom class for deno lsp.")
+  (cl-defmethod eglot-initialization-options ((server eglot-deno))
+    "Passes through required deno initialization options"
+    (list :enable t
+          :lint t))
+
+  ;; keybindings
   (define-key eglot-mode-map (kbd "M-r") #'eglot-rename))
 
 
