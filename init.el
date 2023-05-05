@@ -20,6 +20,12 @@
 
 ;;; exploring zone before loading third-party packages
 
+(defun w/打开gdb调试时自动显示行号 ()
+  (if gdb-many-windows
+      (global-display-line-numbers-mode 1)
+    (global-display-line-numbers-mode -1)))
+(add-hook 'gdb-many-windows-hook #'w/打开gdb调试时自动显示行号)
+
 ;; copied from https://emacs.stackexchange.com/questions/58590/why-set-window-dedicated-p-doesnt-work-with-certain-buffers
 (defun toggle-current-window-dedication-and-fix ()
   (interactive)
