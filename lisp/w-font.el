@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+
+(set-face-attribute 'default nil :background "#fcfcfc" :foreground "black")
+
 ;;; fonts and faces, wrapped in window-system block, because there is no set-font-font function for emacs-nox
 ;; to use in multiple frames, wrap in after-make-frame-functions, see https://stackoverflow.com/a/5801740
 (when window-system
