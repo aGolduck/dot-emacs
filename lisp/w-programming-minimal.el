@@ -44,6 +44,7 @@
 
 
 ;;; auto-mode-alist
+(add-to-list 'auto-mode-alist '("requirements\\.txt\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.cnf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.gmk\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("/\\.gitignore\\'" . conf-unix-mode))
