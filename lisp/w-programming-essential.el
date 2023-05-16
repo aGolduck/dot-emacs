@@ -1,6 +1,9 @@
 ;;; lsp
 (require 'w-lsp-bridge)
 
+;;; a nice debug front end for several languages, see https://github.com/realgud/realgud/wiki/Debuggers-Available
+(straight-use-package 'realgud)
+
 ;;; projectile
 (require 'w-projectile)
 
