@@ -53,6 +53,10 @@
     (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))
 (global-set-key (kbd "M-SPC ^") #'dired-jump)
 
+;;; display-time
+(setq display-time-format "%H:%M:%S.%1N")
+(setq display-time-interval 0.1)
+
 ;;; edit
 (add-hook 'after-init-hook #'delete-selection-mode)
 (add-hook 'after-init-hook #'global-subword-mode)

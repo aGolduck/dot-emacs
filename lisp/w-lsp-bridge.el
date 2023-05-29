@@ -9,12 +9,14 @@
       lsp-bridge-enable-diagnostics t)
 
 
-;; (yas-global-mode)
 ;; org-babel js/shell 等不支持，原因不明
 (setq acm-enable-search-file-words nil
       lsp-bridge-enable-diagnostics nil
       lsp-bridge-org-babel-lang-list '("css" "python"))
+;; typescript 使用 deno lsp.
+(setq lsp-bridge-multi-lang-server-extension-list nil)
 (with-eval-after-load 'lsp-bridge
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((typescript-mode typescript-ts-mode) . "deno"))
   (define-key lsp-bridge-mode-map (kbd "M-'") #'lsp-bridge-popup-documentation)
   (define-key lsp-bridge-mode-map (kbd "M-.") #'lsp-bridge-find-def)
   (define-key lsp-bridge-mode-map (kbd "M-,") #'lsp-bridge-find-def-return)
@@ -22,8 +24,20 @@
   (define-key lsp-bridge-mode-map (kbd "M-r") #'lsp-bridge-rename)
   (define-key lsp-bridge-mode-map (kbd "M-\"") #'lsp-bridge-find-references)
 
+  ;; If typescript file include deno.land url, then use Deno LSP server.
+  ;; (setq lsp-bridge-get-single-lang-server-by-project
+  ;;       (lambda (project-path filepath)
+  ;;         (save-excursion
+  ;;           (when (string-equal (file-name-extension filepath) "ts")
+  ;;             (dolist (buf (buffer-list))
+  ;;               (when (string-equal (buffer-file-name buf) filepath)
+  ;;                 (with-current-buffer buf
+  ;;                   (goto-char (point-min))
+  ;;                   (when (search-forward-regexp (regexp-quote "from \"https://deno.land") nil t)
+  ;;                     (return "deno")))))))))
   ;; prefer deno for typescript
   (add-to-list 'lsp-bridge-single-lang-server-extension-list '(("ts") . "deno")))
+
 (add-hook 'lsp-bridge-mode-hook #'yas-minor-mode)
 
 ;;; lsp-bridge-call-hierarchy for lsp-code-action

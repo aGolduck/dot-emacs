@@ -9,6 +9,9 @@
 ;;; programming
 (require 'w-programming-full)
 
+;;; adoc-mode
+(straight-use-package 'adoc-mode)
+
 ;;; csv-mode
 (straight-use-package 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
