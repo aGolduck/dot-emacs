@@ -23,6 +23,9 @@
   ;; (require 'erlang-start)
   
   (when window-system
-    (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height)))
+    (set-face-attribute 'default nil :background "#fcfcfc" :family "PragmataPro" :height w/font-default-height))
+
+  (setq locate-command "mdfind")
+  (setq consult-locate-args "mdfind"))
 
 (provide 'w-local)
