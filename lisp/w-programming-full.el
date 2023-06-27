@@ -33,6 +33,7 @@
       highlight-indent-guides-auto-even-face-perc 55
       highlight-indent-guides-auto-character-face-perc 61.8)
 (add-hook 'python-mode-hook #'highlight-indent-guides-mode)
+(add-hook 'python-ts-mode-hook #'highlight-indent-guides-mode)
 (add-hook 'yaml-ts-mode-hook #'highlight-indent-guides-mode)
 
 (with-eval-after-load 'smartparens

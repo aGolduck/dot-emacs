@@ -38,10 +38,9 @@
 (add-hook 'after-init-hook #'interaction-log-mode)
 
 ;;; helpful
-;; disable for now, not compatible with emacs 29
-;; (straight-use-package 'helpful)
-;; (global-set-key (kbd "C-h k") #'helpful-key)
-;; (global-set-key (kbd "C-h o") #'helpful-symbol)
+(straight-use-package 'helpful)
+(global-set-key (kbd "C-h k") #'helpful-key)
+(global-set-key (kbd "C-h o") #'helpful-symbol)
 
 ;;; text input
 (require 'w-pyim)
