@@ -92,6 +92,8 @@
 
 (straight-use-package 'haskell-mode)
 
+(straight-use-package 'graphviz-dot-mode)
+(setq graphviz-dot-preview-extension "svg")
 
 
 (provide 'w-programming-essential)
