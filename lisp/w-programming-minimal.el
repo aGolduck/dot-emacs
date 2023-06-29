@@ -9,7 +9,6 @@
 
 
 ;;; eglot
-;; (setq eglot-log-level 6)
 (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
 (setq eglot-extend-to-xref t)
 (with-eval-after-load 'eglot
@@ -37,8 +36,10 @@
 ;;; auto-insert
 (setq auto-insert-directory "~/.emacs.d/auto-insert-templates"
       auto-insert-query t)
-(define-auto-insert "\\.ts\\'" "with-logger.ts")
-(define-auto-insert "\\.java\\'" "with-Logger.java")
+;; `.lc.ts' 结尾
+(define-auto-insert "\\.lc\\.ts\\'" "with-logger.lc.ts")
+;; 非点 + `.ts'，一般文件名不会有 `.' ，可以认为是除 `.lc.ts' 的所有情况
+(define-auto-insert "^[^\\.]*\\.ts\\'" "with-logger.ts")
 (define-auto-insert "CMakeLists\\.txt\\'" "CMakeLists.txt")
 (add-hook 'after-init-hook #'auto-insert-mode)
 
