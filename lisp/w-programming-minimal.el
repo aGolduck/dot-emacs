@@ -41,6 +41,20 @@
 ;; 非点 + `.ts'，一般文件名不会有 `.' ，可以认为是除 `.lc.ts' 的所有情况
 (define-auto-insert "^[^\\.]*\\.ts\\'" "with-logger.ts")
 (define-auto-insert "CMakeLists\\.txt\\'" "CMakeLists.txt")
+(define-auto-insert '("\\.lc\\.scala\\'" . "leetcode scala")
+  '(
+    "leetcode scala template"
+    "object " (nth 0 (split-string
+                      (nth 1 (split-string
+                              (file-name-base (buffer-file-name)) "-"))
+                      "\\.")) " {" "\n"
+    "\n"
+    "  def main(args: Array[String]): Unit = {"
+    _ "\n"
+    "\n"
+    "  }" "\n"
+    "}"
+    ))
 (add-hook 'after-init-hook #'auto-insert-mode)
 
 

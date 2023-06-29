@@ -55,12 +55,18 @@
       (:description . "run clojure file with plain clj"))
     :default "clojure"
     :override nil)
+  (quickrun-add-command "scala"
+    '((:command . "scala")
+      (:cmdopt . "-Duser.language=en -Dfile.encoding=UTF-8 -explain")
+      (:description . "scala"))
+    :default "scala"
+    :override t)
   )
 
 
 ;;; languages
-(setq typescript-indent-leven 2)
-(straight-use-package 'scala-mode)
+
+
 
 ;;; clojure
 (straight-use-package 'clojure-mode)
@@ -79,7 +85,11 @@
 ;;   (with-eval-after-load 'cider
 ;;     (with-eval-after-load 'flycheck
 ;;       (flycheck-clojure-setup))))
+
+
+(straight-use-package 'scala-mode)
 (add-to-list 'auto-mode-alist '("\\.sc\\'" . scala-mode))
+
 (straight-use-package 'haskell-mode)
 
 
