@@ -33,6 +33,7 @@
 
 ;;; symbol-overlay
 (straight-use-package 'symbol-overlay)
+(defalias 'w/highlight-clear 'symbol-overlay-remove-all)
 (global-set-key (kbd "M-s h .") 'symbol-overlay-put)
 (global-set-key (kbd "M-s h c") 'symbol-overlay-remove-all)
 (global-set-key (kbd "M-p") #'symbol-overlay-switch-backward)
