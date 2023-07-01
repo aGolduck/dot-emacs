@@ -52,10 +52,6 @@
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
 (global-set-key [remap switch-to-buffer] 'consult-buffer)
 (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
-;; (defun sanityinc/consult-ripgrep-at-point (&optional dir initial)
-;;   (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
-;;                                   (symbol-name s))))
-;;   (consult-ripgrep dir initial))
 
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
 ;; (define-key isearch-mode-map (kbd "M-e") #'consult-isearch)
