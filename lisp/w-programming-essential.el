@@ -41,6 +41,16 @@
     :default "typescript" ;; 和 (quickrun-set-default "typescript" "typescript/deno") 效果一样, 可以是列表
     :mode 'typescript-mode
     :override t)
+  (quickrun-add-command "typescript/deno-debug"
+    '((:command . "deno")
+      (:exec . ("%c run --inspect-brk -A %s --std-log-level=DEBUG"
+                ;; 设置过期时间为10小时，使 debugger 不会因过期时间而挂掉
+                ;; 副作用是影响别的 quickrun，不过也无所谓了
+                (lambda () (setq quickrun-option-timeout-seconds 36000) "")))
+      (:description . "debug TypeScript script with deno --log-level=debug"))
+    :default nil
+    :mode 'typescript-mode
+    :override nil)
   (quickrun-add-command "c++/clang++"
     '((:command . "clang++")
       (:exec    . ("%c -std=c++2a -x c++ %o -o %e %s" "%e %a"))
