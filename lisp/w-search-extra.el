@@ -7,17 +7,8 @@
 (straight-use-package 'wgrep)
 
 (when (executable-find "rg")
-  ;; rg
-  ;; color-rg
+  ;; rg 不比 consult-ripgrep 方便，又没有 color-rg 功能强大好用，暂时弃用
   ;; (global-set-key (kbd "M-SPC s") #'w/rg-menu)
-
-  ;; consult-ripgrep
-  (with-eval-after-load 'consult
-    (defun sanityinc/consult-ripgrep-at-point (&optional dir initial)
-      (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
-                                  (symbol-name s))))
-      (consult-ripgrep dir initial))
-    (global-set-key (kbd "M-SPC s p") #'sanityinc/consult-ripgrep-at-point))
 
   ;; color-rg
   (setq color-rg-search-ignore-rules "-g \"!node_modules\" -g \"!dist\" -g\"!straight\"")
