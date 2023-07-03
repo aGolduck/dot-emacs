@@ -7,8 +7,8 @@
 (straight-use-package 'consult)
 (straight-use-package 'marginalia)
 (straight-use-package 'orderless)
-;; (straight-use-package 'embark)
-;; (straight-use-package 'embark-consult)
+(straight-use-package 'embark)
+(straight-use-package 'embark-consult)
 ;; (straight-use-package 'mini-frame)
 
 
@@ -67,7 +67,6 @@
 (setq-default marginalia-annotators '(marginalia-annotators-heavy))
 (add-hook 'after-init-hook 'marginalia-mode)
 
-;; (with-eval-after-load 'embark
-;;   (define-key selectrum-minibuffer-map (kbd "C-c C-o") #'embark-export))
+(global-set-key (kbd "C-.") #'embark-act)
 
 (provide 'w-minibuffer)

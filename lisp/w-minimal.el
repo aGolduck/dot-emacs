@@ -77,7 +77,8 @@
 (global-set-key (kbd "M-SPC F f") #'find-function)
 (global-set-key (kbd "M-SPC F V") #'find-variable-other-window)
 (global-set-key (kbd "M-SPC F v") #'find-variable)
-(define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
+;; 不常用，与新加的包 embark embark-act 冲突
+;; (define-key key-translation-map (kbd "C-.") (kbd "C-x 4 ."))
 
 ;;; flyspell
 (when (executable-find "aspell")
