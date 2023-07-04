@@ -54,7 +54,7 @@
 (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
 (if (executable-find "rg")
     (global-set-key (kbd "M-SPC s p") #'consult-ripgrep)
-  (global-set-key (kbd "M-SPC s p") #'consult-git-grep))
+  (global-set-key (kbd "M-SPC s p") #'consult-grep))
 
 
 ;; consult-isearch 作为 edit 没有历史，作为 C-s 又会清除当前搜索串
