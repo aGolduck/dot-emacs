@@ -37,4 +37,8 @@
 	                  (?? aw-show-dispatch-help)))
 (global-set-key (kbd "M-i") #'ace-window)
 
+(with-eval-after-load 'ace-window
+  (require 'w-ui-minimal)
+  (advice-add 'ace-window :after #'w/闪烁上下文))
+
 (provide 'w-ace-window)

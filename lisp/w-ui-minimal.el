@@ -96,6 +96,25 @@
 (global-set-key (kbd "M-SPC w s") #'w/split-window-right)
 (global-set-key (kbd "M-SPC w v") #'split-window-below)
 (global-set-key (kbd "M-SPC w x") #'window-swap-states)
+(setq pulse-delay 0.05
+      pulse-iterations 10)
+(with-eval-after-load 'pulse
+  ;; TODO 调色彩
+  (set-face-attribute 'pulse-highlight-start-face nil :background "red"))
+(defun w/闪烁上下文 (&rest _)
+  ;; TODO 考虑光标在文件结尾处的情况
+  (let ((saved-point (point))
+        (start-point nil)
+        (end-point nil))
+    (beginning-of-line)
+    (setq start-point (point))
+    (forward-char 80)
+    (end-of-line)
+    (setq end-point (point))
+    (pulse-momentary-highlight-region start-point end-point)
+    (goto-char saved-point)))
+;; TODO 尽量不要搞 dirty hack, 自主可控的入口复合函数即可, advice-add 仅适用于有不可控的系统或第三方代码
+(advice-add 'other-window :after #'w/闪烁上下文)
 
 ;;; winner
 (add-hook 'after-init-hook #'winner-mode)
