@@ -89,7 +89,9 @@
 (with-eval-after-load 'cider
   ;; odd is that cider depends on org-src-mode
   (require 'org-src))
-(add-hook 'clojure-mode-hook #'lispy-mode)
+(add-hook 'clojure-mode-hook (lambda ()
+                               (setq-local lispy-compat '(cider))
+                               (lispy-mode 1)))
 ;;; TODO company 的相关配置全部转移到 w-company
 ;; (with-eval-after-load 'clojure-mode
 ;;   (with-eval-after-load 'cider
