@@ -162,6 +162,22 @@
 (setq reb-re-syntax 'rx)
 
 
+;;; 与外界交互
+(defun idea ()
+  (interactive)
+  ;; Using shell-command runs the program as a child, even when done asynchronously
+  ;; start-process also runs as a child process
+
+  ;; (shell-command "idea" (project-root (project-current)))
+  ;; sleep for 1 second, or emacs will be stuck
+  ;; (sleep-for 1)
+  ;; (ns-do-applescript "tell application \"IntelliJ IDEA\" to activate")
+
+  ;; call-process start the program as its own distinct process
+  (call-process "idea" nil nil nil (expand-file-name (project-root (project-current))))
+  )
+
+
 (require 'w-programming-minimal)
 (require 'w-file-minimal)
 (require 'w-ui-minimal)

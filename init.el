@@ -22,38 +22,6 @@
 (require 'w-straight)
 
 
-(defun w/打开gdb调试时自动显示行号 ()
-  (if gdb-many-windows
-      (global-display-line-numbers-mode 1)
-    (global-display-line-numbers-mode -1)))
-(add-hook 'gdb-many-windows-hook #'w/打开gdb调试时自动显示行号)
-
-;; copied from https://emacs.stackexchange.com/questions/58590/why-set-window-dedicated-p-doesnt-work-with-certain-buffers
-(defun toggle-current-window-dedication-and-fix ()
-  (interactive)
-  (let* ((window    (selected-window))
-         (dedicated-and-fixed-p (window-dedicated-p window)))
-    (set-window-dedicated-p window (not dedicated-and-fixed-p))
-    (set-window-parameter window 'no-delete-other-windows (not dedicated-and-fixed-p))
-    (message "Window fixed and %sdedicated to %s"
-             (if dedicated-and-fixed-p "no longer " "")
-             (buffer-name))))
-
-(defun idea ()
-  (interactive)
-  ;; Using shell-command runs the program as a child, even when done asynchronously
-  ;; start-process also runs as a child process
-
-  ;; (shell-command "idea" (project-root (project-current)))
-  ;; sleep for 1 second, or emacs will be stuck
-  ;; (sleep-for 1)
-  ;; (ns-do-applescript "tell application \"IntelliJ IDEA\" to activate")
-
-  ;; call-process start the program as its own distinct process
-  (call-process "idea" nil nil nil (expand-file-name (project-root (project-current))))
-  )
-
-
 (require 'w-essential)
 (require 'w-full)
 

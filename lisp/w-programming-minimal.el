@@ -8,6 +8,13 @@
                                 "~/.emacs.d/tree-sitter"))
 
 
+;;; gdb
+(defun w/打开gdb调试时自动显示行号 ()
+  (if gdb-many-windows
+      (global-display-line-numbers-mode 1)
+    (global-display-line-numbers-mode -1)))
+(add-hook 'gdb-many-windows-hook #'w/打开gdb调试时自动显示行号)
+
 ;;; eglot
 (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
 (setq eglot-extend-to-xref t)

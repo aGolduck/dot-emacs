@@ -35,7 +35,9 @@
                                  (plantuml . t)
                                  (shell . t)
                                  (sql . t)
-                                 (typescript . t)))
+                                 (typescript . t)
+                                 (python . t)
+                                 ))
   ;; set faces
   (set-face-attribute 'org-headline-done nil :strike-through t)
   (set-face-attribute 'org-agenda-done nil :strike-through t))
