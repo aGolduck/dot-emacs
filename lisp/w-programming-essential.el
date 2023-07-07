@@ -18,6 +18,21 @@
 (setq quickrun-debug t)
 ;; quickrun-add-command, :override nil 表示增加，override t 表示覆盖原选项
 (with-eval-after-load 'quickrun
+  ;; TODO maven 处理多 module 的情况
+  (quickrun-add-command "java/maven-test"
+    '((:command . "mvn")
+      (:exec . ((lambda ()
+                  (concat "%c -f " (concat (projectile-project-root) "pom.xml") " test -DfailIfNoTests=false -Dtest="
+                          (save-excursion
+                            (setq quickrun-option-timeout-seconds 36000)
+                            (beginning-of-buffer)
+                            (search-forward-regexp "package \\(.+\\);" nil t)
+                            (match-string 1))
+                          "."
+                          (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))))
+      (:tempfile . nil)
+      (:description . "run java unit test"))
+    :default nil :mode 'java-mode :override nil)
   (quickrun-add-command "java/maven"
     '((:command . "mvn")
       (:exec . ((lambda ()
