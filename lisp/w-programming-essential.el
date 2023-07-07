@@ -36,13 +36,14 @@
   (quickrun-add-command "java/maven"
     '((:command . "mvn")
       (:exec . ((lambda ()
-                  (concat  "%c -f " (concat (projectile-project-root) "pom.xml") " compile exec:java -Dexec.mainClass=\""
-                           (string-replace "/" "."
-                                           (string-remove-suffix ".java"
-                                                                 (string-remove-prefix
-                                                                  (concat (projectile-project-root) "src/main/java/")
-                                                                  (buffer-file-name))))
-                           "\""))))
+                  (concat "%c -f " (concat (projectile-project-root) "pom.xml") " compile exec:java -Dexec.mainClass=\""
+                          (save-excursion
+                            (beginning-of-buffer)
+                            (search-forward-regexp "package \\(.+\\);" nil t)
+                            (match-string 1))
+                          "."
+                          (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))
+                          "\""))))
       (:tempfile . nil)
       (:description . "run java file with maven"))
     :default nil :mode 'java-mode :override nil)
@@ -85,8 +86,7 @@
       (:cmdopt . "-Duser.language=en -Dfile.encoding=UTF-8 -explain")
       (:description . "scala"))
     :default "scala"
-    :override t)
-  )
+    :override t))
 
 
 ;;; languages
