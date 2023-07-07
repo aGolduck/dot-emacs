@@ -15,10 +15,12 @@
 
 (require 'w-minimal)
 
+(setq explore-file (locate-user-emacs-file "w-explore.el"))
+(load explore-file 'no-error 'no-message)
+
 
 (require 'w-straight)
 
-;;; exploring zone before loading third-party packages
 
 (defun w/打开gdb调试时自动显示行号 ()
   (if gdb-many-windows
