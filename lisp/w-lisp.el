@@ -8,22 +8,11 @@
                      ;; macrostep
                      ))
 (with-eval-after-load 'lispy
-  (define-key lispy-mode-map (kbd "M-a") #'lispy-backward)
-  (define-key lispy-mode-map (kbd "M-e") #'lispy-forward)
-  ;; 只在括号处起作用，一定要加上 `special' 前缀，不然在非括号处会有意想不到的结果
-  (define-key lispy-mode-map (kbd "<tab>") #'special-lispy-tab)
-
-  (define-key lispy-mode-map (kbd "i") nil)
-  (define-key lispy-mode-map (kbd "M-i") nil)
-  (define-key lispy-mode-map (kbd "M-o") nil)
-
   (defun w/lispy-help ()
     "少量实用但是实用的命令提示"
     (interactive)
     ;; TODO 增加颜色配置，message 只是 print 到 echo area, echo area 不支持 text property
     (message "\
-> -> lispy-slurp, aka grow
-< -> lispy-barf, aka shrink
 s -> lispy-move-down
 w -> lispy-move-up
 x -> IDE like features
@@ -33,9 +22,24 @@ r -> lispy-raise `(let ((foo 1)) |(+ bar baz))' -> `(+ bar baz)'
 M -> lispy-multiline
 O -> lispy-oneline
 C-1 -> lispy-describe-inline"))
+
   ;; 增加 `special' 即只在括号处起作用的命令的方法
   (lispy-defverb "help" (("?" w/lispy-help)))
+  (lispy-defverb "slurp(grow)-or-barf(shrink)"
+                 (("<" lispy-slurp-or-barf-left)
+                  (">" lispy-slurp-or-barf-right)))
+
+  (define-key lispy-mode-map (kbd "M-a") #'lispy-backward)
+  (define-key lispy-mode-map (kbd "M-e") #'lispy-forward)
+  ;; 只在括号处起作用，一定要加上 `special' 前缀，不然在非括号处会有意想不到的结果
+  (define-key lispy-mode-map (kbd "<tab>") #'special-lispy-tab)
   (define-key lispy-mode-map (kbd "?") #'special-w/lispy-help)
+  (define-key lispy-mode-map (kbd "<") #'special-lispy-slurp-or-barf-left)
+  (define-key lispy-mode-map (kbd ">") #'special-lispy-slurp-or-barf-right)
+
+  (define-key lispy-mode-map (kbd "i") nil)
+  (define-key lispy-mode-map (kbd "M-i") nil)
+  (define-key lispy-mode-map (kbd "M-o") nil)
 
   ;; 找不到针对具体项目的取消 lispy-indent 方法，暂时取消所有 clojure-mode 的 lispy-indent
   (define-key lispy-mode-map (kbd "RET")
