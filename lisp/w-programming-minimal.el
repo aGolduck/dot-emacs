@@ -3,10 +3,7 @@
 (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 
 ;;; treesit
-;; build treesit language definitions by https://github.com/casouri/tree-sitter-module
-(setq treesit-extra-load-path '("~/g/casouri/tree-sitter-module/dist"
-                                "~/.emacs.d/tree-sitter"))
-
+(add-hook 'treesit--explorer-tree-mode-hook #'lispy-mode)
 
 ;;; gdb
 (defun w/打开gdb调试时自动显示行号 ()
