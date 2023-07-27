@@ -48,12 +48,17 @@
 (define-auto-insert '("\\.lc\\.scala\\'" . "leetcode scala")
   '(
     "leetcode scala template"
+    "import java.util.logging.Logger" "\n"
+    "import java.util.logging.Level" "\n"
     "object " (nth 0 (split-string
                       (nth 1 (split-string
                               (file-name-base (buffer-file-name)) "-"))
                       "\\.")) " {" "\n"
+    "  val log: Logger = Logger.getLogger(\"\")" "\n"
     "\n"
-    "  def main(args: Array[String]): Unit = {"
+    "  def main(args: Array[String]): Unit = {" "\n"
+    "    log.setLevel(Level.FINE)" "\n"
+    "    log.getHandlers().foreach(handler => handler.setLevel(Level.FINE))" "\n"
     _ "\n"
     "\n"
     "  }" "\n"
