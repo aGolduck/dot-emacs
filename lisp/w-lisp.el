@@ -53,7 +53,7 @@ C-1 -> lispy-describe-inline"))
 
 (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
 (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
-(add-hook 'treesit--explorer-tree-mode-hook #lispy-mode)
+(add-hook 'treesit--explorer-tree-mode-hook #'lispy-mode)
 
 
 (provide 'w-lisp)
