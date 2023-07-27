@@ -33,6 +33,7 @@
     (let ((new-name (read-string "Rename to: " (thing-at-point 'symbol 'no-properties))))
       (eglot-rename new-name)))
   ;; keybindings
+  (define-key eglot-mode-map (kbd "M-<return>") #'eglot-code-actions)
   (define-key eglot-mode-map (kbd "M-\"") #'xref-find-references)
   (define-key eglot-mode-map (kbd "M-r") #'w/eglot-rename-with-initial-contents))
 
