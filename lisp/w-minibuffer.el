@@ -47,7 +47,19 @@
       read-buffer-completion-ignore-case t)
 (setq savehist-file (w/locate-emacs-var-file "history"))
 (add-hook 'after-init-hook #'savehist-mode)
-(setq consult-preview-key nil)          ;; consult-buffer previews files too, just inhibit preview
+
+;; consult
+;; (setq consult-preview-key nil)          ;; consult-buffer previews files too, just inhibit preview, 副作用：全局禁止
+(with-eval-after-load 'consult
+  (consult-customize
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; my/command-wrapping-consult    ;; disable auto previews inside my command
+   :preview-key '(:debounce 0.4 any) ;; Option 1: Delay preview
+   ;; :preview-key "M-.")            ;; Option 2: Manual preview
+   ))
 (setq-default consult-project-root-function #'projectile-project-root)
 ;; (global-set-key (kbd "M-SPC f r") #'consult-recent-file)  ;; use crux-find-recent-file instead, no need to access tramp files just for marginalia information
 (global-set-key [remap switch-to-buffer] 'consult-buffer)
