@@ -139,6 +139,7 @@
 (setq project-find-functions '(w/project-try-local project-try-vc))
 
 ;;; simple
+(defalias 'w/insert-unicode 'insert-char)
 (add-hook 'after-init-hook #'global-visual-line-mode)
 (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
