@@ -1,31 +1,10 @@
-import * as log from "https://deno.land/std/log/mod.ts";
-import { parse } from "https://deno.land/std/flags/mod.ts";
-const flags = parse(Deno.args, {
-  string: ["std-log-level"]
-})
-const STD_LOG_LEVEL = flags["std-log-level"] as "DEBUG" | "INFO" | "ERROR" | "NOTSET" | "WARNING" | "CRITICAL" || "INFO"
-await log.setup({
-  handlers: {
-    console: new log.handlers.ConsoleHandler(STD_LOG_LEVEL),
-  },
-  loggers: {
-    default: {
-      level: STD_LOG_LEVEL,
-      handlers: ["console"],
-    },
-  },
-});
-
-log.debug("init")
-
-
 
 //////////////////////////////////////////////////////////////////////////////
 //                       暴力破解法
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 //                        递归法
-// 目标数据：从 [1, a^2] 到 (x, y) 坐标系的映射关系，并收集映射至二维数组
+// 目标数据：
 // 1. 什么是 n, n-1: 
 // 2. 什么是 f(n), f(n-1): 
 // 3. 递归终止条件:
