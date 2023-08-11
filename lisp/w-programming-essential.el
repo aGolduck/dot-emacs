@@ -7,12 +7,6 @@
 ;;; projectile
 (require 'w-projectile)
 
-;;; dumb-jump
-(straight-use-package 'dumb-jump)
-;; (setq dumb-jump-force-searcher 'rg) ;; rg is not working for at least elisp files
-(with-eval-after-load 'xref
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
-
 ;;; quickrun
 (straight-use-package 'quickrun)
 (setq quickrun-debug t)
