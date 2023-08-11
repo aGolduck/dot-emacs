@@ -91,7 +91,7 @@
 
 
 ;;; hideshow
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+;; (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-set-key (kbd "M-SPC z H") #'hs-hide-all)
 (global-set-key (kbd "M-SPC z S") #'hs-show-all)
 (global-set-key (kbd "M-SPC z h") #'hs-hide-block)

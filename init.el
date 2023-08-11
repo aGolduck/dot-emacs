@@ -15,17 +15,17 @@
 
 (require 'w-minimal)
 
-(setq explore-file (locate-user-emacs-file "w-explore.el"))
-(load explore-file 'no-error 'no-message)
-
 
 (require 'w-straight)
+
+
+(setq explore-file (locate-user-emacs-file "w-explore.el"))
+(load explore-file 'no-error 'no-message)
 
 
 (require 'w-essential)
 (require 'w-full)
 
-;;; exploring zone after full initialization
 
 ;;; local settings
 (require 'w-local)

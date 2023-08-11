@@ -1,3 +1,5 @@
+(require 'w-minimal)
+
 (require 'w-essential)
 
 (require 'w-dired-plus)
