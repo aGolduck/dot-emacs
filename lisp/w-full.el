@@ -71,5 +71,20 @@
 ;;         ("sourcegraph" git-link-sourcegraph)
 ;;         ("git.woa.com" git-link-gitlab)))
 
+;;; ein, emacs ipython notebook
+;; TOOD ein 获取不到 SPARK_HOME 变量，原因不明
+;; 可手动补充变量 `import os; os.environ['SPARK_HOME'] = '/Users/w/.sdkman/candidates/spark/current'`
+(straight-use-package 'ein)
+(add-hook 'ein:notebook-mode-hook
+          (lambda ()
+            ;; 借用 auto-save-visited-mode 的自动保存间隔设置
+            (require 'auto-save-visited-mode)
+            (run-with-idle-timer auto-save-visited-interval t
+                                 (lambda ()
+                                   ;; 只在 ein:notebook-mode 下在启动命令，其他 mode 下不需要，且有大量报错
+                                   (when ein:notebook-mode
+                                     (ein:notebook-save-notebook ein:%notebook%))))))
+
+
 
 (provide 'w-full)
