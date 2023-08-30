@@ -144,6 +144,23 @@
 (global-set-key (kbd "M-SPC SPC") #'execute-extended-command)
 (global-set-key (kbd "M-SPC u") #'universal-argument)
 
+;;; sqlite
+;; SQLite 文件都用 sqlite-mode 打开
+(when (functionp 'sqlite-available-p)
+  (require 'sqlite-mode)
+  (defun sqlite-file-p ()
+    (let* ((ms "SQLite format 3")
+	   (msl (length ms)))
+      (and (> (point-max) msl)
+	   (string= (buffer-substring 1 (1+ msl))
+		    ms))))
+  (defun sqlite-mode-open-file* ()
+    (let ((f (buffer-file-name)))
+      ;; 简单粗暴，先关了当前buffer, 再重新用新方法打开
+      (kill-buffer (current-buffer))
+      (sqlite-mode-open-file f)))
+  (add-to-list 'magic-mode-alist '(sqlite-file-p . sqlite-mode-open-file*)))
+
 ;;; terms
 ;;; ansi-color for compilation mode
 ;; https://stackoverflow.com/questions/5819719/emacs-shell-command-output-not-showing-ansi-colors-but-the-code
