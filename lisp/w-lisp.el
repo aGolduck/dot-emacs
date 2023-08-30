@@ -42,6 +42,10 @@ C-1 -> lispy-describe-inline"))
   (define-key lispy-mode-map (kbd "M-i") nil)
   (define-key lispy-mode-map (kbd "M-o") nil)
 
+  ;; json 可用 lispy-mode 导航
+  (with-eval-after-load 'lispy
+    (add-to-list 'lispy-clojure-modes "json-ts-mode"))
+  (add-hook 'json-ts-mode-hook #'lispy-mode)
   ;; 找不到针对具体项目的取消 lispy-indent 方法，暂时取消所有 clojure-mode 的 lispy-indent
   (define-key lispy-mode-map (kbd "RET")
               (lambda ()
