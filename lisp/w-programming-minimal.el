@@ -16,6 +16,11 @@
 (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
 (setq eglot-extend-to-xref t)
 (with-eval-after-load 'eglot
+  ;; 禁止自动构建，能和 Intellij IDEA 同时使用
+  (setq eglot-workspace-configuration
+        '(:java
+          (:autobuild
+           (:enabled :json-false))))
   ;; deno lsp
   ;; (add-to-list 'eglot-server-programs '((typescript-mode typescript-ts-mode) . ("deno" "lsp")))
   (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . (eglot-deno "deno" "lsp")))
