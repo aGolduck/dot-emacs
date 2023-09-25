@@ -12,6 +12,7 @@
 
 ;; save all files when you switch out of emacs.
 ;; (setq after-focus-change-function (lambda () (interactive) (save-some-buffers t)))
+(setq auto-save-visited-interval 0.5)
 (add-hook 'after-init-hook #'auto-save-visited-mode)
 
 ;;; saveplace to save position visited last time
