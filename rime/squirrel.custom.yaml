@@ -41,4 +41,4 @@ patch:
       vim_mode: true
     ru.keepcoder.Telegram:
       inline: true
-  keyboard_layout: dvorak
+  keyboard_layout: com.apple.keylayout.Dvorak
