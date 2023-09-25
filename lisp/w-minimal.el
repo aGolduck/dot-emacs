@@ -182,18 +182,15 @@
 
 ;;; 与外界交互
 (defun idea ()
+  "跳转到idea对应的文件buffer, 只能跳转到对应的行，无法到具体的字符位置"
   (interactive)
   ;; Using shell-command runs the program as a child, even when done asynchronously
   ;; start-process also runs as a child process
-
-  ;; (shell-command "idea" (project-root (project-current)))
-  ;; sleep for 1 second, or emacs will be stuck
-  ;; (sleep-for 1)
-  ;; (ns-do-applescript "tell application \"IntelliJ IDEA\" to activate")
-
   ;; call-process start the program as its own distinct process
-  (call-process "idea" nil nil nil (expand-file-name (project-root (project-current))))
-  )
+  (let ((default-directory (expand-file-name (project-root (project-current))))
+        (line (line-number-at-pos))
+        (column (current-column)))
+    (call-process "idea" nil nil nil "--line" (number-to-string line) (expand-file-name (buffer-file-name)))))
 
 
 (require 'w-programming-minimal)
