@@ -1,3 +1,14 @@
+;;; pulsar 只会高亮当前行，当前行字数太少时不明显，不如自己定制的
+;; (straight-use-package 'pulsar)
+;; (setq pulsar-pulse t)
+;; (setq pulsar-delay 0.055)
+;; (setq pulsar-iterations 10)
+;; (setq pulsar-face 'pulsar-magenta)
+;; (setq pulsar-face 'pulsar-red)
+;; (setq pulsar-highlight-face 'pulsar-yellow)
+;; (pulsar-global-mode 1)
+;; (add-to-list 'pulsar-pulse-functions #'ace-window)
+
 ;; 禁用从右往左的编辑模式可明显加速超长行显示，见 https://emacs-china.org/t/topic/25811/9
 ;; doom-emacs 也提供了另外的方案，是基于 `bidi-display-reordering' 的文档给出的建议
 ;; 哪个效果更好未知
@@ -10,7 +21,8 @@
       large-hscroll-threshold 1000
       syntax-wholeline-max 1000)
 
-
+(straight-use-package 'string-inflection)
+(straight-use-package '(opencc :type git :host github :repo "xuchunyang/emacs-opencc"))
 (straight-use-package '(dape :type git :host github :repo "svaante/dape"))
 (require 'dape)
 (add-to-list 'dape-configs
@@ -37,8 +49,8 @@
 ;;               "JM"
 ;;               ])
 
-(require 'dired-aux)
-(add-to-list 'dired-compress-file-suffixes '("\\.jmod\\'" "" "unzip -o -d %o %i"))
+;; (require 'dired-aux)
+;; (add-to-list 'dired-compress-file-suffixes '("\\.jmod\\'" "" "unzip -o -d %o %i"))
 
 (setq zotero-random-current-pane-item-views "
 var iv = ZoteroPane.itemsView;
@@ -50,7 +62,7 @@ await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id)
 ;; const itemIDs = await searchCondition.search()
 ;; const zoteroPane = Zotero.getActiveZoteroPane();
 ;; zoteroPane.selectItem(itemIDs[1])
-
+;; https://www.zotero.org/support/dev/client_coding/javascript_api
 (defun zotero-random ()
   (interactive)
   (let ((url-request-method "POST")
@@ -149,6 +161,53 @@ await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id)
   (add-hook 'json-ts-mode-hook #'combobulate-mode))
 
 
+
+(straight-use-package '(valign :host github :repo "casouri/valign"))
+(with-eval-after-load 'valign
+  (add-to-list 'valign-box-charset-alist
+               '(test . "
++------------------------------ +
+|+-- +------------------------ + |
+|+-- +------------------------ + |
+
+")))
+
+
 (straight-use-package '(typst-ts-mode :host sourcehut :repo "meow_king/typst-ts-mode"))
+
+(straight-use-package 'sbt-mode)
+(straight-use-package 'mvn)
+;; use consult-mark?
+(straight-use-package 'goto-chg)
+(require 'goto-chg)
+(straight-use-package 'pcre2el)
+
+
+(straight-use-package 'realgud-lldb)
+;; (require 'realgud-lldb)
+(straight-use-package '(mind-wave :host github :repo "manateelazycat/mind-wave" :files ("*")))
+(with-eval-after-load 'mind-wave
+  (add-hook 'mind-wave-chat-mode-hook
+            (lambda ()
+              (require 'markdown-mode)
+              (markdown-mode 1)
+              (setq-local auto-revert-remote-files t)
+              (auto-revert-mode 1))))
+(require 'mind-wave)
+
+;; lots of errors in treesit-explore-mode, not usable
+(straight-use-package '(scala-ts-mode :type git :host github :repo "KaranAhlawat/scala-ts-mode"))
+
+
+
+;; (with-eval-after-load 'pyim
+;;   (defun w/set-pyim-cursor-color (&optional theme)
+;;     (setq pyim-indicator--original-cursor-color (face-attribute 'cursor :background)))
+;;   (advice-add 'load-theme :after #'w/set-pyim-cursor-color)
+;;   (advice-add 'enable-theme :after #'w/set-pyim-cursor-color)
+;;   (advice-add 'disable-theme :after #'w/set-pyim-cursor-color))
+
+
+(with-eval-after-load 'w-full)
 
 (provide 'w-explore)
