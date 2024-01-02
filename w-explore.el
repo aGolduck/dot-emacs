@@ -53,8 +53,8 @@
 ;; (add-to-list 'dired-compress-file-suffixes '("\\.jmod\\'" "" "unzip -o -d %o %i"))
 
 (setq zotero-random-current-pane-item-views "
-var iv = ZoteroPane.itemsView;
-await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id)
+var iv = Zotero.getActiveZoteroPane().itemsView;
+await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id);
 ")
 
 ;; const searchCondition = new Zotero.Search()
