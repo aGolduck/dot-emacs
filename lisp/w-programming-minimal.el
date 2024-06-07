@@ -97,6 +97,7 @@
 ;;; java
 ;; java 文件经常巨长，打开行号方便定位
 (add-hook 'java-mode-hook #'display-line-numbers-mode)
+(add-hook 'java-ts-mode-hook #'display-line-numbers-mode)
 (add-hook 'java-mode-hook #'yas-minor-mode)
 
 ;;; js
