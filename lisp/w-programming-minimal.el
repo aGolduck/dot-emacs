@@ -86,6 +86,7 @@
 
 ;;; auto-mode-alist for treesit modes
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-ts-mode))
+(add-to-list auto-mode-alist '("Dockerfile", dockerfile-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-ts-mode))
 ;; go-ts-mode 对中文标识符支持有问题，如常用需考虑回退为 go-mode
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
