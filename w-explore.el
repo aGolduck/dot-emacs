@@ -1,3 +1,6 @@
+;; exclude magit buffers from consult-buffer
+(add-to-list 'consult-buffer-filter "\\`magit.*\\'")
+
 ;;; pulsar 只会高亮当前行，当前行字数太少时不明显，不如自己定制的
 ;; (straight-use-package 'pulsar)
 ;; (setq pulsar-pulse t)
