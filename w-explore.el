@@ -1,6 +1,19 @@
-;; exclude magit buffers from consult-buffer
-(with-eval-after-load 'consult
-  (add-to-list 'consult-buffer-filter "\\`magit.*\\'"))
+(defun join-numbers-with-comma-and-sort ()
+  "把多行数字拼接成排序好的用逗号连接的字符串"
+  (interactive)
+  (when (region-active-p)
+    (let* ((start (region-beginning))
+           (end (region-end))
+           (text (buffer-substring-no-properties start end)))
+
+      ;; TODO copy to system clipboard
+      (message
+       (mapconcat 'number-to-string
+                  (sort
+                   (mapcar 'string-to-number
+                           (split-string (replace-regexp-in-string "\n" "\n" text) "\n"))
+                   '<)
+                  ",")))))
 
 ;;; pulsar 只会高亮当前行，当前行字数太少时不明显，不如自己定制的
 ;; (straight-use-package 'pulsar)
