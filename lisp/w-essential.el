@@ -20,6 +20,8 @@
 ;;; crux
 (straight-use-package 'crux)
 (global-set-key (kbd "C-o") #'crux-smart-open-line)
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "M-RET") #'crux-open-with))
 (global-set-key (kbd "M-o") #'crux-smart-open-line-above)
 (global-set-key (kbd "M-SPC f r") #'crux-recentf-find-file)
 
