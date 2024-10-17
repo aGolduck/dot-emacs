@@ -5,6 +5,8 @@
 
 ;; 日志选项必须在启动 python 进程前设置才能生效
 (setq lsp-bridge-enable-log nil
+      ;; 用 python -m venv ~/.emacs.d 创建一个 lsp-bridge 专用的 python 环境
+      lsp-bridge-python-command "/Users/w/.emacs.d/bin/python3"
       lsp-bridge-enable-profile nil
       lsp-bridge-enable-diagnostics t)
 
@@ -13,10 +15,24 @@
 (setq acm-enable-search-file-words nil
       lsp-bridge-enable-diagnostics nil
       lsp-bridge-org-babel-lang-list '("css" "python"))
-;; typescript 使用 deno lsp.
-(setq lsp-bridge-multi-lang-server-extension-list nil)
+;; (setq lsp-bridge-multi-lang-server-extension-list nil)
 (with-eval-after-load 'lsp-bridge
-  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((typescript-mode typescript-ts-mode) . "deno"))
+  ;; typescript 使用 deno lsp.
+  ;; lsp-bridge 首先尝试使用 `lsp-bridge--get-multi-lang-server-func`， 然后尝试使用 `lsp-bridge--get-single-lang-server-func`
+  ;; 因此我们需要从 lsp-bridge-multi-lang-server-extension-list 的默认值中移除 `ts` 和 `tsx` 的设置。
+  (setq lsp-bridge-multi-lang-server-extension-list
+        (cl-remove-if (lambda (item)
+                        (equal (car item) '("ts" "tsx")))
+                      lsp-bridge-multi-lang-server-extension-list))
+
+  ;; 最后我们自定义 `lsp-bridge-get-single-lang-server-by-project` 以返回 `deno` lsp 服务器名称。
+  ;; 我建议你编写一些代码来比较 project-path 或 file-path， 只有在匹配目标路径时才返回 `deno`
+  ;; 下面的配置只是简单的匹配 `ts` 和 `tsx` 的扩展名， 让你快速体验 Deno
+  (setq lsp-bridge-get-single-lang-server-by-project
+        (lambda (project-path file-path)
+          (when (or (string-suffix-p ".ts" file-path)
+                    (string-suffix-p ".tsx" file-path))
+            "deno")))
   (define-key lsp-bridge-mode-map (kbd "M-'") #'lsp-bridge-popup-documentation)
   (define-key lsp-bridge-mode-map (kbd "M-.") #'lsp-bridge-find-def)
   (define-key lsp-bridge-mode-map (kbd "M-,") #'lsp-bridge-find-def-return)
