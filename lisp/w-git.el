@@ -17,8 +17,9 @@
 (with-eval-after-load 'selectrum
   (setq magit-completing-read-function #'selectrum-completing-read))
 
-(when (executable-find "delta")
-  (add-hook 'magit-mode-hook #'magit-delta-mode))
+;;; magit-delta 极大影响 magit 的速度
+;; (when (executable-find "delta")
+;;   (add-hook 'magit-mode-hook #'magit-delta-mode))
 
 ;; disable magit-todos to speed up magit
 (setq magit-todos-exclude-globs '("*.css.map"))
