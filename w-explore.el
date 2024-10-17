@@ -83,10 +83,11 @@ await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id);
 (defun zotero-random ()
   (interactive)
   (let ((url-request-method "POST")
-        (url-request-extra-headers '(("Content-Type" . "application/javascript")))
+        (url-request-extra-headers '(("Content-Type" . "application/javascript")
+                                     ("Authorization" . "Bearer eingoh3OoD-ae")))
         (url-request-data zotero-random-current-pane-item-views)
         (url-show-status nil))
-    (url-retrieve-synchronously "http://127.0.0.1:23119/debug-bridge/execute?password=CTT"))
+    (url-retrieve-synchronously "http://127.0.0.1:23119/debug-bridge/execute"))
   (ns-do-applescript "tell application \"Zotero\" to activate"))
 
 (defun file-random ()
