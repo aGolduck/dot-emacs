@@ -1,3 +1,58 @@
+(straight-use-package '(aider :host github :repo "tninja/aider.el" :files ("aider.el")))
+(require 'auth-source)
+;; (setenv "OPENAI_API_BASE" "https://api.hunyuan.cloud.tencent.com/v1")
+;; (setenv "OPENAI_API_KEY" (auth-source-pick-first-password :host "api.hunyuan.cloud.tencent.com"))
+;; (setq aider-args '("--model" "openai/hunyuan-pro"))
+;; (setq aider-args '("--no-auto-commits" "--model" "openai/hunyuan-pro"))
+(setenv "OPENAI_API_BASE" "http://hunyuanapi.woa.com/openapi/v1")
+(setenv "OPENAI_API_KEY" (auth-source-pick-first-password :host "hunyuanapi.woa.com"))
+(setenv "DEEPSEEK_API_KEY" (auth-source-pick-first-password :host "deepseek.com"))
+;; (setq aider-args '("--no-auto-commits" "--model" "openai/hunyuan-turbo" "--map-tokens" "1024"))
+;; (setq aider-args '("--no-auto-commits" "--model" "deepseek/deepseek-reasoner"))
+(setq aider-args '("--model" "deepseek/deepseek-reasoner"))
+
+
+(straight-use-package 'gptel)
+;; (setq gptel-backend (gptel-make-openai "hunyuan-pro"
+;;                       :key 'gptel-api-key
+;;                       :host "api.hunyuan.cloud.tencent.com"
+;;                       :models '(hunyuan-pro))
+;;       gptel-model 'hunyuan-pro
+;;       gptel-prompt-prefix-alist '((markdown-mode . "## ")
+;;                                   (org-mode . "** ")))
+(setq gptel-backend (gptel-make-openai "hunyuan"
+                      :key 'gptel-api-key
+                      :host "hunyuanapi.woa.com"
+                      :endpoint "/openapi/v1/chat/completions"
+                      :protocol "http"
+                      :stream t
+                      :models '(hunyuan-code hunyuan-turbo hunyuan-large))
+      gptel-org-branching-context t
+      gptel-model 'hunyuan-turbo
+      gptel-default-mode 'markdown-mode
+      gptel-prompt-prefix-alist '((markdown-mode . "## ")
+                                  (org-mode . "** ")))
+(with-eval-after-load 'gptel
+  (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
+  (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
+
+(straight-use-package '(shell-maker :host github :repo "xenodium/shell-maker"))
+(straight-use-package '(chatgpt-shell :host github :repo "xenodium/chatgpt-shell" :files ("*")))
+(require 'auth-source)
+(setq chatgpt-shell-api-url-base "https://api.hunyuan.cloud.tencent.com"
+      chatgpt-shell-openai-key (auth-source-pick-first-password :host "api.hunyuan.cloud.tencent.com")
+      chatgpt-shell-model-version "hunyuan-pro")
+
+(with-eval-after-load 'chatgpt-shell
+  (add-to-list 'chatgpt-shell-models
+               (chatgpt-shell-openai-make-model
+                :version "hunyuan-pro"
+                :token-width 3
+                :context-window 128000)))
+
+
+(straight-use-package '(uniline-mode :host github :repo "tbanel/uniline"))
+
 (defun join-numbers-with-comma-and-sort ()
   "把多行数字拼接成排序好的用逗号连接的字符串"
   (interactive)
