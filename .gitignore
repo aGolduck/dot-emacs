@@ -21,3 +21,4 @@ tree-sitter
 
 # local python env
 bin
+.aider*
