@@ -1,5 +1,3 @@
-(defalias 'project-root-dired 'project-dired)
-
 (require 'auth-source)
 (setenv "DEEPSEEK_API_KEY" (auth-source-pick-first-password :host "deepseek.com"))
 (setenv "AIDER_COMMIT_PROMPT" "You are an expert software engineer that generates concise, \

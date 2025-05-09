@@ -36,3 +36,5 @@
             (when-let ((pr (project-current nil full-name)))
               (project-remember-project pr)
               (message "add project %s..." pr))))))))
+
+(defalias 'project-root-dired 'project-dired)
