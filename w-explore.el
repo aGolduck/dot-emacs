@@ -1,4 +1,28 @@
+(straight-use-package 'dumb-jump)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
+;;; consult 自定义函数
+(defun consult-magit-buffers ()
+  "使用 consult-buffer 只显示 magit: 开头的 buffer"
+  (interactive)
+  (require 'consult)                    ; 确保 consult 已加载
+  (let ((consult--source-buffer
+         (plist-put (copy-sequence consult--source-buffer)
+                    :items
+                    (lambda ()
+                      (consult--buffer-query :sort 'visibility
+                                             :as #'buffer-name
+                                             :predicate
+                                             (lambda (buf)
+                                               (string-prefix-p "magit:" (buffer-name buf))))))))
+    (consult-buffer)))
+
+;; 绑定快捷键
+(global-set-key (kbd "M-SPC m") #'consult-magit-buffers)
+
+(straight-use-package 'groovy-mode)
+
+(setq magit-diff-refine-hunk 'all)
 
 
 (straight-use-package 'gptel)
