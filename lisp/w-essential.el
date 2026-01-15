@@ -69,7 +69,4 @@
 (require 'w-lisp)
 (require 'w-programming-essential)
 
-;;; aider
-(require 'w-aider)
-
 (provide 'w-essential)

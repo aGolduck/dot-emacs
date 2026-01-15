@@ -28,7 +28,6 @@ init.el
 └── w-full            → Full feature set
     ├── w-dired-plus, w-term-full, w-org
     ├── w-programming-full
-    └── w-aider       → AI coding assistant (aidermacs)
 ```
 
 ### Key Directories
@@ -53,7 +52,6 @@ Uses `straight.el` with version-specific isolation via `straight-base-dir`. Pack
 All user commands use `M-SPC` as prefix:
 
 - `M-SPC SPC` - `execute-extended-command`
-- `M-SPC a` - Aider menu (aidermacs-transient-menu)
 - `M-SPC g s` - magit-status
 - `M-SPC s p` - consult-ripgrep (or consult-grep)
 - `M-SPC f r` - crux-recentf-find-file
@@ -72,12 +70,6 @@ Custom `w/project-try-local` detects projects by these markers (in priority orde
 2. `go.mod`, `Cargo.toml`, `project.clj`, `pom.xml`, `package.json`
 3. `Makefile`, `README.org`, `README.md`
 
-## AI Integration
-
-Aidermacs (aider integration) is configured in `w-aider.el`:
-- Default model: deepseek
-- Commit messages in Chinese with specific format
-- API keys from auth-source
 
 ## Language Support
 

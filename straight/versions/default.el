@@ -1,7 +1,6 @@
 (("Emacs-wgrep" . "208b9d01cfffa71037527e3a324684b3ce45ddc4")
  ("ace-window" . "77115afc1b0b9f633084cf7479c767988106c196")
  ("adoc-mode" . "2c2eb8043623aa99d35aacbad2ee39188bf1bad3")
- ("aidermacs" . "38aa5bfa5c5a66664abb5bb9cd7f191d1ac3d915")
  ("anaphora" . "a755afa7db7f3fa515f8dd2c0518113be0b027f6")
  ("autodisass-java-bytecode" . "02788145f5c70e9004c4eba5acffbb584fe7de37")
  ("avy" . "be612110cb116a38b8603df367942e2bb3d9bdbe")
