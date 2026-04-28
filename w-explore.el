@@ -1,3 +1,18 @@
+(straight-use-package 'rust-mode)
+
+(straight-use-package 'treemacs)
+
+(with-eval-after-load 'treemacs
+  ;; 自动跟随当前文件
+  (treemacs-follow-mode t)
+  ;; 自动监测文件变化
+  (treemacs-file-watch-mode t)
+  ;; 显示 git 状态
+  (treemacs-git-mode 'deferred))
+
+;; dumb-jump 的 Java 等语言的函数定义正则依赖 PCRE2 (--pcre2)，
+;; 必须使用带 +pcre2 feature 的 rg，否则 M-. 找不到定义。
+;; 可通过 `rg --version' 确认，cargo 默认编译的不带 pcre2，yum 安装的带。
 (straight-use-package 'dumb-jump)
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
@@ -6,7 +21,8 @@
   "使用 consult-buffer 只显示 magit: 开头的 buffer"
   (interactive)
   (require 'consult)                    ; 确保 consult 已加载
-  (let ((consult--source-buffer
+  (let ((consult-project-function nil)  ; 不需要 project 检测，避免非项目目录报错
+        (consult--source-buffer
          (plist-put (copy-sequence consult--source-buffer)
                     :items
                     (lambda ()
@@ -25,6 +41,8 @@
 (setq magit-diff-refine-hunk 'all)
 
 
+(defalias 'project-root-dired 'project-dired)
+
 (straight-use-package 'gptel)
 ;; (setq gptel-backend (gptel-make-openai "hunyuan-pro"
 ;;                       :key 'gptel-api-key
@@ -42,9 +60,8 @@
                       :models '(hunyuan-code hunyuan-turbo hunyuan-large))
       gptel-org-branching-context t
       gptel-model 'hunyuan-turbo
-      gptel-default-mode 'markdown-mode
-      gptel-prompt-prefix-alist '((markdown-mode . "## ")
-                                  (org-mode . "** ")))
+      gptel-default-mode 'org-mode
+      gptel-prompt-prefix-alist '((org-mode . "** ")))
 (with-eval-after-load 'gptel
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
   (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
@@ -79,9 +96,15 @@
        (mapconcat 'number-to-string
                   (sort
                    (mapcar 'string-to-number
-                           (split-string (replace-regexp-in-string "\n" "\n" text) "\n"))
+                           (split-string (replace-regexp-in-string "
+\n" "\n" text) "\n"))
                    '<)
                   ",")))))
+
+
+;; (setq insert-directory-program "gls" dired-use-ls-dired t)
+;; 之前设置的 ls 选项不适用 mac
+(setq dired-listing-switches "-al --group-directories-first")
 
 ;;; pulsar 只会高亮当前行，当前行字数太少时不明显，不如自己定制的
 ;; (straight-use-package 'pulsar)
@@ -275,8 +298,7 @@ await iv.selectItem(iv.getRow(Zotero.Utilities.rand(0, iv.rowCount - 1)).id);
 (with-eval-after-load 'mind-wave
   (add-hook 'mind-wave-chat-mode-hook
             (lambda ()
-              (require 'markdown-mode)
-              (markdown-mode 1)
+              ;; markdown-mode disabled
               (setq-local auto-revert-remote-files t)
               (auto-revert-mode 1))))
 (require 'mind-wave)

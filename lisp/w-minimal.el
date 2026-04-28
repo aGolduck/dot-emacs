@@ -136,6 +136,10 @@
           (when-let ((root (locate-dominating-file dir f)))
             (throw 'ret (cons 'local root))))))))
 
+(with-eval-after-load 'project
+  (cl-defmethod project-root ((project (head local)))
+    (cdr project)))
+
 (setq project-find-functions '(w/project-try-local project-try-vc))
 
 ;;; simple

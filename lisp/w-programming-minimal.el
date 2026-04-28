@@ -13,35 +13,35 @@
 (add-hook 'gdb-many-windows-hook #'w/打开gdb调试时自动显示行号)
 
 ;;; eglot
-(add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
-(setq eglot-extend-to-xref t)
-(setq-default eglot-workspace-configuration
-              '(:java
-                (:autobuild
-                 (:enabled :json-false))))
-(with-eval-after-load 'eglot
-  ;; 禁止自动构建，能和 Intellij IDEA 同时使用
+;; (add-hook 'eglot-managed-mode-hook (lambda () (company-mode 1)))
+;; (setq eglot-extend-to-xref t)
+;; (setq-default eglot-workspace-configuration
+;;               '(:java
+;;                 (:autobuild
+;;                  (:enabled :json-false))))
+;; (with-eval-after-load 'eglot
+;;   ;; 禁止自动构建，能和 Intellij IDEA 同时使用
 
-  ;; deno lsp
-  ;; (add-to-list 'eglot-server-programs '((typescript-mode typescript-ts-mode) . ("deno" "lsp")))
-  (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . (eglot-deno "deno" "lsp")))
-  (defclass eglot-deno (eglot-lsp-server) ()
-    :documentation "A custom class for deno lsp.")
-  (cl-defmethod eglot-initialization-options ((server eglot-deno))
-    "Passes through required deno initialization options"
-    (list :enable t
-          :lint t))
+;;   ;; deno lsp
+;;   ;; (add-to-list 'eglot-server-programs '((typescript-mode typescript-ts-mode) . ("deno" "lsp")))
+;;   (add-to-list 'eglot-server-programs '((typescript-ts-mode :language-id "typescript") . (eglot-deno "deno" "lsp")))
+;;   (defclass eglot-deno (eglot-lsp-server) ()
+;;     :documentation "A custom class for deno lsp.")
+;;   (cl-defmethod eglot-initialization-options ((server eglot-deno))
+;;     "Passes through required deno initialization options"
+;;     (list :enable t
+;;           :lint t))
 
-  ;; TODO 原eglot-rename 的 default 参数不起作用，需要用废弃的 INITIAL-CONTENTS，不知道为什么
-  ;; copy from lsp-bridge-rename
-  (defun w/eglot-rename-with-initial-contents ()
-    (interactive)
-    (let ((new-name (read-string "Rename to: " (thing-at-point 'symbol 'no-properties))))
-      (eglot-rename new-name)))
-  ;; keybindings
-  (define-key eglot-mode-map (kbd "M-<return>") #'eglot-code-actions)
-  (define-key eglot-mode-map (kbd "M-\"") #'xref-find-references)
-  (define-key eglot-mode-map (kbd "M-r") #'w/eglot-rename-with-initial-contents))
+;;   ;; TODO 原eglot-rename 的 default 参数不起作用，需要用废弃的 INITIAL-CONTENTS，不知道为什么
+;;   ;; copy from lsp-bridge-rename
+;;   (defun w/eglot-rename-with-initial-contents ()
+;;     (interactive)
+;;     (let ((new-name (read-string "Rename to: " (thing-at-point 'symbol 'no-properties))))
+;;       (eglot-rename new-name)))
+;;   ;; keybindings
+;;   (define-key eglot-mode-map (kbd "M-<return>") #'eglot-code-actions)
+;;   (define-key eglot-mode-map (kbd "M-\"") #'xref-find-references)
+;;   (define-key eglot-mode-map (kbd "M-r") #'w/eglot-rename-with-initial-contents))
 
 
 ;;; auto-insert

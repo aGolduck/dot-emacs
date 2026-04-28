@@ -1,5 +1,6 @@
 (straight-use-package 'posframe)
-(straight-use-package 'markdown-mode)
+;; markdown-mode disabled intentionally (see w-explore.el / w-full.el)
+;; (straight-use-package 'markdown-mode)
 (straight-use-package 'yasnippet)
 (straight-use-package '(lsp-bridge :host github :repo "manateelazycat/lsp-bridge" :files ("*")))
 
@@ -107,10 +108,10 @@
     (message "echo")
     (lsp-bridge-mode 1)))
 ;; 仅 lsp-bridge-mode 无法激活 jdtls 的参数配置
-(add-hook 'java-mode-hook (lambda ()
-                            (setq-local lsp-bridge-get-single-lang-server-by-project
-                                        'lsp-bridge-get-jdtls-server-by-project)
-                            (w/maybe-enable-lsp-bridge-for-java)))
+;; (add-hook 'java-mode-hook (lambda ()
+;;                             (setq-local lsp-bridge-get-single-lang-server-by-project
+;;                                         'lsp-bridge-get-jdtls-server-by-project)
+;;                             (w/maybe-enable-lsp-bridge-for-java)))
 
 
 ;; preferred deno already, no need to set specifically
