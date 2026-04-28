@@ -2,7 +2,8 @@
 (straight-use-package 'ob-typescript)
 (straight-use-package 'ob-http)
 
-(setq org-directory "~/org"
+(setq org-directory "~/s/hermes-todo"
+      org-agenda-files '("~/s/hermes-todo/todo.org")
       org-confirm-babel-evaluate nil
       org-export-with-sub-superscripts nil
       org-export-with-toc nil
@@ -11,6 +12,10 @@
 (add-hook 'org-mode-hook #'visual-line-mode)
 
 (with-eval-after-load 'org
+  ;;; org agenda
+  (setq org-agenda-span 1
+        org-agenda-restore-windows-after-quit t
+        org-agenda-show-future-repeats 'next)
   ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
   ;; fix error of org-babel-js evaluation
@@ -63,7 +68,7 @@
                             :maxlevel . 3))
       org-refile-use-outline-path t
       org-return-follows-link t
-      org-stuck-projects (quote ("" nil nil "")))
+      org-stuck-projects (quote ("+LEVEL=2/-DONE-CANCELLED" ("NEXT") nil "")))
 
 ;;; org-colview
 (with-eval-after-load 'org-colview
@@ -94,7 +99,7 @@
 ;;; lazy load
 ;; (with-eval-after-load 'org
 ;;   (require 'org-download)
-
+;;
 ;;   (defadvice org-html-paragraph (before org-html-paragraph-advice
 ;; 					(paragraph contents info) activate)
 ;;     "Join consecutive Chinese lines into a single long line without
@@ -107,5 +112,7 @@
 ;;               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
 ;;       (ad-set-arg 1 fixed-contents)))
 ;;   (define-key org-mode-map (kbd "C-<tab>") nil))
+
+(global-set-key (kbd "C-c a") #'org-agenda)
 
 (provide 'w-org)
