@@ -2,8 +2,7 @@
 (straight-use-package 'ob-typescript)
 (straight-use-package 'ob-http)
 
-(setq org-directory "~/s/hermes-todo"
-      org-agenda-files '("~/s/hermes-todo/todo.org")
+(setq org-directory "~/org"
       org-confirm-babel-evaluate nil
       org-export-with-sub-superscripts nil
       org-export-with-toc nil
@@ -12,10 +11,32 @@
 (add-hook 'org-mode-hook #'visual-line-mode)
 
 (with-eval-after-load 'org
-  ;;; org agenda
+  ;;; org todo
+  (setq org-todo-keywords
+        '((sequence "TODO" "NEXT" "WAITING" "DELEGATED" "SOMEDAY" "|" "DONE" "CANCELLED")))
+  (setq org-todo-state-tags-triggers
+        '(("CANCELLED" ("CANCELLED" . t))
+          ("WAITING" ("WAITING" . t))
+          ("DELEGATED" ("WAITING" . t))
+          (done ("WAITING"))
+          ("TODO" ("WAITING") ("CANCELLED"))
+          ("NEXT" ("WAITING") ("CANCELLED"))
+          ("DONE" ("WAITING") ("CANCELLED"))))
+  (setq org-global-properties
+        '(("Effort_ALL" . "0 0:05 0:10 0:20 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00")))
+  (setq org-log-done 'time)
+  (setq org-archive-location "%s_archive::* Archived Tasks")
+  (setq org-archive-mark-done nil)
+  (setq org-stuck-projects '("+LEVEL>1/-DONE-CANCELLED" ("NEXT") nil ""))
   (setq org-agenda-span 1
         org-agenda-restore-windows-after-quit t
         org-agenda-show-future-repeats 'next)
+  (setq org-agenda-custom-commands
+        '(("n" "Next Actions" tags-todo "+TODO=\"NEXT\"-CANCELLED"
+           ((org-agenda-overriding-header "Next Actions")))
+          ("s" "Stuck Projects" stuck ""
+           ((org-agenda-overriding-header "Stuck Projects")))
+          ("a" "Agenda" agenda "" ((org-agenda-span 'week)))))
   ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
   ;; fix error of org-babel-js evaluation
@@ -51,12 +72,9 @@
 
 
 (setq org-adapt-indentation nil
-      org-archive-location "%s_archive::* Archived Tasks"
-      org-archive-mark-done nil
       org-default-notes-file (concat org-directory "/orgzly/Inbox.org")
       org-html-inline-images t
       org-id-locations-file (w/locate-emacs-var-file ".org-id-locations")
-      org-log-done 'time
       org-outline-path-complete-in-steps nil
       org-preview-latex-default-process 'dvisvgm
       ;; org-refile-target-verify-function 'bh/verify-refile-target
@@ -67,8 +85,7 @@
                              "~/org/roam/unix.org")
                             :maxlevel . 3))
       org-refile-use-outline-path t
-      org-return-follows-link t
-      org-stuck-projects (quote ("+LEVEL=2/-DONE-CANCELLED" ("NEXT") nil "")))
+      org-return-follows-link t)
 
 ;;; org-colview
 (with-eval-after-load 'org-colview

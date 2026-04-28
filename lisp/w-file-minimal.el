@@ -11,7 +11,8 @@
 (global-set-key (kbd "M-SPC q q") #'save-buffers-kill-terminal)
 
 ;; save all files when you switch out of emacs.
-;; (setq after-focus-change-function (lambda () (interactive) (save-some-buffers t)))
+(add-function :after after-focus-change-function
+              (lambda () (unless (frame-focus-state) (save-some-buffers t))))
 (setq auto-save-visited-interval 0.5)
 (add-hook 'after-init-hook #'auto-save-visited-mode)
 
@@ -27,10 +28,12 @@
 (setq recentf-auto-cleanup 'never
       recentf-save-file (w/locate-emacs-var-file "recentf")
       recentf-max-saved-items nil)
+(require 'recentf)
 ;; https://www.emacswiki.org/emacs/RecentFiles#toc21
 (defun recentd-track-opened-file ()
   "Insert the name of the directory just opened into the recent list."
   (and (derived-mode-p 'dired-mode) default-directory
+       (fboundp 'recentf-add-file)
        (recentf-add-file (substring default-directory 0 -1)))
   ;; Must return nil because it is run from `write-file-functions'.
   nil)
@@ -38,10 +41,16 @@
   "Update the recent list when a dired buffer is killed.
 That is, remove a non kept dired from the recent list."
   (and (derived-mode-p 'dired-mode) default-directory
+       (fboundp 'recentf-remove-if-non-kept)
        (recentf-remove-if-non-kept (substring default-directory 0 -1))))
 (add-hook 'dired-after-readin-hook 'recentd-track-opened-file)
 (add-hook 'kill-buffer-hook 'recentd-track-closed-file)
 (add-hook 'after-init-hook #'recentf-mode)
+
+;;; server
+;; 把 server socket 目录放到家目录下，避免 /tmp/emacs<uid>/ 被外部改权限后
+;; `server-ensure-safe-dir' 拒绝启动的问题
+(setq server-socket-dir (w/locate-emacs-var-file "server"))
 
 ;;; tramp
 (setq tramp-persistency-file-name (w/locate-emacs-var-file "tramp"))

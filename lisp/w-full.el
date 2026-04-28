@@ -7,6 +7,7 @@
 (require 'w-term-full)
 
 (require 'w-org)
+(require 'w-hermes-todo)
 
 ;;; programming
 (require 'w-programming-full)
