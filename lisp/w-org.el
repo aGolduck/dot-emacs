@@ -22,13 +22,11 @@
         org-agenda-restore-windows-after-quit t
         org-agenda-show-future-repeats 'next)
   ;; 自动检测 hermes-todo 路径（macOS/远端通用，有则启用 agenda）
+  ;; 注意：不检测 iCloud 路径——那是手机客户端专属通道
   (defun w/org--find-hermes-todo ()
     "Return path to hermes todo.org if it exists, nil otherwise."
     (catch 'found
       (dolist (path (list (expand-file-name \"s/hermes-todo/todo.org\" (getenv \"HOME\"))
-                          (expand-file-name
-                           \"Library/Mobile Documents/com~apple~CloudDocs/hermes/todo/todo.org\"
-                           (getenv \"HOME\"))
                           \"/data/home/bingezhou/s/hermes-todo/todo.org\"))
         (when (file-exists-p path)
           (throw 'found path)))))
