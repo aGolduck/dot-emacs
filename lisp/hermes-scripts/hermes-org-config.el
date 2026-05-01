@@ -1,19 +1,18 @@
-;;; hermes-org-config.el --- 统一 org 配置，确保 batch 与 Emacs 行为一致
+;;; hermes-org-config.el --- 统一 org 配置，batch 脚本与 Emacs GUI 唯一信息源
 ;; 所有 batch 脚本开头先加载此文件（相对路径，同目录）：
 ;; (load (expand-file-name "hermes-org-config.el" (file-name-directory load-file-name)))
 ;;
-;; 位置：~/.emacs.d/lisp/hermes-scripts/hermes-org-config.el
+;; w-org.el 通过 load-file 加载此文件：
+;; (load-file (expand-file-name "lisp/hermes-scripts/hermes-org-config.el" user-emacs-directory))
+;;
+;; 位置：/data/home/bingezhou/.emacs.d/lisp/hermes-scripts/hermes-org-config.el
 ;; hermes-todo/scripts/ 是到此目录的 symlink
 ;;
-;; Emacs 端在 w-org.el 中同步同等配置（须保持一致）
+;; 注意：TODO 关键词不在此定义——由 todo.org 文件头 #+TODO: 统一管理
 
 (require 'org)
 
-;; ── TODO 关键词 ──
-(setq org-todo-keywords
-      '((sequence "TODO" "NEXT" "WAITING" "DELEGATED" "SOMEDAY" "|" "DONE" "CANCELLED")))
-
-;; ── 状态-标签联动（与 Emacs 端 w-org.el 逐条对齐，修改须同步）──
+;; ── 状态-标签联动 ──
 (setq org-todo-state-tags-triggers
       '(("CANCELLED" ("CANCELLED" . t))
         ("WAITING" ("WAITING" . t))
@@ -27,11 +26,11 @@
 ;; ── DONE 自动加 CLOSED ──
 (setq org-log-done 'time)
 
-;; ── 归档位置（与 Emacs 端 w-org.el 一致）──
+;; ── 归档位置──
 (setq org-archive-location "%s_archive::* Archived Tasks")
 (setq org-archive-mark-done nil)
 
-;; ── Stuck Project 定义（与 Emacs 端一致）──
+;; ── Stuck Project 定义──
 (setq org-stuck-projects '("+LEVEL>1/-DONE-CANCELLED" ("NEXT") nil ""))
 
 ;; ── 全局属性（Effort 估计）──
