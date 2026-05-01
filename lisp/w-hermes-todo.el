@@ -13,8 +13,10 @@ Override this in private.el if your setup is different.")
 (defvar w/hermes-todo-file (expand-file-name "todo.org" w/hermes-todo-dir)
   "The main todo.org file.")
 
-(defvar w/hermes-todo-scripts-dir (expand-file-name "scripts" w/hermes-todo-dir)
-  "Directory containing batch elisp scripts.")
+(defvar w/hermes-todo-scripts-dir
+  (expand-file-name "lisp/hermes-scripts" user-emacs-directory)
+  "Directory containing batch elisp scripts.
+Canonical location under .emacs.d; hermes-todo/scripts is a symlink to here.")
 
 (defvar w/hermes-todo--active nil
   "Non-nil when hermes-todo integration is active.")
@@ -32,12 +34,9 @@ Override this in private.el if your setup is different.")
   (with-eval-after-load 'org
     (add-to-list 'org-agenda-files w/hermes-todo-file))
 
-  ;; Override default notes file if it doesn't exist elsewhere
+  ;; Set default notes file to todo.org
   (with-eval-after-load 'org
-    (unless (and (boundp 'org-default-notes-file)
-                 org-default-notes-file
-                 (file-exists-p org-default-notes-file))
-      (setq org-default-notes-file w/hermes-todo-file)))
+    (setq org-default-notes-file w/hermes-todo-file))
 
   ;; ── Auto-revert for AI co-editing ──
   (add-hook 'org-mode-hook

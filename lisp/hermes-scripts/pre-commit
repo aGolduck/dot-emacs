@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# pre-commit hook: validate todo.org syntax before committing
+set -euo pipefail
+
+# Only run if todo.org is staged
+if ! git diff --cached --name-only | grep -q 'todo.org'; then
+    exit 0
+fi
+
+ORG="todo.org"
+ERRORS=0
+
+echo "Validating $ORG..."
+
+# 1. Valid TODO keywords only
+# Match headings that have a known-length uppercase word as first token.
+# Project headings like "AI 学习" or "US" are not keywords.
+VALID_RE="^(TODO|NEXT|WAITING|DELEGATED|SOMEDAY|DONE|CANCELLED)[[:space:]]"
+while IFS= read -r line; do
+    if [[ "$line" =~ ^(\*+)[[:space:]]+(.*) ]]; then
+        rest="${BASH_REMATCH[2]}"
+        # Only check if first word is all-caps and >= 4 chars (shortest keyword is TODO/NEXT/DONE)
+        if [[ "$rest" =~ ^([A-Z]{4,})[[:space:]] ]]; then
+            kw="${BASH_REMATCH[1]}"
+            if ! [[ "$kw" =~ ^(TODO|NEXT|WAITING|DELEGATED|SOMEDAY|DONE|CANCELLED)$ ]]; then
+                echo "ERROR: Invalid keyword '$kw' in: $line"
+                ERRORS=$((ERRORS + 1))
+            fi
+        fi
+    fi
+done < "$ORG"
+
+# 2. Balanced drawers (anchored to line start)
+PROP=$(grep -c '^:PROPERTIES:' "$ORG" || true)
+NOTES=$(grep -c '^:NOTES:' "$ORG" || true)
+ENDS=$(grep -c '^:END:' "$ORG" || true)
+EXPECTED=$((PROP + NOTES))
+if [ "$ENDS" -ne "$EXPECTED" ]; then
+    echo "ERROR: Drawer mismatch PROPERTIES=$PROP NOTES=$NOTES END=$ENDS (expected $EXPECTED)"
+    ERRORS=$((ERRORS + 1))
+fi
+
+# 3. DEADLINE format check
+while IFS= read -r line; do
+    if ! [[ "$line" =~ ^DEADLINE:\ \<[0-9]{4}-[0-9]{2}-[0-9]{2}\ [A-Z][a-z]{2} ]]; then
+        echo "ERROR: Bad DEADLINE format: $line"
+        ERRORS=$((ERRORS + 1))
+    fi
+done < <(grep '^DEADLINE:' "$ORG" || true)
+
+if [ "$ERRORS" -gt 0 ]; then
+    echo "❌ $ERRORS error(s). Commit aborted."
+    exit 1
+fi
+echo "✅ todo.org validation passed."
