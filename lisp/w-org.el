@@ -21,20 +21,38 @@
   (setq org-agenda-span 1
         org-agenda-restore-windows-after-quit t
         org-agenda-show-future-repeats 'next)
-  (setq org-agenda-custom-commands
-        '(("i" "Inbox" tags-todo "LEVEL=2+TODO<>\"\"-TODO=\"DONE\"-TODO=\"CANCELLED\""
-           ((org-agenda-overriding-header "Inbox Triage")
-            (org-agenda-files (list (expand-file-name "todo.org" "/data/home/bingezhou/s/hermes-todo")))
-            (org-agenda-skip-function
-             (lambda ()
-               (unless (string-match-p "^\\* inbox" (org-format-outline-path
-                                                       (org-get-outline-path t)))
-                 (point))))))
-          ("n" "Next Actions" tags-todo "+TODO=\"NEXT\"-CANCELLED"
-           ((org-agenda-overriding-header "Next Actions")))
-          ("s" "Stuck Projects" stuck ""
-           ((org-agenda-overriding-header "Stuck Projects")))
-          ("a" "Agenda" agenda "" ((org-agenda-span 'week)))))
+  ;; 自动检测 hermes-todo 路径（macOS/远端通用，有则启用 agenda）
+  (defun w/org--find-hermes-todo ()
+    "Return path to hermes todo.org if it exists, nil otherwise."
+    (catch 'found
+      (dolist (path (list (expand-file-name \"s/hermes-todo/todo.org\" (getenv \"HOME\"))
+                          (expand-file-name
+                           \"Library/Mobile Documents/com~apple~CloudDocs/hermes/todo/todo.org\"
+                           (getenv \"HOME\"))
+                          \"/data/home/bingezhou/s/hermes-todo/todo.org\"))
+        (when (file-exists-p path)
+          (throw 'found path)))))
+  (let ((todo-file (w/org--find-hermes-todo)))
+    ;; 让 stuck/next 等视图自动扫描 hermes-todo
+    (when todo-file
+      (add-to-list 'org-agenda-files todo-file))
+    (setq org-agenda-custom-commands
+          `((\"i\" \"Inbox\" tags-todo \"LEVEL=2+TODO<>\\\"\\\"-TODO=\\\"DONE\\\"-TODO=\\\"CANCELLED\\\"\"
+             ((org-agenda-overriding-header \"Inbox Triage\")
+              ,@(when todo-file
+                  `((org-agenda-files (list ,todo-file))))
+              (org-agenda-skip-function
+               (lambda ()
+                 (unless (string-match-p \"^\\\\* inbox\"
+                          (or (ignore-errors
+                                (org-format-outline-path (org-get-outline-path t)))
+                              \"\"))
+                   (point))))))
+            (\"n\" \"Next Actions\" tags-todo \"+TODO=\\\"NEXT\\\"-CANCELLED\"
+             ((org-agenda-overriding-header \"Next Actions\")))
+            (\"s\" \"Stuck Projects\" stuck \"\"
+             ((org-agenda-overriding-header \"Stuck Projects\")))
+            (\"a\" \"Agenda\" agenda \"\" ((org-agenda-span 'week))))))
 ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
   ;; fix error of org-babel-js evaluation
@@ -62,9 +80,7 @@
                                  (typescript . t)
                                  (python . t)
                                  ))
-  ;; set faces
-  (set-face-attribute 'org-headline-done nil :strike-through t)
-  (set-face-attribute 'org-agenda-done nil :strike-through t))
+  )
 
 (straight-use-package 'ox-gfm)
 
