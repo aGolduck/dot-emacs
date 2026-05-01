@@ -26,16 +26,11 @@
 ;; ── DONE 自动加 CLOSED ──
 (setq org-log-done 'time)
 
-;; ── 归档位置──
-(setq org-archive-location "%s_archive::* Archived Tasks")
-(setq org-archive-mark-done nil)
+;; ── 归档时行为 ──
+(setq org-archive-mark-done nil)          ; 归档后保持原状态
 
-;; ── Stuck Project 定义──
+;; ── Stuck Project 定义 ──
 (setq org-stuck-projects '("+LEVEL>1/-DONE-CANCELLED" ("NEXT") nil ""))
-
-;; ── 全局属性（Effort 估计）──
-(setq org-global-properties
-      '(("Effort_ALL" . "0 0:05 0:10 0:20 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00")))
 
 (provide 'hermes-org-config)
 ;;; hermes-org-config.el ends here
