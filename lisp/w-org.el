@@ -27,17 +27,12 @@
             (org-agenda-files (list (expand-file-name "todo.org" "/data/home/bingezhou/s/hermes-todo")))
             (org-agenda-skip-function
              (lambda ()
-               (cond
-                ;; Not under inbox → skip
-                ((not (string-match-p "^\\* inbox" (org-format-outline-path
-                                                      (org-get-outline-path t))))
-                 (save-excursion (org-end-of-subtree t)))
-                ;; Has SCHEDULED or DEADLINE → already processed, skip
-                ((or (org-entry-get (point) "SCHEDULED")
-                     (org-entry-get (point) "DEADLINE"))
-                 (save-excursion (org-end-of-subtree t)))
-                ;; Show it
-                (t nil))))))
+               ;; Show only if: under inbox AND no SCHEDULED AND no DEADLINE
+               (unless (and (string-match-p "^\\* inbox" (org-format-outline-path
+                                                           (org-get-outline-path t)))
+                            (not (org-entry-get (point) "SCHEDULED"))
+                            (not (org-entry-get (point) "DEADLINE")))
+                 (point))))))
           ("n" "Next Actions" tags-todo "+TODO=\"NEXT\"-CANCELLED"
            ((org-agenda-overriding-header "Next Actions")))
           ("s" "Stuck Projects" stuck ""
@@ -45,11 +40,8 @@
           ("a" "Agenda" agenda "" ((org-agenda-span 'week)))))
 ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
-  ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
         "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
-  ;; TODO ob-jshell
-  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
   (defun org-babel-execute:jsh (body params)
     "Execute a block of jshell code snippets or commands with org-babel"
     (message "Executing jshell snippets")
@@ -70,7 +62,6 @@
                                  (typescript . t)
                                  (python . t)
                                  ))
-  ;; set faces
   (set-face-attribute 'org-headline-done nil :strike-through t)
   (set-face-attribute 'org-agenda-done nil :strike-through t))
 
@@ -116,7 +107,6 @@
 ;;   (org-link-set-parameters "zotero" :follow
 ;;                            (lambda (zpath)
 ;;                              (browse-url
-;;                               ;; we get the "zotero:"-less url, so we put it back.
 ;;                               (format "zotero:%s" zpath)))))
 
 ;;; lazy load
