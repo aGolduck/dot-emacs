@@ -38,6 +38,13 @@ Canonical location under .emacs.d; hermes-todo/scripts is a symlink to here.")
   (with-eval-after-load 'org
     (setq org-default-notes-file w/hermes-todo-file))
 
+  ;; Refile targets — ensure todo.org is always available
+  (with-eval-after-load 'org
+    (setq org-refile-targets
+          `((nil :maxlevel . 9)
+            (org-agenda-files :maxlevel . 9)
+            ((,w/hermes-todo-file) :maxlevel . 9))))
+
   ;; ── Auto-revert for AI co-editing ──
   (add-hook 'org-mode-hook
             (lambda ()

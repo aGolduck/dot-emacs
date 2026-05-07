@@ -75,12 +75,7 @@
       org-outline-path-complete-in-steps nil
       org-preview-latex-default-process 'dvisvgm
       ;; org-refile-target-verify-function 'bh/verify-refile-target
-      org-refile-targets '((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)
-                           (("~/org/roam/notes.org"
-                             "~/org/roam/work.org"
-                             "~/org/roam/emacs.org"
-                             "~/org/roam/unix.org")
-                            :maxlevel . 3))
+      org-refile-targets '((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9))
       org-refile-use-outline-path t
       org-return-follows-link t)
 
