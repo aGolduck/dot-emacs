@@ -28,7 +28,7 @@
             (org-agenda-skip-function
              (lambda ()
                ;; Show only if: under inbox AND no SCHEDULED AND no DEADLINE
-               (unless (and (string-match-p "^\\* inbox" (org-format-outline-path
+               (unless (and (string-match-p "^inbox" (org-format-outline-path
                                                            (org-get-outline-path t)))
                             (not (org-entry-get (point) "SCHEDULED"))
                             (not (org-entry-get (point) "DEADLINE")))
