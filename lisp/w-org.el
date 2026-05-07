@@ -22,14 +22,22 @@
         org-agenda-restore-windows-after-quit t
         org-agenda-show-future-repeats 'next)
   (setq org-agenda-custom-commands
-        '(("i" "Inbox" tags-todo "LEVEL=2+TODO<>\"\"-TODO=\"DONE\"-TODO=\"CANCELLED\""
-           ((org-agenda-overriding-header "Inbox Triage")
+        '(("i" "Inbox Triage (no date)" tags-todo "LEVEL=2+TODO<>\"\"-TODO=\"DONE\"-TODO=\"CANCELLED\""
+           ((org-agenda-overriding-header "Inbox — 待处理（无日期）")
             (org-agenda-files (list (expand-file-name "todo.org" "/data/home/bingezhou/s/hermes-todo")))
             (org-agenda-skip-function
              (lambda ()
-               (unless (string-match-p "^\\* inbox" (org-format-outline-path
-                                                       (org-get-outline-path t)))
-                 (point))))))
+               (cond
+                ;; Not under inbox → skip
+                ((not (string-match-p "^\\* inbox" (org-format-outline-path
+                                                      (org-get-outline-path t))))
+                 (save-excursion (org-end-of-subtree t)))
+                ;; Has SCHEDULED or DEADLINE → already processed, skip
+                ((or (org-entry-get (point) "SCHEDULED")
+                     (org-entry-get (point) "DEADLINE"))
+                 (save-excursion (org-end-of-subtree t)))
+                ;; Show it
+                (t nil))))))
           ("n" "Next Actions" tags-todo "+TODO=\"NEXT\"-CANCELLED"
            ((org-agenda-overriding-header "Next Actions")))
           ("s" "Stuck Projects" stuck ""
@@ -124,7 +132,7 @@
 ;;            (fixed-contents
 ;;             (replace-regexp-in-string
 ;;              (concat
-;;               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+;;               "\\\\(\" fix-regexp \"\\\\) *\\n *\\\\(\" fix-regexp \"\\\\)") "\\\\1\\\\2" origin-contents)))
 ;;       (ad-set-arg 1 fixed-contents)))
 ;;   (define-key org-mode-map (kbd "C-<tab>") nil))
 
