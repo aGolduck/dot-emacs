@@ -6,11 +6,21 @@
 ;; It connects Emacs to the AI-managed org-mode GTD system.
 ;; On machines without hermes-todo, this file loads silently with no effect.
 
-(defvar w/hermes-todo-dir "/data/home/bingezhou/s/hermes-todo"
-  "Path to hermes-todo repository.
-Override this in private.el if your setup is different.")
+(defun w/hermes-todo--find-dir ()
+  "Auto-detect hermes-todo directory. Returns path or nil."
+  (catch 'found
+    (dolist (dir (list (expand-file-name "s/hermes-todo" (getenv "HOME"))
+                       "/data/home/bingezhou/s/hermes-todo"))
+      (when (and (file-directory-p dir)
+                 (file-exists-p (expand-file-name "todo.org" dir)))
+        (throw 'found dir)))))
 
-(defvar w/hermes-todo-file (expand-file-name "todo.org" w/hermes-todo-dir)
+(defvar w/hermes-todo-dir (w/hermes-todo--find-dir)
+  "Auto-detected path to hermes-todo repository.
+Detection: ~/s/hermes-todo, then /data/home/bingezhou/s/hermes-todo.")
+
+(defvar w/hermes-todo-file (and w/hermes-todo-dir
+                                (expand-file-name "todo.org" w/hermes-todo-dir))
   "The main todo.org file.")
 
 (defvar w/hermes-todo-scripts-dir
@@ -25,8 +35,7 @@ Canonical location under .emacs.d; hermes-todo/scripts is a symlink to here.")
 ;; Activation guard
 ;; ───────────────────────────────────────────────────────────
 
-(when (and (file-directory-p w/hermes-todo-dir)
-           (file-exists-p w/hermes-todo-file))
+(when w/hermes-todo-dir
   (setq w/hermes-todo--active t)
 
   ;; ── Org integration ──
@@ -118,10 +127,11 @@ If SCRIPT is nil, prompt with completion."
           (w/hermes-todo--git-cmd "diff --quiet todo.org || echo dirty"))))
 
   ;; ── Keybindings ──
-  (global-set-key (kbd "M-SPC t s") #'w/hermes-run-script)
-  (global-set-key (kbd "M-SPC t g") #'w/hermes-todo-git-status)
-  (global-set-key (kbd "M-SPC t c") #'w/hermes-todo-commit)
-  (global-set-key (kbd "M-SPC t p") #'w/hermes-todo-pull)
+  (unless noninteractive
+    (global-set-key (kbd "M-SPC t s") #'w/hermes-run-script)
+    (global-set-key (kbd "M-SPC t g") #'w/hermes-todo-git-status)
+    (global-set-key (kbd "M-SPC t c") #'w/hermes-todo-commit)
+    (global-set-key (kbd "M-SPC t p") #'w/hermes-todo-pull))
 
   (message "[hermes] todo integration active: %s" w/hermes-todo-dir))
 
