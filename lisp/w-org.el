@@ -35,16 +35,19 @@
     (when todo-file
       (add-to-list 'org-agenda-files todo-file))
     (setq org-agenda-custom-commands
-          `((\"i\" \"Inbox\" tags-todo \"LEVEL=2+TODO<>\\\"\\\"-TODO=\\\"DONE\\\"-TODO=\\\"CANCELLED\\\"\"
-             ((org-agenda-overriding-header \"Inbox Triage\")
+          `((\"i\" \"Inbox — 待处理（无日期）\" tags-todo \"LEVEL=2+TODO<>\\\"\\\"-TODO=\\\"DONE\\\"-TODO=\\\"CANCELLED\\\"-TODO=\\\"SOMEDAY\\\"\"
+             ((org-agenda-overriding-header \"Inbox — 待处理（无日期）\")
               ,@(when todo-file
                   `((org-agenda-files (list ,todo-file))))
               (org-agenda-skip-function
                (lambda ()
-                 (unless (string-match-p \"^\\\\* inbox\"
-                          (or (ignore-errors
-                                (org-format-outline-path (org-get-outline-path t)))
-                              \"\"))
+                 ;; Show only if: under inbox AND no SCHEDULED AND no DEADLINE
+                 (unless (and (string-match-p \"^inbox\"
+                                (or (ignore-errors
+                                      (org-format-outline-path (org-get-outline-path t)))
+                                    \"\"))
+                              (not (org-entry-get (point) \"SCHEDULED\"))
+                              (not (org-entry-get (point) \"DEADLINE\")))
                    (point))))))
             (\"n\" \"Next Actions\" tags-todo \"+TODO=\\\"NEXT\\\"-CANCELLED\"
              ((org-agenda-overriding-header \"Next Actions\")))
@@ -53,11 +56,8 @@
             (\"a\" \"Agenda\" agenda \"\" ((org-agenda-span 'week))))))
 ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
-  ;; fix error of org-babel-js evaluation
   (setq org-babel-js-function-wrapper
         "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
-  ;; TODO ob-jshell
-  ;; reference: https://stackoverflow.com/questions/10405461/org-babel-new-language
   (defun org-babel-execute:jsh (body params)
     "Execute a block of jshell code snippets or commands with org-babel"
     (message "Executing jshell snippets")
@@ -78,7 +78,8 @@
                                  (typescript . t)
                                  (python . t)
                                  ))
-  )
+  (set-face-attribute 'org-headline-done nil :strike-through t)
+  (set-face-attribute 'org-agenda-done nil :strike-through t))
 
 (straight-use-package 'ox-gfm)
 
@@ -90,12 +91,7 @@
       org-outline-path-complete-in-steps nil
       org-preview-latex-default-process 'dvisvgm
       ;; org-refile-target-verify-function 'bh/verify-refile-target
-      org-refile-targets '((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9)
-                           (("~/org/roam/notes.org"
-                             "~/org/roam/work.org"
-                             "~/org/roam/emacs.org"
-                             "~/org/roam/unix.org")
-                            :maxlevel . 3))
+      org-refile-targets '((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9))
       org-refile-use-outline-path t
       org-return-follows-link t)
 
@@ -122,7 +118,6 @@
 ;;   (org-link-set-parameters "zotero" :follow
 ;;                            (lambda (zpath)
 ;;                              (browse-url
-;;                               ;; we get the "zotero:"-less url, so we put it back.
 ;;                               (format "zotero:%s" zpath)))))
 
 ;;; lazy load
@@ -138,7 +133,7 @@
 ;;            (fixed-contents
 ;;             (replace-regexp-in-string
 ;;              (concat
-;;               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+;;               "\\\\(\" fix-regexp \"\\\\) *\\n *\\\\(\" fix-regexp \"\\\\)") "\\\\1\\\\2" origin-contents)))
 ;;       (ad-set-arg 1 fixed-contents)))
 ;;   (define-key org-mode-map (kbd "C-<tab>") nil))
 

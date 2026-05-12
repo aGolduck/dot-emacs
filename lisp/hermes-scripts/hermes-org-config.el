@@ -12,6 +12,9 @@
 
 (require 'org)
 
+;; ── 时间戳使用英文星期（覆盖 LC_TIME=zh_CN 的影响，batch 与 GUI 一致）──
+(setq system-time-locale "C")
+
 ;; ── 状态-标签联动 ──
 (setq org-todo-state-tags-triggers
       '(("CANCELLED" ("CANCELLED" . t))
