@@ -59,10 +59,10 @@
             (unless (re-search-forward (concat "^\\*+ .*" (regexp-quote hermes-parent)) nil t)
               (error "未找到父条目: %s" hermes-parent))
             (org-back-to-heading t)
-            ;; 移动到当前子树末尾（在子树内）
-            (org-end-of-subtree t)
-            ;; 确保插入前有换行
+            ;; 保存父级层级，移动到子树末尾（在子树内）
             (let ((parent-level (org-current-level)))
+              (org-end-of-subtree t)
+              ;; 确保插入前有换行
               (insert "\n" (make-string (1+ parent-level) ?*) " ")))
 
         ;; 模式 2：文件末尾追加
