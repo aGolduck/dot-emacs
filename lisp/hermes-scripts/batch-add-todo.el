@@ -11,9 +11,10 @@
 ;;   PARENT    父条目标题（在此条目下插入），默认在文件末尾追加
 ;;   PROPS     属性 JSON，格式 '{"KEY1":"val1","KEY2":"val2"}'，默认无
 ;;   BODY      正文内容，默认无
+;;   CREATED   创建时间，格式 "[2026-05-11 Mon 13:27]"（含方括号），设为 CREATED 属性，默认无
 ;;
 ;; 示例：
-;;   emacs --batch -l batch-add-todo.el todo.org "买一把大伞" "TODO" "A" "2026-04-28" "" "life:urgent" "" '{"AI_ACTION":"remind"}' "不要忘了带钥匙"
+;;   emacs --batch -l batch-add-todo.el todo.org "买一把大伞" "TODO" "A" "2026-04-28" "" "life:urgent" "" '{"AI_ACTION":"remind"}' "不要忘了带钥匙" "[2026-05-11 Mon 13:27]"
 
 (require 'org)
 (require 'json)
@@ -29,6 +30,7 @@
 (defvar hermes-parent nil)
 (defvar hermes-props nil)
 (defvar hermes-body nil)
+(defvar hermes-created nil)
 
 ;; 解析参数
 (setq hermes-file (pop command-line-args-left))
@@ -41,9 +43,10 @@
 (when command-line-args-left (setq hermes-parent (pop command-line-args-left)))
 (when command-line-args-left (setq hermes-props (pop command-line-args-left)))
 (when command-line-args-left (setq hermes-body (pop command-line-args-left)))
+(when command-line-args-left (setq hermes-created (pop command-line-args-left)))
 
 (unless (and hermes-file hermes-title)
-  (error "用法: emacs --batch -l batch-add-todo.el FILE TITLE [STATE] [PRIORITY] [SCHEDULED] [DEADLINE] [TAGS] [PARENT] [PROPS] [BODY]"))
+  (error "用法: emacs --batch -l batch-add-todo.el FILE TITLE [STATE] [PRIORITY] [SCHEDULED] [DEADLINE] [TAGS] [PARENT] [PROPS] [BODY] [CREATED]"))
 
 (condition-case err
     (progn
@@ -108,6 +111,10 @@
           (mapc (lambda (pair)
                   (org-entry-put (point) (symbol-name (car pair)) (cdr pair)))
                 props-alist)))
+
+      ;; 设置 CREATED 属性（创建时间戳）
+      (when (and hermes-created (not (string= hermes-created "")))
+        (org-entry-put (point) "CREATED" hermes-created))
 
       ;; 添加正文
       (when (and hermes-body (not (string= hermes-body "")))
