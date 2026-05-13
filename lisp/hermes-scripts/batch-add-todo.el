@@ -59,9 +59,9 @@
             (unless (re-search-forward (concat "^\\*+ .*" (regexp-quote hermes-parent)) nil t)
               (error "未找到父条目: %s" hermes-parent))
             (org-back-to-heading t)
-            ;; 移动到当前子树末尾
-            (org-end-of-subtree t t)
-            ;; 插入子级 heading（比父级多一个星号）
+            ;; 移动到当前子树末尾（在子树内）
+            (org-end-of-subtree t)
+            ;; 确保插入前有换行
             (let ((parent-level (org-current-level)))
               (insert "\n" (make-string (1+ parent-level) ?*) " ")))
 
