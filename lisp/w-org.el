@@ -20,14 +20,15 @@
 ;;; org agenda
   (setq org-agenda-span 1
         org-agenda-restore-windows-after-quit t
-        org-agenda-show-future-repeats 'next)
+        org-agenda-show-future-repeats 'next
+        org-agenda-start-with-entry-text-mode t)
   ;; 自动检测 hermes-todo 路径（macOS/远端通用，有则启用 agenda）
   ;; 注意：不检测 iCloud 路径——那是手机客户端专属通道
   (defun w/org--find-hermes-todo ()
     "Return path to hermes todo.org if it exists, nil otherwise."
     (catch 'found
-      (dolist (path (list (expand-file-name \"s/hermes-todo/todo.org\" (getenv \"HOME\"))
-                          \"/data/home/bingezhou/s/hermes-todo/todo.org\"))
+      (dolist (path (list (expand-file-name "s/hermes-todo/todo.org" (getenv "HOME"))
+                          "/data/home/bingezhou/s/hermes-todo/todo.org"))
         (when (file-exists-p path)
           (throw 'found path)))))
   (let ((todo-file (w/org--find-hermes-todo)))
@@ -35,25 +36,36 @@
     (when todo-file
       (add-to-list 'org-agenda-files todo-file))
     (setq org-agenda-custom-commands
-          `((\"i\" \"Inbox — 待处理（无日期）\" tags-todo \"LEVEL=2+TODO<>\\\"\\\"-TODO=\\\"DONE\\\"-TODO=\\\"CANCELLED\\\"-TODO=\\\"SOMEDAY\\\"\"
-             ((org-agenda-overriding-header \"Inbox — 待处理（无日期）\")
+          `(("i" "Inbox — 待处理（无日期）" tags-todo "LEVEL=2+TODO<>\"\"-TODO=\"DONE\"-TODO=\"CANCELLED\"-TODO=\"SOMEDAY\"-TODO=\"NEXT\""
+             ((org-agenda-overriding-header "Inbox — 待处理（无日期）")
               ,@(when todo-file
                   `((org-agenda-files (list ,todo-file))))
               (org-agenda-skip-function
                (lambda ()
                  ;; Show only if: under inbox AND no SCHEDULED AND no DEADLINE
-                 (unless (and (string-match-p \"^inbox\"
+                 (unless (and (string-match-p "^inbox"
                                 (or (ignore-errors
                                       (org-format-outline-path (org-get-outline-path t)))
-                                    \"\"))
-                              (not (org-entry-get (point) \"SCHEDULED\"))
-                              (not (org-entry-get (point) \"DEADLINE\")))
+                                    ""))
+                              (not (org-entry-get (point) "SCHEDULED"))
+                              (not (org-entry-get (point) "DEADLINE")))
                    (point))))))
-            (\"n\" \"Next Actions\" tags-todo \"+TODO=\\\"NEXT\\\"-CANCELLED\"
-             ((org-agenda-overriding-header \"Next Actions\")))
-            (\"s\" \"Stuck Projects\" stuck \"\"
-             ((org-agenda-overriding-header \"Stuck Projects\")))
-            (\"a\" \"Agenda\" agenda \"\" ((org-agenda-span 'week))))))
+            ("n" "Next Actions"
+             ((tags-todo "+TODO=\"NEXT\"+@office-CANCELLED"
+                         ((org-agenda-overriding-header "Office Next Actions")))
+              (tags-todo "+TODO=\"NEXT\"-@office-CANCELLED"
+                         ((org-agenda-overriding-header "Other Next Actions"))))
+             nil)
+            ("o" "Office"
+             ((agenda "" ((org-agenda-span 'week)
+                          (org-agenda-tag-filter-preset '("+@office"))
+                          (org-agenda-overriding-header "Office Agenda")))
+              (tags-todo "@office+TODO<>\"\""
+                         ((org-agenda-overriding-header "Office — No Date"))))
+             nil)
+            ("s" "Stuck Projects" stuck ""
+             ((org-agenda-overriding-header "Stuck Projects")))
+            ("a" "Agenda" agenda "" ((org-agenda-span 'week))))))
 ;;; org babel
   (setq org-plantuml-jar-path (expand-file-name (locate-user-emacs-file "resources/plantuml.jar")))
   (setq org-babel-js-function-wrapper
@@ -133,7 +145,7 @@
 ;;            (fixed-contents
 ;;             (replace-regexp-in-string
 ;;              (concat
-;;               "\\\\(\" fix-regexp \"\\\\) *\\n *\\\\(\" fix-regexp \"\\\\)") "\\\\1\\\\2" origin-contents)))
+;;               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
 ;;       (ad-set-arg 1 fixed-contents)))
 ;;   (define-key org-mode-map (kbd "C-<tab>") nil))
 
