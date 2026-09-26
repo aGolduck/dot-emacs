@@ -21,7 +21,13 @@ Detection: ~/s/hermes-todo, then /data/home/bingezhou/s/hermes-todo.")
 
 (defvar w/hermes-todo-file (and w/hermes-todo-dir
                                 (expand-file-name "todo.org" w/hermes-todo-dir))
-  "The main todo.org file.")
+  "The main todo.org file (私人账本).")
+
+(defvar w/hermes-work-file (and w/hermes-todo-dir
+                                (expand-file-name "work.org" w/hermes-todo-dir))
+  "The work.org file (工作账本).
+工作条目从 todo.org 分流到此。文件不存在时，下面所有接线静默跳过——
+以免只建了一半的配置把 Emacs 拖坏。")
 
 (defvar w/hermes-todo-scripts-dir
   (expand-file-name "lisp/hermes-scripts" user-emacs-directory)
@@ -41,18 +47,22 @@ Canonical location under .emacs.d; hermes-todo/scripts is a symlink to here.")
   ;; ── Org integration ──
   (setq org-directory w/hermes-todo-dir)
   (with-eval-after-load 'org
-    (add-to-list 'org-agenda-files w/hermes-todo-file))
+    (add-to-list 'org-agenda-files w/hermes-todo-file)
+    (when (and w/hermes-work-file (file-exists-p w/hermes-work-file))
+      (add-to-list 'org-agenda-files w/hermes-work-file)))
 
   ;; Set default notes file to todo.org
   (with-eval-after-load 'org
     (setq org-default-notes-file w/hermes-todo-file))
 
-  ;; Refile targets — ensure todo.org is always available
+  ;; Refile targets — todo.org 与 work.org 都在（后者存在时才加）
   (with-eval-after-load 'org
     (setq org-refile-targets
           `((nil :maxlevel . 9)
             (org-agenda-files :maxlevel . 9)
-            ((,w/hermes-todo-file) :maxlevel . 9))))
+            ((,w/hermes-todo-file) :maxlevel . 9)
+            ,@(when (and w/hermes-work-file (file-exists-p w/hermes-work-file))
+                `(((,w/hermes-work-file) :maxlevel . 9))))))
 
   ;; ── Auto-revert for AI co-editing ──
   (add-hook 'org-mode-hook
