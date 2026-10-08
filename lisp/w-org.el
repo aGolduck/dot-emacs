@@ -31,7 +31,11 @@
                           "/data/home/bingezhou/s/hermes-todo/todo.org"))
         (when (file-exists-p path)
           (throw 'found path)))))
-  (let ((todo-file (w/org--find-hermes-todo)))
+  (let* ((todo-file (w/org--find-hermes-todo))
+         (work-file (and todo-file
+                         (let ((wf (expand-file-name "work.org"
+                                                     (file-name-directory todo-file))))
+                           (and (file-exists-p wf) wf)))))
     ;; 让 stuck/next 等视图自动扫描 hermes-todo
     (when todo-file
       (add-to-list 'org-agenda-files todo-file))
@@ -44,6 +48,20 @@
                (lambda ()
                  ;; Show only if: under inbox AND no SCHEDULED AND no DEADLINE
                  (unless (and (string-match-p "^inbox"
+                                (or (ignore-errors
+                                      (org-format-outline-path (org-get-outline-path t)))
+                                    ""))
+                              (not (org-entry-get (point) "SCHEDULED"))
+                              (not (org-entry-get (point) "DEADLINE")))
+                   (point))))))
+            ("w" "Work — 待处理（无日期）" tags-todo "LEVEL=2+TODO<>\"\"-TODO=\"DONE\"-TODO=\"CANCELLED\"-TODO=\"SOMEDAY\"-TODO=\"NEXT\""
+             ((org-agenda-overriding-header "Work — 待处理（无日期）")
+              ,@(when work-file
+                  `((org-agenda-files (list ,work-file))))
+              (org-agenda-skip-function
+               (lambda ()
+                 ;; Show only if: under work AND no SCHEDULED AND no DEADLINE
+                 (unless (and (string-match-p "^work"
                                 (or (ignore-errors
                                       (org-format-outline-path (org-get-outline-path t)))
                                     ""))
